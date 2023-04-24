@@ -1,10 +1,8 @@
 #include <iostream>
-#include "University.h"
-// include any other necessary headers
+#include "../include/Student.h"
 
 int main()
 {
-
 	// define a student
 	Student student("John Doe");
 

@@ -1,4 +1,4 @@
-#include "Student.h"
+#include "../include/Student.h"
 
 const std::string &Student::getName() const
 {
