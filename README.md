@@ -1,36 +1,37 @@
-\* TOP UNIVERSITY RECOMMENDATION SYSTEM FOR SECONDARY SCHOOL STUDENTS
+# TOP UNIVERSITY RECOMMENDATION SYSTEM FOR SECONDARY SCHOOL STUDENTS
 
 This is a C++ program designed to help parents of secondary school students better understand the quality of universities around the world and plan a better future education for their children. The program uses the 2023 QS university ranking dataset, which contains information of more than 1400 different universities from all over the world, to provide recommendations to the users.
 
-\*\* Requirements
+## Requirements
 
 - C++ compiler (GCC or Clang recommended)
 - GNU Make
 
-\*\* Installation
+## Installation
 
 1. Clone this repository to your local machine
 2. Navigate to the root directory of the project in your terminal
 3. Run make all to compile the program
 4. Run ./university_recommendation_system.exe to run the program
 
-\*\* Usage
-\*\*\* Normal Users
+## Usage
+
+### Normal Users
 
 1. Display all the universities’ information from the dataset.
 2. Sort university information in ascending order by university name
 
-- Two distinct sorting algorithms are implemented to compare their execution time.
-- The result is discussed in the final report as shown in Appendix 2.
+   - Two distinct sorting algorithms are implemented to compare their execution time.
+   - The result is discussed in the final report as shown in Appendix 2.
 
 3. Search individual university details.
 
-- Two distinct search algorithms are implemented to compare their execution time.
-- The result is discussed in the final report as shown in Appendix 2.
+   - Two distinct search algorithms are implemented to compare their execution time.
+   - The result is discussed in the final report as shown in Appendix 2.
 
 4. Register as a customer of the education exhibition.
 
-\*\*\* Registered Users (Customers)
+### Registered Users (Customers)
 
 1. Login and logout.
 2. Sort university information in descending order based on academic reputation score, faculty/student ratio score and employer reputation score.
@@ -39,7 +40,7 @@ This is a C++ program designed to help parents of secondary school students bett
 5. Send feedback to MoHE for further information about the University.
 6. Read the feedback reply from the MoHE based on the latest date.
 
-\*\*\* MoHE Admin
+### MoHE Admin
 
 1. Login and logout.
 2. Display all registered users’ details.
@@ -51,8 +52,10 @@ This is a C++ program designed to help parents of secondary school students bett
 
 Note: The system capabilities mentioned above are mandatory as required by MoHE. However, the program can be further enhanced by adding more features in the future.
 
-\*\* Contributing
+## Contributing
+
 If you would like to contribute to this project, please fork the repository and submit a pull request.
 
-\*\* License
+## License
+
 This project is licensed under the MIT License. See the LICENSE file for more details.
