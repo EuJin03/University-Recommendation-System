@@ -10,9 +10,9 @@ This is a C++ program designed to help parents of secondary school students bett
 ## Installation
 
 1. Clone this repository to your local machine
-2. Navigate to the root directory of the project in your terminal
-3. Run make all to compile the program
-4. Run ./university_recommendation_system.exe to run the program
+2. Navigate to the `root` directory of the project in your terminal
+3. Run `make all` to compile the program
+4. Run `./university_recommendation_system.exe` to run the program
 
 ## Usage
 
