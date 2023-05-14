@@ -22,12 +22,12 @@ This is a C++ program designed to help parents of secondary school students bett
 2. Sort university information in ascending order by university name
 
    - Two distinct sorting algorithms are implemented to compare their execution time.
-   - The result is discussed in the final report as shown in Appendix 2.
+   - The result is discussed in the final report.
 
 3. Search individual university details.
 
    - Two distinct search algorithms are implemented to compare their execution time.
-   - The result is discussed in the final report as shown in Appendix 2.
+   - The result is discussed in the final report.
 
 4. Register as a customer of the education exhibition.
 
@@ -50,7 +50,7 @@ This is a C++ program designed to help parents of secondary school students bett
 6. Reply to the registered user’s feedback.
 7. Based on the list of all customers' favorite universities, summarize the top 10 universities most preferred by parents in Malaysia and generate a report.
 
-Note: The system capabilities mentioned above are mandatory as required by MoHE. However, the program can be further enhanced by adding more features in the future.
+Note: The system capabilities mentioned above are mandatory as required in the assignment. However, the program can be further enhanced by adding more features in the future.
 
 ## Contributing
 

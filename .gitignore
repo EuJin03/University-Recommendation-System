@@ -1,2 +1,8 @@
 # executable files
 /university_recommendation_system.exe
+
+# misc
+/.vscode
+/.vscode/*
+/additional
+/additional/*
