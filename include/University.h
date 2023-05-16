@@ -1,83 +1,62 @@
 #ifndef UNIVERSITY_H
 #define UNIVERSITY_H
 
+#include <iostream>
 #include <string>
-#include <vector>
-#include "Student.h" // assume Department class is defined in Department.h
+
+struct UnivNode
+{
+	std::string rank;
+	std::string institution;
+	std::string locale;
+	std::string location;
+	std::string arCode;
+	std::string arRank;
+	std::string erScore;
+	std::string erRank;
+	std::string fsrScore;
+	std::string fsrRank;
+	std::string cpfScore;
+	std::string cpfRank;
+	std::string lfrScore;
+	std::string lfrRank;
+	std::string lsrScore;
+	std::string lsrRank;
+	std::string lrnScore;
+	std::string lrnRank;
+	std::string gerScore;
+	std::string gerRank;
+	std::string scoreScaled;
+
+	UnivNode *prev;
+	UnivNode *next;
+};
 
 class University
 {
 public:
-	// constructor
-	University(int rank, std::string institution, std::string location, int arScore, int erScore, int fsrScore, int cpfScore, int ifrScore, int isrScore, int irnScore, int gerScore) {
-		this->rank = rank;
-		this->institution = institution;
-		this->location = location;
-		this->arScore = arScore;
-		this->erScore = erScore;
-		this->fsrScore = fsrScore;
-		this->cpfScore = cpfScore;
-		this->ifrScore = ifrScore;
-		this->isrScore = isrScore;
-		this->irnScore = irnScore;
-		this->gerScore = gerScore;
-	};
+	University();
+	~University();
+	void addUniversityAtStart(std::string rank, std::string institution, std::string locale, std::string location, std::string arCode, std::string arRank, std::string erScore, std::string erRank, std::string fsrScore, std::string fsrRank, std::string cpfScore, std::string cpfRank, std::string lfrScore, std::string lfrRank, std::string lsrScore, std::string lsrRank, std::string lrnScore, std::string lrnRank, std::string gerScore, std::string gerRank, std::string scoreScaled);
+	int getSize() const;
 
-	// copy constructor
-	University(const University &other) {
-		this->rank = other.rank;
-		this->institution = other.institution;
-		this->location = other.location;
-		this->arScore = other.arScore;
-		this->erScore = other.erScore;
-		this->fsrScore = other.fsrScore;
-		this->cpfScore = other.cpfScore;
-		this->ifrScore = other.ifrScore;
-		this->isrScore = other.isrScore;
-		this->irnScore = other.irnScore;
-		this->gerScore = other.gerScore;
-	};
+	// Printings
+	void printUniversitiesInfo();
 
-	// destructor
-	~University() {};
+	// TODO: all functions should display 20 units at a time, could use index to keep track on next 20 units.
+	// sort
+	void sortUniversitiesByRank();
+	void sortUniversitiesByInstitution();
 
-	// getters
-	int getRank() const { return rank; };
-	std::string getInstitution() const { return institution; };
-	std::string getLocation() const { return location; };
-	int getArScore() const { return arScore; };
-	int getErScore() const { return erScore; };
-	int getFsrScore() const { return fsrScore; };
-	int getCpfScore() const { return cpfScore; };
-	int getIfrScore() const { return ifrScore; };
-	int getIsrScore() const { return isrScore; };
-	int getIrnScore() const { return irnScore; };
-
-	// setters
-	void setRank(int rank) { this->rank = rank; };
-	void setInstitution(std::string institution) { this->institution = institution; };
-	void setLocation(std::string location) { this->location = location; };
-	void setArScore(int arScore) { this->arScore = arScore; };
-	void setErScore(int erScore) { this->erScore = erScore; };
-	void setFsrScore(int fsrScore) { this->fsrScore = fsrScore; };
-	void setCpfScore(int cpfScore) { this->cpfScore = cpfScore; };
-	void setIfrScore(int ifrScore) { this->ifrScore = ifrScore; };
-	void setIsrScore(int isrScore) { this->isrScore = isrScore; };
-	void setIrnScore(int irnScore) { this->irnScore = irnScore; };
-	void setGerScore(int gerScore) { this->gerScore = gerScore; };
+	// search
+	int binarySearch();
+	int linearSearch();
 
 private:
-	int rank;
-	std::string institution;
-	std::string location;
-	int arScore;	// Academic Reputation
-	int erScore;	// Employer Reputation
-	int fsrScore;	// Faculty/Student ratio
-	int cpfScore;	// Citations per faculty ratio
-	int ifrScore;	// Interation Faculty score
-	int isrScore;	// International Students ratio
-	int irnScore;	// International Research Network
-	int gerScore;	// Employment outcome
+	UnivNode *head;
+	UnivNode *tail;
+	int size;
+	bool isSorted;
+	int univIndex;
 };
-
 #endif // UNIVERSITY_H
