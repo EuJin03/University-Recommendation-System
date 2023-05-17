@@ -4,6 +4,34 @@
 #include <iostream>
 #include <string>
 
+struct UnivNode
+{
+	std::string rank;
+	std::string institution;
+	std::string locale;
+	std::string location;
+	std::string arCode;
+	std::string arRank;
+	std::string erScore;
+	std::string erRank;
+	std::string fsrScore;
+	std::string fsrRank;
+	std::string cpfScore;
+	std::string cpfRank;
+	std::string lfrScore;
+	std::string lfrRank;
+	std::string lsrScore;
+	std::string lsrRank;
+	std::string lrnScore;
+	std::string lrnRank;
+	std::string gerScore;
+	std::string gerRank;
+	std::string scoreScaled;
+
+	UnivNode *prev;
+	UnivNode *next;
+};
+
 class University
 {
 public:
@@ -26,26 +54,10 @@ public:
 	int linearSearch();
 
 private:
-	int rank;
-	std::string institution;
-	std::string locale;
-	std::string location;
-	std::string arCode;
-	int arRank;
-	int erScore;
-	std::string erRank;
-	int fsrScore;
-	std::string fsrRank;
-	int cpfScore;
-	std::string cpfRank;
-	int lfrScore;
-	std::string lfrRank;
-	int lsrScore;
-	std::string lsrRank;
-	int lrnScore;
-	std::string lrnRank;
-	int gerScore;
-	std::string gerRank;
-	int scoreScaled;
+	UnivNode *head;
+	UnivNode *tail;
+	int size;
+	bool isSorted;
+	int univIndex;
 };
 #endif // UNIVERSITY_H
