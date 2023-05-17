@@ -27,10 +27,6 @@ int main()
 		while (std::getline(file, line))
 		{
 			// skip file header
-			if (line == "Rank,Institution,LocationCode,Location,ArScore,ArRank,ErScore,ErRank,FsrScore,FsrRank,CpfScore,CpfRank,IfrScore,IfrRank,IsrScore,IsrRank,IrnScore,IrnRank,GerScore,GerRank,ScoreScaled")
-			{
-				continue;
-			}
 			// breaking words by comma
 			std::stringstream ss(line);
 			std::string rank, institution, locale, location, arCode, arRank, erScore, erRank, fsrScore, fsrRank, cpfScore, cpfRank, lfrScore, lfrRank, lsrScore, lsrRank, lrnScore, lrnRank, gerScore, gerRank, scoreScaled;
@@ -38,6 +34,8 @@ int main()
 			// Extract data from each column
 			std::getline(ss, rank, ',');
 			std::getline(ss, institution, ',');
+			if (institution == "Institution")
+				continue;
 			std::getline(ss, locale, ',');
 			std::getline(ss, location, ',');
 			std::getline(ss, arCode, ',');
@@ -59,7 +57,7 @@ int main()
 			std::getline(ss, scoreScaled, ',');
 
 			// Insert into linked list
-			university.addUniversityAtStart(rank, institution, locale, location, arCode, arRank, erScore, erRank, fsrScore, fsrRank, cpfScore, cpfRank, lfrScore, lfrRank, lsrScore, lsrRank, lrnScore, lrnRank, gerScore, gerRank, scoreScaled);
+			university.addUniversityAtEnd(rank, institution, locale, location, arCode, arRank, erScore, erRank, fsrScore, fsrRank, cpfScore, cpfRank, lfrScore, lfrRank, lsrScore, lsrRank, lrnScore, lrnRank, gerScore, gerRank, scoreScaled);
 		}
 	}
 	else
