@@ -2,22 +2,25 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <filesystem>
+#include <ctime>
+#include <chrono>
 
 #include "../include/University.h"
 
+using namespace std::chrono;
+
 int main()
 {
-	// define a student
-
-	// display the results to the user
 	std::cout << "Welcome to our university! " << std::endl;
-	// output any other information about the university or its components
 
+	// ******************************************************
 	// should move this into seeder class
-	std::ifstream file("C://Users/eugen/Home/Desktop/Degree(CYB)/Sem 2/Data Structure/university_recommendation_system/resources/assets/2023_QS_World_University_Rankings.csv");
+	std::filesystem::path currentPath = std::filesystem::current_path();
+	std::ifstream file(currentPath.string() + "\\resources\\assets\\2023_QS_World_University_Rankings.csv");
 
 	University university;
-
+	auto start_load = high_resolution_clock::now();
 	if (file.is_open())
 	{
 		std::string line, entry;
@@ -64,9 +67,23 @@ int main()
 		std::cout << "File not found." << std::endl;
 	}
 	file.close();
+	auto end_load = high_resolution_clock::now();
 
 	std::cout << "Size of linked list: " << university.getSize() << std::endl;
+
 	university.printUniversitiesInfo();
+
+	long long durationLoad = duration_cast<microseconds>(end_load - start_load).count();
+
+	std::cout << "Time taken to load data: " << durationLoad << " microseconds" << std::endl;
+
+	// ******************************************************
 
 	return 0;
 }
+
+/**
+ *  system("cls");
+		time_t now = time(0);
+		tm* current_time = localtime(&now);
+ */

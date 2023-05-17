@@ -6,16 +6,9 @@
 class Customer
 {
 public:
-	Customer(const std::string &name)
-	{
-		this->name = name;
-	};
-
-	
+	Customer(const std::string &name);
 
 private:
-	
-	// add any other necessary member variables
 };
 
 #endif // ADMIN_H
