@@ -88,4 +88,19 @@ FeedbackNode *Feedback::navigateTo(FeedbackNode *current, char code)
 		std::cout << "Invalid input." << std::endl;
 		return current;
 	}
+<<<<<<< HEAD
+=======
+}
+
+void Feedback::replyFeedback(FeedbackNode *current, std::string admin, std::string replyContent)
+{
+	current->admin = "admin";
+	current->replyContent = replyContent;
+	time_t now = time(0);
+	current->repliedAt = localtime(&now);
+
+	char buffer[80];
+	strftime(buffer, sizeof(buffer), "%y::%m::%d %H::%M::%S", current->repliedAt);
+	std::cout << "repliedAt: " << buffer << std::endl;
+>>>>>>> 1b2b35669d5d6e66b9b4006681ad08482e1946a6
 }
