@@ -71,7 +71,7 @@ int main()
 
 	university.printUniversitiesInfo();
 
-	long long durationLoad = duration_cast<microseconds>(end_load - start_load).count();
+	long long durationLoad = duration_cast<std::chrono::microseconds>(end_load - start_load).count();
 
 	std::cout << "Time taken to load data: " << durationLoad << " microseconds" << std::endl;
 

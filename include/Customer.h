@@ -14,9 +14,11 @@ struct UserAccount
 class Customer
 {
 public:
-	Customer(const std::string &name);
+	
+	
 
 private:
+
 };
 
 #endif // ADMIN_H
