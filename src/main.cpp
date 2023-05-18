@@ -68,7 +68,6 @@ int main()
 	auto end_load = high_resolution_clock::now();
 
 	std::cout << "Size of linked list: " << university.getSize() << std::endl;
-
 	university.printUniversitiesInfo();
 
 	long long durationLoad = duration_cast<std::chrono::microseconds>(end_load - start_load).count();
