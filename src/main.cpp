@@ -7,6 +7,7 @@
 #include <chrono>
 
 #include "../include/University.h"
+#include "../include/Feedback.h"
 
 using namespace std::chrono;
 
@@ -75,6 +76,11 @@ int main()
 	std::cout << "Time taken to load data: " << durationLoad << " microseconds" << std::endl;
 
 	// ******************************************************
+
+	// Feedback
+	Feedback feedback;
+	time_t now = time(0);
+	feedback.insertAtEnd("1", "This is a feedback", localtime(&now));
 
 	return 0;
 }
