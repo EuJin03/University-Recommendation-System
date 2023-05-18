@@ -4,8 +4,9 @@
 #include <iostream>
 #include <string>
 
-struct FeedbackNode
+class Feedback
 {
+private:
 	int feedbackID;
 	std::string username;
 	std::string feedback;
@@ -13,23 +14,12 @@ struct FeedbackNode
 	std::string admin;
 	std::string replyContent;
 	tm *repliedAt;
-	FeedbackNode *prev;
-	FeedbackNode *next;
-};
-
-class Feedback
-{
-private:
-	int size;
-	FeedbackNodeNode *head;
-	FeedbackNodeNode *tail;
 
 public:
-	Feedback();
-	void insertAtEnd(std::string username, std::string feedback, tm *createdAt);
-	void printList();
-	FeedbackNode *navigateTo(FeedbackNode *current, char code);
-	void replyFeedback(FeedbackNode *current, std::string admin, std::string replyContent);
+	Feedback(int feedbackID, std::string username, std::string feedback, std::string admin, std::string replyContent);
+	void printFeedback();
+	// FeedbackNode *navigateTo(FeedbackNode *current, char code);
+	// void replyFeedback(FeedbackNode *current, std::string admin, std::string replyContent);
 };
 
 #endif
