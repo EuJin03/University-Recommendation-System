@@ -7,7 +7,11 @@
 class University
 {
 public:
+	// Constructor
 	University(int rank, std::string institution, std::string locale, std::string location, int arScore, int arRank, int erScore, int erRank, int fsrScore, int fsrRank, int cpfScore, int cpfRank, int lfrScore, int lfrRank, int lsrScore, int lsrRank, int lrnScore, int lrnRank, int gerScore, int gerRank, int scoreScaled);
+	// Copy Constructor
+	University(const University &university);
+	// Destructor
 	~University();
 
 	// Getters
@@ -55,6 +59,8 @@ public:
 	void setGerScore(int gerScore) {this->gerScore = gerScore;};
 	void setGerRank(int gerRank) {this->gerRank	= gerRank;};
 	void setScoreScaled(int scoreScaled) {this->scoreScaled = scoreScaled;};
+
+	void printUniversityInfo();
 
 private:
 	int rank;
