@@ -21,15 +21,15 @@ class Feedback
 {
 private:
 	int size;
-	FeedbackNode *head;
-	FeedbackNode *tail;
+	FeedbackNodeNode *head;
+	FeedbackNodeNode *tail;
 
 public:
 	Feedback();
 	void insertAtEnd(std::string username, std::string feedback, tm *createdAt);
 	void printList();
 	FeedbackNode *navigateTo(FeedbackNode *current, char code);
-	void replyFeedback(FeedbackNode *current, std::string replyContent);
+	void replyFeedback(FeedbackNode *current, std::string admin, std::string replyContent);
 };
 
 #endif

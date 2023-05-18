@@ -89,3 +89,15 @@ FeedbackNode *Feedback::navigateTo(FeedbackNode *current, char code)
 		return current;
 	}
 }
+
+void Feedback::replyFeedback(FeedbackNode *current, std::string admin, std::string replyContent)
+{
+	current->admin = "admin";
+	current->replyContent = replyContent;
+	time_t now = time(0);
+	current->repliedAt = localtime(&now);
+
+	char buffer[80];
+	strftime(buffer, sizeof(buffer), "%y::%m::%d %H::%M::%S", current->repliedAt);
+	std::cout << "repliedAt: " << buffer << std::endl;
+}
