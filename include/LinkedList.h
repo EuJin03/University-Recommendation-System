@@ -1,12 +1,11 @@
 #include <iostream>
 
 template <class T>
-struct Node 
+struct Node
 {
     T data;
     Node<T> *next;
     Node<T> *prev;
-
 };
 
 template <class U>
@@ -19,7 +18,7 @@ public:
         tail = nullptr;
         size = 0;
     }
-    
+
     void insertAtBeginning(U data)
     {
         Node<U> *newNode;
@@ -27,7 +26,7 @@ public:
         newNode->data = data;
         newNode->next = head;
         newNode->prev = nullptr;
-        
+
         if (head != nullptr)
         {
             head->prev = newNode;
@@ -36,7 +35,7 @@ public:
         {
             tail = newNode;
         }
-        
+
         head = newNode;
         std::cout << "========= Node inserted =========" << std::endl;
         std::cout << std::endl;
@@ -50,7 +49,7 @@ public:
         newNode->data = data;
         newNode->next = nullptr;
         newNode->prev = tail;
-        
+
         if (tail != nullptr)
         {
             tail->next = newNode;
@@ -59,7 +58,7 @@ public:
         {
             head = newNode;
         }
-        
+
         tail = newNode;
         std::cout << "========= Node inserted =========" << std::endl;
         std::cout << std::endl;
@@ -72,7 +71,7 @@ public:
         {
             Node<U> *temp = head;
             head = head->next;
-            
+
             if (head != nullptr)
             {
                 head->prev = nullptr;
@@ -81,7 +80,7 @@ public:
             {
                 tail = nullptr;
             }
-            
+
             delete temp;
             std::cout << "========= Node removed =========" << std::endl;
             std::cout << std::endl;
@@ -89,13 +88,13 @@ public:
         }
     }
 
-    void removeAtEnd() 
+    void removeAtEnd()
     {
         if (tail != nullptr)
         {
             Node<U> *temp = tail;
             tail = tail->prev;
-            
+
             if (tail != nullptr)
             {
                 tail->next = nullptr;
@@ -104,7 +103,7 @@ public:
             {
                 head = nullptr;
             }
-            
+
             delete temp;
             std::cout << "========= Node removed =========" << std::endl;
             std::cout << std::endl;
@@ -112,10 +111,22 @@ public:
         }
     }
 
-    void quickSort(std::string username);
-    void countingSort(std::string username);
-    void linearSearch();
-    void binarySearch();
+    void quickSort(std::string username)
+    {
+        // TODO: Bryan's Algo
+    };
+    void countingSort(std::string username)
+    {
+        // TODO: Eugene's Algo
+    };
+    void linearSearch()
+    {
+        // TODO: Wen Xuen's Algo
+    };
+    void binarySearch()
+    {
+        // TODO: Pin Cheng's ALgo
+    };
     int getSize() const
     {
         return size;
@@ -125,11 +136,12 @@ public:
     void show()
     {
         Node<U> *current = head;
-        
+
         if (current == nullptr)
         {
             std::cout << "List is empty" << std::endl;
-        } else
+        }
+        else
         {
             while (current != nullptr)
             {

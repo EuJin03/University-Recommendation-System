@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <string>
+#include <ctime>
+#include <optional>
 
 class Feedback
 {
@@ -10,10 +12,20 @@ private:
 	int feedbackID;
 	std::string username;
 	std::string feedback;
-	tm *createdAt;
+	struct tm createdAt;
 	std::string admin;
 	std::string replyContent;
-	tm *repliedAt;
+	std::optional<tm> repliedAt;
+	FeedbackNode *prev;
+	FeedbackNode *next;
+};
+
+class Feedback
+{
+private:
+	int size;
+	FeedbackNode *head;
+	FeedbackNode *tail;
 
 public:
 	// Constructor
