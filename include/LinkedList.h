@@ -40,7 +40,8 @@ public:
     
     void insertAtBeginning(U data)
     {
-        Node<U> *newNode = new Node<U>;
+        Node<U> *newNode;
+        newNode = new Node<U>();
         newNode->data = data;
         newNode->next = head;
         newNode->prev = nullptr;
@@ -55,12 +56,14 @@ public:
         }
         
         head = newNode;
+        std::cout << "Node inserted" << std::endl;
         size++;
     }
 
     void insertAtEnd(U data)
     {
-        Node<U> *newNode = new Node<U>;
+        Node<U> *newNode;
+        newNode = new Node<U>();
         newNode->data = data;
         newNode->next = nullptr;
         newNode->prev = tail;
@@ -95,6 +98,7 @@ public:
             }
             
             delete temp;
+            std::cout << "Node removed" << std::endl;
             size--;
         }
     }
@@ -134,13 +138,19 @@ public:
     {
         Node<U> *current = head;
         
-        while (current != nullptr)
+        if (current == nullptr)
         {
-            std::cout << current->data << " ";
-            current = current->next;
+            std::cout << "List is empty" << std::endl;
+            return;
+        } else
+        {
+            while (current != nullptr)
+            {
+                std::cout << current->data << std::endl;
+                current = current->next;
+            }
+            std::cout << std::endl;
         }
-        
-        std::cout << std::endl;
     }
 
 private:
