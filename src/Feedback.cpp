@@ -1,5 +1,4 @@
 #include "../include/Feedback.h"
-#include "Feedback.h"
 
 Feedback::Feedback(int feedbackID, std::string username, std::string feedback, std::string admin, std::string replyContent)
 {
@@ -8,7 +7,7 @@ Feedback::Feedback(int feedbackID, std::string username, std::string feedback, s
 	this->feedback = feedback;
 	this->admin = admin;
 	this->replyContent = replyContent;
-};
+}
 
 Feedback::Feedback(const Feedback &feedback)
 {
@@ -26,15 +25,6 @@ Feedback::Feedback()
 	this->feedback = "";
 	this->admin = "";
 	this->replyContent = "";
-}
-
-void Feedback::printFeedback()
-{
-	std::cout << "Feedback ID: " << this->feedbackID << std::endl;
-	std::cout << "Username: " << this->username << std::endl;
-	std::cout << "Feedback: " << this->feedback << std::endl;
-	std::cout << "Admin: " << this->admin << std::endl;
-	std::cout << "Reply content: " << this->replyContent << std::endl;
 }
 
 // Override ostream operator

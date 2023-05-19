@@ -1,6 +1,4 @@
 #include <iostream>
-#include "University.h"
-#include "Feedback.h"
 
 template <class T>
 struct Node 
@@ -10,20 +8,6 @@ struct Node
     Node<T> *prev;
 
 };
-
-// struct UniNode
-// {
-//     University university;
-//     UniNode *next;
-//     UniNode *prev;
-// };
-
-// struct FeedbackNode
-// {
-//     Feedback feedback;
-//     FeedbackNode *next;
-//     FeedbackNode *prev;
-// }
 
 template <class U>
 class LinkedList
@@ -35,8 +19,6 @@ public:
         tail = nullptr;
         size = 0;
     }
-    
-    // ~LinkedList();
     
     void insertAtBeginning(U data)
     {
@@ -147,7 +129,6 @@ public:
         if (current == nullptr)
         {
             std::cout << "List is empty" << std::endl;
-            return;
         } else
         {
             while (current != nullptr)

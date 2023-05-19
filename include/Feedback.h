@@ -21,7 +21,6 @@ public:
 	// Copy constructor
 	Feedback(const Feedback &feedback);
 	Feedback();
-	void printFeedback();
 
 	// Getter
 	int getFeedbackID() const { return this->feedbackID; }
