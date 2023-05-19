@@ -16,7 +16,10 @@ private:
 	tm *repliedAt;
 
 public:
+	// Constructor
 	Feedback(int feedbackID, std::string username, std::string feedback, std::string admin, std::string replyContent);
+	// Copy constructor
+	Feedback(const Feedback &feedback);
 	void printFeedback();
 	// FeedbackNode *navigateTo(FeedbackNode *current, char code);
 	// void replyFeedback(FeedbackNode *current, std::string admin, std::string replyContent);
