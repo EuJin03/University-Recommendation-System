@@ -1,5 +1,6 @@
-#include <iostream>
+// #include <iostream>
 #include "../include/University.h"
+#include "University.h"
 
 University::University(int rank, std::string institution, std::string locale, std::string location, int arScore, int arRank, int erScore, int erRank, int fsrScore, int fsrRank, int cpfScore, int cpfRank, int lfrScore, int lfrRank, int lsrScore, int lsrRank, int lrnScore, int lrnRank, int gerScore, int gerRank, int scoreScaled)
 {
@@ -50,32 +51,59 @@ University::University(const University &university) {
 	this->scoreScaled = university.scoreScaled;
 }
 
+University::University()
+{
+	this->rank = 0;
+	this->institution = "";
+	this->locale = "";
+	this->location = "";
+	this->arScore = 0;
+	this->arRank = 0;
+	this->erScore = 0;
+	this->erRank = 0;
+	this->fsrScore = 0;
+	this->fsrRank = 0;
+	this->cpfScore = 0;
+	this->cpfRank = 0;
+	this->lfrScore = 0;
+	this->lfrRank = 0;
+	this->lsrScore = 0;
+	this->lsrRank = 0;
+	this->lrnScore = 0;
+	this->lrnRank = 0;
+	this->gerScore = 0;
+	this->gerRank = 0;
+	this->scoreScaled = 0;
+}
+
 University::~University()
 {
 	// TODO: Ask Eugene how to write this Destructor
 }
 
-void University::printUniversityInfo()
+// Overriding the ostream operator
+std::ostream &operator<<(std::ostream &os, const University &university)
 {
-	std::cout << "Rank: " << this->rank << std::endl;
-	std::cout << "Institution: " << this->institution << std::endl;
-	std::cout << "Locale: " << this->locale << std::endl;
-	std::cout << "Location: " << this->location << std::endl;
-	std::cout << "Academic Reputation Score: " << this->arScore << std::endl;
-	std::cout << "Academic Reputation Rank: " << this->arRank << std::endl;
-	std::cout << "Employer Reputation Score: " << this->erScore << std::endl;
-	std::cout << "Employer Reputation Rank: " << this->erRank << std::endl;
-	std::cout << "Faculty Student Score: " << this->fsrScore << std::endl;
-	std::cout << "Faculty Student Rank: " << this->fsrRank << std::endl;
-	std::cout << "Citations Per Faculty Score: " << this->cpfScore << std::endl;
-	std::cout << "Citations Per Faculty Rank: " << this->cpfRank << std::endl;
-	std::cout << "International Faculty Score: " << this->lfrScore << std::endl;
-	std::cout << "International Faculty Rank: " << this->lfrRank << std::endl;
-	std::cout << "International Students Score: " << this->lsrScore << std::endl;
-	std::cout << "International Students Rank: " << this->lsrRank << std::endl;
-	std::cout << "International Research Score: " << this->lrnRank << std::endl;
-	std::cout << "International Research Rank: " << this->lrnRank << std::endl;
-	std::cout << "Employment Outcome Score: " << this->gerScore << std::endl; // "ger" stands for "Graduate Employment Rate
-	std::cout << "Employment Outcome Rank: " << this->gerRank << std::endl;
-	std::cout << "Overall score: " << this->scoreScaled << std::endl;
+	os << "University Rank: " << university.getRank() << std::endl;
+	os << "University Name: " << university.getInstitution() << std::endl;
+	os << "University Locale: " << university.getLocale() << std::endl;
+	os << "University Location: " << university.getLocation() << std::endl;
+	os << "Academic Reputation Score: " << university.getArScore() << std::endl;
+	os << "Academic Reputation Rank: " << university.getArRank() << std::endl;
+	os << "Employer Reputation Score: " << university.getErScore() << std::endl;
+	os << "Employer Reputation Rank: " << university.getErRank() << std::endl;
+	os << "Faculty Student Score: " << university.getFsrScore() << std::endl;
+	os << "Faculty Student Rank: " << university.getFsrRank() << std::endl;
+	os << "Citation Per Faculty Score: " << university.getCpfScore() << std::endl;
+	os << "Citation Per Faculty Rank: " << university.getCpfRank() << std::endl;
+	os << "International Faculty Score: " << university.getLfrScore() << std::endl;
+	os << "International Faculty Rank: " << university.getLfrRank() << std::endl;
+	os << "International Student Score: " << university.getLsrScore() << std::endl;
+	os << "International Student Rank: " << university.getLsrRank() << std::endl;
+	os << "International Research Score: " << university.getLrnScore() << std::endl;
+	os << "International Research Rank: " << university.getLrnRank() << std::endl;
+	os << "Graduate Employment Score: " << university.getGerScore() << std::endl;
+	os << "Graduate Employment Rank: " << university.getGerRank() << std::endl;
+	os << "Overall Score: " << university.getScoreScaled() << std::endl;
+	return os;
 }
