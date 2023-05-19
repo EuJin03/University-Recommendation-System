@@ -12,20 +12,10 @@ private:
 	int feedbackID;
 	std::string username;
 	std::string feedback;
-	struct tm createdAt;
+	tm *createdAt;
 	std::string admin;
 	std::string replyContent;
-	std::optional<tm> repliedAt;
-	FeedbackNode *prev;
-	FeedbackNode *next;
-};
-
-class Feedback
-{
-private:
-	int size;
-	FeedbackNode *head;
-	FeedbackNode *tail;
+	tm *repliedAt;
 
 public:
 	// Constructor
