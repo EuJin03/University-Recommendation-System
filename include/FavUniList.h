@@ -24,6 +24,8 @@ public:
 	void removeFavUniv(UnivNode *univ);
 	void printFavUnivLists();
 	int getSize() const;
+	FavUnivNode *getHead() const;
+	FavUnivNode *getTail() const;
 
 	// Printings
 	void printFavUnivsInfo();
