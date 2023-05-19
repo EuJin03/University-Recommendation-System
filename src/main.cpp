@@ -27,7 +27,6 @@ int main()
 		std::string line, entry;
 		while (std::getline(file, line))
 		{
-			// skip file header
 			// breaking words by comma
 			std::stringstream ss(line);
 			std::string rank, institution, locale, location, arCode, arRank, erScore, erRank, fsrScore, fsrRank, cpfScore, cpfRank, lfrScore, lfrRank, lsrScore, lsrRank, lrnScore, lrnRank, gerScore, gerRank, scoreScaled;
@@ -80,8 +79,12 @@ int main()
 	// Feedback
 	Feedback feedback;
 	time_t now = time(0);
-	feedback.insertAtEnd("1", "This is a feedback", localtime(&now));
+	feedback.insertAtEnd("user1", "This is a feedback", localtime(&now));
+	feedback.replyFeedback(feedback.getTail(), "admin1", "This is a reply");
 
+	time_t yesterday = now - (24 * 60 * 60);
+	feedback.insertAtEnd("user2", "this is another feedback", localtime(&yesterday));
+	feedback.printList();
 	return 0;
 }
 

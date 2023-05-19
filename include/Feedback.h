@@ -3,16 +3,18 @@
 
 #include <iostream>
 #include <string>
+#include <ctime>
+#include <optional>
 
 struct FeedbackNode
 {
 	int feedbackID;
 	std::string username;
 	std::string feedback;
-	tm *createdAt;
+	struct tm createdAt;
 	std::string admin;
 	std::string replyContent;
-	tm *repliedAt;
+	std::optional<tm> repliedAt;
 	FeedbackNode *prev;
 	FeedbackNode *next;
 };
@@ -26,10 +28,11 @@ private:
 
 public:
 	Feedback();
-	void insertAtEnd(std::string username, std::string feedback, tm *createdAt);
+	void insertAtEnd(std::string username, std::string feedback, struct tm *createdAt);
 	void printList();
 	FeedbackNode *navigateTo(FeedbackNode *current, char code);
 	void replyFeedback(FeedbackNode *current, std::string admin, std::string replyContent);
+	FeedbackNode *getTail() const;
 };
 
 #endif

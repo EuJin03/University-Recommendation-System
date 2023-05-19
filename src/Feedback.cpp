@@ -13,10 +13,10 @@ void Feedback::insertAtEnd(std::string username, std::string feedback, tm *creat
 	newNode->feedbackID = size + 1;
 	newNode->username = username;
 	newNode->feedback = feedback;
-	newNode->createdAt = createdAt;
+	newNode->createdAt = *createdAt;
 	newNode->admin = "";
 	newNode->replyContent = "";
-	newNode->repliedAt = nullptr;
+	newNode->repliedAt = std::nullopt;
 	newNode->prev = nullptr;
 	newNode->next = nullptr;
 
@@ -35,6 +35,22 @@ void Feedback::insertAtEnd(std::string username, std::string feedback, tm *creat
 	size++;
 }
 
+FeedbackNode *Feedback::getTail() const
+{
+	if (head == nullptr)
+	{
+		return nullptr; // Return nullptr if the list is empty
+	}
+
+	FeedbackNode *current = head;
+	while (current->next != nullptr)
+	{
+		current = current->next;
+	}
+
+	return current;
+}
+
 void Feedback::printList()
 {
 	if (head == nullptr)
@@ -47,9 +63,23 @@ void Feedback::printList()
 	FeedbackNode *current = head;
 	while (current != nullptr)
 	{
+		char buffer[80];
+		strftime(buffer, sizeof(buffer), "%y-%m-%d %H:%M:%S", &(current->createdAt));
+
 		std::cout << "Feedback ID: " << current->feedbackID << std::endl;
 		std::cout << "Content: " << current->feedback << std::endl;
 		std::cout << "By user: " << current->username << std::endl;
+		std::cout << "Created At: " << buffer << std::endl;
+
+		if (current->admin != "")
+		{
+			char buffer2[80];
+			strftime(buffer2, sizeof(buffer2), "%y-%m-%d %H:%M:%S", &(current->repliedAt.value()));
+
+			std::cout << "Replied by: " << current->admin << std::endl;
+			std::cout << "Reply content: " << current->replyContent << std::endl;
+			std::cout << "Replied At: " << buffer2 << std::endl;
+		}
 		current = current->next;
 		i++;
 	}
@@ -95,9 +125,5 @@ void Feedback::replyFeedback(FeedbackNode *current, std::string admin, std::stri
 	current->admin = "admin";
 	current->replyContent = replyContent;
 	time_t now = time(0);
-	current->repliedAt = localtime(&now);
-
-	char buffer[80];
-	strftime(buffer, sizeof(buffer), "%y::%m::%d %H::%M::%S", current->repliedAt);
-	std::cout << "repliedAt: " << buffer << std::endl;
+	current->repliedAt = *localtime(&now);
 }
