@@ -128,3 +128,74 @@ void University::printUniversitiesInfo()
 		std::cout << "No universities to print." << std::endl;
 	}
 }
+
+// Find middle node of linked list
+UnivNode *University::getMiddle(UnivNode *start, UnivNode *last)
+{
+	if (start == nullptr)
+	{
+		return NULL;
+	}
+
+	UnivNode *slow = start;
+	UnivNode *fast = start->next;
+
+	while(fast != last)
+	{
+		fast = fast -> next;
+		if (fast != last)
+		{
+			slow = slow -> next;
+			fast = fast -> next;
+		}
+	}
+
+	return slow;
+}
+
+// Search with University Rank
+void University::binarySearch(int rank)
+{
+	if(rank > size)
+	{
+		std::cout << "University not found!" << std::endl;
+		return;
+	}
+
+	UnivNode *start = head;
+	UnivNode *last = NULL;
+	std::cout << "Here 3" << std::endl;
+
+	do
+	{
+		/* code */
+		UnivNode *mid = getMiddle(start, last);
+
+		std::cout << "Here 1" << std::endl;
+
+		if (mid == nullptr)
+		{
+			std::cout << "University not found!" << std::endl;
+			return;
+		}
+
+		std::cout << "Here 2" << std::endl;
+
+		if (stoi(mid->rank) == rank)
+		{
+			std::cout << "University found: " << mid->institution << std::endl;
+			return;
+		}
+		else if (stoi(mid->rank) < rank)
+		{
+			start = mid->next;
+		}
+		else
+		{
+			last = mid;
+		}
+	} while (last == NULL || last != start);
+
+	return;
+	
+}

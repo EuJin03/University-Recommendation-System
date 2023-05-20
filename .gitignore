@@ -6,3 +6,6 @@
 /.vscode/*
 /additional
 /additional/*
+/bin/*
+/bin
+*.o

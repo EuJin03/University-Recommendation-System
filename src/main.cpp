@@ -7,6 +7,10 @@
 #include <chrono>
 
 #include "../include/University.h"
+#include "../include/Customer.h"
+
+using namespace std::filesystem;
+
 
 using namespace std::chrono;
 
@@ -16,7 +20,7 @@ int main()
 
 	// ******************************************************
 	// should move this into seeder class
-	std::filesystem::path currentPath = std::filesystem::current_path();
+	path currentPath = current_path();
 	std::ifstream file(currentPath.string() + "\\resources\\assets\\2023_QS_World_University_Rankings.csv");
 
 	University university;
@@ -69,7 +73,7 @@ int main()
 
 	std::cout << "Size of linked list: " << university.getSize() << std::endl;
 
-	university.printUniversitiesInfo();
+	// university.printUniversitiesInfo();
 
 	long long durationLoad = duration_cast<microseconds>(end_load - start_load).count();
 
@@ -77,6 +81,20 @@ int main()
 
 	// ******************************************************
 
+	// ******************************************************
+	// Testing for Customer Class
+
+	Customer customer;
+	customer.addCustomerAtEnd("user1", "password1", "user1@mail.com", "0123456789", "01/01/2001");
+	customer.addCustomerAtEnd("user2", "password2", "user2@mail.com", "0123456789", "01/01/2001");
+	customer.addCustomerAtEnd("user3", "password3", "user3@mail.com", "0123456789", "01/01/2001");
+	customer.addCustomerAtEnd("user4", "password4", "user4@mail.com", "0123456789", "01/01/2001");
+	customer.addCustomerAtEnd("user5", "password5", "user5@mail.com", "0123456789", "01/01/2001");
+	customer.addCustomerAtEnd("user6", "password6", "user6@mail.com", "0123456789", "01/01/2001");
+
+	// customer.printCustomersInfo();
+	std::cout << std::endl;
+	university.binarySearch(1234);
 	return 0;
 }
 

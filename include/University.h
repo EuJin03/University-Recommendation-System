@@ -50,7 +50,9 @@ public:
 	void sortUniversitiesByInstitution();
 
 	// search
-	int binarySearch();
+	void binarySearch(int rank);
+	UnivNode *getMiddle(UnivNode *start, UnivNode *last);
+
 	int linearSearch();
 
 private:
