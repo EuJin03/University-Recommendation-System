@@ -171,15 +171,11 @@ void University::binarySearch(int rank)
 		/* code */
 		UnivNode *mid = getMiddle(start, last);
 
-		std::cout << "Here 1" << std::endl;
-
 		if (mid == nullptr)
 		{
 			std::cout << "University not found!" << std::endl;
 			return;
 		}
-
-		std::cout << "Here 2" << std::endl;
 
 		if (stoi(mid->rank) == rank)
 		{
