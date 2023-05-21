@@ -126,6 +126,10 @@ tm *Customer::getLastActive(UserAccount *curr)
     return curr->lastActive;
 }
 
+bool Customer::login(std::string username, std::string password)
+{
+
+}
 
 void Customer::printCustomersInfo()
 {
@@ -136,14 +140,6 @@ void Customer::printCustomersInfo()
         printCustomerHeader();
         while (count < 20)
         {
-            // std::cout << curr->customerIndex << std::endl;
-            // std::cout << curr->username << std::endl;
-			// std::cout << curr->password << std::endl;
-            // std::cout << curr->email << std::endl;
-            // std::cout << curr->contact << std::endl;
-            // std::cout << curr->dateOfBirth << std::endl;
-            // std::cout << curr->lastActive << std::endl;
-            // std::cout << std::endl;
             printCustomer(curr);
 			curr = curr->next;
 			count++;

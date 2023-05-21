@@ -26,11 +26,34 @@ struct UserAccount
 //=====================
 
 	// Login and logout
-	void login(std::string username, std::string password);
+	
 	void logout();
 
 	// save university
-	void saveUniversity(std::string university);
+	// void saveUniversity(UnivNode *university)
+	// {
+	// 	savedUniversities.addUniversityAtEnd(university->rank,
+	// 	university->institution,
+	// 	university->locale,
+	// 	university->location ,
+	// 	university->arCode,
+	// 	university->arRank,
+	// 	university->erScore,
+	// 	university->erRank,
+	// 	university->fsrScore ,
+	// 	university->fsrRank,
+	// 	university->cpfScore ,
+	// 	university->cpfRank,
+	// 	university->lfrScore ,
+	// 	university->lfrRank,
+	// 	university->lsrScore ,
+	// 	university->lsrRank,
+	// 	university->lrnScore ,
+	// 	university->lrnRank,
+	// 	university->gerScore ,
+	// 	university->gerRank,
+	// 	university->scoreScaled);
+	// }
 
 	// feedback
 	// void sendFeedback(Feedback feedback);
@@ -65,6 +88,9 @@ public:
 
 	// register
 	void registerAccount(std::string username, std::string password);
+
+	// login
+	bool login(std::string username, std::string password);
 
 private:
 	UserAccount *head;
