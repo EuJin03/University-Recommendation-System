@@ -1,24 +1,32 @@
 #ifndef CUSTOMER_H
 #define CUSTOMER_H
 
-#include <iostream>
 #include <string>
 #include <ctime>
+#include <vector>
+#include <list>
 
-struct UserAccount
-{
-	std::string username;
-	std::string password;
-	tm *lastActive;
-};
+#include "User.h"
+
 class Customer
 {
-public:
-	
-	
-	
 private:
+	std::vector<std::list<User>> hashTable;
+	std::hash<std::string> hasher;
 
+public:
+	Customer(int tableSize);
+
+	void addCustomer(const User &user);
+	void removeCustomer(const std::string &username);
+
+	// TODO: implement these
+	bool verifyCustomer(const std::string &username, const std::string &password) const;
+	bool updateLastLogin(const std::string &username);
+
+	void printCustomerDetails(const std::string &username);
+	void printAllUsersDetails();
+	bool deleteInactiveAccounts();
 };
 
-#endif // ADMIN_H
+#endif // CUSTOMER_H

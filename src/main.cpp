@@ -9,6 +9,9 @@
 #include "../include/University.h"
 #include "../include/Feedback.h"
 #include "../include/LinkedList.h"
+#include "../include/Customer.h"
+#include "../include/User.h"
+#include "../include/Seeder.h"
 
 using namespace std::chrono;
 
@@ -92,7 +95,8 @@ int main()
 	universityList.insertAtBeginning(university);
 	universityList.show();
 	// ******************************************************
-
+	Seeder seeder;
+	seeder.createUserInstances();
 	return 0;
 }
 
