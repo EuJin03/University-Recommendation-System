@@ -1,129 +1,39 @@
 #include "../include/Feedback.h"
 
+Feedback::Feedback(int feedbackID, std::string username, std::string feedback, std::string admin, std::string replyContent)
+{
+	this->feedbackID = feedbackID;
+	this->username = username;
+	this->feedback = feedback;
+	this->admin = admin;
+	this->replyContent = replyContent;
+}
+
+Feedback::Feedback(const Feedback &feedback)
+{
+	this->feedbackID = feedback.feedbackID;
+	this->username = feedback.username;
+	this->feedback = feedback.feedback;
+	this->admin = feedback.admin;
+	this->replyContent = feedback.replyContent;
+}
+
 Feedback::Feedback()
 {
-	head = nullptr;
-	tail = nullptr;
-	size = 0;
+	this->feedbackID = 0;
+	this->username = "";
+	this->feedback = "";
+	this->admin = "";
+	this->replyContent = "";
 }
 
-void Feedback::insertAtEnd(std::string username, std::string feedback, tm *createdAt)
+// Override ostream operator
+std::ostream &operator<<(std::ostream &os, const Feedback &feedback)
 {
-	FeedbackNode *newNode = new FeedbackNode;
-	newNode->feedbackID = size + 1;
-	newNode->username = username;
-	newNode->feedback = feedback;
-	newNode->createdAt = *createdAt;
-	newNode->admin = "";
-	newNode->replyContent = "";
-	newNode->repliedAt = std::nullopt;
-	newNode->prev = nullptr;
-	newNode->next = nullptr;
-
-	if (head == nullptr)
-	{
-		head = newNode;
-		tail = newNode;
-	}
-	else
-	{
-		newNode->prev = tail;
-		tail->next = newNode;
-		tail = newNode;
-	}
-
-	size++;
-}
-
-FeedbackNode *Feedback::getTail() const
-{
-	if (head == nullptr)
-	{
-		return nullptr; // Return nullptr if the list is empty
-	}
-
-	FeedbackNode *current = head;
-	while (current->next != nullptr)
-	{
-		current = current->next;
-	}
-
-	return current;
-}
-
-void Feedback::printList()
-{
-	if (head == nullptr)
-	{
-		std::cout << "No feedbacks available." << std::endl;
-		return;
-	}
-
-	int i = 0;
-	FeedbackNode *current = head;
-	while (current != nullptr)
-	{
-		char buffer[80];
-		strftime(buffer, sizeof(buffer), "%y-%m-%d %H:%M:%S", &(current->createdAt));
-
-		std::cout << "Feedback ID: " << current->feedbackID << std::endl;
-		std::cout << "Content: " << current->feedback << std::endl;
-		std::cout << "By user: " << current->username << std::endl;
-		std::cout << "Created At: " << buffer << std::endl;
-
-		if (current->admin != "")
-		{
-			char buffer2[80];
-			strftime(buffer2, sizeof(buffer2), "%y-%m-%d %H:%M:%S", &(current->repliedAt.value()));
-
-			std::cout << "Replied by: " << current->admin << std::endl;
-			std::cout << "Reply content: " << current->replyContent << std::endl;
-			std::cout << "Replied At: " << buffer2 << std::endl;
-		}
-		current = current->next;
-		i++;
-	}
-}
-
-FeedbackNode *Feedback::navigateTo(FeedbackNode *current, char code)
-{
-	if (code == 'n')
-	{
-		if (current->next == nullptr)
-		{
-			std::cout << "No more feedbacks." << std::endl;
-			return current;
-		}
-		else
-		{
-			current = current->next;
-			return current;
-		}
-	}
-	else if (code == 'p')
-	{
-		if (current->prev == nullptr)
-		{
-			std::cout << "No more feedbacks." << std::endl;
-			return current;
-		}
-		else
-		{
-			current = current->prev;
-			return current;
-		}
-	}
-	else
-	{
-		std::cout << "Invalid input." << std::endl;
-		return current;
-	}
-}
-
-void Feedback::replyFeedback(FeedbackNode *current, std::string admin, std::string replyContent)
-{
-	current->admin = "admin";
-	current->replyContent = replyContent;
-	time_t now = time(0);
-	current->repliedAt = *localtime(&now);
+	os << "Feedback ID: " << feedback.getFeedbackID() << std::endl;
+	os << "Username: " << feedback.getUsername() << std::endl;
+	os << "Feedback: " << feedback.getFeedback() << std::endl;
+	os << "Admin: " << feedback.getAdmin() << std::endl;
+	os << "Reply content: " << feedback.getReplyContent() << std::endl;
+	return os;
 }

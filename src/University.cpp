@@ -1,130 +1,109 @@
-#include <iostream>
+// #include <iostream>
 #include "../include/University.h"
+#include "University.h"
+
+University::University(int rank, std::string institution, std::string locale, std::string location, int arScore, int arRank, int erScore, int erRank, int fsrScore, int fsrRank, int cpfScore, int cpfRank, int lfrScore, int lfrRank, int lsrScore, int lsrRank, int lrnScore, int lrnRank, int gerScore, int gerRank, int scoreScaled)
+{
+	this->rank = rank;
+	this->institution = institution;
+	this->locale = locale;
+	this->location = location;
+	this->arScore = arScore;
+	this->arRank = arRank;
+	this->erScore = erScore;
+	this->erRank = erRank;
+	this->fsrScore = fsrScore;
+	this->fsrRank = fsrRank;
+	this->cpfScore = cpfScore;
+	this->cpfRank = cpfRank;
+	this->lfrScore = lfrScore;
+	this->lfrRank = lfrRank;
+	this->lsrScore = lsrScore;
+	this->lsrRank = lsrRank;
+	this->lrnScore = lrnScore;
+	this->lrnRank = lrnRank;
+	this->gerScore = gerScore;
+	this->gerRank = gerRank;
+	this->scoreScaled = scoreScaled;
+}
+
+University::University(const University &university) {
+	this->rank = university.rank;
+	this->institution = university.institution;
+	this->locale = university.locale;
+	this->location = university.location;
+	this->arScore = university.arScore;
+	this->arRank = university.arRank;
+	this->erScore = university.erScore;
+	this->erRank = university.erRank;
+	this->fsrScore = university.fsrScore;
+	this->fsrRank = university.fsrRank;
+	this->cpfScore = university.cpfScore;
+	this->cpfRank = university.cpfRank;
+	this->lfrScore = university.lfrScore;
+	this->lfrRank = university.lfrRank;
+	this->lsrScore = university.lsrScore;
+	this->lsrRank = university.lsrRank;
+	this->lrnScore = university.lrnScore;
+	this->lrnRank = university.lrnRank;
+	this->gerScore = university.gerScore;
+	this->gerRank = university.gerRank;
+	this->scoreScaled = university.scoreScaled;
+}
 
 University::University()
 {
-	this->size = 0;
-	this->univIndex = 0;
-	this->head = nullptr;
-	this->tail = nullptr;
-	this->isSorted = false;
+	this->rank = 0;
+	this->institution = "";
+	this->locale = "";
+	this->location = "";
+	this->arScore = 0;
+	this->arRank = 0;
+	this->erScore = 0;
+	this->erRank = 0;
+	this->fsrScore = 0;
+	this->fsrRank = 0;
+	this->cpfScore = 0;
+	this->cpfRank = 0;
+	this->lfrScore = 0;
+	this->lfrRank = 0;
+	this->lsrScore = 0;
+	this->lsrRank = 0;
+	this->lrnScore = 0;
+	this->lrnRank = 0;
+	this->gerScore = 0;
+	this->gerRank = 0;
+	this->scoreScaled = 0;
 }
 
 University::~University()
 {
-	// Clean up linked list
-	UnivNode *current = head;
-	while (current != nullptr)
-	{
-		UnivNode *temp = current;
-		current = current->next;
-		delete temp;
-	}
+	// TODO: Ask Eugene how to write this Destructor
 }
 
-void University::addUniversityAtStart(std::string rank, std::string institution, std::string locale, std::string location, std::string arCode, std::string arRank, std::string erScore, std::string erRank, std::string fsrScore, std::string fsrRank, std::string cpfScore, std::string cpfRank, std::string lfrScore, std::string lfrRank, std::string lsrScore, std::string lsrRank, std::string lrnScore, std::string lrnRank, std::string gerScore, std::string gerRank, std::string scoreScaled)
+// Overriding the ostream operator
+std::ostream &operator<<(std::ostream &os, const University &university)
 {
-	UnivNode *newNode = new UnivNode;
-	newNode->rank = rank;
-	newNode->institution = institution;
-	newNode->locale = locale;
-	newNode->location = location;
-	newNode->arCode = arCode;
-	newNode->arRank = arRank;
-	newNode->erScore = erScore;
-	newNode->erRank = erRank;
-	newNode->fsrScore = fsrScore;
-	newNode->fsrRank = fsrRank;
-	newNode->cpfScore = cpfScore;
-	newNode->cpfRank = cpfRank;
-	newNode->lfrScore = lfrScore;
-	newNode->lfrRank = lfrRank;
-	newNode->lsrScore = lsrScore;
-	newNode->lsrRank = lsrRank;
-	newNode->lrnScore = lrnScore;
-	newNode->lrnRank = lrnRank;
-	newNode->gerScore = gerScore;
-	newNode->gerRank = gerRank;
-	newNode->scoreScaled = scoreScaled;
-	newNode->prev = nullptr;
-	newNode->next = nullptr;
-
-	if (head == nullptr)
-	{
-		head = newNode;
-		tail = newNode;
-	}
-	else
-	{
-		newNode->next = head;
-		head->prev = newNode;
-		head = newNode;
-	}
-
-	size++;
-}
-
-void University::addUniversityAtEnd(std::string rank, std::string institution, std::string locale, std::string location, std::string arCode, std::string arRank, std::string erScore, std::string erRank, std::string fsrScore, std::string fsrRank, std::string cpfScore, std::string cpfRank, std::string lfrScore, std::string lfrRank, std::string lsrScore, std::string lsrRank, std::string lrnScore, std::string lrnRank, std::string gerScore, std::string gerRank, std::string scoreScaled)
-{
-	if (tail == nullptr)
-	{
-		addUniversityAtStart(rank, institution, locale, location, arCode, arRank, erScore, erRank, fsrScore, fsrRank, cpfScore, cpfRank, lfrScore, lfrRank, lsrScore, lsrRank, lrnScore, lrnRank, gerScore, gerRank, scoreScaled);
-	}
-	else
-	{
-		UnivNode *newNode = new UnivNode;
-		newNode->rank = rank;
-		newNode->institution = institution;
-		newNode->locale = locale;
-		newNode->location = location;
-		newNode->arCode = arCode;
-		newNode->arRank = arRank;
-		newNode->erScore = erScore;
-		newNode->erRank = erRank;
-		newNode->fsrScore = fsrScore;
-		newNode->fsrRank = fsrRank;
-		newNode->cpfScore = cpfScore;
-		newNode->cpfRank = cpfRank;
-		newNode->lfrScore = lfrScore;
-		newNode->lfrRank = lfrRank;
-		newNode->lsrScore = lsrScore;
-		newNode->lsrRank = lsrRank;
-		newNode->lrnScore = lrnScore;
-		newNode->lrnRank = lrnRank;
-		newNode->gerScore = gerScore;
-		newNode->gerRank = gerRank;
-		newNode->scoreScaled = scoreScaled;
-		newNode->prev = nullptr;
-		newNode->next = nullptr;
-
-		tail->next = newNode;
-		newNode->prev = tail;
-		tail = newNode;
-		size++;
-	}
-}
-
-int University::getSize() const
-{
-	return size;
-}
-
-void University::printUniversitiesInfo()
-{
-	UnivNode *curr = head;
-	int index = 0;
-	if (curr != nullptr)
-	{
-		while (index < 20)
-		{
-			std::cout << curr->rank << std::endl;
-			std::cout << curr->institution << std::endl;
-			curr = curr->next;
-			index++;
-		}
-	}
-	else
-	{
-		std::cout << "No universities to print." << std::endl;
-	}
+	os << "University Rank: " << university.getRank() << std::endl;
+	os << "University Name: " << university.getInstitution() << std::endl;
+	os << "University Locale: " << university.getLocale() << std::endl;
+	os << "University Location: " << university.getLocation() << std::endl;
+	os << "Academic Reputation Score: " << university.getArScore() << std::endl;
+	os << "Academic Reputation Rank: " << university.getArRank() << std::endl;
+	os << "Employer Reputation Score: " << university.getErScore() << std::endl;
+	os << "Employer Reputation Rank: " << university.getErRank() << std::endl;
+	os << "Faculty Student Score: " << university.getFsrScore() << std::endl;
+	os << "Faculty Student Rank: " << university.getFsrRank() << std::endl;
+	os << "Citation Per Faculty Score: " << university.getCpfScore() << std::endl;
+	os << "Citation Per Faculty Rank: " << university.getCpfRank() << std::endl;
+	os << "International Faculty Score: " << university.getLfrScore() << std::endl;
+	os << "International Faculty Rank: " << university.getLfrRank() << std::endl;
+	os << "International Student Score: " << university.getLsrScore() << std::endl;
+	os << "International Student Rank: " << university.getLsrRank() << std::endl;
+	os << "International Research Score: " << university.getLrnScore() << std::endl;
+	os << "International Research Rank: " << university.getLrnRank() << std::endl;
+	os << "Graduate Employment Score: " << university.getGerScore() << std::endl;
+	os << "Graduate Employment Rank: " << university.getGerRank() << std::endl;
+	os << "Overall Score: " << university.getScoreScaled() << std::endl;
+	return os;
 }
