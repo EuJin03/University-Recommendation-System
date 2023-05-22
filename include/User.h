@@ -39,6 +39,7 @@ private:
 	std::string username;
 	std::string password;
 	std::time_t lastLogin;
+	// LinkedList<University> favUnivList;
 
 public:
 	User(const std::string &username, const std::string &password, const std::time_t &lastLogin);

@@ -4,20 +4,25 @@
 
 Customer::Customer(int tableSize)
 {
-	hashTable.reserve(tableSize);
+	std::vector<std::list<User>> newHashTable(tableSize);
+	this->hashTable = newHashTable;
 }
 
 void Customer::addCustomer(const User &user)
 {
-	std::size_t hashValue = hasher(user.getUsername());
-	std::size_t index = hashValue % hashTable.size();
+	std::cout << "Adding user " << user.getUsername() << "...\n";
+	std::cout << "Hashing... " << hashTable.size() << std::endl;
+	int hashValue = hasher(user.getUsername());
+	int index = hashValue % hashTable.size();
+	std::cout << index << std::endl;
+
 	hashTable[index].push_back(user);
 }
 
 void Customer::removeCustomer(const std::string &username)
 {
-	std::size_t hashValue = hasher(username);
-	std::size_t index = hashValue % hashTable.size();
+	int hashValue = hasher(username);
+	int index = hashValue % hashTable.size();
 	auto &userList = hashTable[index];
 
 	for (auto it = userList.begin(); it != userList.end(); ++it)
@@ -63,6 +68,7 @@ void Customer::printCustomerDetails(const std::string &username)
 		if (user.getUsername() == username)
 		{
 			std::cout << "Username: " << user.getUsername() << "\n";
+			std::cout << "Password: " << user.getPassword() << "\n";
 			std::cout << "Last Login: " << std::ctime(&user.getLastLogin()) << "\n";
 			return;
 		}
@@ -90,6 +96,7 @@ bool Customer::deleteInactiveAccounts()
 
 void Customer::printAllUsersDetails()
 {
+	std::cout << "Printing all users...\n\n";
 	for (const auto &userList : hashTable)
 	{
 		for (const User &user : userList)
