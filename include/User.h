@@ -42,13 +42,18 @@ private:
 	// LinkedList<University> favUnivList;
 
 public:
-	User(const std::string &username, const std::string &password, const std::time_t &lastLogin);
+    User(const std::string &username, const std::string &password, const std::time_t &lastLogin);
+	User();
 
 	const std::string &getUsername() const;
 	const std::string &getPassword() const;
 	const std::time_t &getLastLogin() const;
 
 	void setLastLogin(std::time_t newLastLogin);
+
+    friend std::ostream &operator<<(std::ostream &os, const User &user);
 };
+
+std::ostream &operator<<(std::ostream &os, const User &user);
 
 #endif // USER_H
