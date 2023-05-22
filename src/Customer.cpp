@@ -97,7 +97,6 @@ void Customer::printAllUsersDetails()
 			std::cout << "Username: " << user.getUsername() << std::endl;
 			std::cout << "Password: " << user.getPassword() << std::endl;
 
-			// Convert the last login time to a string representation
 			std::tm *lastLoginTime = std::localtime(&user.getLastLogin());
 			char buffer[80];
 			std::strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", lastLoginTime);

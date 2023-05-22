@@ -5,12 +5,6 @@
 #include <filesystem>
 #include <ctime>
 #include <chrono>
-
-#include "../include/University.h"
-#include "../include/Feedback.h"
-#include "../include/LinkedList.h"
-#include "../include/Customer.h"
-#include "../include/User.h"
 #include "../include/Seeder.h"
 
 using namespace std::chrono;
@@ -81,21 +75,9 @@ int main()
 	// std::cout << "Time taken to load data: " << durationLoad << " microseconds" << std::endl;
 
 	// ******************************************************
-
-	// ******************************************************
-	// TESTING NEW LINKED LIST CLASS
-	// ******************************************************
-	Feedback feedback(1, "Customer 1", "Testing Feedback 1", "Admin 1", "Testing Reply 1");
-	LinkedList<Feedback> feedbackList;
-	feedbackList.insertAtBeginning(feedback);
-	feedbackList.show();
-
-	University university(1, "Test University", "Test Locale", "Test Location", 20, 5, 23, 5, 39, 2, 100, 3, 100, 4, 50, 4, 53, 5, 20, 133, 97);
-	LinkedList<University> universityList;
-	universityList.insertAtBeginning(university);
-	universityList.show();
-	// ******************************************************
 	Seeder seeder;
+	seeder.createFeedbackInstances();
+	seeder.createUnivInstances();
 	seeder.createUserInstances();
 	return 0;
 }
