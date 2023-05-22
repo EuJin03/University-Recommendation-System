@@ -92,3 +92,19 @@ void Seeder::createUserInstances()
 	std::string test = "john123";
 	customer.printCustomerDetails(test);
 }
+
+void Seeder::createDynamicArrayInstance()
+{
+    DynamicArray<University> dynamicArray;
+//    User user1("Ali123", "aaaa", getRandomPastTime());
+//    User user2("Bob123", "bbbb", getRandomPastTime());
+//    User user3("Candy123", "cccc", getRandomPastTime());
+    University university(1, "Test University", "Test Locale", "Test Location", 20, 5, 23, 5, 39, 2, 100, 3, 100, 4, 50, 4, 53, 5, 20, 133, 97);
+    University university2(2, "Test University 2", "Test Locale 2", "Test Location 2", 30, 5, 23, 5, 39, 2, 100, 3, 100, 4, 50, 4, 53, 5, 20, 133, 97);
+    University university3(3, "Test University 3", "Test Locale 3", "Test Location 3", 25, 7, 23, 5, 39, 2, 100, 3, 100, 4, 50, 4, 53, 5, 20, 133, 97);
+
+    dynamicArray.append(university);
+    dynamicArray.append(university2);
+    dynamicArray.append(university3);
+    dynamicArray.show();
+}
