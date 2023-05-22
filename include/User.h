@@ -51,6 +51,7 @@ public:
 
 	void setLastLogin(std::time_t newLastLogin);
 
+    bool operator==(const User &user) const;
     friend std::ostream &operator<<(std::ostream &os, const User &user);
 };
 

@@ -49,7 +49,7 @@ public:
     {
         if (size > 0)
         {
-            array[size - 1] = NULL;
+//            array[size - 1] = NULL;
             size--;
             if (size < capacity / 2)
             {
@@ -99,7 +99,7 @@ public:
         {
             array[i] = array[i + 1];
         }
-        array[size - 1] = NULL;
+//        array[size - 1] = NULL;
         size--;
         if (size < capacity / 2)
         {

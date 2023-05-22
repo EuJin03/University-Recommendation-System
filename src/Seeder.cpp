@@ -92,3 +92,32 @@ void Seeder::createUserInstances()
 	std::string test = "john123";
 	customer.printCustomerDetails(test);
 }
+
+void Seeder::createDynamicArrayInstance()
+{
+    DynamicArray<User> dynamicArray;
+    User user1("Ali123", "aaaa", getRandomPastTime());
+    User user2("Bob123", "bbbb", getRandomPastTime());
+    User user3("Candy123", "cccc", getRandomPastTime());
+//    University university(1, "Test University", "Test Locale", "Test Location", 20, 5, 23, 5, 39, 2, 100, 3, 100, 4, 50, 4, 53, 5, 20, 133, 97);
+//    University university2(2, "Test University 2", "Test Locale 2", "Test Location 2", 30, 5, 23, 5, 39, 2, 100, 3, 100, 4, 50, 4, 53, 5, 20, 133, 97);
+//    University university3(3, "Test University 3", "Test Locale 3", "Test Location 3", 25, 7, 23, 5, 39, 2, 100, 3, 100, 4, 50, 4, 53, 5, 20, 133, 97);
+
+    std::cout << "======= INSERTING ELEMENTS INTO DYNAMIC ARRAY =======" << std::endl;
+    dynamicArray.append(user1);
+    dynamicArray.append(user2);
+    dynamicArray.append(user3);
+    dynamicArray.show();
+
+    std::cout << "======= POPPING ELEMENTS FROM DYNAMIC ARRAY =======" << std::endl;
+    dynamicArray.pop();
+    dynamicArray.show();
+
+    std::cout << "======= INSERTING ELEMENTS AT SPECIFIED INDEX INTO DYNAMIC ARRAY =======" << std::endl;
+    dynamicArray.insertAt(user3, 0);
+    dynamicArray.show();
+
+    std::cout << "======= REMOVING ELEMENTS AT SPECIFIED INDEX FROM DYNAMIC ARRAY =======" << std::endl;
+    dynamicArray.remove(user1);
+    dynamicArray.show();
+}

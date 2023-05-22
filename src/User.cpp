@@ -68,3 +68,8 @@ std::ostream &operator<<(std::ostream &os, const User &user) {
     os << "Last Login: " << user.lastLogin << std::endl;
     return os;
 }
+
+bool User::operator==(const User &user) const {
+    return username == user.getUsername()
+            && password == user.getPassword();
+}

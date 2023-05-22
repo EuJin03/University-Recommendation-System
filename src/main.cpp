@@ -6,6 +6,7 @@
 #include <ctime>
 #include <chrono>
 #include "../include/Seeder.h"
+#include "../include/DynamicArray.h"
 
 using namespace std::chrono;
 
@@ -79,6 +80,9 @@ int main()
 	seeder.createFeedbackInstances();
 	seeder.createUnivInstances();
 	seeder.createUserInstances();
+
+    std::cout << "======== TEST DYNAMIC ARRAY ========" << std::endl;
+    seeder.createDynamicArrayInstance();
 
 	return 0;
 }
