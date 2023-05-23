@@ -2,20 +2,20 @@
 
 using namespace std::chrono;
 
-void Seeder::createFeedbackInstances()
+void Seeder::createFeedbackInstances(LinkedList<Feedback> *feedbackList)
 {
-	Feedback feedback(1, "Customer 1", "Testing Feedback 1", "Admin 1", "Testing Reply 1");
-	LinkedList<Feedback> feedbackList;
-	feedbackList.insertAtBeginning(feedback);
-	feedbackList.show();
-}
+	int feedbackCount = 3; // Number of feedback instances to create
 
-void Seeder::createUnivInstances()
-{
-	University university(1, "Test University", "Test Locale", "Test Location", 20, 5, 23, 5, 39, 2, 100, 3, 100, 4, 50, 4, 53, 5, 20, 133, 97);
-	LinkedList<University> universityList;
-	universityList.insertAtBeginning(university);
-	universityList.show();
+	for (int i = 1; i <= feedbackCount; i++)
+	{
+		std::string customerName = "Customer " + std::to_string(i);
+		std::string feedbackText = "Testing Feedback " + std::to_string(i);
+		std::string adminName = "Admin " + std::to_string(i);
+		std::string replyText = "Testing Reply " + std::to_string(i);
+
+		Feedback feedback(i, customerName, feedbackText, adminName, replyText);
+		feedbackList->insertAtBeginning(feedback);
+	}
 }
 
 std::time_t Seeder::getRandomPastTime()
@@ -54,52 +54,16 @@ void Seeder::createUserInstances()
 	std::time_t lastLogin4 = getRandomPastTime();
 	User user4(username4, password4, lastLogin4);
 
-	// Create a Customer instance
-	HashTable customer(10);
-
 	// Add users to the customer
 	customer.addUser(user1);
 	customer.addUser(user2);
 	customer.addUser(user3);
 	customer.addUser(user4);
-
-	// Verify customer credentials
-	bool verified = customer.verifyUser("john123", "password1");
-	if (verified)
-		std::cout << "User verified!\n";
-	else
-		std::cout << "Invalid credentials!\n";
-
-	// Update last login time
-	bool updated = customer.updateLastLogin("john1234");
-	if (updated)
-		std::cout << "Last login time updated!\n";
-	else
-		std::cout << "User not found!\n";
-
-	// Delete inactive accounts
-	bool accountsDeleted = customer.deleteInactiveAccounts();
-	if (accountsDeleted)
-		std::cout << "Inactive accounts deleted!\n";
-	else
-		std::cout << "No inactive accounts found!\n";
-
-	// print all users
-	customer.printAllUsersDetails();
-
-	// validate if user already existed
-	bool valid = customer.validateUsername("john123");
-	if (valid)
-		std::cout << "User already existed!\n";
-	else
-		std::cout << "User not found!\n";
 }
 
-void Seeder::createDynamicArrayInstance()
+void Seeder::createUnivInstances(DynamicArray<University> *dynamicArray)
 {
 	auto start_load = high_resolution_clock::now();
-
-	DynamicArray<University> dynamicArray;
 
 	std::filesystem::path currentPath = std::filesystem::current_path();
 	std::ifstream file(currentPath.string() + "\\resources\\assets\\2023_QS_World_University_Rankings.csv");
@@ -218,7 +182,7 @@ void Seeder::createDynamicArrayInstance()
 
 		// Insert into array
 		University university(std::stoi(rank), institution, locale, location, std::stoi(arCode), std::stoi(arRank), std::stoi(erScore), std::stoi(erRank), std::stoi(fsrScore), std::stoi(fsrRank), std::stoi(cpfScore), std::stoi(cpfRank), std::stoi(lfrScore), std::stoi(lfrRank), std::stoi(lsrScore), std::stoi(lsrRank), std::stoi(lrnScore), std::stoi(lrnRank), std::stoi(gerScore), std::stoi(gerRank), std::stoi(scoreScaled));
-		dynamicArray.append(university);
+		dynamicArray->append(university);
 	}
 
 	file.close();
@@ -227,28 +191,26 @@ void Seeder::createDynamicArrayInstance()
 	std::cout << "Time taken to load data: " << durationLoad << " microseconds" << std::endl;
 
 	std::cout << "\n";
-
-	// std::cout << std::left << std::setw(5) << "Rank";
-	// std::cout << std::left << std::setw(75) << "Institution";
-	// std::cout << std::left << std::setw(20) << "Locale";
-	// std::cout << std::left << std::setw(20) << "Location";
-	// std::cout << std::left << std::setw(8) << "Ar Score";
-	// std::cout << std::left << std::setw(8) << "Ar Rank";
-	// std::cout << std::left << std::setw(8) << "Er Score";
-	// std::cout << std::left << std::setw(8) << "Er Rank";
-	// std::cout << std::left << std::setw(8) << "Fsr Score";
-	// std::cout << std::left << std::setw(8) << "Fsr Rank";
-	// std::cout << std::left << std::setw(8) << "Cpf Score";
-	// std::cout << std::left << std::setw(8) << "Cpf Rank";
-	// std::cout << std::left << std::setw(8) << "Lfr Score";
-	// std::cout << std::left << std::setw(8) << "Lfr Rank";
-	// std::cout << std::left << std::setw(8) << "Lsr Score";
-	// std::cout << std::left << std::setw(8) << "Lsr Rank";
-	// std::cout << std::left << std::setw(8) << "Lrn Score";
-	// std::cout << std::left << std::setw(8) << "Lrn Rank";
-	// std::cout << std::left << std::setw(8) << "Ger Score";
-	// std::cout << std::left << std::setw(8) << "Ger Rank";
-	// std::cout << std::left << std::setw(8) << "Score Scaled";
-	std::cout << "\n";
-	dynamicArray.show();
 }
+
+// std::cout << std::left << std::setw(5) << "Rank";
+// std::cout << std::left << std::setw(75) << "Institution";
+// std::cout << std::left << std::setw(20) << "Locale";
+// std::cout << std::left << std::setw(20) << "Location";
+// std::cout << std::left << std::setw(8) << "Ar Score";
+// std::cout << std::left << std::setw(8) << "Ar Rank";
+// std::cout << std::left << std::setw(8) << "Er Score";
+// std::cout << std::left << std::setw(8) << "Er Rank";
+// std::cout << std::left << std::setw(8) << "Fsr Score";
+// std::cout << std::left << std::setw(8) << "Fsr Rank";
+// std::cout << std::left << std::setw(8) << "Cpf Score";
+// std::cout << std::left << std::setw(8) << "Cpf Rank";
+// std::cout << std::left << std::setw(8) << "Lfr Score";
+// std::cout << std::left << std::setw(8) << "Lfr Rank";
+// std::cout << std::left << std::setw(8) << "Lsr Score";
+// std::cout << std::left << std::setw(8) << "Lsr Rank";
+// std::cout << std::left << std::setw(8) << "Lrn Score";
+// std::cout << std::left << std::setw(8) << "Lrn Rank";
+// std::cout << std::left << std::setw(8) << "Ger Score";
+// std::cout << std::left << std::setw(8) << "Ger Rank";
+// std::cout << std::left << std::setw(8) << "Score Scaled";

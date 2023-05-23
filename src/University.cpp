@@ -84,7 +84,7 @@ University::~University()
 // Overriding the ostream operator
 std::ostream &operator<<(std::ostream &os, const University &university)
 {
-	if (university.getRank() != 1) // Do not add a new line for the first line
+	if (university.getRank() != 1)
 	{
 		os << "\n";
 	}
