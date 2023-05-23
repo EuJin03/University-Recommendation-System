@@ -37,8 +37,6 @@ public:
         }
 
         head = newNode;
-        std::cout << "========= Node inserted =========" << std::endl;
-        std::cout << std::endl;
         size++;
     }
 
@@ -60,8 +58,6 @@ public:
         }
 
         tail = newNode;
-        std::cout << "========= Node inserted =========" << std::endl;
-        std::cout << std::endl;
         size++;
     }
 
@@ -82,8 +78,6 @@ public:
             }
 
             delete temp;
-            std::cout << "========= Node removed =========" << std::endl;
-            std::cout << std::endl;
             size--;
         }
     }
@@ -105,8 +99,6 @@ public:
             }
 
             delete temp;
-            std::cout << "========= Node removed =========" << std::endl;
-            std::cout << std::endl;
             size--;
         }
     }

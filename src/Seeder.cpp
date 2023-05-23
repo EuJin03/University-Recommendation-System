@@ -32,12 +32,13 @@ std::time_t Seeder::getRandomPastTime()
 	return pastTime;
 }
 
-void Seeder::createUserInstances()
+void Seeder::createUserInstances(HashTable *customer)
 {
 	std::string username1 = "john123";
 	std::string password1 = "password1";
 	std::time_t lastLogin1 = getRandomPastTime();
 	User user1(username1, password1, lastLogin1);
+	user1.setAsAdmin();
 
 	std::string username2 = "eugene";
 	std::string password2 = "password2";
@@ -55,10 +56,30 @@ void Seeder::createUserInstances()
 	User user4(username4, password4, lastLogin4);
 
 	// Add users to the customer
-	customer.addUser(user1);
-	customer.addUser(user2);
-	customer.addUser(user3);
-	customer.addUser(user4);
+	customer->addUser(user1);
+	customer->addUser(user2);
+	customer->addUser(user3);
+	customer->addUser(user4);
+
+	bool valid = user1.getIsAdmin();
+	if (valid)
+	{
+		std::cout << "User is admin" << std::endl;
+	}
+	else
+	{
+		std::cout << "User is not admin" << std::endl;
+	}
+
+	bool valid2 = user3.getIsAdmin();
+	if (valid2)
+	{
+		std::cout << "User is admin" << std::endl;
+	}
+	else
+	{
+		std::cout << "User is not admin" << std::endl;
+	}
 }
 
 void Seeder::createUnivInstances(DynamicArray<University> *dynamicArray)
@@ -92,8 +113,9 @@ void Seeder::createUnivInstances(DynamicArray<University> *dynamicArray)
 			field = "0";
 	};
 
-	auto trim = [](std::string &str)
+	auto trim = [](std::string &str, int maxLength = 10)
 	{
+		str = str.substr(0, maxLength);
 		size_t first = str.find_first_not_of(' ');
 		if (first == std::string::npos)
 		{ // check if the string is all spaces
@@ -114,14 +136,14 @@ void Seeder::createUnivInstances(DynamicArray<University> *dynamicArray)
 		std::getline(ss, rank, ',');
 		trim(rank);
 		std::getline(ss, institution, ',');
-		trim(institution);
+		trim(institution, 60);
 		if (institution == "Institution")
 			continue;
 
 		std::getline(ss, locale, ',');
-		trim(locale);
+		trim(locale, 10);
 		std::getline(ss, location, ',');
-		trim(location);
+		trim(location, 15);
 		std::getline(ss, arCode, ',');
 		trim(arCode);
 		std::getline(ss, arRank, ',');
@@ -186,31 +208,6 @@ void Seeder::createUnivInstances(DynamicArray<University> *dynamicArray)
 	}
 
 	file.close();
-	auto end_load = high_resolution_clock::now();
-	long long durationLoad = duration_cast<std::chrono::microseconds>(end_load - start_load).count();
-	std::cout << "Time taken to load data: " << durationLoad << " microseconds" << std::endl;
 
 	std::cout << "\n";
 }
-
-// std::cout << std::left << std::setw(5) << "Rank";
-// std::cout << std::left << std::setw(75) << "Institution";
-// std::cout << std::left << std::setw(20) << "Locale";
-// std::cout << std::left << std::setw(20) << "Location";
-// std::cout << std::left << std::setw(8) << "Ar Score";
-// std::cout << std::left << std::setw(8) << "Ar Rank";
-// std::cout << std::left << std::setw(8) << "Er Score";
-// std::cout << std::left << std::setw(8) << "Er Rank";
-// std::cout << std::left << std::setw(8) << "Fsr Score";
-// std::cout << std::left << std::setw(8) << "Fsr Rank";
-// std::cout << std::left << std::setw(8) << "Cpf Score";
-// std::cout << std::left << std::setw(8) << "Cpf Rank";
-// std::cout << std::left << std::setw(8) << "Lfr Score";
-// std::cout << std::left << std::setw(8) << "Lfr Rank";
-// std::cout << std::left << std::setw(8) << "Lsr Score";
-// std::cout << std::left << std::setw(8) << "Lsr Rank";
-// std::cout << std::left << std::setw(8) << "Lrn Score";
-// std::cout << std::left << std::setw(8) << "Lrn Rank";
-// std::cout << std::left << std::setw(8) << "Ger Score";
-// std::cout << std::left << std::setw(8) << "Ger Rank";
-// std::cout << std::left << std::setw(8) << "Score Scaled";

@@ -1,5 +1,3 @@
-#include <iostream>
-#include <algorithm>
 #include "../include/HashTable.h"
 
 HashTable::HashTable(int tableSize)
@@ -12,7 +10,6 @@ void HashTable::addUser(const User &user)
 {
 	int hashValue = hasher(user.getUsername());
 	int index = hashValue % hashTable.size();
-	std::cout << index << std::endl;
 
 	hashTable[index].push_back(user);
 }

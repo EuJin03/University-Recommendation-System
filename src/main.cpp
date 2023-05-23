@@ -15,10 +15,11 @@ int main()
 	LinkedList<Feedback> feedbackList;
 	seeder.createFeedbackInstances(&feedbackList);
 
+	LinkedList<University> favUnivList;
+	// seeder.createFavUnivInstances(&favUnivList);
+
 	HashTable customer(50);
 	seeder.createUserInstances(&customer);
-
-	std::cout << "Welcome to our university! " << std::endl;
 
 	int option;
 	while (true)
@@ -30,7 +31,7 @@ int main()
 		{
 		case 1:
 			// Display all universities' information
-			universityList.show();
+			universityList.show(ui);
 			break;
 		case 2:
 

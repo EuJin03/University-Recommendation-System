@@ -5,6 +5,7 @@
 #ifndef UNIVERSITY_RECOMMENDATION_SYSTEM_DYNAMICARRAY_H
 #define UNIVERSITY_RECOMMENDATION_SYSTEM_DYNAMICARRAY_H
 #include <iostream>
+#include "UI.h"
 
 template <class T>
 class DynamicArray
@@ -141,7 +142,7 @@ public:
     };
 
     // Print elements in Dynamic Array
-    void show()
+    void show(UI ui)
     {
         const int pageSize = 20;                           // Number of columns to display per page
         int totalPages = (size + pageSize - 1) / pageSize; // Calculate total number of pages
@@ -155,6 +156,9 @@ public:
         char userInput;
         do
         {
+            std::system("clear");
+            ui.clearScreen();
+            ui.universityHeader();
             // Display current page of data
             int start = currentIndex;
             int end = std::min(currentIndex + pageSize, size);
