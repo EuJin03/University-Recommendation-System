@@ -22,10 +22,9 @@
 class Seeder
 {
 public:
-	void createFeedbackInstances();
-	void createUnivInstances();
-	void createUserInstances();
-	void createDynamicArrayInstance();
+	void createFeedbackInstances(LinkedList<Feedback> *feedbackList);
+	void createUserInstances(HashTable *customer);
+	void createUnivInstances(DynamicArray<University> *dynamicArray);
 	static std::time_t getRandomPastTime();
 };
 

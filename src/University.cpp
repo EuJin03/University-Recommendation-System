@@ -84,32 +84,31 @@ University::~University()
 // Overriding the ostream operator
 std::ostream &operator<<(std::ostream &os, const University &university)
 {
-	if (university.getRank() != 1) // Do not add a new line for the first line
+	if (university.getRank() != 1)
 	{
 		os << "\n";
 	}
-	os << std::noskipws;
-	os << std::left << std::setw(8) << std::to_string(university.getRank());
-	os << std::left << std::setw(75) << university.getInstitution();
-	os << std::left << std::setw(20) << university.getLocale();
-	os << std::left << std::setw(20) << university.getLocation();
-	os << std::left << std::setw(8) << university.getArScore();
-	os << std::left << std::setw(8) << university.getArRank();
-	os << std::left << std::setw(8) << university.getErScore();
-	os << std::left << std::setw(8) << university.getErRank();
-	os << std::left << std::setw(8) << university.getFsrScore();
-	os << std::left << std::setw(8) << university.getFsrRank();
-	os << std::left << std::setw(8) << university.getCpfScore();
-	os << std::left << std::setw(8) << university.getCpfRank();
-	os << std::left << std::setw(8) << university.getLfrScore();
-	os << std::left << std::setw(8) << university.getLfrRank();
-	os << std::left << std::setw(8) << university.getLsrScore();
-	os << std::left << std::setw(8) << university.getLsrRank();
-	os << std::left << std::setw(8) << university.getLrnScore();
-	os << std::left << std::setw(8) << university.getLrnRank();
-	os << std::left << std::setw(8) << university.getGerScore();
-	os << std::left << std::setw(8) << university.getGerRank();
-	os << std::left << std::setw(8) << university.getScoreScaled();
+	os << std::left << std::setw(5) << std::to_string(university.getRank());
+	os << std::left << std::setw(60) << university.getInstitution();
+	os << std::left << std::setw(10) << university.getLocale();
+	os << std::left << std::setw(15) << university.getLocation();
+	os << std::left << std::setw(5) << university.getArScore();
+	os << std::left << std::setw(5) << university.getArRank();
+	os << std::left << std::setw(5) << university.getErScore();
+	os << std::left << std::setw(5) << university.getErRank();
+	os << std::left << std::setw(5) << university.getFsrScore();
+	os << std::left << std::setw(5) << university.getFsrRank();
+	os << std::left << std::setw(5) << university.getCpfScore();
+	os << std::left << std::setw(5) << university.getCpfRank();
+	os << std::left << std::setw(5) << university.getLfrScore();
+	os << std::left << std::setw(5) << university.getLfrRank();
+	os << std::left << std::setw(5) << university.getLsrScore();
+	os << std::left << std::setw(5) << university.getLsrRank();
+	os << std::left << std::setw(5) << university.getLrnScore();
+	os << std::left << std::setw(5) << university.getLrnRank();
+	os << std::left << std::setw(5) << university.getGerScore();
+	os << std::left << std::setw(5) << university.getGerRank();
+	os << std::left << std::setw(5) << university.getScoreScaled();
 	return os;
 }
 

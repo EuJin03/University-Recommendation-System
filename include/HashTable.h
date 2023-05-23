@@ -5,6 +5,8 @@
 #include <ctime>
 #include <vector>
 #include <list>
+#include <iostream>
+#include <algorithm>
 
 #include "User.h"
 
@@ -23,7 +25,6 @@ public:
 	// TODO: implement these
 	bool verifyUser(const std::string &username, const std::string &password) const;
 	bool updateLastLogin(const std::string &username);
-
 	void printUserDetails(const std::string &username);
 	void printAllUsersDetails();
 	bool deleteInactiveAccounts();
