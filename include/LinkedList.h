@@ -114,8 +114,46 @@ public:
     void quickSort(std::string username){
         // TODO: Bryan's Algo
     };
-    void countingSort(std::string username){
-        // TODO: Eugene's Algo
+    void countingSort(std::vector<University> &arr)
+    {
+        if (arr.empty())
+            return;
+
+        // Find the maximum value of scoreScaled
+        int maxScoreScaled = arr[0].scoreScaled;
+        for (const auto &uni : arr)
+        {
+            if (uni.scoreScaled > maxScoreScaled)
+                maxScoreScaled = uni.scoreScaled;
+        }
+
+        // Create a count array and initialize with 0
+        std::vector<int> count(maxScoreScaled + 1, 0);
+
+        // Count the occurrences of each scoreScaled value
+        for (const auto &uni : arr)
+        {
+            count[uni.scoreScaled]++;
+        }
+
+        // Compute cumulative sums
+        for (int i = 1; i <= maxScoreScaled; i++)
+        {
+            count[i] += count[i - 1];
+        }
+
+        // Create a temporary array to store sorted universities
+        std::vector<University> sortedArr(arr.size());
+
+        // Build the sorted array by iterating in reverse order
+        for (int i = arr.size() - 1; i >= 0; i--)
+        {
+            sortedArr[count[arr[i].scoreScaled] - 1] = arr[i];
+            count[arr[i].scoreScaled]--;
+        }
+
+        // Update the original array with the sorted values
+        std::copy(sortedArr.begin(), sortedArr.end(), arr.begin());
     };
     void linearSearch(){
         // TODO: Wen Xuen's Algo
