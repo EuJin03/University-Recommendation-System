@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-I include
-OBJ=bin/University.o bin/main.o bin/Feedback.o bin/Customer.o bin/User.o bin/Seeder.o
+OBJ=bin/University.o bin/main.o bin/Feedback.o bin/Customer.o bin/User.o bin/Seeder.o bin/Algorithms.o
 
 all: university_recommendation_system
 
