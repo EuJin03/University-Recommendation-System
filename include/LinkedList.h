@@ -111,18 +111,6 @@ public:
         }
     }
 
-    void quickSort(std::string username){
-        // TODO: Bryan's Algo
-    };
-    void countingSort(std::string username){
-        // TODO: Eugene's Algo
-    };
-    void linearSearch(){
-        // TODO: Wen Xuen's Algo
-    };
-    void binarySearch(){
-        // TODO: Pin Cheng's ALgo
-    };
     int getSize() const
     {
         return size;
