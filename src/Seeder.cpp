@@ -104,129 +104,123 @@ void Seeder::createDynamicArrayInstance()
 	std::filesystem::path currentPath = std::filesystem::current_path();
 	std::ifstream file(currentPath.string() + "\\resources\\assets\\2023_QS_World_University_Rankings.csv");
 
-	if (file.is_open())
-	{
-		std::string line, entry;
-		while (std::getline(file, line))
-		{
-			// skip file header
-			// breaking words by comma
-			std::stringstream ss(line);
-			std::string rank, institution, locale, location, arCode, arRank, erScore, erRank, fsrScore, fsrRank, cpfScore, cpfRank, lfrScore, lfrRank, lsrScore, lsrRank, lrnScore, lrnRank, gerScore, gerRank, scoreScaled;
-
-			// Extract data from each column
-			std::getline(ss, rank, ',');
-			std::getline(ss, institution, ',');
-			if (institution == "Institution")
-				continue;
-			std::getline(ss, locale, ',');
-			std::getline(ss, location, ',');
-			std::getline(ss, arCode, ',');
-			std::getline(ss, arRank, ',');
-			std::getline(ss, erScore, ',');
-			std::getline(ss, erRank, ',');
-			std::getline(ss, fsrScore, ',');
-			std::getline(ss, fsrRank, ',');
-			std::getline(ss, cpfScore, ',');
-			std::getline(ss, cpfRank, ',');
-			std::getline(ss, lfrScore, ',');
-			std::getline(ss, lfrRank, ',');
-			std::getline(ss, lsrScore, ',');
-			std::getline(ss, lsrRank, ',');
-			std::getline(ss, lrnScore, ',');
-			std::getline(ss, lrnRank, ',');
-			std::getline(ss, gerScore, ',');
-			std::getline(ss, gerRank, ',');
-			std::getline(ss, scoreScaled, ',');
-
-			// Clean and sanitize the institution, location, and locale fields
-			std::string cleanInstitution = institution;
-			cleanInstitution.erase(std::remove_if(cleanInstitution.begin(), cleanInstitution.end(), [](unsigned char c)
-																						{ return !std::isalnum(c) && !std::isspace(c); }),
-														 cleanInstitution.end());
-			cleanInstitution = std::regex_replace(cleanInstitution, std::regex("^ +| +$"), ""); // Trim leading and trailing whitespaces
-
-			std::string cleanLocation = location;
-			cleanLocation.erase(std::remove_if(cleanLocation.begin(), cleanLocation.end(), [](unsigned char c)
-																				 { return !std::isalnum(c) && !std::isspace(c); }),
-													cleanLocation.end());
-			cleanLocation = std::regex_replace(cleanLocation, std::regex("^ +| +$"), ""); // Trim leading and trailing whitespaces
-
-			std::string cleanLocale = locale;
-			cleanLocale.erase(std::remove_if(cleanLocale.begin(), cleanLocale.end(), [](unsigned char c)
-																			 { return !std::isalnum(c) && !std::isspace(c); }),
-												cleanLocale.end());
-			cleanLocale = std::regex_replace(cleanLocale, std::regex("^ +| +$"), ""); // Trim leading and trailing whitespaces
-
-			// Clean and sanitize specific fields using regex
-			std::regex unwantedRegex("[^0-9]"); // Matches any character that is not a digit
-
-			rank = std::regex_replace(rank, unwantedRegex, "");								// Remove unwanted characters
-			arCode = std::regex_replace(arCode, unwantedRegex, "");						// Remove unwanted characters
-			arRank = std::regex_replace(arRank, unwantedRegex, "");						// Remove unwanted characters
-			erScore = std::regex_replace(erScore, unwantedRegex, "");					// Remove unwanted characters
-			erRank = std::regex_replace(erRank, unwantedRegex, "");						// Remove unwanted characters
-			fsrScore = std::regex_replace(fsrScore, unwantedRegex, "");				// Remove unwanted characters
-			fsrRank = std::regex_replace(fsrRank, unwantedRegex, "");					// Remove unwanted characters
-			cpfScore = std::regex_replace(cpfScore, unwantedRegex, "");				// Remove unwanted characters
-			cpfRank = std::regex_replace(cpfRank, unwantedRegex, "");					// Remove unwanted characters
-			lfrScore = std::regex_replace(lfrScore, unwantedRegex, "");				// Remove unwanted characters
-			lfrRank = std::regex_replace(lfrRank, unwantedRegex, "");					// Remove unwanted characters
-			lsrScore = std::regex_replace(lsrScore, unwantedRegex, "");				// Remove unwanted characters
-			lsrRank = std::regex_replace(lsrRank, unwantedRegex, "");					// Remove unwanted characters
-			lrnScore = std::regex_replace(lrnScore, unwantedRegex, "");				// Remove unwanted characters
-			lrnRank = std::regex_replace(lrnRank, unwantedRegex, "");					// Remove unwanted characters
-			gerScore = std::regex_replace(gerScore, unwantedRegex, "");				// Remove unwanted characters
-			gerRank = std::regex_replace(gerRank, unwantedRegex, "");					// Remove unwanted characters
-			scoreScaled = std::regex_replace(scoreScaled, unwantedRegex, ""); // Remove unwanted characters
-
-			// Convert empty fields to "0"
-			if (rank.empty())
-				rank = "0";
-			if (arCode.empty())
-				arCode = "0";
-			if (arRank.empty())
-				arRank = "0";
-			if (erScore.empty())
-				erScore = "0";
-			if (erRank.empty())
-				erRank = "0";
-			if (fsrScore.empty())
-				fsrScore = "0";
-			if (fsrRank.empty())
-				fsrRank = "0";
-			if (cpfScore.empty())
-				cpfScore = "0";
-			if (cpfRank.empty())
-				cpfRank = "0";
-			if (lfrScore.empty())
-				lfrScore = "0";
-			if (lfrRank.empty())
-				lfrRank = "0";
-			if (lsrScore.empty())
-				lsrScore = "0";
-			if (lsrRank.empty())
-				lsrRank = "0";
-			if (lrnScore.empty())
-				lrnScore = "0";
-			if (lrnRank.empty())
-				lrnRank = "0";
-			if (gerScore.empty())
-				gerScore = "0";
-			if (gerRank.empty())
-				gerRank = "0";
-			if (scoreScaled.empty())
-				scoreScaled = "0";
-
-			// Insert into array
-			University university(std::stoi(rank), institution, locale, location, std::stoi(arCode), std::stoi(arRank), std::stoi(erScore), std::stoi(erRank), std::stoi(fsrScore), std::stoi(fsrRank), std::stoi(cpfScore), std::stoi(cpfRank), std::stoi(lfrScore), std::stoi(lfrRank), std::stoi(lsrScore), std::stoi(lsrRank), std::stoi(lrnScore), std::stoi(lrnRank), std::stoi(gerScore), std::stoi(gerRank), std::stoi(scoreScaled));
-			dynamicArray.append(university);
-		}
-	}
-	else
+	if (!file.is_open())
 	{
 		std::cout << "File not found." << std::endl;
+		return;
 	}
+
+	std::string line;
+	std::regex unwantedRegex("[^0-9]"); // Matches any character that is not a digit
+
+	auto cleanString = [](std::string str)
+	{
+		str.erase(std::remove_if(str.begin(), str.end(), [](unsigned char c)
+														 { return !std::isalnum(c) && !std::isspace(c); }),
+							str.end());
+		return std::regex_replace(str, std::regex("^ +| +$|( +)+"), " "); // Trim leading, trailing and multiple whitespaces
+	};
+
+	auto sanitizeField = [&](std::string &field)
+	{
+		field = std::regex_replace(field, unwantedRegex, ""); // Remove unwanted characters
+		if (field.empty())
+			field = "0";
+	};
+
+	auto trim = [](std::string &str)
+	{
+		size_t first = str.find_first_not_of(' ');
+		if (first == std::string::npos)
+		{ // check if the string is all spaces
+			str = "";
+		}
+		else
+		{
+			size_t last = str.find_last_not_of(' ');
+			str = str.substr(first, (last - first + 1));
+		}
+	};
+
+	while (std::getline(file, line))
+	{
+		std::stringstream ss(line);
+		std::string rank, institution, locale, location, arCode, arRank, erScore, erRank, fsrScore, fsrRank, cpfScore, cpfRank, lfrScore, lfrRank, lsrScore, lsrRank, lrnScore, lrnRank, gerScore, gerRank, scoreScaled;
+
+		std::getline(ss, rank, ',');
+		trim(rank);
+		std::getline(ss, institution, ',');
+		trim(institution);
+		if (institution == "Institution")
+			continue;
+
+		std::getline(ss, locale, ',');
+		trim(locale);
+		std::getline(ss, location, ',');
+		trim(location);
+		std::getline(ss, arCode, ',');
+		trim(arCode);
+		std::getline(ss, arRank, ',');
+		trim(arRank);
+		std::getline(ss, erScore, ',');
+		trim(erScore);
+		std::getline(ss, erRank, ',');
+		trim(erRank);
+		std::getline(ss, fsrScore, ',');
+		trim(fsrScore);
+		std::getline(ss, fsrRank, ',');
+		trim(fsrRank);
+		std::getline(ss, cpfScore, ',');
+		trim(cpfScore);
+		std::getline(ss, cpfRank, ',');
+		trim(cpfRank);
+		std::getline(ss, lfrScore, ',');
+		trim(lfrScore);
+		std::getline(ss, lfrRank, ',');
+		trim(lfrRank);
+		std::getline(ss, lsrScore, ',');
+		trim(lsrScore);
+		std::getline(ss, lsrRank, ',');
+		trim(lsrRank);
+		std::getline(ss, lrnScore, ',');
+		trim(lrnScore);
+		std::getline(ss, lrnRank, ',');
+		trim(lrnRank);
+		std::getline(ss, gerScore, ',');
+		trim(gerScore);
+		std::getline(ss, gerRank, ',');
+		trim(gerRank);
+		std::getline(ss, scoreScaled, ',');
+		trim(scoreScaled);
+
+		institution = cleanString(institution);
+		location = cleanString(location);
+		locale = cleanString(locale);
+
+		sanitizeField(rank);
+		sanitizeField(arCode);
+		sanitizeField(arRank);
+		sanitizeField(erScore);
+		sanitizeField(erRank);
+		sanitizeField(fsrScore);
+		sanitizeField(fsrRank);
+		sanitizeField(cpfScore);
+		sanitizeField(cpfRank);
+		sanitizeField(lfrScore);
+		sanitizeField(lfrRank);
+		sanitizeField(lsrScore);
+		sanitizeField(lsrRank);
+		sanitizeField(lrnScore);
+		sanitizeField(lrnRank);
+		sanitizeField(gerScore);
+		sanitizeField(gerRank);
+		sanitizeField(scoreScaled);
+
+		// Insert into array
+		University university(std::stoi(rank), institution, locale, location, std::stoi(arCode), std::stoi(arRank), std::stoi(erScore), std::stoi(erRank), std::stoi(fsrScore), std::stoi(fsrRank), std::stoi(cpfScore), std::stoi(cpfRank), std::stoi(lfrScore), std::stoi(lfrRank), std::stoi(lsrScore), std::stoi(lsrRank), std::stoi(lrnScore), std::stoi(lrnRank), std::stoi(gerScore), std::stoi(gerRank), std::stoi(scoreScaled));
+		dynamicArray.append(university);
+	}
+
 	file.close();
 	auto end_load = high_resolution_clock::now();
 	long long durationLoad = duration_cast<std::chrono::microseconds>(end_load - start_load).count();
@@ -234,27 +228,27 @@ void Seeder::createDynamicArrayInstance()
 
 	std::cout << "\n";
 
-	std::cout << std::left << std::setw(5) << "Rank";
-	std::cout << std::left << std::setw(75) << "Institution";
-	std::cout << std::left << std::setw(20) << "Locale";
-	std::cout << std::left << std::setw(20) << "Location";
-	std::cout << std::left << std::setw(8) << "Ar Score";
-	std::cout << std::left << std::setw(8) << "Ar Rank";
-	std::cout << std::left << std::setw(8) << "Er Score";
-	std::cout << std::left << std::setw(8) << "Er Rank";
-	std::cout << std::left << std::setw(8) << "Fsr Score";
-	std::cout << std::left << std::setw(8) << "Fsr Rank";
-	std::cout << std::left << std::setw(8) << "Cpf Score";
-	std::cout << std::left << std::setw(8) << "Cpf Rank";
-	std::cout << std::left << std::setw(8) << "Lfr Score";
-	std::cout << std::left << std::setw(8) << "Lfr Rank";
-	std::cout << std::left << std::setw(8) << "Lsr Score";
-	std::cout << std::left << std::setw(8) << "Lsr Rank";
-	std::cout << std::left << std::setw(8) << "Lrn Score";
-	std::cout << std::left << std::setw(8) << "Lrn Rank";
-	std::cout << std::left << std::setw(8) << "Ger Score";
-	std::cout << std::left << std::setw(8) << "Ger Rank";
-	std::cout << std::left << std::setw(8) << "Score Scaled";
+	// std::cout << std::left << std::setw(5) << "Rank";
+	// std::cout << std::left << std::setw(75) << "Institution";
+	// std::cout << std::left << std::setw(20) << "Locale";
+	// std::cout << std::left << std::setw(20) << "Location";
+	// std::cout << std::left << std::setw(8) << "Ar Score";
+	// std::cout << std::left << std::setw(8) << "Ar Rank";
+	// std::cout << std::left << std::setw(8) << "Er Score";
+	// std::cout << std::left << std::setw(8) << "Er Rank";
+	// std::cout << std::left << std::setw(8) << "Fsr Score";
+	// std::cout << std::left << std::setw(8) << "Fsr Rank";
+	// std::cout << std::left << std::setw(8) << "Cpf Score";
+	// std::cout << std::left << std::setw(8) << "Cpf Rank";
+	// std::cout << std::left << std::setw(8) << "Lfr Score";
+	// std::cout << std::left << std::setw(8) << "Lfr Rank";
+	// std::cout << std::left << std::setw(8) << "Lsr Score";
+	// std::cout << std::left << std::setw(8) << "Lsr Rank";
+	// std::cout << std::left << std::setw(8) << "Lrn Score";
+	// std::cout << std::left << std::setw(8) << "Lrn Rank";
+	// std::cout << std::left << std::setw(8) << "Ger Score";
+	// std::cout << std::left << std::setw(8) << "Ger Rank";
+	// std::cout << std::left << std::setw(8) << "Score Scaled";
 	std::cout << "\n";
 	dynamicArray.show();
 }

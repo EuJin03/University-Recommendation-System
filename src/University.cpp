@@ -84,6 +84,10 @@ University::~University()
 // Overriding the ostream operator
 std::ostream &operator<<(std::ostream &os, const University &university)
 {
+	if (university.getRank() != 1) // Do not add a new line for the first line
+	{
+		os << "\n";
+	}
 	os << std::noskipws;
 	os << std::left << std::setw(8) << std::to_string(university.getRank());
 	os << std::left << std::setw(75) << university.getInstitution();
@@ -106,7 +110,6 @@ std::ostream &operator<<(std::ostream &os, const University &university)
 	os << std::left << std::setw(8) << university.getGerScore();
 	os << std::left << std::setw(8) << university.getGerRank();
 	os << std::left << std::setw(8) << university.getScoreScaled();
-	os << "\n";
 	return os;
 }
 
