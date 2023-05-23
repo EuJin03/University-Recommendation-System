@@ -13,6 +13,7 @@ class Algorithms
 public:
     enum SortType
     {
+        INSTITUTION = 0,
         AR_SCORE = 1,
         FSR_SCORE = 2,
         ER_SCORE = 3
@@ -25,8 +26,11 @@ public:
 
     // Counting Sort Algorithm
     static std::vector<University> countSort(std::vector<University> &uniArr, SortType sortType);
+    static std::vector<University> countSortInteger(std::vector<University> &uniArr, SortType sortType);
+    static std::vector<University> countSortString(std::vector<University> &uniArr, SortType sortType);
     static int getMaxScore(const std::vector<University> &uniArr, SortType sortType);
     static int getScore(const University &uni, SortType sortType);
+    static std::string getScoreString(const University &uni, SortType sortType);
 
     // Linear Search Algorithm
     int linearSearch(University *uniArr, int size, std::string key);

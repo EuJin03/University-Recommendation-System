@@ -16,8 +16,13 @@ int main()
 
 	// Quick sort demo
 	Algorithms algorithm;
+	auto start_load = high_resolution_clock::now();
 	algorithm.countSort(universityList, Algorithms::SortType::AR_SCORE);
-	ui.universityList(universityList, &univIndex);
+	auto end_load = high_resolution_clock::now();
+	long long durationLoad = duration_cast<std::chrono::microseconds>(end_load - start_load).count();
+	std::cout << "Time taken to load data: " << durationLoad << " microseconds" << std::endl;
+
+	// ui.universityList(universityList, &univIndex);
 
 	LinkedList<Feedback> feedbackList;
 	seeder.createFeedbackInstances(&feedbackList);
@@ -40,7 +45,7 @@ int main()
 		{
 		case 1:
 			// Display all universities' information
-
+			ui.universityList(universityList, &univIndex);
 			break;
 		case 2:
 			ui.userSortMenu();

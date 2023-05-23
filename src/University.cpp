@@ -88,6 +88,10 @@ std::ostream &operator<<(std::ostream &os, const University &university)
 	{
 		os << "\n";
 	}
+	else
+	{
+		os << "\n";
+	}
 	os << std::left << std::setw(5) << std::to_string(university.getRank());
 	os << std::left << std::setw(60) << university.getInstitution();
 	os << std::left << std::setw(10) << university.getLocale();

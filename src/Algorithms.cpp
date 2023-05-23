@@ -112,87 +112,104 @@ void Algorithms::quickSort(University *uniArr, int start, int end, bool register
     }
 }
 
-/**
- * @brief Count Sort Algorithm.
- * @param uniArr std::vector of University objects to be sorted.
- * @param sortType The type of sorting to be applied.
- * @return The sorted std::vector of University objects.
- *
- * This function implements the Count Sort algorithm to sort the uniArr std::vector. The sortType parameter is used
- * to determine the sorting criteria.
- */
+// Entry point to the count sort algorithm
 std::vector<University> Algorithms::countSort(std::vector<University> &uniArr, SortType sortType)
 {
-    // The number of universities.
+    // Choose the right function based on sort type
+    return sortType == INSTITUTION ? countSortString(uniArr, sortType) : countSortInteger(uniArr, sortType);
+}
+
+// Function to apply count sort for integers
+std::vector<University> Algorithms::countSortInteger(std::vector<University> &uniArr, SortType sortType)
+{
+    // Initialize relevant variables
     int n = uniArr.size();
-
-    // Find the maximum score to initialize the count array.
     int maxScore = getMaxScore(uniArr, sortType);
-
-    // Initialize the output std::vector and the count array.
     std::vector<University> output(n);
     std::vector<int> count(maxScore + 1, 0);
 
-    // Count the number of times each score appears in the input std::vector.
-    for (int i = 0; i < n; i++)
-    {
-        int score = getScore(uniArr[i], sortType);
-        count[score]++;
-    }
+    // Count the occurrence of each score
+    for (const auto &uni : uniArr)
+        count[getScore(uni, sortType)]++;
 
-    // Transform count[i] so that count[i] now contains the actual position of this score in the output array.
+    // Calculate the prefix sum
     for (int i = 1; i <= maxScore; i++)
-    {
         count[i] += count[i - 1];
-    }
 
-    // Build the output std::vector.
+    // Build the output array based on count array
     for (int i = n - 1; i >= 0; i--)
     {
         int score = getScore(uniArr[i], sortType);
-        output[count[score] - 1] = uniArr[i];
-        count[score]--;
+        output[--count[score]] = uniArr[i];
     }
-
-    uniArr = output;
 
     return output;
 }
 
 /**
- * @brief Get the maximum score from a std::vector of University objects.
- * @param uniArr std::vector of University objects.
+ * @brief Count Sort Algorithm for strings.
+ * @param uniArr std::vector of University objects to be sorted.
  * @param sortType The type of sorting to be applied.
- * @return The maximum score.
+ * @return The sorted std::vector of University objects.
  *
- * This function iterates through the uniArr std::vector to find the maximum score based on the sortType parameter.
+ * This function implements the Count Sort algorithm to sort the uniArr std::vector based on strings.
+ * The sortType parameter is used to determine the sorting criteria.
  */
-int Algorithms::getMaxScore(const std::vector<University> &uniArr, SortType sortType)
+std::vector<University> Algorithms::countSortString(std::vector<University> &uniArr, SortType sortType)
 {
+    // Initialize relevant variables
     int n = uniArr.size();
-    int maxScore = getScore(uniArr[0], sortType);
+    int maxLen = 0;
 
-    for (int i = 1; i < n; i++)
+    // Find the maximum length of strings
+    for (const auto &uni : uniArr)
+        maxLen = std::max(maxLen, (int)getScoreString(uni, sortType).length());
+
+    // Initialize ASCII character range for simplicity
+    int k = 128;
+
+    // Initialize relevant vectors
+    std::vector<University> output(n);
+    std::vector<int> count(k, 0);
+
+    // Count the occurrence of each character for each position in string, sort based on that position
+    for (int len = maxLen; len > 0; len--)
     {
-        int score = getScore(uniArr[i], sortType);
-        if (score > maxScore)
+        // Reset count array for each new position
+        std::fill(count.begin(), count.end(), 0);
+
+        for (int i = 0; i < n; i++)
         {
-            maxScore = score;
+            std::string institution = getScoreString(uniArr[i], sortType);
+            count[institution.length() < len ? 0 : (int)institution[len - 1]]++;
         }
+
+        // Calculate the prefix sum
+        for (int i = 1; i < k; i++)
+            count[i] += count[i - 1];
+
+        // Build the output array based on count array
+        for (int i = n - 1; i >= 0; i--)
+        {
+            std::string institution = getScoreString(uniArr[i], sortType);
+            output[--count[institution.length() < len ? 0 : (int)institution[len - 1]]] = uniArr[i];
+        }
+
+        // Update the original array for the next iteration
+        uniArr = output;
     }
 
-    return maxScore;
+    return output;
 }
 
-/**
- * @brief Get the score of a University object based on the sort type.
- * @param uni University object.
- * @param sortType The type of sorting to be applied.
- * @return The score of the University object.
- *
- * This function returns the score of a University object based on the sortType parameter. It is used to determine
- * the score to be considered when sorting the universities.
- */
+// Function to get the maximum score
+int Algorithms::getMaxScore(const std::vector<University> &uniArr, SortType sortType)
+{
+    return getScore(*std::max_element(uniArr.begin(), uniArr.end(), [&](const University &a, const University &b)
+                                      { return getScore(a, sortType) < getScore(b, sortType); }),
+                    sortType);
+}
+// Function to get the score based on sort type
 int Algorithms::getScore(const University &uni, SortType sortType)
 {
     switch (sortType)
@@ -206,4 +223,10 @@ int Algorithms::getScore(const University &uni, SortType sortType)
     default:
         return -1;
     }
+}
+
+// Function to get the string score based on sort type
+std::string Algorithms::getScoreString(const University &uni, SortType sortType)
+{
+    return sortType == INSTITUTION ? uni.getInstitution() : "";
 }
