@@ -7,10 +7,10 @@ void UI::mainMenu()
 	std::cout << "Welcome to SURS!\n";
 	std::cout << "\nMain Menu\n";
 	std::cout << "1. Display all universities' information\n";
-	std::cout << "2. Sort universities by name\n";
+	std::cout << "2. Sort universities\n";
 	std::cout << "3. Search university details\n";
-	std::cout << "4. Register as customer\n";
-	std::cout << "5. Login as registered customer\n";
+	std::cout << "4. Register\n";
+	std::cout << "5. Login\n";
 	std::cout << "0. Exit program\n";
 	std::cout << "Enter your choice: ";
 }
@@ -40,6 +40,18 @@ void UI::adminMenu()
 	std::cout << "Enter your choice: ";
 }
 
+void UI::userSortMenu()
+{
+	std::cout << "\nSort Menu\n";
+	std::cout << "1. Sort by Institution name\n";
+	std::cout << "2. Sort by Faculty/Student Ratio score\n";
+	std::cout << "3. Sort by Employer Reputation score\n";
+	std::cout << "4. Sort by Academic Reputation score\n";
+	std::cout << "5. Return to main menu\n";
+	std::cout << "0. Exit program\n";
+	std::cout << "Enter your choice: ";
+}
+
 void UI::universityHeader()
 {
 	clearScreen();
@@ -64,6 +76,11 @@ void UI::universityHeader()
 	std::cout << std::left << std::setw(5) << "GerS";
 	std::cout << std::left << std::setw(5) << "GerR";
 	std::cout << std::left << std::setw(5) << "Scaled" << std::endl;
+}
+
+void UI::invalidOptionMsg()
+{
+	std::cout << "Invalid option! Try again.\n";
 }
 
 void UI::clearScreen()

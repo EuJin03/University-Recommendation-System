@@ -1,6 +1,7 @@
 #include "../include/UI.h"
 #include "../include/Seeder.h"
 #include "../include/DynamicArray.h"
+#include "../include/Algorithms.h"
 
 using namespace std::chrono;
 
@@ -12,6 +13,11 @@ int main()
 	DynamicArray<University> universityList;
 	seeder.createUnivInstances(&universityList);
 
+	// Quick sort demo
+	Algorithms algorithm;
+	algorithm.countSort(universityList, Algorithms::FSR_SCORE);
+	universityList.show(ui);
+
 	LinkedList<Feedback> feedbackList;
 	seeder.createFeedbackInstances(&feedbackList);
 
@@ -21,7 +27,9 @@ int main()
 	HashTable customer(50);
 	seeder.createUserInstances(&customer);
 
-	int option;
+	User *currentUser = nullptr;
+
+	int option, sortOption;
 	while (true)
 	{
 		ui.mainMenu();
@@ -34,7 +42,26 @@ int main()
 			universityList.show(ui);
 			break;
 		case 2:
-
+			ui.userSortMenu();
+			// should move into controller class
+			std::cin >> sortOption;
+			switch (sortOption)
+			{
+			case 1:
+				// Sort by Institution name
+				// universityList.sortByName();
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			case 5:
+				break;
+			default:
+				break;
+			}
 			break;
 		case 3:
 
@@ -47,7 +74,7 @@ int main()
 		case 0:
 			return 0; // Ends the program
 		default:
-			std::cout << "Invalid option! Try again.\n";
+			ui.invalidOptionMsg();
 		}
 	}
 

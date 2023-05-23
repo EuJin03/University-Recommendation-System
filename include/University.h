@@ -90,6 +90,15 @@ public:
 
 	// Overriding ostream operator
 	friend std::ostream &operator<<(std::ostream &os, const University &university);
+
+	bool operator==(const University &other) const
+	{
+		// Define what it means for two University objects to be equal.
+		// This is just an example, adjust according to your needs.
+		return this->arScore == other.arScore &&
+					 this->fsrScore == other.fsrScore &&
+					 this->erScore == other.erScore;
+	}
 };
 
 // Override ostream operator

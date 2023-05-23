@@ -35,6 +35,15 @@ public:
 
     int getCapacity() const { return capacity; };
 
+    T &get(int index)
+    {
+        if (index < 0 || index >= size)
+        {
+            throw std::out_of_range("Invalid index");
+        }
+        return array[index];
+    }
+
     // Append T object at the end of the Dynamic Array
     void append(const T &element)
     {
