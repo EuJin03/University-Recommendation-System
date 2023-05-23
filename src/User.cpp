@@ -31,9 +31,16 @@
 // }
 
 #include "../include/User.h"
+#include <iostream>
 
 User::User(const std::string &username, const std::string &password, const std::time_t &lastLogin)
 		: username(username), password(password), lastLogin(lastLogin) {}
+
+User::User() {
+    username = "";
+    password = "";
+    lastLogin = 0;
+}
 
 const std::string &User::getUsername() const
 {
@@ -53,4 +60,16 @@ const std::time_t &User::getLastLogin() const
 void User::setLastLogin(std::time_t newLastLogin)
 {
 	lastLogin = newLastLogin;
+}
+
+std::ostream &operator<<(std::ostream &os, const User &user) {
+    os << "Username: " << user.username << std::endl;
+    os << "Password: " << user.password << std::endl;
+    os << "Last Login: " << user.lastLogin << std::endl;
+    return os;
+}
+
+bool User::operator==(const User &user) const {
+    return username == user.getUsername()
+            && password == user.getPassword();
 }

@@ -6,6 +6,7 @@
 #include "University.h"
 #include "LinkedList.h"
 #include "Feedback.h"
+#include "DynamicArray.h"
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
@@ -16,6 +17,7 @@ public:
 	void createFeedbackInstances();
 	void createUnivInstances();
 	void createUserInstances();
+    void createDynamicArrayInstance();
 	static std::time_t getRandomPastTime();
 };
 
