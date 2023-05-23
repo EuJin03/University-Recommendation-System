@@ -30,20 +30,48 @@ void Algorithms::swap(University *uniA, University *uniB)
  * and Employer Reputation score (erScore).
 * Unregistered users can sort by Institution name only.
  */
-int Algorithms::partition(University *uniArr, int start, int pivot, bool registered)
+int Algorithms::partition(University *uniArr, int start, int pivot, bool registered, int choice)
 {
     int i = start - 1;
     if (registered)
     {   // Registered users, need to think how to decide on which column to sort on.
         // TODO: Figure out how to decide which column to sort on.
-        for (int j = start; j < pivot; j++)
+        switch (choice)
         {
-            if (uniArr[j].getArScore() < uniArr[pivot].getArScore())
-            {
-                i++;
-                swap(&uniArr[i], &uniArr[j]);
-            }
-        }
+            case 1: // Academic Reputation score (arScore)
+                for (int j = start; j < pivot; j++)
+                {
+                    if (uniArr[j].getArScore() < uniArr[pivot].getArScore())
+                    {
+                        i++;
+                        swap(&uniArr[i], &uniArr[j]);
+                    }
+                }
+                break;
+            case 2: // Faculty/Student Ratio score (fsrScore)
+                for (int j = start; j < pivot; j++)
+                {
+                    if (uniArr[j].getFsrScore() < uniArr[pivot].getFsrScore())
+                    {
+                        i++;
+                        swap(&uniArr[i], &uniArr[j]);
+                    }
+                }
+                break;
+            case 3: // Employer Reputation score (erScore)
+                for (int j = start; j < pivot; j++)
+                {
+                    if (uniArr[j].getErScore() < uniArr[pivot].getErScore())
+                    {
+                        i++;
+                        swap(&uniArr[i], &uniArr[j]);
+                    }
+                }
+                break;
+            default:
+                std::cout << "Invalid choice." << std::endl;
+                break;
+        };
         swap(&uniArr[i + 1], &uniArr[pivot]);
         return i + 1;
     } else
@@ -71,12 +99,12 @@ int Algorithms::partition(University *uniArr, int start, int pivot, bool registe
  * @param end
  * @param registered
  */
-void Algorithms::quickSort(University *uniArr, int start, int end, bool registered)
+void Algorithms::quickSort(University *uniArr, int start, int end, bool registered, int choice)
 {
     if (start < end)
     {
-        int pivot = partition(uniArr, start, end, registered);
-        quickSort(uniArr, start, pivot - 1, registered);
-        quickSort(uniArr, pivot + 1, end, registered);
+        int pivot = partition(uniArr, start, end, registered, choice);
+        quickSort(uniArr, start, pivot - 1, registered, choice);
+        quickSort(uniArr, pivot + 1, end, registered, choice);
     }
 }
