@@ -10,13 +10,14 @@ int main()
 	UI ui;
 	Seeder seeder;
 
-	int currentIndex = 0;
+	int univIndex = 0;
 	std::vector<University> universityList;
 	seeder.createUnivInstances(&universityList);
-	ui.universityList(universityList, &currentIndex);
 
 	// Quick sort demo
 	Algorithms algorithm;
+	algorithm.countSort(universityList, Algorithms::SortType::AR_SCORE);
+	ui.universityList(universityList, &univIndex);
 
 	LinkedList<Feedback> feedbackList;
 	seeder.createFeedbackInstances(&feedbackList);
