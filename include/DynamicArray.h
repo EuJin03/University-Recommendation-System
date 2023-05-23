@@ -89,6 +89,35 @@ public:
         size++;
     };
 
+    void set(const University &element, int index)
+    {
+        if (index < 0 || index >= size)
+        {
+            std::cout << "Invalid index" << std::endl;
+            return;
+        }
+
+        if (index >= capacity)
+        {
+            // Resize the array to accommodate the new element
+            int newCapacity = index + 1;
+            T *newArray = new T[newCapacity];
+
+            // Copy the existing elements to the new array
+            for (int i = 0; i < size; i++)
+            {
+                newArray[i] = array[i];
+            }
+
+            // Delete the old array and update the pointers
+            delete[] array;
+            array = newArray;
+            capacity = newCapacity;
+        }
+
+        array[index] = element;
+    }
+
     // Remove T element from the Dynamic Array regardless of index
     void remove(const T &element)
     {
@@ -149,54 +178,6 @@ public:
     {
         return size == 0;
     };
-
-    // Print elements in Dynamic Array
-    void show(UI ui)
-    {
-        const int pageSize = 20;                           // Number of columns to display per page
-        int totalPages = (size + pageSize - 1) / pageSize; // Calculate total number of pages
-
-        if (isEmpty())
-        {
-            std::cout << "Dynamic Array is empty." << std::endl;
-            return;
-        }
-
-        char userInput;
-        do
-        {
-            std::system("clear");
-            ui.clearScreen();
-            ui.universityHeader();
-            // Display current page of data
-            int start = currentIndex;
-            int end = std::min(currentIndex + pageSize, size);
-
-            for (int i = start; i < end; i++)
-            {
-                std::cout << array[i] << " ";
-            }
-            std::cout << std::endl;
-
-            // Prompt user for navigation input
-            std::cout << "Page " << (currentIndex / pageSize) + 1 << " of " << totalPages << std::endl;
-            std::cout << "Enter 'n' for next page, 'p' for previous page, or any other key to exit: ";
-            std::cin >> userInput;
-
-            // Handle user input for navigation
-            if (userInput == 'n')
-            {
-                if (currentIndex + pageSize < size)
-                    currentIndex += pageSize;
-            }
-            else if (userInput == 'p')
-            {
-                if (currentIndex - pageSize >= 0)
-                    currentIndex -= pageSize;
-            }
-            // Ignore any other input and exit the loop
-        } while (userInput == 'n' || userInput == 'p');
-    }
 };
 
 #endif // UNIVERSITY_RECOMMENDATION_SYSTEM_DYNAMICARRAY_H

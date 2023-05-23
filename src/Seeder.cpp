@@ -86,7 +86,7 @@ void Seeder::createUserInstances(HashTable *customer)
 	}
 }
 
-void Seeder::createUnivInstances(DynamicArray<University> *dynamicArray)
+void Seeder::createUnivInstances(std::vector<University> *univList)
 {
 	auto start_load = high_resolution_clock::now();
 
@@ -208,7 +208,7 @@ void Seeder::createUnivInstances(DynamicArray<University> *dynamicArray)
 
 		// Insert into array
 		University university(std::stoi(rank), institution, locale, location, std::stoi(arCode), std::stoi(arRank), std::stoi(erScore), std::stoi(erRank), std::stoi(fsrScore), std::stoi(fsrRank), std::stoi(cpfScore), std::stoi(cpfRank), std::stoi(lfrScore), std::stoi(lfrRank), std::stoi(lsrScore), std::stoi(lsrRank), std::stoi(lrnScore), std::stoi(lrnRank), std::stoi(gerScore), std::stoi(gerRank), std::stoi(scoreScaled));
-		dynamicArray->append(university);
+		univList->push_back(university);
 	}
 
 	file.close();

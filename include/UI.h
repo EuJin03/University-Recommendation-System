@@ -1,6 +1,12 @@
 #ifndef UI_H
 #define UI_H
 
+#include <iostream>
+#include <iomanip>
+#include <vector>
+
+#include "University.h"
+
 class UI
 {
 public:
@@ -25,9 +31,9 @@ public:
 
 	// favourite list menu
 
-	// table ui
-	void
-	universityHeader();
+	// university ui
+	void universityHeader();
+	void universityList(std::vector<University> &universityList, int *currentIndex);
 
 	// interactive commands/outputs
 	void inputErrorMsg();

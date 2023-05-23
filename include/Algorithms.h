@@ -24,7 +24,7 @@ public:
     void quickSort(University *uniArr, int start, int end, bool registered, int choice);
 
     // Counting Sort Algorithm
-    static void countSort(DynamicArray<University> &uniArr, SortType sortType);
+    static DynamicArray<University> countSort(DynamicArray<University> &uniArr, SortType sortType);
     static int getMaxScore(DynamicArray<University> &uniArr, SortType sortType);
     static int getScore(University &uni, SortType sortType);
 

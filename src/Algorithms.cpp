@@ -120,7 +120,7 @@ void Algorithms::quickSort(University *uniArr, int start, int end, bool register
  * This function implements the Count Sort algorithm to sort the uniArr DynamicArray. The sortType parameter is used
  * to determine the sorting criteria.
  */
-void Algorithms::countSort(DynamicArray<University> &uniArr, SortType sortType)
+DynamicArray<University> Algorithms::countSort(DynamicArray<University> &uniArr, SortType sortType)
 {
     // The number of universities.
     int n = uniArr.getSize();
@@ -159,6 +159,8 @@ void Algorithms::countSort(DynamicArray<University> &uniArr, SortType sortType)
         uniArr.remove(uniArr.get(i));
         uniArr.insertAt(output.get(i), i);
     }
+
+    return output;
 }
 
 /**

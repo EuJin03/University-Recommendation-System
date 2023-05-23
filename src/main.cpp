@@ -10,13 +10,13 @@ int main()
 	UI ui;
 	Seeder seeder;
 
-	DynamicArray<University> universityList;
+	int currentIndex = 0;
+	std::vector<University> universityList;
 	seeder.createUnivInstances(&universityList);
+	ui.universityList(universityList, &currentIndex);
 
 	// Quick sort demo
 	Algorithms algorithm;
-	algorithm.countSort(universityList, Algorithms::FSR_SCORE);
-	universityList.show(ui);
 
 	LinkedList<Feedback> feedbackList;
 	seeder.createFeedbackInstances(&feedbackList);
@@ -39,7 +39,7 @@ int main()
 		{
 		case 1:
 			// Display all universities' information
-			universityList.show(ui);
+
 			break;
 		case 2:
 			ui.userSortMenu();

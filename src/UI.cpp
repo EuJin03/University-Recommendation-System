@@ -1,6 +1,4 @@
 #include "../include/UI.h"
-#include <iostream>
-#include <iomanip>
 
 void UI::mainMenu()
 {
@@ -76,6 +74,56 @@ void UI::universityHeader()
 	std::cout << std::left << std::setw(5) << "GerS";
 	std::cout << std::left << std::setw(5) << "GerR";
 	std::cout << std::left << std::setw(5) << "Scaled" << std::endl;
+}
+
+void UI::universityList(std::vector<University> &universityList, int *currentIndex)
+{
+
+	const int pageSize = 20;
+	const int size = universityList.size();
+	// Number of columns to display per page
+	int totalPages = (size + pageSize - 1) / pageSize; // Calculate total number of pages
+
+	if (universityList.empty())
+	{
+		std::cout << "Dynamic Array is empty." << std::endl;
+		return;
+	}
+
+	char userInput;
+	do
+	{
+		clearScreen();
+		std::cout << currentIndex << std::endl;
+		universityHeader();
+		// Display current page of data
+		int start = *currentIndex;
+		int end = std::min(*currentIndex + pageSize, size);
+
+		for (int i = start; i < end; i++)
+		{
+			std::cout << universityList[i] << " ";
+		}
+		std::cout << std::endl;
+
+		// Prompt user for navigation input
+		std::cout << "Page " << (*currentIndex / pageSize) + 1 << " of " << totalPages << std::endl;
+		std::cout << "Enter 'n' for next page, 'p' for previous page, or any other key to exit: ";
+		std::cin >> userInput;
+
+		// Handle user input for navigation
+		if (userInput == 'n')
+		{
+			if (*currentIndex + pageSize < size)
+				*currentIndex += pageSize;
+		}
+		else if (userInput == 'p')
+		{
+			if (*currentIndex - pageSize >= 0)
+				*currentIndex -= pageSize;
+		}
+		// Ignore any other input and exit the loop
+	} while (userInput == 'n' || userInput == 'p');
 }
 
 void UI::invalidOptionMsg()
