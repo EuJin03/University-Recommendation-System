@@ -17,10 +17,10 @@ int main()
 	// Quick sort demo
 	Algorithms algorithm;
 	auto start_load = high_resolution_clock::now();
-	algorithm.countSort(universityList, Algorithms::SortType::AR_SCORE);
+	algorithm.countSort(universityList, Algorithms::SortType::INSTITUTION);
 	auto end_load = high_resolution_clock::now();
 	long long durationLoad = duration_cast<std::chrono::microseconds>(end_load - start_load).count();
-	std::cout << "Time taken to load data: " << durationLoad << " microseconds" << std::endl;
+	std::cout << "Time taken for counting sort: " << durationLoad << " microseconds" << std::endl;
 
 	// ui.universityList(universityList, &univIndex);
 
