@@ -37,23 +37,27 @@ void Seeder::createUserInstances(HashTable *customer)
 	std::string username1 = "john123";
 	std::string password1 = "password1";
 	std::time_t lastLogin1 = getRandomPastTime();
-	User user1(username1, password1, lastLogin1);
+	bool isAdmin1 = false;
+	User user1(username1, password1, lastLogin1, isAdmin1);
 	user1.setAsAdmin();
 
 	std::string username2 = "eugene";
 	std::string password2 = "password2";
 	std::time_t lastLogin2 = getRandomPastTime();
-	User user2(username2, password2, lastLogin2);
+	bool isAdmin2 = false;
+	User user2(username2, password2, lastLogin2, isAdmin2);
 
 	std::string username3 = "bryan";
 	std::string password3 = "password3";
 	std::time_t lastLogin3 = getRandomPastTime();
-	User user3(username3, password3, lastLogin3);
+	bool isAdmin3 = false;
+	User user3(username3, password3, lastLogin3, isAdmin3);
 
 	std::string username4 = "pclai";
 	std::string password4 = "password4";
 	std::time_t lastLogin4 = getRandomPastTime();
-	User user4(username4, password4, lastLogin4);
+	bool isAdmin4 = false;
+	User user4(username4, password4, lastLogin4, isAdmin4);
 
 	// Add users to the customer
 	customer->addUser(user1);

@@ -1,16 +1,8 @@
 #include "../include/User.h"
 #include <iostream>
 
-User::User(const std::string &username, const std::string &password, const std::time_t &lastLogin)
-    : username(username), password(password), lastLogin(lastLogin) {}
-
-User::User()
-{
-    username = "";
-    password = "";
-    lastLogin = 0;
-    isAdmin = false;
-}
+User::User(const std::string &username, const std::string &password, const std::time_t &lastLogin, const bool &isAdmin)
+    : username(username), password(password), lastLogin(lastLogin), isAdmin(isAdmin) {}
 
 const std::string &User::getUsername() const
 {

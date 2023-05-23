@@ -13,8 +13,7 @@ private:
 	// LinkedList<University> favUnivList;
 
 public:
-	User(const std::string &username, const std::string &password, const std::time_t &lastLogin);
-	User();
+	User(const std::string &username, const std::string &password, const std::time_t &lastLogin, const bool &isAdmin = false);
 
 	const std::string &getUsername() const;
 	const std::string &getPassword() const;
