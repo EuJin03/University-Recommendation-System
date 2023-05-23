@@ -35,7 +35,7 @@ public:
 
 	// Setter
 	void setFeedbackID(int feedbackID) { this->feedbackID = feedbackID; }
-	void setUsername(std::string username) { this->username = username; }	
+	void setUsername(std::string username) { this->username = username; }
 	void setFeedback(std::string feedback) { this->feedback = feedback; }
 	void setCreatedAt(tm *createdAt) { this->createdAt = createdAt; }
 	void setAdmin(std::string admin) { this->admin = admin; }

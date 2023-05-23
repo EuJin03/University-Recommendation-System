@@ -1,17 +1,15 @@
 #include <iostream>
 #include <algorithm>
-#include "../include/Customer.h"
+#include "../include/HashTable.h"
 
-Customer::Customer(int tableSize)
+HashTable::HashTable(int tableSize)
 {
 	std::vector<std::list<User>> newHashTable(tableSize);
 	this->hashTable = newHashTable;
 }
 
-void Customer::addCustomer(const User &user)
+void HashTable::addUser(const User &user)
 {
-	std::cout << "Adding user " << user.getUsername() << "...\n";
-	std::cout << "Hashing... " << hashTable.size() << std::endl;
 	int hashValue = hasher(user.getUsername());
 	int index = hashValue % hashTable.size();
 	std::cout << index << std::endl;
@@ -19,7 +17,7 @@ void Customer::addCustomer(const User &user)
 	hashTable[index].push_back(user);
 }
 
-void Customer::removeCustomer(const std::string &username)
+void HashTable::removeUser(const std::string &username)
 {
 	int hashValue = hasher(username);
 	int index = hashValue % hashTable.size();
@@ -35,7 +33,7 @@ void Customer::removeCustomer(const std::string &username)
 	}
 }
 
-bool Customer::verifyCustomer(const std::string &username, const std::string &password) const
+bool HashTable::verifyUser(const std::string &username, const std::string &password) const
 {
 	int index = hasher(username) % hashTable.size();
 	for (const auto &user : hashTable[index])
@@ -46,7 +44,7 @@ bool Customer::verifyCustomer(const std::string &username, const std::string &pa
 	return false;
 }
 
-bool Customer::updateLastLogin(const std::string &username)
+bool HashTable::updateLastLogin(const std::string &username)
 {
 	int index = hasher(username) % hashTable.size();
 	for (auto &user : hashTable[index])
@@ -60,7 +58,7 @@ bool Customer::updateLastLogin(const std::string &username)
 	return false;
 }
 
-void Customer::printCustomerDetails(const std::string &username)
+void HashTable::printUserDetails(const std::string &username)
 {
 	int index = hasher(username) % hashTable.size();
 	for (const auto &user : hashTable[index])
@@ -69,34 +67,42 @@ void Customer::printCustomerDetails(const std::string &username)
 		{
 			std::cout << "Username: " << user.getUsername() << "\n";
 			std::cout << "Password: " << user.getPassword() << "\n";
-			std::cout << "Last Login: " << std::ctime(&user.getLastLogin()) << "\n";
+			std::tm *lastLoginTime = std::localtime(&user.getLastLogin());
+			char buffer[80];
+			std::strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", lastLoginTime);
+
+			std::cout << "Last Login: " << buffer << std::endl;
 			return;
 		}
 	}
 	std::cout << "No such user exists.\n";
 }
 
-bool Customer::deleteInactiveAccounts()
+bool HashTable::deleteInactiveAccounts()
 {
 	bool accountsDeleted = false;
 	std::time_t currentTime = std::time(nullptr);
+
 	for (auto &bucket : hashTable)
 	{
 		auto itr = std::remove_if(bucket.begin(), bucket.end(),
 															[currentTime](const User &user)
-															{ return currentTime - user.getLastLogin() > 60 * 60 * 24 * 30; });
+															{
+																return currentTime - user.getLastLogin() > 60 * 60 * 24 * 30;
+															});
+
 		if (itr != bucket.end())
 		{
 			bucket.erase(itr, bucket.end());
 			accountsDeleted = true;
 		}
 	}
+
 	return accountsDeleted;
 }
 
-void Customer::printAllUsersDetails()
+void HashTable::printAllUsersDetails()
 {
-	std::cout << "Printing all users...\n\n";
 	for (const auto &userList : hashTable)
 	{
 		for (const User &user : userList)
@@ -112,4 +118,17 @@ void Customer::printAllUsersDetails()
 			std::cout << std::endl;
 		}
 	}
+}
+
+bool HashTable::validateUsername(const std::string &username) const
+{
+	for (const auto &userList : hashTable)
+	{
+		for (const User &user : userList)
+		{
+			if (user.getUsername() == username)
+				return true;
+		}
+	}
+	return false;
 }

@@ -1,6 +1,5 @@
 // #include <iostream>
 #include "../include/University.h"
-#include "University.h"
 
 University::University(int rank, std::string institution, std::string locale, std::string location, int arScore, int arRank, int erScore, int erRank, int fsrScore, int fsrRank, int cpfScore, int cpfRank, int lfrScore, int lfrRank, int lsrScore, int lsrRank, int lrnScore, int lrnRank, int gerScore, int gerRank, int scoreScaled)
 {
@@ -27,7 +26,8 @@ University::University(int rank, std::string institution, std::string locale, st
 	this->scoreScaled = scoreScaled;
 }
 
-University::University(const University &university) {
+University::University(const University &university)
+{
 	this->rank = university.rank;
 	this->institution = university.institution;
 	this->locale = university.locale;
@@ -84,26 +84,55 @@ University::~University()
 // Overriding the ostream operator
 std::ostream &operator<<(std::ostream &os, const University &university)
 {
-	os << "University Rank: " << university.getRank() << std::endl;
-	os << "University Name: " << university.getInstitution() << std::endl;
-	os << "University Locale: " << university.getLocale() << std::endl;
-	os << "University Location: " << university.getLocation() << std::endl;
-	os << "Academic Reputation Score: " << university.getArScore() << std::endl;
-	os << "Academic Reputation Rank: " << university.getArRank() << std::endl;
-	os << "Employer Reputation Score: " << university.getErScore() << std::endl;
-	os << "Employer Reputation Rank: " << university.getErRank() << std::endl;
-	os << "Faculty Student Score: " << university.getFsrScore() << std::endl;
-	os << "Faculty Student Rank: " << university.getFsrRank() << std::endl;
-	os << "Citation Per Faculty Score: " << university.getCpfScore() << std::endl;
-	os << "Citation Per Faculty Rank: " << university.getCpfRank() << std::endl;
-	os << "International Faculty Score: " << university.getLfrScore() << std::endl;
-	os << "International Faculty Rank: " << university.getLfrRank() << std::endl;
-	os << "International Student Score: " << university.getLsrScore() << std::endl;
-	os << "International Student Rank: " << university.getLsrRank() << std::endl;
-	os << "International Research Score: " << university.getLrnScore() << std::endl;
-	os << "International Research Rank: " << university.getLrnRank() << std::endl;
-	os << "Graduate Employment Score: " << university.getGerScore() << std::endl;
-	os << "Graduate Employment Rank: " << university.getGerRank() << std::endl;
-	os << "Overall Score: " << university.getScoreScaled() << std::endl;
+	if (university.getRank() != 1) // Do not add a new line for the first line
+	{
+		os << "\n";
+	}
+	os << std::noskipws;
+	os << std::left << std::setw(8) << std::to_string(university.getRank());
+	os << std::left << std::setw(75) << university.getInstitution();
+	os << std::left << std::setw(20) << university.getLocale();
+	os << std::left << std::setw(20) << university.getLocation();
+	os << std::left << std::setw(8) << university.getArScore();
+	os << std::left << std::setw(8) << university.getArRank();
+	os << std::left << std::setw(8) << university.getErScore();
+	os << std::left << std::setw(8) << university.getErRank();
+	os << std::left << std::setw(8) << university.getFsrScore();
+	os << std::left << std::setw(8) << university.getFsrRank();
+	os << std::left << std::setw(8) << university.getCpfScore();
+	os << std::left << std::setw(8) << university.getCpfRank();
+	os << std::left << std::setw(8) << university.getLfrScore();
+	os << std::left << std::setw(8) << university.getLfrRank();
+	os << std::left << std::setw(8) << university.getLsrScore();
+	os << std::left << std::setw(8) << university.getLsrRank();
+	os << std::left << std::setw(8) << university.getLrnScore();
+	os << std::left << std::setw(8) << university.getLrnRank();
+	os << std::left << std::setw(8) << university.getGerScore();
+	os << std::left << std::setw(8) << university.getGerRank();
+	os << std::left << std::setw(8) << university.getScoreScaled();
 	return os;
 }
+
+// Header
+// std::cout << std::left << std::setw(5) << "Rank";
+// std::cout << std::left << std::setw(40) << "Institution";
+// std::cout << std::left << std::setw(15) << "Locale";
+// std::cout << std::left << std::setw(20) << "Location";
+// std::cout << std::left << std::setw(10) << "Ar Score";
+// std::cout << std::left << std::setw(10) << "Ar Rank";
+// std::cout << std::left << std::setw(10) << "Er Score";
+// std::cout << std::left << std::setw(10) << "Er Rank";
+// std::cout << std::left << std::setw(10) << "Fsr Score";
+// std::cout << std::left << std::setw(10) << "Fsr Rank";
+// std::cout << std::left << std::setw(10) << "Cpf Score";
+// std::cout << std::left << std::setw(10) << "Cpf Rank";
+// std::cout << std::left << std::setw(10) << "Lfr Score";
+// std::cout << std::left << std::setw(10) << "Lfr Rank";
+// std::cout << std::left << std::setw(10) << "Lsr Score";
+// std::cout << std::left << std::setw(10) << "Lsr Rank";
+// std::cout << std::left << std::setw(10) << "Lrn Score";
+// std::cout << std::left << std::setw(10) << "Lrn Rank";
+// std::cout << std::left << std::setw(10) << "Ger Score";
+// std::cout << std::left << std::setw(10) << "Ger Rank";
+// std::cout << std::left << std::setw(10) << "Score Scaled";
+// std::cout << "\n";

@@ -1,5 +1,7 @@
 #include "../include/Seeder.h"
 
+using namespace std::chrono;
+
 void Seeder::createFeedbackInstances()
 {
 	Feedback feedback(1, "Customer 1", "Testing Feedback 1", "Admin 1", "Testing Reply 1");
@@ -21,8 +23,8 @@ std::time_t Seeder::getRandomPastTime()
 	// Get the current time
 	std::time_t currentTime = std::time(nullptr);
 
-	// Generate a random number between 0 and 30 days in the past (in seconds)
-	std::time_t randomOffset = std::rand() % (30 * 24 * 60 * 60);
+	// Generate a random number between 0 and 90 days in the past (in seconds)
+	std::time_t randomOffset = std::rand() % (90 * 24 * 60 * 60);
 
 	// Calculate the past time
 	std::time_t pastTime = currentTime - randomOffset;
@@ -37,49 +39,43 @@ void Seeder::createUserInstances()
 	std::time_t lastLogin1 = getRandomPastTime();
 	User user1(username1, password1, lastLogin1);
 
-	std::string username2 = "john123";
+	std::string username2 = "eugene";
 	std::string password2 = "password2";
 	std::time_t lastLogin2 = getRandomPastTime();
 	User user2(username2, password2, lastLogin2);
 
-	std::string username3 = "john123";
+	std::string username3 = "bryan";
 	std::string password3 = "password3";
 	std::time_t lastLogin3 = getRandomPastTime();
 	User user3(username3, password3, lastLogin3);
 
-	std::string username4 = "john123";
+	std::string username4 = "pclai";
 	std::string password4 = "password4";
 	std::time_t lastLogin4 = getRandomPastTime();
 	User user4(username4, password4, lastLogin4);
 
 	// Create a Customer instance
-	Customer customer(10);
+	HashTable customer(10);
 
 	// Add users to the customer
-	customer.addCustomer(user1);
-	customer.addCustomer(user2);
-	customer.addCustomer(user3);
-	customer.addCustomer(user4);
+	customer.addUser(user1);
+	customer.addUser(user2);
+	customer.addUser(user3);
+	customer.addUser(user4);
 
 	// Verify customer credentials
-	bool verified = customer.verifyCustomer("john123", "password1");
+	bool verified = customer.verifyUser("john123", "password1");
 	if (verified)
 		std::cout << "User verified!\n";
 	else
 		std::cout << "Invalid credentials!\n";
 
 	// Update last login time
-	bool updated = customer.updateLastLogin("john123");
+	bool updated = customer.updateLastLogin("john1234");
 	if (updated)
 		std::cout << "Last login time updated!\n";
 	else
 		std::cout << "User not found!\n";
-
-	// Print customer details
-	customer.printCustomerDetails("john123");
-
-	// Remove a customer
-	customer.removeCustomer("bob789");
 
 	// Delete inactive accounts
 	bool accountsDeleted = customer.deleteInactiveAccounts();
@@ -89,35 +85,170 @@ void Seeder::createUserInstances()
 		std::cout << "No inactive accounts found!\n";
 
 	// print all users
-	std::string test = "john123";
-	customer.printCustomerDetails(test);
+	customer.printAllUsersDetails();
+
+	// validate if user already existed
+	bool valid = customer.validateUsername("john123");
+	if (valid)
+		std::cout << "User already existed!\n";
+	else
+		std::cout << "User not found!\n";
 }
 
 void Seeder::createDynamicArrayInstance()
 {
-    DynamicArray<User> dynamicArray;
-    User user1("Ali123", "aaaa", getRandomPastTime());
-    User user2("Bob123", "bbbb", getRandomPastTime());
-    User user3("Candy123", "cccc", getRandomPastTime());
-//    University university(1, "Test University", "Test Locale", "Test Location", 20, 5, 23, 5, 39, 2, 100, 3, 100, 4, 50, 4, 53, 5, 20, 133, 97);
-//    University university2(2, "Test University 2", "Test Locale 2", "Test Location 2", 30, 5, 23, 5, 39, 2, 100, 3, 100, 4, 50, 4, 53, 5, 20, 133, 97);
-//    University university3(3, "Test University 3", "Test Locale 3", "Test Location 3", 25, 7, 23, 5, 39, 2, 100, 3, 100, 4, 50, 4, 53, 5, 20, 133, 97);
+	auto start_load = high_resolution_clock::now();
 
-    std::cout << "======= INSERTING ELEMENTS INTO DYNAMIC ARRAY =======" << std::endl;
-    dynamicArray.append(user1);
-    dynamicArray.append(user2);
-    dynamicArray.append(user3);
-    dynamicArray.show();
+	DynamicArray<University> dynamicArray;
 
-    std::cout << "======= POPPING ELEMENTS FROM DYNAMIC ARRAY =======" << std::endl;
-    dynamicArray.pop();
-    dynamicArray.show();
+	std::filesystem::path currentPath = std::filesystem::current_path();
+	std::ifstream file(currentPath.string() + "\\resources\\assets\\2023_QS_World_University_Rankings.csv");
 
-    std::cout << "======= INSERTING ELEMENTS AT SPECIFIED INDEX INTO DYNAMIC ARRAY =======" << std::endl;
-    dynamicArray.insertAt(user3, 0);
-    dynamicArray.show();
+	if (!file.is_open())
+	{
+		std::cout << "File not found." << std::endl;
+		return;
+	}
 
-    std::cout << "======= REMOVING ELEMENTS AT SPECIFIED INDEX FROM DYNAMIC ARRAY =======" << std::endl;
-    dynamicArray.remove(user1);
-    dynamicArray.show();
+	std::string line;
+	std::regex unwantedRegex("[^0-9]"); // Matches any character that is not a digit
+
+	auto cleanString = [](std::string str)
+	{
+		str.erase(std::remove_if(str.begin(), str.end(), [](unsigned char c)
+														 { return !std::isalnum(c) && !std::isspace(c); }),
+							str.end());
+		return std::regex_replace(str, std::regex("^ +| +$|( +)+"), " "); // Trim leading, trailing and multiple whitespaces
+	};
+
+	auto sanitizeField = [&](std::string &field)
+	{
+		field = std::regex_replace(field, unwantedRegex, ""); // Remove unwanted characters
+		if (field.empty())
+			field = "0";
+	};
+
+	auto trim = [](std::string &str)
+	{
+		size_t first = str.find_first_not_of(' ');
+		if (first == std::string::npos)
+		{ // check if the string is all spaces
+			str = "";
+		}
+		else
+		{
+			size_t last = str.find_last_not_of(' ');
+			str = str.substr(first, (last - first + 1));
+		}
+	};
+
+	while (std::getline(file, line))
+	{
+		std::stringstream ss(line);
+		std::string rank, institution, locale, location, arCode, arRank, erScore, erRank, fsrScore, fsrRank, cpfScore, cpfRank, lfrScore, lfrRank, lsrScore, lsrRank, lrnScore, lrnRank, gerScore, gerRank, scoreScaled;
+
+		std::getline(ss, rank, ',');
+		trim(rank);
+		std::getline(ss, institution, ',');
+		trim(institution);
+		if (institution == "Institution")
+			continue;
+
+		std::getline(ss, locale, ',');
+		trim(locale);
+		std::getline(ss, location, ',');
+		trim(location);
+		std::getline(ss, arCode, ',');
+		trim(arCode);
+		std::getline(ss, arRank, ',');
+		trim(arRank);
+		std::getline(ss, erScore, ',');
+		trim(erScore);
+		std::getline(ss, erRank, ',');
+		trim(erRank);
+		std::getline(ss, fsrScore, ',');
+		trim(fsrScore);
+		std::getline(ss, fsrRank, ',');
+		trim(fsrRank);
+		std::getline(ss, cpfScore, ',');
+		trim(cpfScore);
+		std::getline(ss, cpfRank, ',');
+		trim(cpfRank);
+		std::getline(ss, lfrScore, ',');
+		trim(lfrScore);
+		std::getline(ss, lfrRank, ',');
+		trim(lfrRank);
+		std::getline(ss, lsrScore, ',');
+		trim(lsrScore);
+		std::getline(ss, lsrRank, ',');
+		trim(lsrRank);
+		std::getline(ss, lrnScore, ',');
+		trim(lrnScore);
+		std::getline(ss, lrnRank, ',');
+		trim(lrnRank);
+		std::getline(ss, gerScore, ',');
+		trim(gerScore);
+		std::getline(ss, gerRank, ',');
+		trim(gerRank);
+		std::getline(ss, scoreScaled, ',');
+		trim(scoreScaled);
+
+		institution = cleanString(institution);
+		location = cleanString(location);
+		locale = cleanString(locale);
+
+		sanitizeField(rank);
+		sanitizeField(arCode);
+		sanitizeField(arRank);
+		sanitizeField(erScore);
+		sanitizeField(erRank);
+		sanitizeField(fsrScore);
+		sanitizeField(fsrRank);
+		sanitizeField(cpfScore);
+		sanitizeField(cpfRank);
+		sanitizeField(lfrScore);
+		sanitizeField(lfrRank);
+		sanitizeField(lsrScore);
+		sanitizeField(lsrRank);
+		sanitizeField(lrnScore);
+		sanitizeField(lrnRank);
+		sanitizeField(gerScore);
+		sanitizeField(gerRank);
+		sanitizeField(scoreScaled);
+
+		// Insert into array
+		University university(std::stoi(rank), institution, locale, location, std::stoi(arCode), std::stoi(arRank), std::stoi(erScore), std::stoi(erRank), std::stoi(fsrScore), std::stoi(fsrRank), std::stoi(cpfScore), std::stoi(cpfRank), std::stoi(lfrScore), std::stoi(lfrRank), std::stoi(lsrScore), std::stoi(lsrRank), std::stoi(lrnScore), std::stoi(lrnRank), std::stoi(gerScore), std::stoi(gerRank), std::stoi(scoreScaled));
+		dynamicArray.append(university);
+	}
+
+	file.close();
+	auto end_load = high_resolution_clock::now();
+	long long durationLoad = duration_cast<std::chrono::microseconds>(end_load - start_load).count();
+	std::cout << "Time taken to load data: " << durationLoad << " microseconds" << std::endl;
+
+	std::cout << "\n";
+
+	// std::cout << std::left << std::setw(5) << "Rank";
+	// std::cout << std::left << std::setw(75) << "Institution";
+	// std::cout << std::left << std::setw(20) << "Locale";
+	// std::cout << std::left << std::setw(20) << "Location";
+	// std::cout << std::left << std::setw(8) << "Ar Score";
+	// std::cout << std::left << std::setw(8) << "Ar Rank";
+	// std::cout << std::left << std::setw(8) << "Er Score";
+	// std::cout << std::left << std::setw(8) << "Er Rank";
+	// std::cout << std::left << std::setw(8) << "Fsr Score";
+	// std::cout << std::left << std::setw(8) << "Fsr Rank";
+	// std::cout << std::left << std::setw(8) << "Cpf Score";
+	// std::cout << std::left << std::setw(8) << "Cpf Rank";
+	// std::cout << std::left << std::setw(8) << "Lfr Score";
+	// std::cout << std::left << std::setw(8) << "Lfr Rank";
+	// std::cout << std::left << std::setw(8) << "Lsr Score";
+	// std::cout << std::left << std::setw(8) << "Lsr Rank";
+	// std::cout << std::left << std::setw(8) << "Lrn Score";
+	// std::cout << std::left << std::setw(8) << "Lrn Rank";
+	// std::cout << std::left << std::setw(8) << "Ger Score";
+	// std::cout << std::left << std::setw(8) << "Ger Rank";
+	// std::cout << std::left << std::setw(8) << "Score Scaled";
+	std::cout << "\n";
+	dynamicArray.show();
 }
