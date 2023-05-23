@@ -3,8 +3,6 @@
 #include "../include/DynamicArray.h"
 #include "../include/Algorithms.h"
 
-using namespace std::chrono;
-
 int main()
 {
 	UI ui;
@@ -16,10 +14,11 @@ int main()
 
 	// Quick sort demo
 	Algorithms algorithm;
-	auto start_load = high_resolution_clock::now();
-	algorithm.countSort(universityList, Algorithms::SortType::INSTITUTION);
-	auto end_load = high_resolution_clock::now();
-	long long durationLoad = duration_cast<std::chrono::microseconds>(end_load - start_load).count();
+	auto start_load = std::chrono::high_resolution_clock::now();
+	algorithm.countSort(universityList, Algorithms::SortType::AR_SCORE);
+	ui.universityList(universityList, &univIndex);
+	auto end_load = std::chrono::high_resolution_clock::now();
+	long long durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
 	std::cout << "Time taken for counting sort: " << durationLoad << " microseconds" << std::endl;
 
 	// ui.universityList(universityList, &univIndex);
@@ -45,7 +44,7 @@ int main()
 		{
 		case 1:
 			// Display all universities' information
-			ui.universityList(universityList, &univIndex);
+			// ui.universityList(universityList, &univIndex);
 			break;
 		case 2:
 			ui.userSortMenu();

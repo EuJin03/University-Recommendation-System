@@ -76,10 +76,7 @@ University::University()
 	this->scoreScaled = 0;
 }
 
-University::~University()
-{
-	// TODO: Ask Eugene how to write this Destructor
-}
+University::~University() = default;
 
 // Overriding the ostream operator
 std::ostream &operator<<(std::ostream &os, const University &university)
@@ -115,27 +112,3 @@ std::ostream &operator<<(std::ostream &os, const University &university)
 	os << std::left << std::setw(5) << university.getScoreScaled();
 	return os;
 }
-
-// Header
-// std::cout << std::left << std::setw(5) << "Rank";
-// std::cout << std::left << std::setw(40) << "Institution";
-// std::cout << std::left << std::setw(15) << "Locale";
-// std::cout << std::left << std::setw(20) << "Location";
-// std::cout << std::left << std::setw(10) << "Ar Score";
-// std::cout << std::left << std::setw(10) << "Ar Rank";
-// std::cout << std::left << std::setw(10) << "Er Score";
-// std::cout << std::left << std::setw(10) << "Er Rank";
-// std::cout << std::left << std::setw(10) << "Fsr Score";
-// std::cout << std::left << std::setw(10) << "Fsr Rank";
-// std::cout << std::left << std::setw(10) << "Cpf Score";
-// std::cout << std::left << std::setw(10) << "Cpf Rank";
-// std::cout << std::left << std::setw(10) << "Lfr Score";
-// std::cout << std::left << std::setw(10) << "Lfr Rank";
-// std::cout << std::left << std::setw(10) << "Lsr Score";
-// std::cout << std::left << std::setw(10) << "Lsr Rank";
-// std::cout << std::left << std::setw(10) << "Lrn Score";
-// std::cout << std::left << std::setw(10) << "Lrn Rank";
-// std::cout << std::left << std::setw(10) << "Ger Score";
-// std::cout << std::left << std::setw(10) << "Ger Rank";
-// std::cout << std::left << std::setw(10) << "Score Scaled";
-// std::cout << "\n";
