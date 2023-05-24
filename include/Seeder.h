@@ -24,7 +24,7 @@ class Seeder
 public:
 	void createFeedbackInstances(LinkedList<Feedback> *feedbackList);
 	void createUserInstances(HashTable *customer);
-	void createUnivInstances(std::vector<University> *dynamicArray);
+	void createUnivInstances(University *uniArr);
 	static std::time_t getRandomPastTime();
 };
 

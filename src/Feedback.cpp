@@ -1,8 +1,8 @@
 #include "../include/Feedback.h"
 
-Feedback::Feedback(int feedbackID, std::string username, std::string feedback, std::string admin, std::string replyContent)
+Feedback::Feedback(std::string username, std::string feedback, std::string admin, std::string replyContent)
 {
-	this->feedbackID = feedbackID;
+	this->feedbackID++;
 	this->username = username;
 	this->feedback = feedback;
 	this->admin = admin;
@@ -20,7 +20,7 @@ Feedback::Feedback(const Feedback &feedback)
 
 Feedback::Feedback()
 {
-	this->feedbackID = 0;
+	this->feedbackID++;
 	this->username = "";
 	this->feedback = "";
 	this->admin = "";

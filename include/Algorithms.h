@@ -21,8 +21,8 @@ public:
 
     // Quick Sort Algorithm
     void swap(University *uniA, University *uniB);
-    int partition(University *uniArr, int start, int pivot, bool registered, int choice);
-    void quickSort(University *uniArr, int start, int end, bool registered, int choice);
+    int partition(University uniArr[], int start, int pivot, bool registered, int choice);
+    void quickSort(University uniArr[], int start, int end, bool registered, int choice);
 
     // Counting Sort Algorithm
     static std::vector<University> countSort(std::vector<University> &uniArr, SortType sortType);
@@ -33,10 +33,10 @@ public:
     static std::string getScoreString(const University &uni, SortType sortType);
 
     // Linear Search Algorithm
-    int linearSearch(University *uniArr, int size, std::string key);
+    int linearSearch(std::vector<University> &uniArr, int size, std::string key);
 
     // Binary Search Algorithm
-    int binarySearch(University *uniArr, int start, int end, std::string key);
+    int binarySearch(std::vector<University> &uniArr, int start, int end, std::string key);
 };
 
 #endif // UNIVERSITY_RECOMMENDATION_SYSTEM_ALGORITHMS_H

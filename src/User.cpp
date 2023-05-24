@@ -1,8 +1,10 @@
 #include "../include/User.h"
+#include "../include/LinkedList.h"
+#include "../include/University.h"
 #include <iostream>
 
-User::User(const std::string &username, const std::string &password, const std::time_t &lastLogin, const bool &isAdmin)
-    : username(username), password(password), lastLogin(lastLogin), isAdmin(isAdmin) {}
+User::User(const std::string &username, const std::string &password, const std::time_t &lastLogin, const bool &isAdmin, const LinkedList<University> &favUnivList)
+    : username(username), password(password), lastLogin(lastLogin), isAdmin(isAdmin), favUnivList(favUnivList) {}
 
 const std::string &User::getUsername() const
 {
@@ -22,6 +24,11 @@ const std::time_t &User::getLastLogin() const
 const bool &User::getIsAdmin() const
 {
     return isAdmin;
+}
+
+const LinkedList<University> &User::getFavUnivList() const
+{
+    return favUnivList;
 }
 
 void User::setLastLogin(std::time_t newLastLogin)
@@ -45,6 +52,10 @@ operator<<(std::ostream &os, const User &user)
 
 bool User::validate(const User &user) const
 {
+    return username == user.getUsername() && password == user.getPassword();
+}
+
+bool User::operator==(const User &user) {
     return username == user.getUsername() && password == user.getPassword();
 }
 

@@ -32,7 +32,7 @@ void Algorithms::swap(University *uniA, University *uniB)
  * and Employer Reputation score (erScore).
  * Unregistered users can sort by Institution name only.
  */
-int Algorithms::partition(University *uniArr, int start, int pivot, bool registered, int choice)
+int Algorithms::partition(University uniArr[], int start, int pivot, bool registered, int choice)
 {
     int i = start - 1;
     if (registered)
@@ -102,7 +102,7 @@ int Algorithms::partition(University *uniArr, int start, int pivot, bool registe
  * @param end
  * @param registered
  */
-void Algorithms::quickSort(University *uniArr, int start, int end, bool registered, int choice)
+void Algorithms::quickSort(University uniArr[], int start, int end, bool registered, int choice)
 {
     if (start < end)
     {

@@ -1,3 +1,6 @@
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
+
 #include <iostream>
 
 template <class T>
@@ -133,3 +136,5 @@ private:
     Node<U> *tail;
     int size;
 };
+
+#endif // LINKEDLIST_H

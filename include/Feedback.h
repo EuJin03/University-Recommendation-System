@@ -9,7 +9,6 @@
 class Feedback
 {
 private:
-	int feedbackID;
 	std::string username;
 	std::string feedback;
 	tm *createdAt;
@@ -18,8 +17,9 @@ private:
 	tm *repliedAt;
 
 public:
+	static int feedbackID;
 	// Constructor
-	Feedback(int feedbackID, std::string username, std::string feedback, std::string admin, std::string replyContent);
+	Feedback(std::string username, std::string feedback, std::string admin, std::string replyContent);
 	// Copy constructor
 	Feedback(const Feedback &feedback);
 	Feedback();
