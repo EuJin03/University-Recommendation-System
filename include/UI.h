@@ -33,7 +33,7 @@ public:
 
 	// university ui
 	void universityHeader();
-	void universityList(std::vector<University> &universityList, int *currentIndex);
+	void universityList(University *uniArr, int *currentIndex);
 
 	// interactive commands/outputs
 	void inputErrorMsg();

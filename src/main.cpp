@@ -10,22 +10,25 @@ int main()
 	Seeder seeder;
 
 	int univIndex = 0;
-	std::vector<University> universityList;
-	seeder.createUnivInstances(&universityList);
+	int ARRAY_SIZE = 1422;
+	University universityList[ARRAY_SIZE];
+	DynamicArray<University> top10;
+	seeder.createUnivInstances(universityList);
 
 	// Quick sort demo
 	Algorithms algorithm;
 	auto start_load = std::chrono::high_resolution_clock::now();
-	// algorithm.countSort(universityList, Algorithms::SortType::AR_SCORE);?
-	ui.universityList(universityList, &univIndex);
+	algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::INSTITUTION);
+	//    algorithm.quickSort(universityList, 0, universityList.size() - 1, true, 1);
+	//	ui.universityList(universityList, &univIndex);
 	auto end_load = std::chrono::high_resolution_clock::now();
 	long long durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
 	std::cout << "Time taken for counting sort: " << durationLoad << " microseconds" << std::endl;
 
 	// ui.universityList(universityList, &univIndex);
 
-	LinkedList<Feedback> feedbackList;
-	seeder.createFeedbackInstances(&feedbackList);
+	// LinkedList<Feedback> feedbackList;
+	// seeder.createFeedbackInstances(&feedbackList);
 
 	LinkedList<University> favUnivList;
 	// seeder.createFavUnivInstances(&favUnivList);
@@ -45,7 +48,7 @@ int main()
 		{
 		case 1:
 			// Display all universities' information
-			// ui.universityList(universityList, &univIndex);
+			ui.universityList(universityList, &univIndex);
 			break;
 		case 2:
 			ui.userSortMenu();

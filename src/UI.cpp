@@ -2,6 +2,7 @@
 
 void UI::mainMenu()
 {
+	clearScreen();
 	std::cout << "Welcome to SURS!\n";
 	std::cout << "\nMain Menu\n";
 	std::cout << "1. Display all universities' information\n";
@@ -15,6 +16,7 @@ void UI::mainMenu()
 
 void UI::customerMenu()
 {
+	clearScreen();
 	std::cout << "\nCustomer Menu\n";
 	std::cout << "1. Display all universities' information\n";
 	std::cout << "2. Sort universities\n";
@@ -28,6 +30,7 @@ void UI::customerMenu()
 
 void UI::adminMenu()
 {
+	clearScreen();
 	std::cout << "\nAdmin Menu\n";
 	std::cout << "1. Display all universities' information\n";
 	std::cout << "2. Sort universities\n";
@@ -40,6 +43,7 @@ void UI::adminMenu()
 
 void UI::userSortMenu()
 {
+	clearScreen();
 	std::cout << "\nSort Menu\n";
 	std::cout << "1. Sort by Institution name\n";
 	std::cout << "2. Sort by Faculty/Student Ratio score\n";
@@ -88,15 +92,15 @@ void UI::universityHeader()
 	std::cout << std::left << std::setw(5) << "Scaled" << std::endl;
 }
 
-void UI::universityList(std::vector<University> &universityList, int *currentIndex)
+void UI::universityList(University uniArr[], int *currentIndex)
 {
 
 	const int pageSize = 20;
-	const int size = universityList.size();
-	// Number of columns to display per page
-	int totalPages = (size + pageSize - 1) / pageSize; // Calculate total number of pages
+	int SIZE = 1422;
+	int totalPages = (SIZE + pageSize - 1) / pageSize; // Calculate total number of pages
 
-	if (universityList.empty())
+	// TODO
+	if (SIZE == 0)
 	{
 		std::cout << "Dynamic Array is empty." << std::endl;
 		return;
@@ -110,11 +114,11 @@ void UI::universityList(std::vector<University> &universityList, int *currentInd
 		universityHeader();
 		// Display current page of data
 		int start = *currentIndex;
-		int end = std::min(*currentIndex + pageSize, size);
+		int end = std::min(*currentIndex + pageSize, SIZE);
 
 		for (int i = start; i < end; i++)
 		{
-			std::cout << universityList[i] << " ";
+			std::cout << uniArr[i] << " ";
 		}
 		std::cout << std::endl;
 
@@ -126,7 +130,7 @@ void UI::universityList(std::vector<University> &universityList, int *currentInd
 		// Handle user input for navigation
 		if (userInput == 'n')
 		{
-			if (*currentIndex + pageSize < size)
+			if (*currentIndex + pageSize < SIZE)
 				*currentIndex += pageSize;
 		}
 		else if (userInput == 'p')
@@ -148,4 +152,5 @@ void UI::invalidOptionMsg()
 void UI::clearScreen()
 {
 	std::cout << std::string(100, '\n');
+	system("cls");
 }

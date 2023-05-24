@@ -86,12 +86,13 @@ void Seeder::createUserInstances(HashTable *customer)
 	}
 }
 
-void Seeder::createUnivInstances(std::vector<University> *univList)
+void Seeder::createUnivInstances(University uniArr[])
 {
 	auto start_load = high_resolution_clock::now();
 
 	std::filesystem::path currentPath = std::filesystem::current_path();
 	std::ifstream file(currentPath.string() + "\\resources\\assets\\2023_QS_World_University_Rankings.csv");
+	int index = 0;
 
 	if (!file.is_open())
 	{
@@ -208,7 +209,8 @@ void Seeder::createUnivInstances(std::vector<University> *univList)
 
 		// Insert into array
 		University university(std::stoi(rank), institution, locale, location, std::stoi(arCode), std::stoi(arRank), std::stoi(erScore), std::stoi(erRank), std::stoi(fsrScore), std::stoi(fsrRank), std::stoi(cpfScore), std::stoi(cpfRank), std::stoi(lfrScore), std::stoi(lfrRank), std::stoi(lsrScore), std::stoi(lsrRank), std::stoi(lrnScore), std::stoi(lrnRank), std::stoi(gerScore), std::stoi(gerRank), std::stoi(scoreScaled));
-		univList->push_back(university);
+		uniArr[index] = university;
+		index++;
 	}
 
 	file.close();
