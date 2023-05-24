@@ -33,7 +33,7 @@ public:
     static std::string getScoreString(University uni, SortType sortType);
 
     // Linear Search Algorithm
-    void linearSearch(std::vector<University> &uniArr, int size, int criteria, std::string key);
+    void linearSearch(University universityList[], int size, int criteria, std::string key);
 
 
     // Binary Search Algorithm

@@ -84,14 +84,14 @@ int main()
 				std::cout << "Enter the institution name you want to search: ";
 				std::cin.ignore();
 				std::getline(std::cin, searchCriteria);
-				algorithm.linearSearch(universityList, universityList.size(),1, searchCriteria);
+				algorithm.linearSearch(universityList, ARRAY_SIZE,1, searchCriteria);
 				break;
 			case 2:	
 				// Search by Locale
 				std::cout << "Enter the locale you want to search: ";
 				std::cin.ignore();
 				std::getline(std::cin, searchCriteria);
-				algorithm.linearSearch(universityList, universityList.size(),2, searchCriteria);
+				algorithm.linearSearch(universityList, ARRAY_SIZE,2, searchCriteria);
 				break;
 			case 3:
 				// Search by Rank
