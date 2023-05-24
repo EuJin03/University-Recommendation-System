@@ -25,12 +25,12 @@ public:
     void quickSort(University uniArr[], int start, int end, bool registered, int choice);
 
     // Counting Sort Algorithm
-    static std::vector<University> countSort(std::vector<University> &uniArr, SortType sortType);
-    static std::vector<University> countSortInteger(std::vector<University> &uniArr, SortType sortType);
-    static std::vector<University> countSortString(std::vector<University> &uniArr, SortType sortType);
-    static int getMaxScore(const std::vector<University> &uniArr, SortType sortType);
-    static int getScore(const University &uni, SortType sortType);
-    static std::string getScoreString(const University &uni, SortType sortType);
+    static void countSort(University universityList[], int size, SortType sortType);
+    static void countSortInteger(University universityList[], int size, SortType sortType);
+    static void countSortString(University universityList[], int size, SortType sortType);
+    static int getMaxScore(University universityList[], int size, SortType sortType);
+    static int getScore(University uni, SortType sortType);
+    static std::string getScoreString(University uni, SortType sortType);
 
     // Linear Search Algorithm
     int linearSearch(std::vector<University> &uniArr, int size, std::string key);

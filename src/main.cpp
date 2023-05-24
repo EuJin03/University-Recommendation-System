@@ -16,7 +16,7 @@ int main()
 	// Quick sort demo
 	Algorithms algorithm;
 	auto start_load = std::chrono::high_resolution_clock::now();
-	//	algorithm.countSort(universityList, Algorithms::SortType::AR_SCORE);
+	algorithm.countSort(universityList, 1422, Algorithms::SortType::INSTITUTION);
 	//    algorithm.quickSort(universityList, 0, universityList.size() - 1, true, 1);
 	//	ui.universityList(universityList, &univIndex);
 	auto end_load = std::chrono::high_resolution_clock::now();
