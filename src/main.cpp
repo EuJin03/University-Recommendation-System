@@ -9,9 +9,9 @@ int main()
 	Seeder seeder;
 
 	int univIndex = 0;
-    int SIZE = 1422;
+	int ARRAY_SIZE = 1422;
+	University universityList[ARRAY_SIZE];
     static int feedbackID = 1;
-	University universityList[1422];
 	DynamicArray<University> top10;
 	seeder.createUnivInstances(universityList);
 
@@ -48,7 +48,7 @@ int main()
 		{
 		case 1:
 			// Display all universities' information
-//			ui.universityList(universityList, &univIndex);
+			ui.universityList(universityList, &univIndex);
 			break;
 		case 2:
 			ui.userSortMenu();
