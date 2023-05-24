@@ -3,7 +3,7 @@
 #include "../include/University.h"
 
 #include <vector>
-
+using namespace std;
 /**
  * @brief Quick Sort Algorithm -- swap function
  * @usage Swap 2 University objects in an array.
@@ -284,3 +284,20 @@ std::string Algorithms::getScoreString(const University &uni, SortType sortType)
     else
         return "";
 }
+
+int linearSearch(std::vector<University> &uniArr, int size, std::string key)
+{
+    std::vector<University> tempArr; 
+    for (int i = 0; i < size; i++)
+    {
+        if (uniArr[i].getInstitution() == key)
+        {
+            tempArr.push_back(uniArr[i]); // push the university object into the temp array
+            cout << tempArr[i] << endl; // print the university object
+            return 0;
+        }
+    }
+    return 0;
+}
+
+

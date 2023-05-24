@@ -35,6 +35,7 @@ public:
     // Linear Search Algorithm
     int linearSearch(University *uniArr, int size, std::string key);
 
+
     // Binary Search Algorithm
     int binarySearch(University *uniArr, int start, int end, std::string key);
 };
