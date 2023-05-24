@@ -9,6 +9,8 @@ int main()
 	Seeder seeder;
 
 	int univIndex = 0;
+    int SIZE = 1422;
+    static int feedbackID = 1;
 	University universityList[1422];
 	DynamicArray<University> top10;
 	seeder.createUnivInstances(universityList);
@@ -17,8 +19,8 @@ int main()
 	Algorithms algorithm;
 	auto start_load = std::chrono::high_resolution_clock::now();
 	//	algorithm.countSort(universityList, Algorithms::SortType::AR_SCORE);
-	//    algorithm.quickSort(universityList, 0, universityList.size() - 1, true, 1);
-	//	ui.universityList(universityList, &univIndex);
+    //  algorithm.quickSort(universityList, 0, SIZE - 1, false, 0);
+    //  ui.universityList(universityList, &univIndex);
 	auto end_load = std::chrono::high_resolution_clock::now();
 	long long durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
 	std::cout << "Time taken for counting sort: " << durationLoad << " microseconds" << std::endl;
@@ -46,7 +48,7 @@ int main()
 		{
 		case 1:
 			// Display all universities' information
-			ui.universityList(universityList, &univIndex);
+//			ui.universityList(universityList, &univIndex);
 			break;
 		case 2:
 			ui.userSortMenu();
