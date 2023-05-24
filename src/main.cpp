@@ -9,14 +9,15 @@ int main()
 	Seeder seeder;
 
 	int univIndex = 0;
-	University universityList[1422];
+	int ARRAY_SIZE = 1422;
+	University universityList[ARRAY_SIZE];
 	DynamicArray<University> top10;
 	seeder.createUnivInstances(universityList);
 
 	// Quick sort demo
 	Algorithms algorithm;
 	auto start_load = std::chrono::high_resolution_clock::now();
-	algorithm.countSort(universityList, 1422, Algorithms::SortType::INSTITUTION);
+	algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::INSTITUTION);
 	//    algorithm.quickSort(universityList, 0, universityList.size() - 1, true, 1);
 	//	ui.universityList(universityList, &univIndex);
 	auto end_load = std::chrono::high_resolution_clock::now();
