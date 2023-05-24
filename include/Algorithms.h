@@ -19,6 +19,14 @@ public:
         ER_SCORE = 3
     };
 
+    enum SearchType
+    {
+        RANK = 0,
+        AR_RANK = 1,
+        FSR_RANK = 2,
+        ER_RANK = 3
+    };
+
     // Quick Sort Algorithm
     void swap(University *uniA, University *uniB);
     int partition(University uniArr[], int start, int pivot, bool registered, int choice);
@@ -37,7 +45,7 @@ public:
 
 
     // Binary Search Algorithm
-    int binarySearch(std::vector<University> &uniArr, int start, int end, std::string key);
+    void binarySearch(University universityList[], int choice, int rank);
 };
 
 #endif // UNIVERSITY_RECOMMENDATION_SYSTEM_ALGORITHMS_H

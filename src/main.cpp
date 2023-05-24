@@ -59,6 +59,8 @@ int main()
 			case 1:
 				// Sort by Institution name
 				// universityList.sortByName();
+				universityList = algorithm.countSort(universityList, Algorithms::SortType::AR_SCORE);
+				ui.universityList(universityList, &univIndex);
 				break;
 			case 2:
 				break;

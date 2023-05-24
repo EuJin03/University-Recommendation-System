@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../include/Algorithms.h"
 #include "../include/University.h"
+#include "../include/UI.h"
 
 #include <vector>
 
@@ -288,7 +289,7 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
             std::cout << universityList[i];
         }
     }
-        std::cout<<endl;
+        std::cout<< std::endl;
         break;
     case 2:
         for (int i = 0; i < size; i++)
@@ -308,3 +309,63 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
 }
 
 
+
+
+void Algorithms::binarySearch(University universityList[], int choice, int rank)
+{
+    UI ui;
+    int start = 0;
+    int end = (sizeof(universityList) / sizeof(University)) - 1;
+    int mid = (start + end) / 2;
+    int current;
+    while(true)
+    {
+        mid = (start + end) / 2;
+        switch (choice)
+        {
+        case RANK:
+            // Searching by University Rank
+            current = universityList[mid].getRank();
+            break;
+        
+        case AR_RANK:
+            // Searching by AR Rank
+            current = universityList[mid].getArRank();
+            break;
+
+        case FSR_RANK:
+            // Searching by FSR Rank
+            current = universityList[mid].getFsrRank();
+            break;
+
+        case ER_RANK:
+            // Searching by ER Rank
+            current = universityList[mid].getErRank();
+            break;
+
+        default:
+            break;
+        }
+
+        
+        if (current == rank)
+        {
+            std::cout << "Found " << rank << " at index " << mid << std::endl;
+            std::cout << std::endl;
+            ui.universityHeader();
+            std::cout << universityList[mid] << std::endl << std::endl;
+            break;
+        } else if (current < rank)
+        {
+            start = mid + 1;
+        } else
+        {
+            end = mid - 1;
+        }
+        if (start > end)
+        {
+            std::cout << "Not found." << std::endl;
+            break;
+        }
+    }
+}
