@@ -13,7 +13,7 @@ void Seeder::createFeedbackInstances(LinkedList<Feedback> *feedbackList)
 		std::string adminName = "Admin " + std::to_string(i);
 		std::string replyText = "Testing Reply " + std::to_string(i);
 
-		Feedback feedback(customerName, feedbackText, adminName, replyText);
+		Feedback feedback(i, customerName, feedbackText, adminName, replyText);
 		feedbackList->insertAtBeginning(feedback);
 	}
 }
@@ -34,8 +34,8 @@ std::time_t Seeder::getRandomPastTime()
 
 void Seeder::createUserInstances(HashTable *customer)
 {
-	std::string username1 = "admin";
-	std::string password1 = "admin";
+	std::string username1 = "john123";
+	std::string password1 = "password1";
 	std::time_t lastLogin1 = getRandomPastTime();
 	bool isAdmin1 = false;
 	User user1(username1, password1, lastLogin1, isAdmin1);
@@ -86,12 +86,13 @@ void Seeder::createUserInstances(HashTable *customer)
 	}
 }
 
-void Seeder::createUnivInstances(University *uniArr)
+void Seeder::createUnivInstances(University uniArr[])
 {
 	auto start_load = high_resolution_clock::now();
 
 	std::filesystem::path currentPath = std::filesystem::current_path();
 	std::ifstream file(currentPath.string() + "\\resources\\assets\\2023_QS_World_University_Rankings.csv");
+	int index = 0;
 
 	if (!file.is_open())
 	{
@@ -208,7 +209,8 @@ void Seeder::createUnivInstances(University *uniArr)
 
 		// Insert into array
 		University university(std::stoi(rank), institution, locale, location, std::stoi(arCode), std::stoi(arRank), std::stoi(erScore), std::stoi(erRank), std::stoi(fsrScore), std::stoi(fsrRank), std::stoi(cpfScore), std::stoi(cpfRank), std::stoi(lfrScore), std::stoi(lfrRank), std::stoi(lsrScore), std::stoi(lsrRank), std::stoi(lrnScore), std::stoi(lrnRank), std::stoi(gerScore), std::stoi(gerRank), std::stoi(scoreScaled));
-		univList[std::stoi(rank)] = university;
+		uniArr[index] = university;
+		index++;
 	}
 
 	file.close();
