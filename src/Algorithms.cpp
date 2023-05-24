@@ -275,3 +275,36 @@ std::string Algorithms::getScoreString(University uni, SortType sortType)
     else
         return "";
 }
+
+void Algorithms::linearSearch(University universityList[], int size, int criteria, std::string key)
+{
+    switch (criteria)
+    {
+    case 1:
+        for (int i = 0; i < size; i++)
+    {
+        if (universityList[i].getInstitution() == key)
+        {
+            std::cout << universityList[i];
+        }
+    }
+        std::cout<<endl;
+        break;
+    case 2:
+        for (int i = 0; i < size; i++)
+    {
+        if (universityList[i].getLocale() == key)
+        {
+            std::cout << universityList[i];
+        }
+
+    }
+        std::cout<<endl;
+        break;
+    default:
+        break;
+    }
+
+}
+
+
