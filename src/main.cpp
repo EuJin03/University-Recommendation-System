@@ -59,6 +59,7 @@ int main()
 			case 2:
 				break;
 			case 3:
+
 				break;
 			case 4:
 				break;
@@ -69,7 +70,30 @@ int main()
 			}
 			break;
 		case 3:
-
+			//Search university
+			ui.userSearchMenu();
+			std::cin >> option;
+			switch (option)
+			{case 1:
+				// Search by Institution name
+				// universityList.sortByName();
+				break;
+			case 2:	
+				// Search by Locale
+				break;
+			case 3:
+				// Search by Rank
+				break;
+			case 4:
+				// Search by Employer Reputation score
+				break;
+			case 5:
+				// Search by Academic Reputation score
+				break;
+			default:
+				break;
+			}
+			
 			break;
 		case 4:
 
