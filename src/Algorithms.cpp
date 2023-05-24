@@ -285,19 +285,37 @@ std::string Algorithms::getScoreString(const University &uni, SortType sortType)
         return "";
 }
 
-int linearSearch(std::vector<University> &uniArr, int size, std::string key)
+void Algorithms::linearSearch(std::vector<University> &uniArr, int size, int criteria, std::string key)
 {
-    std::vector<University> tempArr; 
-    for (int i = 0; i < size; i++)
+    std::vector<University> tempArr;
+    UI ui;
+    switch (criteria)
+    {
+    case 1:
+        for (int i = 0; i < size; i++)
     {
         if (uniArr[i].getInstitution() == key)
         {
-            tempArr.push_back(uniArr[i]); // push the university object into the temp array
-            cout << tempArr[i] << endl; // print the university object
-            return 0;
+            cout << uniArr[i];
         }
     }
-    return 0;
+        cout<<endl;
+        break;
+    case 2:
+        for (int i = 0; i < size; i++)
+    {
+        if (uniArr[i].getLocale() == key)
+        {
+            cout << uniArr[i];
+        }
+
+    }
+        cout<<endl;
+        break;
+    default:
+        break;
+    }
+
 }
 
 

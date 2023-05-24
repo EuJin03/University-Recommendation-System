@@ -2,6 +2,7 @@
 #include "../include/Seeder.h"
 #include "../include/DynamicArray.h"
 #include "../include/Algorithms.h"
+#include <string.h>
 
 int main()
 {
@@ -15,7 +16,7 @@ int main()
 	// Quick sort demo
 	Algorithms algorithm;
 	auto start_load = std::chrono::high_resolution_clock::now();
-	algorithm.countSort(universityList, Algorithms::SortType::AR_SCORE);
+	// algorithm.countSort(universityList, Algorithms::SortType::AR_SCORE);?
 	ui.universityList(universityList, &univIndex);
 	auto end_load = std::chrono::high_resolution_clock::now();
 	long long durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
@@ -39,7 +40,7 @@ int main()
 	{
 		ui.mainMenu();
 		std::cin >> option;
-
+		std::string searchCriteria;
 		switch (option)
 		{
 		case 1:
@@ -77,9 +78,17 @@ int main()
 			{case 1:
 				// Search by Institution name
 				// universityList.sortByName();
+				std::cout << "Enter the institution name you want to search: ";
+				std::cin.ignore();
+				std::getline(std::cin, searchCriteria);
+				algorithm.linearSearch(universityList, universityList.size(),1, searchCriteria);
 				break;
 			case 2:	
 				// Search by Locale
+				std::cout << "Enter the locale you want to search: ";
+				std::cin.ignore();
+				std::getline(std::cin, searchCriteria);
+				algorithm.linearSearch(universityList, universityList.size(),2, searchCriteria);
 				break;
 			case 3:
 				// Search by Rank
@@ -88,7 +97,7 @@ int main()
 				// Search by Employer Reputation score
 				break;
 			case 5:
-				// Search by Academic Reputation score
+				// Search by Academic Reputation scorecd..
 				break;
 			default:
 				break;
