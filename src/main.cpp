@@ -2,7 +2,7 @@
 #include "../include/Seeder.h"
 #include "../include/DynamicArray.h"
 #include "../include/Algorithms.h"
-#include <string.h>
+#include <string>
 
 int main()
 {
