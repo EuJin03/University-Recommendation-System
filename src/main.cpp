@@ -2,12 +2,15 @@
 #include "../include/Seeder.h"
 #include "../include/DynamicArray.h"
 #include "../include/Algorithms.h"
+#include "../include/LinkedList.h"
+#include "../include/Controller.h"
 #include <string>
 
 int main()
 {
 	UI ui;
 	Seeder seeder;
+    Controller controller;
 
 	int univIndex = 0;
 	int ARRAY_SIZE = 1422;
@@ -24,11 +27,9 @@ int main()
     // ui.universityList(universityList, &univIndex);
 	auto end_load = std::chrono::high_resolution_clock::now();
 	long long durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
-	std::cout << "Time taken for counting sort: " << durationLoad << " microseconds" << std::endl;
+	// std::cout << "Time taken for counting sort: " << durationLoad << " microseconds" << std::endl;
 
-	// ui.universityList(universityList, &univIndex);
-
-	 LinkedList<Feedback> feedbackList;
+    LinkedList<Feedback> feedbackList;
 	// seeder.createFeedbackInstances(&feedbackList);
 
 	LinkedList<University> favUnivList;
@@ -37,7 +38,8 @@ int main()
 	HashTable customer(50);
 	seeder.createUserInstances(&customer);
 
-	User *currentUser = nullptr;
+	User currentUser();
+    std::string username, password;
 
 	int option, sortOption;
 	while (true)
@@ -108,8 +110,19 @@ int main()
 
 			break;
         case 4:
+            // Register
 			break;
 		case 5:
+            // Login
+            std::cout << " ---------- LOGIN ---------- " << std::endl;
+            std::cout << "Username: ";
+            std::cin >> username;
+            std::cout << "Password: ";
+            std::cin >> password;
+            currentUser(controller.login(&customer, username, password));
+            std::cout << " ---------- END OF LOGIN ---------- " << std::endl;
+            std::cout << std::endl;
+            std::cout << currentUser << std::endl;
 			break;
 		case 0:
 			return 0; // Ends the program
