@@ -16,7 +16,11 @@ private:
 	LinkedList<University> favUnivList;
 
 public:
-	User(const std::string &username, const std::string &password, const std::time_t &lastLogin, const bool &isAdmin = false, const LinkedList<University> &favUnivList = LinkedList<University>());
+	// Constructor
+    User(const std::string &username, const std::string &password, const std::time_t &lastLogin, const bool &isAdmin = false, const LinkedList<University> &favUnivList = LinkedList<University>());
+
+    // Copy constructor
+    User(const User &user);
 
 	const std::string &getUsername() const;
 	const std::string &getPassword() const;

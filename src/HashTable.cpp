@@ -129,3 +129,14 @@ bool HashTable::validateUsername(const std::string &username) const
 	}
 	return false;
 }
+
+User HashTable::getUser(const std::string &username) {
+    int index = hasher(username) % hashTable.size();
+    for (const auto &user : hashTable[index])
+    {
+        if (user.getUsername() == username)
+        {
+            return user;
+        }
+    }
+}
