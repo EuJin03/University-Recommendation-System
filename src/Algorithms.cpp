@@ -290,16 +290,12 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
     switch (criteria)
     {
     case 1:
-        
         for (int i = 0; i < size; i++)
         {
             //finally found a way to make it case insensitive yay :D  (╯°□°）╯︵ ┻━┻
             key = toLower(key);
-
             std::string uniName = universityList[i].getInstitution();
-
             uniName = toLower(uniName);
-
             if(uniName.find(key) != std::string::npos)
             {
                 std::cout << universityList[i];
@@ -314,7 +310,6 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
         {
             std::cout << universityList[i];
         }
-
     }
         std::cout << std::endl;
         break;
