@@ -53,6 +53,18 @@ void UI::userSortMenu()
 	std::cout << "Enter your choice: ";
 }
 
+void UI::userSearchMenu(){
+	std::cout << "\nSearch Menu\n";
+	std::cout << "1. Search by Institution name\n";
+	std::cout << "2. Search by Locale\n";
+	std::cout << "3. Search by Rank\n";
+	std::cout << "4. Search by Employer Reputation score\n";
+	std::cout << "4. Search by Academic Reputation score\n";
+	std::cout << "5. Return to main menu\n";
+	std::cout << "0. Exit program\n";
+	std::cout << "Enter your choice: ";
+}
+
 void UI::universityHeader()
 {
 	clearScreen();
@@ -131,7 +143,7 @@ void UI::universityList(University uniArr[], int *currentIndex)
 
 void UI::invalidOptionMsg()
 {
-	std::cout << "Invalid option! Try again.\n";
+	std::cout << "Invalid option! Please try again.\n";
 }
 
 void UI::clearScreen()
