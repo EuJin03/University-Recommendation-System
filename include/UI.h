@@ -23,9 +23,8 @@ public:
 	void guestSearchMenu();
 	void userSearchMenu();
 
-	// user login/register menu
-	void loginMenu();
-	void registerMenu();
+	// registered user ui
+    void registeredPage();
 
 	// feedback menu
 

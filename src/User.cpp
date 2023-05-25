@@ -51,9 +51,9 @@ void User::setAsAdmin()
 std::ostream &
 operator<<(std::ostream &os, const User &user)
 {
-    os << "Username: " << user.username << std::endl;
-    os << "Password: " << user.password << std::endl;
-    os << "Last Login: " << user.lastLogin << std::endl;
+    os << "Username: " << user.getUsername() << std::endl;
+    os << "Password: " << user.getPassword() << std::endl;
+    os << "Last Login: " << user.getLastLogin() << std::endl;
     return os;
 }
 

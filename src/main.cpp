@@ -106,15 +106,11 @@ int main()
 			default:
 				break;
 			}
-
 			break;
 		case 4:
 			// Register
 			break;
 		case 5:
-			std::cout << "EXISTING USERS" << std::endl;
-			customer.printAllUsersDetails();
-			std::cout << std::endl;
 			// Login
 			std::cout << " ---------- LOGIN ---------- " << std::endl;
 			std::cout << "Username: ";
@@ -123,16 +119,15 @@ int main()
 			std::cin >> password;
 			if (customer.verifyUser(username, password))
 			{
+                // Successful Login
 				currentUser = customer.getUser(username);
 				std::cout << "Login successful!" << std::endl;
 			}
 			else
 			{
-				//                currentUser = NullUser();
+                // Unsuccessful Login
 				std::cout << "Login unsuccessful" << std::endl;
 			}
-			std::cout << " ---------- END OF LOGIN ---------- " << std::endl;
-			std::cout << std::endl;
 			break;
 		case 0:
 			return 0; // Ends the program
