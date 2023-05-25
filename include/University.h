@@ -94,9 +94,9 @@ public:
 	bool operator==(const University &other) const
 	{
 		// Define what it means for two University objects to be equal.
-		return this->arScore == other.arScore &&
-					 this->fsrScore == other.fsrScore &&
-					 this->erScore == other.erScore;
+		return this->rank == other.rank
+                && this->institution == other.institution
+                && this->locale == other.locale;
 	}
 };
 

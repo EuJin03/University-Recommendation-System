@@ -31,6 +31,7 @@ public:
 
 	void setLastLogin(std::time_t newLastLogin);
 	void setAsAdmin();
+    void setFavUnivList(LinkedList<University> newFavUnivList);
 
 	bool isNull() const { return false; }
 	bool validate(const User &user) const;

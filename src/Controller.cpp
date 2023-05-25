@@ -18,7 +18,12 @@ std::string Controller::validate(std::string username, std::string password)
 	}
 }
 
-void Controller::userController(University universityList[], int *univIndex, UI ui)
+void Controller::adminController()
+{
+
+}
+
+void Controller::userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *currentUser, DynamicArray<University> *top10)
 {
 	while (true)
 	{
@@ -41,6 +46,7 @@ void Controller::userController(University universityList[], int *univIndex, UI 
 			break;
 		case 4:
 			// Favourite controller - bryan
+            favouriteController(customer, currentUser, ui, universityList, univIndex, top10);
 			break;
 		case 5:
 			// Feedback controller - eugene
@@ -48,13 +54,61 @@ void Controller::userController(University universityList[], int *univIndex, UI 
 		case 6:
 			ui.clearScreen();
 			return;
-			break;
 		case 0:
 			exit(0);
-			break;
 		default:
-			return;
 			break;
 		}
 	}
+}
+
+void Controller::favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[], int *univIndex, DynamicArray<University> *top10)
+{
+    ui.clearScreen();
+    while (true)
+    {
+        ui.favouriteMenu();
+        int userChoice;
+        int uniChoice;
+        LinkedList<University> favList = currentUser->getFavUnivList();
+        std::cin.clear();
+        std::cin.ignore();
+        std::cin >> userChoice;
+
+        switch (userChoice)
+        {
+            case 1:
+                ui.universityHeader();
+                favList.show();
+                break;
+            case 2:
+                ui.universityList(universityList, univIndex);
+                std::cout << "Please provide the rank of the university you want to add: ";
+                std::cin >> uniChoice;
+                favList.insertAtEnd(universityList[uniChoice - 1]);
+                top10->append(universityList[uniChoice - 1]);
+                currentUser->setFavUnivList(favList);
+                customer->removeUser(currentUser->getUsername());
+                customer->addUser(*currentUser);
+                std::cout << " -------- DYNAMIC ARRAY -------- " << std::endl;
+                top10->show();
+                break;
+            case 3:
+                ui.universityHeader();
+                favList.show();
+                std::cout << "Please provide the rank of the university you want to remove: ";
+                std::cin >> uniChoice;
+                favList.removeItem(universityList[uniChoice - 1]);
+                top10->remove(universityList[uniChoice - 1]);
+                currentUser->setFavUnivList(favList);
+                break;
+            case 4:
+                return;
+            case 5:
+                exit(1);
+            default:
+                std::cout << "Not an option" << std::endl;
+                break;
+        }
+    }
 }

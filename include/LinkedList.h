@@ -106,6 +106,36 @@ public:
         }
     }
 
+    // Remove a University Item based on its rank from the LinkedList
+    void removeItem(U data)
+    {
+        Node<U> *current = head;
+
+        while (current != nullptr)
+        {
+            if (current->data == data)
+            {
+                if (current == head)
+                {
+                    removeAtBeginning();
+                }
+                else if (current == tail)
+                {
+                    removeAtEnd();
+                }
+                else
+                {
+                    current->prev->next = current->next;
+                    current->next->prev = current->prev;
+                    delete current;
+                    size--;
+                }
+                break;
+            }
+            current = current->next;
+        }
+    }
+
     int getSize() const
     {
         return size;

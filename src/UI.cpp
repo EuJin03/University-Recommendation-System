@@ -143,7 +143,6 @@ void UI::universityList(University uniArr[], int *currentIndex)
 
 	if (userInput != 'n' && userInput != 'p')
 	{
-		clearScreen();
 		std::cout << "Returning to main menu..." << std::endl;
 	}
 }
@@ -157,4 +156,14 @@ void UI::clearScreen()
 {
 	std::cout << std::string(100, '\n');
 	system("cls");
+}
+
+void UI::favouriteMenu() {
+    std::cout << "\nFavourite University Menu\n";
+    std::cout << "1. View Favourite Universities\n";
+    std::cout << "2. Add University to Favourites\n";
+    std::cout << "3. Remove University from Favourites\n";
+    std::cout << "4. Return to user menu\n";
+    std::cout << "5. Exit program\n";
+    std::cout << "Enter your choice: ";
 }

@@ -18,9 +18,11 @@ public:
     // Unregistered user
 
     // Registered user
-    void userController(University universityList[], int *univIndex, UI ui);
+    void userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *currentUser, DynamicArray<University> *top10);
+    void favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[], int *univIndex, DynamicArray<University> *top10);
 
     // Admin
+    void adminController();
 
     // Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
     // void insertFavUni(std::string uniName);
