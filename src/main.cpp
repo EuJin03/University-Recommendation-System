@@ -128,7 +128,6 @@ int main()
 			}
 			else
 			{
-				//                currentUser = NullUser();
 				std::cout << "Login unsuccessful" << std::endl;
 			}
 			std::cout << " ---------- END OF LOGIN ---------- " << std::endl;
