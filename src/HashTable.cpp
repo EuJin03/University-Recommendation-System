@@ -139,4 +139,6 @@ User HashTable::getUser(const std::string &username) {
             return user;
         }
     }
+
+    return User();
 }
