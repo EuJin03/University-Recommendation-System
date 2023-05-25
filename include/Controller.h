@@ -17,7 +17,6 @@ public:
     User registerUser();
     Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
     void insertFavUni(std::string uniName);
-    long long ke
     checkExecutionTime(Algorithms algorithm, Algorithms::SortType sortType, std::vector<University> &uniArr);
 };
 
