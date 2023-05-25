@@ -16,13 +16,19 @@ std::string Controller::validate(std::string username, std::string password)
     }
 }
 
-User Controller::login(HashTable *customerTable, std::string username, std::string password)
+User Controller::login(HashTable userTable, std::string username, std::string password)
 {
-    do {
-        std::cout << "Enter username: ";
-        std::cin >> username;
-        std::cout << "Enter password: ";
-        std::cin >> password;
-        for ()
-    } while (validate(username, password) != "success");
+    User user = NullUser();
+    if (userTable.verifyUser(username, password))
+    {
+        std::cout << "Login successful!" << std::endl;
+        return userTable.getUser(username);
+//        return username;
+    }
+    else
+    {
+        std::cout << "Invalid username or password!" << std::endl;
+    }
+    return user;
+//    return "";
 }
