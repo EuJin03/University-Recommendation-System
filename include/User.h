@@ -24,7 +24,7 @@ public:
 
     // Null constructor
     User(const std::string& name) : username(name) {}
-    User();
+    User() = default;
 
 	const std::string &getUsername() const;
 	const std::string &getPassword() const;

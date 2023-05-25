@@ -10,7 +10,7 @@ int main()
 {
 	UI ui;
 	Seeder seeder;
-    Controller controller;
+	Controller controller;
 
 	int univIndex = 0;
 	int ARRAY_SIZE = 1422;
@@ -38,7 +38,7 @@ int main()
 	HashTable customer(50);
 	seeder.createUserInstances(&customer);
 
-	User currentUser;
+	User currentUser();
     std::string username, password;
 
 	int option, sortOption;
@@ -60,8 +60,6 @@ int main()
 			switch (sortOption)
 			{
 			case 1:
-				// Sort by Institution name
-				// universityList.sortByName();
 				break;
 			case 2:
 				break;
@@ -76,24 +74,25 @@ int main()
 			}
 			break;
 		case 3:
-			//Search university
+			// Search university
 			ui.userSearchMenu();
 			std::cin >> option;
 			switch (option)
-			{case 1:
+			{
+			case 1:
 				// Search by Institution name
 				// universityList.sortByName();
 				std::cout << "Enter the institution name you want to search: ";
 				std::cin.ignore();
 				std::getline(std::cin, searchCriteria);
-				algorithm.linearSearch(universityList, ARRAY_SIZE,1, searchCriteria);
+				algorithm.linearSearch(universityList, ARRAY_SIZE, 1, searchCriteria);
 				break;
 			case 2:
 				// Search by Locale
 				std::cout << "Enter the locale you want to search: ";
 				std::cin.ignore();
 				std::getline(std::cin, searchCriteria);
-				algorithm.linearSearch(universityList, ARRAY_SIZE,2, searchCriteria);
+				algorithm.linearSearch(universityList, ARRAY_SIZE, 2, searchCriteria);
 				break;
 			case 3:
 				// Search by Rank
@@ -124,17 +123,17 @@ int main()
             std::cin >> password;
             if (customer.verifyUser(username, password))
             {
-                currentUser = User(customer.getUser(username));
+                currentUser = customer->getUser(username);
                 std::cout << "Login successful!" << std::endl;
             }
             else
             {
-                currentUser = NullUser();
+//                currentUser = NullUser();
                 std::cout << "Login unsuccessful" << std::endl;
             }
             std::cout << " ---------- END OF LOGIN ---------- " << std::endl;
             std::cout << std::endl;
-            if (currentUser.isNull())
+            if (currentUser)
             {
                 std::cout << "Invalid username or password" << std::endl;
             }
