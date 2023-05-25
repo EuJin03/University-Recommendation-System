@@ -13,11 +13,12 @@ class Controller
 {
 public:
     std::string validate(std::string username, std::string password);
-//    User login(HashTable userTable, std::string username, std::string password);
+    //    User login(HashTable userTable, std::string username, std::string password);
     User registerUser();
     Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
     void insertFavUni(std::string uniName);
-    long long checkExecutionTime(Algorithms algorithm, Algorithms::SortType sortType, std::vector<University> &uniArr);
+    long long ke
+    checkExecutionTime(Algorithms algorithm, Algorithms::SortType sortType, std::vector<University> &uniArr);
 };
 
 #endif // CONTROLLER_H
