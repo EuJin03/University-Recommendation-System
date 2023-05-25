@@ -8,6 +8,7 @@
 #include "../include/LinkedList.h"
 #include "../include/HashTable.h"
 #include <iostream>
+#include <stdlib.h>
 
 class Controller
 {
@@ -18,9 +19,11 @@ public:
     // Unregistered user
 
     // Registered user
-    void userController(University universityList[], int *univIndex, UI ui);
+    void userController(University universityList[], int *univIndex, UI ui, LinkedList<Feedback> feedbackList, User currentUser);
+    void feedbackController(LinkedList<Feedback> feedbackList, UI ui, User currentUser);
 
     // Admin
+    void adminController();
 
     // Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
     // void insertFavUni(std::string uniName);
