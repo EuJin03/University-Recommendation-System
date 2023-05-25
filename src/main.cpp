@@ -10,26 +10,26 @@ int main()
 {
 	UI ui;
 	Seeder seeder;
-    Controller controller;
+	Controller controller;
 
 	int univIndex = 0;
 	int ARRAY_SIZE = 1422;
 	University universityList[ARRAY_SIZE];
-    static int feedbackID = 0;
+	static int feedbackID = 0;
 	DynamicArray<University> top10;
 	seeder.createUnivInstances(universityList);
 
 	// Quick sort demo
 	Algorithms algorithm;
 	auto start_load = std::chrono::high_resolution_clock::now();
-	//	algorithm.countSort(universityList, Algorithms::SortType::AR_SCORE);
-    // algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, true, 2);
-    // ui.universityList(universityList, &univIndex);
+	algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::INSTITUTION);
+	//    algorithm.quickSort(universityList, 0, universityList.size() - 1, true, 1);
+	//	ui.universityList(universityList, &./univIndex);
 	auto end_load = std::chrono::high_resolution_clock::now();
 	long long durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
 	// std::cout << "Time taken for counting sort: " << durationLoad << " microseconds" << std::endl;
 
-    LinkedList<Feedback> feedbackList;
+	LinkedList<Feedback> feedbackList;
 	// seeder.createFeedbackInstances(&feedbackList);
 
 	LinkedList<University> favUnivList;
@@ -39,7 +39,7 @@ int main()
 	seeder.createUserInstances(&customer);
 
 	User currentUser();
-    std::string username, password;
+	std::string username, password;
 
 	int option, sortOption;
 	while (true)
@@ -60,8 +60,7 @@ int main()
 			switch (sortOption)
 			{
 			case 1:
-				// Sort by Institution name
-				// universityList.sortByName();
+
 				universityList = algorithm.countSort(universityList, Algorithms::SortType::AR_SCORE);
 				ui.universityList(universityList, &univIndex);
 				break;
@@ -78,24 +77,25 @@ int main()
 			}
 			break;
 		case 3:
-			//Search university
+			// Search university
 			ui.userSearchMenu();
 			std::cin >> option;
 			switch (option)
-			{case 1:
+			{
+			case 1:
 				// Search by Institution name
 				// universityList.sortByName();
 				std::cout << "Enter the institution name you want to search: ";
 				std::cin.ignore();
 				std::getline(std::cin, searchCriteria);
-				algorithm.linearSearch(universityList, ARRAY_SIZE,1, searchCriteria);
+				algorithm.linearSearch(universityList, ARRAY_SIZE, 1, searchCriteria);
 				break;
 			case 2:
 				// Search by Locale
 				std::cout << "Enter the locale you want to search: ";
 				std::cin.ignore();
 				std::getline(std::cin, searchCriteria);
-				algorithm.linearSearch(universityList, ARRAY_SIZE,2, searchCriteria);
+				algorithm.linearSearch(universityList, ARRAY_SIZE, 2, searchCriteria);
 				break;
 			case 3:
 				// Search by Rank
@@ -111,20 +111,20 @@ int main()
 			}
 
 			break;
-        case 4:
-            // Register
+		case 4:
+			// Register
 			break;
 		case 5:
-            // Login
-            std::cout << " ---------- LOGIN ---------- " << std::endl;
-            std::cout << "Username: ";
-            std::cin >> username;
-            std::cout << "Password: ";
-            std::cin >> password;
-            currentUser(controller.login(&customer, username, password));
-            std::cout << " ---------- END OF LOGIN ---------- " << std::endl;
-            std::cout << std::endl;
-            std::cout << currentUser << std::endl;
+			// Login
+			std::cout << " ---------- LOGIN ---------- " << std::endl;
+			std::cout << "Username: ";
+			std::cin >> username;
+			std::cout << "Password: ";
+			std::cin >> password;
+			currentUser(controller.login(&customer, username, password));
+			std::cout << " ---------- END OF LOGIN ---------- " << std::endl;
+			std::cout << std::endl;
+			std::cout << currentUser << std::endl;
 			break;
 		case 0:
 			return 0; // Ends the program
