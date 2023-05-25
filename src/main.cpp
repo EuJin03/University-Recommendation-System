@@ -30,7 +30,7 @@ int main()
 	// std::cout << "Time taken for counting sort: " << durationLoad << " microseconds" << std::endl;
 
 	LinkedList<Feedback> feedbackList;
-	// seeder.createFeedbackInstances(&feedbackList);
+	seeder.createFeedbackInstances(&feedbackList);
 
 	LinkedList<University> favUnivList;
 	// seeder.createFavUnivInstances(&favUnivList);

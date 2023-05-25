@@ -8,6 +8,7 @@
 #include "../include/LinkedList.h"
 #include "../include/HashTable.h"
 #include <iostream>
+#include <stdlib.h>
 
 class Controller
 {

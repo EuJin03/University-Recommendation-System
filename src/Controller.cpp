@@ -1,7 +1,5 @@
 #include "../include/Controller.h"
 
-#include <stdlib.h>
-
 std::string Controller::validate(std::string username, std::string password)
 {
 	if (username.length() < 6)
@@ -23,7 +21,7 @@ void Controller::adminController()
 
 }
 
-void Controller::userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *currentUser, DynamicArray<University> *top10)
+void Controller::userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *currentUser, DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser)
 {
 	while (true)
 	{
@@ -50,6 +48,7 @@ void Controller::userController(HashTable *customer, University universityList[]
 			break;
 		case 5:
 			// Feedback controller - eugene
+			feedbackController(feedbackList, ui, currentUser);
 			break;
 		case 6:
 			ui.clearScreen();
@@ -57,6 +56,7 @@ void Controller::userController(HashTable *customer, University universityList[]
 		case 0:
 			exit(0);
 		default:
+			return;
 			break;
 		}
 	}
@@ -123,4 +123,23 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
                 break;
         }
     }
+}
+
+void Controller::feedbackController(LinkedList<Feedback> feedbackList, UI ui, User currentUser)
+{
+	int userChoice;
+	ui.clearScreen();
+
+	std::cin.ignore();
+	std::cin.clear();
+	std::cin >> userChoice;
+	Feedback current = feedbackList.getTail();
+
+	std::cout << "------------Feedback Lists------------";
+	while (true)
+	{
+		std::cout << "\tFeedback ID: " << current.getFeedbackID() << std::endl;
+		std::cout << "\tUser: " << current.getUsername() << std::endl;
+		std::cout << current.getFeedback() << std::endl;
+	}
 }

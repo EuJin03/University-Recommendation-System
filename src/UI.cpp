@@ -147,6 +147,23 @@ void UI::universityList(University uniArr[], int *currentIndex)
 	}
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// FEEDBACK MENUS
 void UI::invalidOptionMsg()
 {
 	std::cout << "Invalid option! Please try again.\n";

@@ -14,7 +14,7 @@ void Seeder::createFeedbackInstances(LinkedList<Feedback> *feedbackList)
 		std::string replyText = "Testing Reply " + std::to_string(i);
 
 		Feedback feedback(i, customerName, feedbackText, adminName, replyText);
-		feedbackList->insertAtBeginning(feedback);
+		feedbackList->insertAtEnd(feedback);
 	}
 }
 
@@ -95,7 +95,7 @@ void Seeder::createUnivInstances(University uniArr[])
 
 	std::string line;
 	std::regex unwantedRegex("[^0-9]"); // Matches any character that is not a digit
-
+	std::getline(file, line);
 	auto cleanString = [](std::string str)
 	{
 		str.erase(std::remove_if(str.begin(), str.end(), [](unsigned char c)
@@ -135,9 +135,6 @@ void Seeder::createUnivInstances(University uniArr[])
 		trim(rank);
 		std::getline(ss, institution, ',');
 		trim(institution, 60);
-		if (institution == "Institution")
-			continue;
-
 		std::getline(ss, locale, ',');
 		trim(locale, 10);
 		std::getline(ss, location, ',');
