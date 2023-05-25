@@ -34,15 +34,14 @@ std::time_t Seeder::getRandomPastTime()
 
 void Seeder::createUserInstances(HashTable *customer)
 {
-	std::string username1 = "john123";
-	std::string password1 = "password1";
+	std::string username1 = "admin";
+	std::string password1 = "admin";
 	std::time_t lastLogin1 = getRandomPastTime();
 	bool isAdmin1 = false;
 	User user1(username1, password1, lastLogin1, isAdmin1);
-	user1.setAsAdmin();
 
 	std::string username2 = "eugene";
-	std::string password2 = "password2";
+	std::string password2 = "user";
 	std::time_t lastLogin2 = getRandomPastTime();
 	bool isAdmin2 = false;
 	User user2(username2, password2, lastLogin2, isAdmin2);

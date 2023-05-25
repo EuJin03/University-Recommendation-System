@@ -53,7 +53,8 @@ void UI::userSortMenu()
 	std::cout << "Enter your choice: ";
 }
 
-void UI::userSearchMenu(){
+void UI::userSearchMenu()
+{
 	std::cout << "\nSearch Menu\n";
 	std::cout << "1. Search by Institution name\n";
 	std::cout << "2. Search by Locale\n";
@@ -139,6 +140,12 @@ void UI::universityList(University uniArr[], int *currentIndex)
 		}
 		// Ignore any other input and exit the loop
 	} while (userInput == 'n' || userInput == 'p');
+
+	if (userInput != 'n' && userInput != 'p')
+	{
+		clearScreen();
+		std::cout << "Returning to main menu..." << std::endl;
+	}
 }
 
 void UI::invalidOptionMsg()
