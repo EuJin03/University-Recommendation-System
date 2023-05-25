@@ -43,7 +43,7 @@ int Algorithms::partition(University uniArr[], int start, int pivot, bool regist
         case 1: // Academic Reputation score (arScore)
             for (int j = start; j < pivot; j++)
             {
-                if (uniArr[j].getArScore() < uniArr[pivot].getArScore())
+                if (uniArr[j].getArScore() > uniArr[pivot].getArScore())
                 {
                     i++;
                     swap(&uniArr[i], &uniArr[j]);
@@ -53,7 +53,7 @@ int Algorithms::partition(University uniArr[], int start, int pivot, bool regist
         case 2: // Faculty/Student Ratio score (fsrScore)
             for (int j = start; j < pivot; j++)
             {
-                if (uniArr[j].getFsrScore() < uniArr[pivot].getFsrScore())
+                if (uniArr[j].getFsrScore() > uniArr[pivot].getFsrScore())
                 {
                     i++;
                     swap(&uniArr[i], &uniArr[j]);
@@ -63,7 +63,7 @@ int Algorithms::partition(University uniArr[], int start, int pivot, bool regist
         case 3: // Employer Reputation score (erScore)
             for (int j = start; j < pivot; j++)
             {
-                if (uniArr[j].getErScore() < uniArr[pivot].getErScore())
+                if (uniArr[j].getErScore() > uniArr[pivot].getErScore())
                 {
                     i++;
                     swap(&uniArr[i], &uniArr[j]);
@@ -288,7 +288,7 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
             std::cout << universityList[i];
         }
     }
-        std::cout<<endl;
+        std::cout << std::endl;
         break;
     case 2:
         for (int i = 0; i < size; i++)
@@ -299,7 +299,7 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
         }
 
     }
-        std::cout<<endl;
+        std::cout << std::endl;
         break;
     default:
         break;
