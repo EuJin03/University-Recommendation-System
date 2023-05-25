@@ -4,8 +4,8 @@
 User::User(const std::string &username, const std::string &password, const std::time_t &lastLogin, const bool &isAdmin, const LinkedList<University> &favUnivList)
     : username(username), password(password), lastLogin(lastLogin), isAdmin(isAdmin), favUnivList(favUnivList) {}
 
-
-User::User(const User &user) {
+User::User(const User &user)
+{
     username = user.getUsername();
     password = user.getPassword();
     lastLogin = user.getLastLogin();
@@ -62,7 +62,8 @@ bool User::validate(const User &user) const
     return username == user.getUsername() && password == user.getPassword();
 }
 
-bool User::operator==(const User &user) {
+bool User::operator==(const User &user)
+{
     return username == user.getUsername() && password == user.getPassword();
 }
 

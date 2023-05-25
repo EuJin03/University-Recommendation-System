@@ -38,7 +38,7 @@ int main()
 	HashTable customer(50);
 	seeder.createUserInstances(&customer);
 
-	User currentUser();
+	// User currentUser();
 	std::string username, password;
 
 	int option, sortOption;
@@ -119,10 +119,10 @@ int main()
 			std::cin >> username;
 			std::cout << "Password: ";
 			std::cin >> password;
-			currentUser(controller.login(&customer, username, password));
+			// currentUser(controller.login(&customer, username, password));
 			std::cout << " ---------- END OF LOGIN ---------- " << std::endl;
 			std::cout << std::endl;
-			std::cout << currentUser << std::endl;
+			// std::cout << currentUser << std::endl;
 			break;
 		case 0:
 			return 0; // Ends the program

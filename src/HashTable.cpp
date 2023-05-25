@@ -32,7 +32,8 @@ void HashTable::removeUser(const std::string &username)
 
 bool HashTable::verifyUser(const std::string &username, const std::string &password) const
 {
-	int index = hasher(username) % hashTable.size();
+	int hashValue = hasher(username);
+	int index = hashValue % hashTable.size();
 	for (const auto &user : hashTable[index])
 	{
 		if (user.getUsername() == username && user.getPassword() == password)
@@ -130,13 +131,16 @@ bool HashTable::validateUsername(const std::string &username) const
 	return false;
 }
 
-User HashTable::getUser(const std::string &username) {
-    int index = hasher(username) % hashTable.size();
-    for (const auto &user : hashTable[index])
-    {
-        if (user.getUsername() == username)
-        {
-            return user;
-        }
-    }
+User HashTable::getUser(const std::string &username)
+{
+	int index = hasher(username) % hashTable.size();
+	for (const auto &user : hashTable[index])
+	{
+		if (user.getUsername() == username)
+		{
+			return user;
+		}
+	}
+
+	return User();
 }

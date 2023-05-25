@@ -17,10 +17,11 @@ private:
 
 public:
 	// Constructor
-    User(const std::string &username, const std::string &password, const std::time_t &lastLogin, const bool &isAdmin = false, const LinkedList<University> &favUnivList = LinkedList<University>());
+	User(const std::string &username, const std::string &password, const std::time_t &lastLogin, const bool &isAdmin = false, const LinkedList<University> &favUnivList = LinkedList<University>());
 
-    // Copy constructor
-    User(const User &user);
+	// Copy constructor
+	User(const User &user);
+	User() = default;
 
 	const std::string &getUsername() const;
 	const std::string &getPassword() const;

@@ -65,24 +65,15 @@ void Seeder::createUserInstances(HashTable *customer)
 	customer->addUser(user3);
 	customer->addUser(user4);
 
-	bool valid = user1.getIsAdmin();
-	if (valid)
+	// verify
+	bool test = customer->verifyUser("eugene", "password2");
+	if (test)
 	{
-		std::cout << "User is admin" << std::endl;
+		std::cout << "eugene is verified" << std::endl;
 	}
 	else
 	{
-		std::cout << "User is not admin" << std::endl;
-	}
-
-	bool valid2 = user3.getIsAdmin();
-	if (valid2)
-	{
-		std::cout << "User is admin" << std::endl;
-	}
-	else
-	{
-		std::cout << "User is not admin" << std::endl;
+		std::cout << "eugene is not verified" << std::endl;
 	}
 }
 
