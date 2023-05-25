@@ -43,25 +43,33 @@ public:
         size++;
     }
 
-    void insertAtEnd(U data)
+    bool insertAtEnd(U data)
     {
         Node<U> *newNode;
+        Node<U> *temp = head;
         newNode = new Node<U>();
         newNode->data = data;
         newNode->next = nullptr;
         newNode->prev = tail;
 
-        if (tail != nullptr)
+        if (checkUnique(data))
         {
-            tail->next = newNode;
-        }
-        else
-        {
-            head = newNode;
-        }
+            if (head != nullptr) {
+                tail->next = newNode;a
+                newNode->prev = tail;
+                tail = tail->next;
+            } else {
+                head = newNode;
+                tail = newNode;
+            }
 
-        tail = newNode;
-        size++;
+            tail = newNode;
+            size++;
+            return true;
+        } else {
+            std::cout << "Record already exists in the list!" << std::endl;
+            return false;
+        }
     }
 
     void removeAtBeginning()
@@ -131,6 +139,8 @@ public:
                     size--;
                 }
                 break;
+            } else {
+                std::cout << "Record does not exist in the list!" << std::endl;
             }
             current = current->next;
         }
@@ -139,6 +149,21 @@ public:
     int getSize() const
     {
         return size;
+    }
+
+    bool checkUnique(U data)
+    {
+        Node<U> *current = head;
+
+        while (current != nullptr)
+        {
+            if (current->data == data)
+            {
+                return false;
+            }
+            current = current->next;
+        }
+        return true;
     }
 
     // Printings

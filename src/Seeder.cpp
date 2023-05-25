@@ -70,6 +70,7 @@ void Seeder::createUserInstances(HashTable *customer)
 //	LinkedList<University> newUniList;
 //    University testUniversity = University(1, "Test University", "UK", "United Kingdom", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 //    newUniList.insertAtBeginning(testUniversity);
+//    newUniList.insertAtEnd(testUniversity);
 //    user2.setFavUnivList(newUniList);
 //    customer->removeUser("eugene");
 //    customer->addUser(user2);

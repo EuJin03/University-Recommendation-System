@@ -85,12 +85,19 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
                 ui.universityList(universityList, univIndex);
                 std::cout << "Please provide the rank of the university you want to add: ";
                 std::cin >> uniChoice;
-                favList.insertAtEnd(universityList[uniChoice - 1]);
-                top10->append(universityList[uniChoice - 1]);
+                if (uniChoice == 0)
+                {
+                    std::cout << "Invalid choice" << std::endl;
+                    continue;
+                }
+                if (favList.insertAtEnd(universityList[uniChoice - 1]))
+                {
+                    top10->append(universityList[uniChoice - 1]);
+                };
                 currentUser->setFavUnivList(favList);
                 customer->removeUser(currentUser->getUsername());
                 customer->addUser(*currentUser);
-                std::cout << " -------- DYNAMIC ARRAY -------- " << std::endl;
+                std::cout << " ----- DYNAMIC ARRAY ----- " << std::endl;
                 top10->show();
                 break;
             case 3:
@@ -98,6 +105,11 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
                 favList.show();
                 std::cout << "Please provide the rank of the university you want to remove: ";
                 std::cin >> uniChoice;
+                if (uniChoice == 0)
+                {
+                    std::cout << "Invalid choice" << std::endl;
+                    continue;
+                }
                 favList.removeItem(universityList[uniChoice - 1]);
                 top10->remove(universityList[uniChoice - 1]);
                 currentUser->setFavUnivList(favList);
