@@ -32,6 +32,9 @@ public:
     static int getScore(University uni, SortType sortType);
     static std::string getScoreString(University uni, SortType sortType);
 
+    //To Lower Algorithm
+    std::string toLower(std::string &str);
+
     // Linear Search Algorithm
     void linearSearch(University universityList[], int size, int criteria, std::string key);
 

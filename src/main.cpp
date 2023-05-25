@@ -3,6 +3,7 @@
 #include "../include/DynamicArray.h"
 #include "../include/Algorithms.h"
 #include <string>
+#include<bits/stdc++.h>
 
 int main()
 {
@@ -85,14 +86,24 @@ int main()
 				std::cout << "Enter the institution name you want to search: ";
 				std::cin.ignore();
 				std::getline(std::cin, searchCriteria);
+				ui.universityHeader();
+				std::cout << std::string(175,'-') << std::endl;
+				start_load = std::chrono::high_resolution_clock::now();
 				algorithm.linearSearch(universityList, ARRAY_SIZE,1, searchCriteria);
+				end_load = std::chrono::high_resolution_clock::now();
+				durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
+				std::cout << "Time taken for linear search to complete: " << durationLoad << " microseconds" << std::endl;
 				break;
 			case 2:	
 				// Search by Locale
 				std::cout << "Enter the locale you want to search: ";
 				std::cin.ignore();
 				std::getline(std::cin, searchCriteria);
+				start_load = std::chrono::high_resolution_clock::now();
 				algorithm.linearSearch(universityList, ARRAY_SIZE,2, searchCriteria);
+				end_load = std::chrono::high_resolution_clock::now();
+				durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
+				std::cout << "Time taken for linear search to complete: " << durationLoad << " microseconds" << std::endl;
 				break;
 			case 3:
 				// Search by Rank

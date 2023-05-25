@@ -276,31 +276,29 @@ std::string Algorithms::getScoreString(University uni, SortType sortType)
         return "";
 }
 
+std::string Algorithms::toLower(std::string &str)
+{
+    for (auto &c : str)
+    {
+        c = tolower(c);
+    }
+    return str;
+}
+
 void Algorithms::linearSearch(University universityList[], int size, int criteria, std::string key)
 {
     switch (criteria)
     {
     case 1:
+        
         for (int i = 0; i < size; i++)
         {
-            //old linear search, uselss must be exactly same input
-            // if (universityList[i].getInstitution() == key)
-            // {
-            //     std::cout << universityList[i];
-            // }
-
             //finally found a way to make it case insensitive yay :D  (╯°□°）╯︵ ┻━┻
-            for(auto& c : key)
-            {
-                c = tolower(c);
-            }
+            key = toLower(key);
 
             std::string uniName = universityList[i].getInstitution();
 
-            for(auto& c : uniName)
-            {
-                c = tolower(c);
-            }
+            uniName = toLower(uniName);
 
             if(uniName.find(key) != std::string::npos)
             {
