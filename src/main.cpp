@@ -22,9 +22,9 @@ int main()
 	// Quick sort demo
 	Algorithms algorithm;
 	auto start_load = std::chrono::high_resolution_clock::now();
-	algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::INSTITUTION);
-	//    algorithm.quickSort(universityList, 0, universityList.size() - 1, true, 1);
-	//	ui.universityList(universityList, &./univIndex);
+	//	algorithm.countSort(universityList, Algorithms::SortType::AR_SCORE);
+	// algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, true, 2);
+	// ui.universityList(universityList, &univIndex);
 	auto end_load = std::chrono::high_resolution_clock::now();
 	long long durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
 	// std::cout << "Time taken for counting sort: " << durationLoad << " microseconds" << std::endl;
@@ -38,8 +38,13 @@ int main()
 	HashTable customer(50);
 	seeder.createUserInstances(&customer);
 
+<<<<<<< HEAD
 	// User currentUser();
 	std::string username, password;
+	== == == =
+							 User currentUser();
+	std::string username, password;
+>>>>>>> 672f91ca0bff0bf6205d3ea4a87b331c671644ee
 
 	int option, sortOption;
 	while (true)
@@ -60,7 +65,6 @@ int main()
 			switch (sortOption)
 			{
 			case 1:
-
 				break;
 			case 2:
 				break;
@@ -113,16 +117,35 @@ int main()
 			// Register
 			break;
 		case 5:
+			std::cout << "EXISTING USERS" << std::endl;
+			customer.printAllUsersDetails();
+			std::cout << std::endl;
 			// Login
 			std::cout << " ---------- LOGIN ---------- " << std::endl;
 			std::cout << "Username: ";
 			std::cin >> username;
 			std::cout << "Password: ";
 			std::cin >> password;
-			// currentUser(controller.login(&customer, username, password));
+			if (customer.verifyUser(username, password))
+			{
+				currentUser = customer->getUser(username);
+				std::cout << "Login successful!" << std::endl;
+			}
+			else
+			{
+				//                currentUser = NullUser();
+				std::cout << "Login unsuccessful" << std::endl;
+			}
 			std::cout << " ---------- END OF LOGIN ---------- " << std::endl;
 			std::cout << std::endl;
-			// std::cout << currentUser << std::endl;
+			if (currentUser)
+			{
+				std::cout << "Invalid username or password" << std::endl;
+			}
+			else
+			{
+				std::cout << currentUser << std::endl;
+			}
 			break;
 		case 0:
 			return 0; // Ends the program

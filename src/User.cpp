@@ -6,11 +6,20 @@ User::User(const std::string &username, const std::string &password, const std::
 
 User::User(const User &user)
 {
-    username = user.getUsername();
-    password = user.getPassword();
-    lastLogin = user.getLastLogin();
-    isAdmin = user.getIsAdmin();
-    favUnivList = user.getFavUnivList();
+    this->username = user.getUsername();
+    this->password = user.getPassword();
+    this->lastLogin = user.getLastLogin();
+    this->isAdmin = user.getIsAdmin();
+    this->favUnivList = user.getFavUnivList();
+}
+
+User::User()
+{
+    this->username = "";
+    this->password = "";
+    this->lastLogin = 0;
+    this->isAdmin = false;
+    this->favUnivList = LinkedList<University>();
 }
 
 const std::string &User::getUsername() const
