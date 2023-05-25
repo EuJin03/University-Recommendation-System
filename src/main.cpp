@@ -13,22 +13,23 @@ int main()
 	int univIndex = 0;
 	int ARRAY_SIZE = 1422;
 	University universityList[ARRAY_SIZE];
+    static int feedbackID = 0;
 	DynamicArray<University> top10;
 	seeder.createUnivInstances(universityList);
 
 	// Quick sort demo
 	Algorithms algorithm;
 	auto start_load = std::chrono::high_resolution_clock::now();
-	algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::INSTITUTION);
-	//    algorithm.quickSort(universityList, 0, universityList.size() - 1, true, 1);
-	//	ui.universityList(universityList, &univIndex);
+	//	algorithm.countSort(universityList, Algorithms::SortType::AR_SCORE);
+    // algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, true, 2);
+    // ui.universityList(universityList, &univIndex);
 	auto end_load = std::chrono::high_resolution_clock::now();
 	long long durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
 	std::cout << "Time taken for counting sort: " << durationLoad << " microseconds" << std::endl;
 
 	// ui.universityList(universityList, &univIndex);
 
-	// LinkedList<Feedback> feedbackList;
+	 LinkedList<Feedback> feedbackList;
 	// seeder.createFeedbackInstances(&feedbackList);
 
 	LinkedList<University> favUnivList;
@@ -64,7 +65,6 @@ int main()
 			case 2:
 				break;
 			case 3:
-
 				break;
 			case 4:
 				break;
@@ -94,7 +94,7 @@ int main()
 				durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
 				std::cout << "Time taken for linear search to complete: " << durationLoad << " microseconds" << std::endl;
 				break;
-			case 2:	
+			case 2:
 				// Search by Locale
 				std::cout << "Enter the locale you want to search: ";
 				std::cin.ignore();
@@ -117,10 +117,9 @@ int main()
 			default:
 				break;
 			}
-			
-			break;
-		case 4:
 
+			break;
+        case 4:
 			break;
 		case 5:
 			break;

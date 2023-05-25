@@ -2,7 +2,6 @@
 
 void UI::mainMenu()
 {
-	// clearScreen();
 	std::cout << "Welcome to SURS!\n";
 	std::cout << "\nMain Menu\n";
 	std::cout << "1. Display all universities' information\n";
@@ -165,8 +164,6 @@ void UI::invalidOptionMsg()
 {
 	std::cout << "Invalid option! Please try again.\n";
 }
-
-
 
 void UI::clearScreen()
 {

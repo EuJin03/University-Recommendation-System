@@ -1,6 +1,4 @@
 #include "../include/User.h"
-#include "../include/LinkedList.h"
-#include "../include/University.h"
 #include <iostream>
 
 User::User(const std::string &username, const std::string &password, const std::time_t &lastLogin, const bool &isAdmin, const LinkedList<University> &favUnivList)

@@ -6,13 +6,14 @@
 #include "../include/Algorithms.h"
 #include "../include/Feedback.h"
 #include "../include/LinkedList.h"
+#include "../include/HashTable.h"
 #include <iostream>
 
 class Controller
 {
 public:
     std::string validate(std::string username, std::string password);
-    User login(std::string username, std::string password);
+    User login(HashTable *customer, std::string username, std::string password);
     User registerUser();
     Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
     void insertFavUni(std::string uniName);
