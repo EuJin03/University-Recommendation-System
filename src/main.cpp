@@ -2,6 +2,7 @@
 #include "../include/Seeder.h"
 #include "../include/DynamicArray.h"
 #include "../include/Algorithms.h"
+#include <string>
 
 int main()
 {
@@ -42,7 +43,7 @@ int main()
 	{
 		ui.mainMenu();
 		std::cin >> option;
-
+		std::string searchCriteria;
 		switch (option)
 		{
 		case 1:
@@ -61,6 +62,7 @@ int main()
 			case 2:
 				break;
 			case 3:
+
 				break;
 			case 4:
 				break;
@@ -71,7 +73,38 @@ int main()
 			}
 			break;
 		case 3:
-
+			//Search university
+			ui.userSearchMenu();
+			std::cin >> option;
+			switch (option)
+			{case 1:
+				// Search by Institution name
+				// universityList.sortByName();
+				std::cout << "Enter the institution name you want to search: ";
+				std::cin.ignore();
+				std::getline(std::cin, searchCriteria);
+				algorithm.linearSearch(universityList, ARRAY_SIZE,1, searchCriteria);
+				break;
+			case 2:	
+				// Search by Locale
+				std::cout << "Enter the locale you want to search: ";
+				std::cin.ignore();
+				std::getline(std::cin, searchCriteria);
+				algorithm.linearSearch(universityList, ARRAY_SIZE,2, searchCriteria);
+				break;
+			case 3:
+				// Search by Rank
+				break;
+			case 4:
+				// Search by Employer Reputation score
+				break;
+			case 5:
+				// Search by Academic Reputation scorecd..
+				break;
+			default:
+				break;
+			}
+			
 			break;
 		case 4:
 
