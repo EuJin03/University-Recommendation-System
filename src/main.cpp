@@ -75,6 +75,7 @@ int main()
 			break;
 		case 3:
 			//Search university
+			
 			ui.userSearchMenu();
 			std::cin >> option;
 			switch (option)

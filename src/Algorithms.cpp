@@ -288,7 +288,7 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
             std::cout << universityList[i];
         }
     }
-        std::cout<<endl;
+        std::cout << endl;
         break;
     case 2:
         for (int i = 0; i < size; i++)
@@ -299,7 +299,7 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
         }
 
     }
-        std::cout<<endl;
+        std::cout << endl;
         break;
     default:
         break;
