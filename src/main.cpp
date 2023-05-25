@@ -19,7 +19,7 @@ int main()
 	auto start_load = std::chrono::high_resolution_clock::now();
 	algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::INSTITUTION);
 	//    algorithm.quickSort(universityList, 0, universityList.size() - 1, true, 1);
-	//	ui.universityList(universityList, &univIndex);
+	//	ui.universityList(universityList, &./univIndex);
 	auto end_load = std::chrono::high_resolution_clock::now();
 	long long durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
 	std::cout << "Time taken for counting sort: " << durationLoad << " microseconds" << std::endl;
@@ -56,8 +56,7 @@ int main()
 			switch (sortOption)
 			{
 			case 1:
-				// Sort by Institution name
-				// universityList.sortByName();
+				
 				break;
 			case 2:
 				break;
