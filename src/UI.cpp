@@ -2,7 +2,6 @@
 
 void UI::mainMenu()
 {
-	clearScreen();
 	std::cout << "Welcome to SURS!\n";
 	std::cout << "\nMain Menu\n";
 	std::cout << "1. Display all universities' information\n";

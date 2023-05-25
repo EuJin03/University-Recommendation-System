@@ -11,7 +11,7 @@ int main()
 	int univIndex = 0;
 	int ARRAY_SIZE = 1422;
 	University universityList[ARRAY_SIZE];
-    static int feedbackID = 1;
+    static int feedbackID = 0;
 	DynamicArray<University> top10;
 	seeder.createUnivInstances(universityList);
 
@@ -27,7 +27,7 @@ int main()
 
 	// ui.universityList(universityList, &univIndex);
 
-	// LinkedList<Feedback> feedbackList;
+	 LinkedList<Feedback> feedbackList;
 	// seeder.createFeedbackInstances(&feedbackList);
 
 	LinkedList<University> favUnivList;
@@ -73,10 +73,8 @@ int main()
 			}
 			break;
 		case 3:
-
 			break;
-		case 4:
-
+        case 4:
 			break;
 		case 5:
 			break;
