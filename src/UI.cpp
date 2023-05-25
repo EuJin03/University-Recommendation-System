@@ -58,16 +58,15 @@ void UI::userSearchMenu(){
 	std::cout << "\nSearch Menu\n";
 	std::cout << "1. Search by Institution name\n";
 	std::cout << "2. Search by Locale\n";
-	std::cout << "3. Search by Location\n";
 	std::cout << "3. Search by Rank\n";
 	std::cout << "4. Search by Employer Reputation score\n";
-	std::cout << "4. Search by Academic Reputation score\n";
-	std::cout << "5. Return to main menu\n";
+	std::cout << "5. Search by Academic Reputation score\n";
+	std::cout << "6. Return to main menu\n";
 	std::cout << "0. Exit program\n";
 	std::cout << "Enter your choice: ";
 }
 
-void UI::unregisteredUserSearchMenu()
+void UI::guestSearchMenu()
 {
 	std::cout << "\nSearch Menu\n";
 	std::cout << "1. Search by Institution name\n";
@@ -77,7 +76,7 @@ void UI::unregisteredUserSearchMenu()
 	std::cout << "Enter your choice: ";
 }
 
-void UI::unregisteredUserSortMenu()
+void UI::guestSortMenu()
 {
 	std::cout << "\nSort Menu\n";
 	std::cout << "1. Sort by Institution name\n";

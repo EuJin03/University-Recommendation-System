@@ -282,13 +282,32 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
     {
     case 1:
         for (int i = 0; i < size; i++)
-    {
-        if (universityList[i].getInstitution() == key)
         {
-            std::cout << universityList[i];
+            //old linear search, uselss must be exactly same input
+            // if (universityList[i].getInstitution() == key)
+            // {
+            //     std::cout << universityList[i];
+            // }
+
+            //finally found a way to make it case insensitive yay :D  (╯°□°）╯︵ ┻━┻
+            for(auto& c : key)
+            {
+                c = tolower(c);
+            }
+
+            std::string uniName = universityList[i].getInstitution();
+
+            for(auto& c : uniName)
+            {
+                c = tolower(c);
+            }
+
+            if(uniName.find(key) != std::string::npos)
+            {
+                std::cout << universityList[i];
+            }
         }
-    }
-        std::cout << endl;
+        std::cout << std::endl;
         break;
     case 2:
         for (int i = 0; i < size; i++)
@@ -299,7 +318,7 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
         }
 
     }
-        std::cout << endl;
+        std::cout << std::endl;
         break;
     default:
         break;
