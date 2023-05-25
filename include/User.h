@@ -23,10 +23,6 @@ public:
 	User(const User &user);
 	User() = default;
 
-    // Null constructor
-    User(const std::string& name) : username(name) {}
-    User() = default;
-
 	const std::string &getUsername() const;
 	const std::string &getPassword() const;
 	const std::time_t &getLastLogin() const;
@@ -36,21 +32,10 @@ public:
 	void setLastLogin(std::time_t newLastLogin);
 	void setAsAdmin();
 
-    bool isNull() const {return false;}
+	bool isNull() const { return false; }
 	bool validate(const User &user) const;
 	bool operator==(const User &user);
 	friend std::ostream &operator<<(std::ostream &os, const User &user);
 };
-
-class NullUser : public User
-{
-    public:
-    NullUser() : User("null") {}
-    bool isNull() const {return true;}
-    bool validate(const User &user) const {return false;}
-    bool operator==(const User &user) {return false;}
-};
-
-std::ostream &operator<<(std::ostream &os, const User &user);
 
 #endif // USER_H

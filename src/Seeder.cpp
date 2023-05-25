@@ -75,6 +75,8 @@ void Seeder::createUserInstances(HashTable *customer)
 	{
 		std::cout << "eugene is not verified" << std::endl;
 	}
+
+	User test2 = User();
 }
 
 void Seeder::createUnivInstances(University uniArr[])

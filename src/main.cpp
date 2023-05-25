@@ -38,13 +38,8 @@ int main()
 	HashTable customer(50);
 	seeder.createUserInstances(&customer);
 
-<<<<<<< HEAD
-	// User currentUser();
+	User currentUser;
 	std::string username, password;
-	== == == =
-							 User currentUser();
-	std::string username, password;
->>>>>>> 672f91ca0bff0bf6205d3ea4a87b331c671644ee
 
 	int option, sortOption;
 	while (true)
@@ -128,7 +123,7 @@ int main()
 			std::cin >> password;
 			if (customer.verifyUser(username, password))
 			{
-				currentUser = customer->getUser(username);
+				currentUser = customer.getUser(username);
 				std::cout << "Login successful!" << std::endl;
 			}
 			else
@@ -138,14 +133,6 @@ int main()
 			}
 			std::cout << " ---------- END OF LOGIN ---------- " << std::endl;
 			std::cout << std::endl;
-			if (currentUser)
-			{
-				std::cout << "Invalid username or password" << std::endl;
-			}
-			else
-			{
-				std::cout << currentUser << std::endl;
-			}
 			break;
 		case 0:
 			return 0; // Ends the program

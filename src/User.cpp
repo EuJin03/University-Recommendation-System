@@ -13,15 +13,6 @@ User::User(const User &user)
     this->favUnivList = user.getFavUnivList();
 }
 
-User::User()
-{
-    this->username = "";
-    this->password = "";
-    this->lastLogin = 0;
-    this->isAdmin = false;
-    this->favUnivList = LinkedList<University>();
-}
-
 const std::string &User::getUsername() const
 {
     return username;
