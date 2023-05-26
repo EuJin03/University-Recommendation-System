@@ -1,3 +1,6 @@
+/*
+	craeted by eujin & bryan
+*/
 #ifndef UNIVERSITY_H
 #define UNIVERSITY_H
 
@@ -94,9 +97,7 @@ public:
 	bool operator==(const University &other) const
 	{
 		// Define what it means for two University objects to be equal.
-		return this->rank == other.rank
-                && this->institution == other.institution
-                && this->locale == other.locale;
+		return this->rank == other.rank && this->institution == other.institution && this->locale == other.locale;
 	}
 };
 
