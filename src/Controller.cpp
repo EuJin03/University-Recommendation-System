@@ -10,6 +10,23 @@ std::string Controller::validate(std::string username, std::string password) {
     }
 }
 
+bool Controller::registerUser(std::string username, std::string password, HashTable *userTable)
+{
+    if (validate(username, password) != "success")
+    {
+        std::cout << "Register Failed \nPlease try again with username and password length of at least 6 characters." << std::endl;
+        return false;
+    }
+    else
+    {
+        std::time_t lastLogin = std::time(nullptr);
+        bool isAdmin = false;
+        User user(username, password, lastLogin, isAdmin);
+        userTable->addUser(user);
+    }
+    return true;
+}
+
 void Controller::adminController(UI ui, University universityList[], int *univIndex, HashTable *customer, LinkedList<Feedback> *feedbackList, User currentUser)
 {
 	while (true)
@@ -247,7 +264,13 @@ void Controller::feedbackController(LinkedList<Feedback> *feedbackList, UI ui, U
 
 		std::cout << "0. Move to previous feedback";
 		std::cout << "\n1. Move to next feedback";
-		std::cout << "\n2. Write a new feedback";
+        if (currentUser.getIsAdmin())
+        {
+            std::cout << "\n2. Reply to feedback";
+        } else {
+            std::cout << "\n2. Write a new feedback";
+
+        }
 		std::cout << "\n3. Go back";
 
 		std::cout << "\nPlease select an option: ";

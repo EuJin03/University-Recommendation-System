@@ -76,7 +76,19 @@ int main()
 
 			break;
 		case 4:
-			// Register
+            // Register
+            std::cout << " ---------- REGISTER ---------- " << std::endl;
+                do
+                {
+                    std::cout << "Enter username: ";
+                    std::cin >> username;
+                    std::cout << "Enter password: ";
+                    std::cin >> password;
+                } while (!controller.registerUser(username, password, &customer));
+
+                std::cout << "Registration successful!" << std::endl;
+
+                break;
 			break;
 		case 5:
 			// Login
@@ -90,6 +102,9 @@ int main()
 				if (customer.verifyUser(username, password))
 				{
 					currentUser = customer.getUser(username);
+                    currentUser.setLastLogin(std::time(nullptr));
+                    customer.removeUser(username);
+                    customer.addUser(currentUser);
 					if (currentUser.getIsAdmin())
 					{
 						// Admin

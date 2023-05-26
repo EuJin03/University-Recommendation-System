@@ -17,6 +17,7 @@ public:
     std::string validate(std::string username, std::string password);
 
     // Unregistered user
+    bool registerUser(std::string username, std::string password, HashTable *userTable);
 
     // Registered user
     void userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> *feedbackList, User currentUser);
