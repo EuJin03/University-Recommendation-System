@@ -4,7 +4,7 @@ using namespace std::chrono;
 
 void Seeder::createFeedbackInstances(LinkedList<Feedback> *feedbackList)
 {
-	int feedbackCount = 3; // Number of feedback instances to create
+	int feedbackCount = 3; // Number of feedback instances to create`
 
 	for (int i = 1; i <= feedbackCount; i++)
 	{
@@ -15,7 +15,7 @@ void Seeder::createFeedbackInstances(LinkedList<Feedback> *feedbackList)
 		std::string replyText = "Testing Reply " + std::to_string(i);
 		std::time_t repliedAt = getRandomPastTime();
 
-		Feedback feedback(i, customerName, feedbackText, createdAt);
+		Feedback feedback(i, customerName, feedbackText, createdAt, adminName, replyText, repliedAt);
 		feedbackList->insertAtEnd(feedback);
 	}
 }
@@ -46,21 +46,21 @@ void Seeder::createUserInstances(HashTable *customer)
 	std::string password2 = "user";
 	std::time_t lastLogin2 = getRandomPastTime();
 	bool isAdmin2 = false;
-    LinkedList<University> eugeneList;
+	LinkedList<University> eugeneList;
 	User user2(username2, password2, lastLogin2, isAdmin2, eugeneList);
 
 	std::string username3 = "bryan";
 	std::string password3 = "password3";
 	std::time_t lastLogin3 = getRandomPastTime();
 	bool isAdmin3 = false;
-    LinkedList<University> bryanList;
+	LinkedList<University> bryanList;
 	User user3(username3, password3, lastLogin3, isAdmin3, bryanList);
 
 	std::string username4 = "pclai";
 	std::string password4 = "password4";
 	std::time_t lastLogin4 = getRandomPastTime();
 	bool isAdmin4 = false;
-    LinkedList<University> pclaiList;
+	LinkedList<University> pclaiList;
 	User user4(username4, password4, lastLogin4, isAdmin4, pclaiList);
 
 	// Add users to the customer
@@ -69,14 +69,14 @@ void Seeder::createUserInstances(HashTable *customer)
 	customer->addUser(user3);
 	customer->addUser(user4);
 
-//	LinkedList<University> newUniList;
-//    University testUniversity = University(1, "Test University", "UK", "United Kingdom", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
-//    newUniList.insertAtBeginning(testUniversity);
-//    newUniList.insertAtEnd(testUniversity);
-//    user2.setFavUnivList(newUniList);
-//    customer->removeUser("eugene");
-//    customer->addUser(user2);
-//    std::cout << customer->getUser("eugene") << std::endl;
+	//	LinkedList<University> newUniList;
+	//    University testUniversity = University(1, "Test University", "UK", "United Kingdom", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+	//    newUniList.insertAtBeginning(testUniversity);
+	//    newUniList.insertAtEnd(testUniversity);
+	//    user2.setFavUnivList(newUniList);
+	//    customer->removeUser("eugene");
+	//    customer->addUser(user2);
+	//    std::cout << customer->getUser("eugene") << std::endl;
 
 	User test2 = User();
 }

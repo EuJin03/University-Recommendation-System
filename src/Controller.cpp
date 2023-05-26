@@ -137,12 +137,12 @@ void Controller::feedbackController(LinkedList<Feedback> feedbackList, UI ui, Us
 
 		std::cout << current << std::endl;
 
-		std::cout << "\n0. Move to previous feedback";
+		std::cout << "0. Move to previous feedback";
 		std::cout << "\n1. Move to next feedback";
 		std::cout << "\n2. Write a new feedback";
 		std::cout << "\n3. Go back";
 
-		std::cout << "Please select an option: ";
+		std::cout << "\nPlease select an option: ";
 		std::cin.ignore();
 		std::cin.clear();
 		std::cin >> userChoice;
@@ -165,6 +165,23 @@ void Controller::feedbackController(LinkedList<Feedback> feedbackList, UI ui, Us
 
 		if (userChoice == 2)
 		{
+
+			std::string feedback;
+			std::cout << "\n------------Feedback Lists------------";
+			std::cout << "\nPlease enter your feedback: ";
+			std::cin.ignore();
+			std::cin >> feedback;
+
+			int newID = feedbackList.getSize() + 1;
+			std::string newUser = currentUser.getUsername();
+			std::string newComment = feedback;
+			std::time_t createdAt = std::time(nullptr);
+
+			Feedback newFeedback = Feedback(newID, newUser, newComment, createdAt);
+			feedbackList.insertAtEnd(newFeedback);
+			ui.clearScreen();
+			currentNode = feedbackList.getTail();
+			current = currentNode->data;
 		}
 
 		if (userChoice == 3)

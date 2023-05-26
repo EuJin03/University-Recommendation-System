@@ -216,7 +216,7 @@ public:
             if (current->next != NULL)
                 current = current->next;
             else
-                std::cout << "This is the leftmost node, go back!\n\n";
+                std::cout << "This is the rightmost node, go back!\n\n";
         }
 
         return current;

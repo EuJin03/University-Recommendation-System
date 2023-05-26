@@ -60,8 +60,12 @@ std::ostream &operator<<(std::ostream &os, const Feedback &feedback)
 	os << "Username: " << feedback.getUsername() << std::endl;
 	os << "Feedback: " << feedback.getFeedback() << std::endl;
 	os << "Created At: " << CAbuffer << std::endl;
-	os << "Admin: " << feedback.getAdmin() << std::endl;
-	os << "Reply content: " << feedback.getReplyContent() << std::endl;
-	os << "Replied At: " << RAbuffer << std::endl;
+	if (feedback.getAdmin() != "")
+	{
+		os << "----------------Reply----------------\n";
+		os << "Admin: " << feedback.getAdmin() << std::endl;
+		os << "Reply Content: " << feedback.getReplyContent() << std::endl;
+		os << "Replied At: " << RAbuffer << std::endl;
+	}
 	return os;
 }

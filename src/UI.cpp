@@ -147,22 +147,6 @@ void UI::universityList(University uniArr[], int *currentIndex)
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // FEEDBACK MENUS
 void UI::invalidOptionMsg()
 {
@@ -175,12 +159,13 @@ void UI::clearScreen()
 	system("cls");
 }
 
-void UI::favouriteMenu() {
-    std::cout << "\nFavourite University Menu\n";
-    std::cout << "1. View Favourite Universities\n";
-    std::cout << "2. Add University to Favourites\n";
-    std::cout << "3. Remove University from Favourites\n";
-    std::cout << "4. Return to user menu\n";
-    std::cout << "5. Exit program\n";
-    std::cout << "Enter your choice: ";
+void UI::favouriteMenu()
+{
+	std::cout << "\nFavourite University Menu\n";
+	std::cout << "1. View Favourite Universities\n";
+	std::cout << "2. Add University to Favourites\n";
+	std::cout << "3. Remove University from Favourites\n";
+	std::cout << "4. Return to user menu\n";
+	std::cout << "5. Exit program\n";
+	std::cout << "Enter your choice: ";
 }
