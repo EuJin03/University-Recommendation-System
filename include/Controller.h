@@ -21,9 +21,12 @@ public:
     // Registered user
     void userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *currentUser, DynamicArray<University> *top10);
     void favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[], int *univIndex, DynamicArray<University> *top10);
-
+    
     // Admin
     void adminController();
+
+    //register User validation
+    bool registerUser(HashTable *customer, UI ui, User *currentUser);
 
     // Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
     // void insertFavUni(std::string uniName);

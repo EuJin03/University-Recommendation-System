@@ -104,14 +104,18 @@ int main()
 			}
 
 			break;
-        case 4:;
-			if (controller.registerUser(&customer))
-			{
-				std::cout << "User registered successfully!" << std::endl;
-			}
-			else
-			{
-				std::cout << "User registration failed!" << std::endl;
+        case 4:
+			// Register
+			std::cout << " ---------- REGISTER ---------- " << std::endl;
+			std::string username, password;
+    		std::cout << "Enter username: ";
+    		std::cin >> username;
+    		std::cout << "Enter password: ";
+			std::cin >> password;
+			if(!controller.registerUser(username, password, &customer)){
+				std::cout << "Registration failed!" << std::endl;
+			}else{
+				std::cout << "Registration successful!" << std::endl;
 			}
 			
 			break;
