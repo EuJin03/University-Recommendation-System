@@ -147,6 +147,7 @@ bool Controller::registerUser(std::string username, std::string password, HashTa
 {
     if (validate(username, password) != "success")
     {
+        std::cout << "Register Failed \nPlease try again with username and password length of at least 6 characters." << std::endl;
         return false;
     }
     else

@@ -127,7 +127,7 @@ void UI::universityList(University uniArr[], int *currentIndex)
 
 	char userInput;
 	do
-	{
+	{		
 		clearScreen();
 		std::cout << currentIndex << std::endl;
 		universityHeader();

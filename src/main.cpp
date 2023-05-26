@@ -107,15 +107,15 @@ int main()
         case 4:
 			// Register
 			std::cout << " ---------- REGISTER ---------- " << std::endl;
-    		std::cout << "Enter username: ";
-    		std::cin >> username;
-    		std::cout << "Enter password: ";
-			std::cin >> password;
-			if(!controller.registerUser(username, password, &customer)){
-				std::cout << "Registration failed!" << std::endl;
-			}else{
-				std::cout << "Registration successful!" << std::endl;
-			}
+    		do
+			{
+				std::cout << "Enter username: ";
+    			std::cin >> username;
+    			std::cout << "Enter password: ";
+				std::cin >> password;
+			} while (!controller.registerUser(username, password, &customer));
+			
+			std::cout << "Registration successful!" << std::endl;
 			
 			break;
 		case 5:
