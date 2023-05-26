@@ -133,14 +133,14 @@ bool HashTable::validateUsername(const std::string &username) const
 
 User HashTable::getUser(const std::string &username)
 {
-	for (const auto &userList : hashTable)
-	{
-		for (const User &user : userList)
-		{
-			if (user.getUsername() == username)
-				return user;
-		}
-	}
+    for (const auto &userList : hashTable)
+    {
+        for (const User &user : userList)
+        {
+            if (user.getUsername() == username)
+                return user;
+        }
+    }
 
 	return User();
 }

@@ -44,28 +44,37 @@ public:
         size++;
     }
 
-    void insertAtEnd(U data)
+    bool insertAtEnd(U data)
     {
         // Insert in a way so that the tail will have the latest node.
         Node<U> *newNode;
+        Node<U> *temp = head;
         newNode = new Node<U>();
         newNode->data = data;
         newNode->next = nullptr;
         newNode->prev = nullptr;
 
-        if (head != nullptr)
+        if (checkUnique(data))
         {
-            tail->next = newNode;
-            newNode->prev = tail;
-            tail = tail->next;
+            if (head != nullptr)
+            {
+                tail->next = newNode;
+                newNode->prev = tail;
+                tail = tail->next;
+            }
+            else
+            {
+                head = newNode;
+                tail = newNode;
+            }
+            size++;
+            return true;
         }
         else
         {
-            head = newNode;
-            tail = newNode;
+            std::cout << "Record already exists in the list!" << std::endl;
+            return false;
         }
-
-        size++;
     }
 
     void removeAtBeginning()
@@ -110,9 +119,58 @@ public:
         }
     }
 
+    // Remove a University Item based on its rank from the LinkedList
+    void removeItem(U data)
+    {
+        Node<U> *current = head;
+
+        while (current != nullptr)
+        {
+            if (current->data == data)
+            {
+                if (current == head)
+                {
+                    removeAtBeginning();
+                }
+                else if (current == tail)
+                {
+                    removeAtEnd();
+                }
+                else
+                {
+                    current->prev->next = current->next;
+                    current->next->prev = current->prev;
+                    delete current;
+                    size--;
+                }
+                break;
+            }
+            else
+            {
+                std::cout << "Record does not exist in the list!" << std::endl;
+            }
+            current = current->next;
+        }
+    }
+
     int getSize() const
     {
         return size;
+    }
+
+    bool checkUnique(U data)
+    {
+        Node<U> *current = head;
+
+        while (current != nullptr)
+        {
+            if (current->data == data)
+            {
+                return false;
+            }
+            current = current->next;
+        }
+        return true;
     }
 
     // Printings
