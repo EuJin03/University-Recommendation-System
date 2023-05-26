@@ -21,7 +21,7 @@ void Controller::adminController()
 
 }
 
-void Controller::userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *currentUser, DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser)
+void Controller::userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser)
 {
 	while (true)
 	{
@@ -44,7 +44,7 @@ void Controller::userController(HashTable *customer, University universityList[]
 			break;
 		case 4:
 			// Favourite controller - bryan
-            favouriteController(customer, currentUser, ui, universityList, univIndex, top10);
+            favouriteController(customer, favUser, ui, universityList, univIndex, top10);
 			break;
 		case 5:
 			// Feedback controller - eugene
