@@ -8,16 +8,26 @@
 #include "../include/LinkedList.h"
 #include "../include/HashTable.h"
 #include <iostream>
+#include <stdlib.h>
 
 class Controller
 {
 public:
+    // general
     std::string validate(std::string username, std::string password);
-    User login(HashTable *customer, std::string username, std::string password);
-    bool registerUser(HashTable *userTable);
-    Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
-    void insertFavUni(std::string uniName);
-    long long checkExecutionTime(Algorithms algorithm, Algorithms::SortType sortType, std::vector<University> &uniArr);
+
+    // Unregistered user
+
+    // Registered user
+    void userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *currentUser, DynamicArray<University> *top10);
+    void favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[], int *univIndex, DynamicArray<University> *top10);
+
+    // Admin
+    void adminController();
+
+    // Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
+    // void insertFavUni(std::string uniName);
+    // checkExecutionTime(Algorithms algorithm, Algorithms::SortType sortType, std::vector<University> &uniArr);
 };
 
 #endif // CONTROLLER_H

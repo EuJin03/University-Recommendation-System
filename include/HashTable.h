@@ -21,6 +21,7 @@ public:
 
 	void addUser(const User &user);
 	void removeUser(const std::string &username);
+	User getUser(const std::string &username);
 
 	// TODO: implement these
 	bool verifyUser(const std::string &username, const std::string &password) const;

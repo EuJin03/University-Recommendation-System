@@ -23,13 +23,10 @@ public:
 	void guestSearchMenu();
 	void userSearchMenu();
 
-	// user login/register menu
-	void loginMenu();
-	void registerMenu();
-
 	// feedback menu
 
 	// favourite list menu
+    void favouriteMenu();
 
 	// university ui
 	void universityHeader();

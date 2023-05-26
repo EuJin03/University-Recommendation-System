@@ -2,6 +2,7 @@
 #define LINKEDLIST_H
 
 #include <iostream>
+#include "Feedback.h"
 
 template <class T>
 struct Node
@@ -43,25 +44,31 @@ public:
         size++;
     }
 
-    void insertAtEnd(U data)
+    bool insertAtEnd(U data)
     {
         Node<U> *newNode;
+        Node<U> *temp = head;
         newNode = new Node<U>();
         newNode->data = data;
         newNode->next = nullptr;
-        newNode->prev = tail;
+        newNode->prev = nullptr;
 
-        if (tail != nullptr)
+        if (checkUnique(data))
         {
-            tail->next = newNode;
+            if (head != nullptr) {
+                tail->next = newNode;
+                newNode->prev = tail;
+                tail = tail->next;
+            } else {
+                head = newNode;
+                tail = newNode;
+            }
+            size++;
+            return true;
+        } else {
+            std::cout << "Record already exists in the list!" << std::endl;
+            return false;
         }
-        else
-        {
-            head = newNode;
-        }
-
-        tail = newNode;
-        size++;
     }
 
     void removeAtBeginning()
@@ -106,9 +113,56 @@ public:
         }
     }
 
+    // Remove a University Item based on its rank from the LinkedList
+    void removeItem(U data)
+    {
+        Node<U> *current = head;
+
+        while (current != nullptr)
+        {
+            if (current->data == data)
+            {
+                if (current == head)
+                {
+                    removeAtBeginning();
+                }
+                else if (current == tail)
+                {
+                    removeAtEnd();
+                }
+                else
+                {
+                    current->prev->next = current->next;
+                    current->next->prev = current->prev;
+                    delete current;
+                    size--;
+                }
+                break;
+            } else {
+                std::cout << "Record does not exist in the list!" << std::endl;
+            }
+            current = current->next;
+        }
+    }
+
     int getSize() const
     {
         return size;
+    }
+
+    bool checkUnique(U data)
+    {
+        Node<U> *current = head;
+
+        while (current != nullptr)
+        {
+            if (current->data == data)
+            {
+                return false;
+            }
+            current = current->next;
+        }
+        return true;
     }
 
     // Printings
@@ -129,6 +183,35 @@ public:
             }
             std::cout << std::endl;
         }
+    }
+
+    U getTail()
+    {
+        if (tail != nullptr)
+            return tail->data;
+        else
+            throw std::runtime_error("Empty list");
+    }
+
+    Node<U> navigateNodes(Node<U> current, int action)
+    {
+        if (action == 0)
+        {
+            if (current->prev != NULL)
+                current = current->prev;
+            else
+                std::cout << "This is the leftmost node, go front!.\n";
+        }
+
+        if (action == 1)
+        {
+            if (current->next != NULL)
+                current = current->next;
+            else
+                std::cout << "This is the leftmost node, go back!\n";
+        }
+
+        return current;
     }
 
 private:

@@ -16,7 +16,12 @@ private:
 	LinkedList<University> favUnivList;
 
 public:
+	// Constructor
 	User(const std::string &username, const std::string &password, const std::time_t &lastLogin, const bool &isAdmin = false, const LinkedList<University> &favUnivList = LinkedList<University>());
+
+	// Copy constructor
+	User(const User &user);
+	User() = default;
 
 	const std::string &getUsername() const;
 	const std::string &getPassword() const;
@@ -26,12 +31,12 @@ public:
 
 	void setLastLogin(std::time_t newLastLogin);
 	void setAsAdmin();
+    void setFavUnivList(LinkedList<University> newFavUnivList);
 
+	bool isNull() const { return false; }
 	bool validate(const User &user) const;
 	bool operator==(const User &user);
 	friend std::ostream &operator<<(std::ostream &os, const User &user);
 };
-
-std::ostream &operator<<(std::ostream &os, const User &user);
 
 #endif // USER_H

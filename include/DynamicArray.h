@@ -178,6 +178,15 @@ public:
     {
         return size == 0;
     };
+
+    void show()
+    {
+        for (int i = 0; i < size; i++)
+        {
+            std::cout << array[i] << std::endl;
+        }
+        std::cout << std::endl;
+    }
 };
 
 #endif // UNIVERSITY_RECOMMENDATION_SYSTEM_DYNAMICARRAY_H

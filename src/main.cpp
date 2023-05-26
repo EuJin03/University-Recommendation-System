@@ -2,6 +2,7 @@
 #include "../include/Seeder.h"
 #include "../include/DynamicArray.h"
 #include "../include/Algorithms.h"
+#include "../include/LinkedList.h"
 #include "../include/Controller.h"
 #include <string>
 #include<bits/stdc++.h>
@@ -15,7 +16,7 @@ int main()
 	int univIndex = 0;
 	int ARRAY_SIZE = 1422;
 	University universityList[ARRAY_SIZE];
-    static int feedbackID = 0;
+	static int feedbackID = 0;
 	DynamicArray<University> top10;
 	seeder.createUnivInstances(universityList);
 
@@ -23,16 +24,14 @@ int main()
 	Algorithms algorithm;
 	auto start_load = std::chrono::high_resolution_clock::now();
 	//	algorithm.countSort(universityList, Algorithms::SortType::AR_SCORE);
-    // algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, true, 2);
-    // ui.universityList(universityList, &univIndex);
+	// algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, true, 2);
+	// ui.universityList(universityList, &univIndex);
 	auto end_load = std::chrono::high_resolution_clock::now();
 	long long durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
-	std::cout << "Time taken for counting sort: " << durationLoad << " microseconds" << std::endl;
+	// std::cout << "Time taken for counting sort: " << durationLoad << " microseconds" << std::endl;
 
-	// ui.universityList(universityList, &univIndex);
-
-	 LinkedList<Feedback> feedbackList;
-	// seeder.createFeedbackInstances(&feedbackList);
+	LinkedList<Feedback> feedbackList;
+	seeder.createFeedbackInstances(&feedbackList);
 
 	LinkedList<University> favUnivList;
 	// seeder.createFavUnivInstances(&favUnivList);
@@ -40,7 +39,8 @@ int main()
 	HashTable customer(50);
 	seeder.createUserInstances(&customer);
 
-	User *currentUser = nullptr;
+	User currentUser;
+	std::string username, password;
 
 	int option, sortOption;
 	while (true)
@@ -48,6 +48,7 @@ int main()
 		ui.mainMenu();
 		std::cin >> option;
 		std::string searchCriteria;
+		// Unregistered User
 		switch (option)
 		{
 		case 1:
@@ -57,24 +58,6 @@ int main()
 		case 2:
 			ui.userSortMenu();
 			// should move into controller class
-			std::cin >> sortOption;
-			switch (sortOption)
-			{
-			case 1:
-				// Sort by Institution name
-				// universityList.sortByName();
-				break;
-			case 2:
-				break;
-			case 3:
-				break;
-			case 4:
-				break;
-			case 5:
-				break;
-			default:
-				break;
-			}
 			break;
 		case 3:
 			//Search university
@@ -133,6 +116,34 @@ int main()
 			
 			break;
 		case 5:
+			// Login
+			std::cout << " ---------- LOGIN ---------- " << std::endl;
+			while (true)
+			{
+				std::cout << "Username: ";
+				std::cin >> username;
+				std::cout << "Password: ";
+				std::cin >> password;
+				if (customer.verifyUser(username, password))
+				{
+					currentUser = customer.getUser(username);
+					if (currentUser.getIsAdmin())
+					{
+						// Admin
+						controller.adminController(); // -- wenxuen
+					}
+					else
+					{
+						// Registered User
+						controller.userController(&customer, universityList, &univIndex, ui, &currentUser, &top10);
+					}
+					break;
+				}
+				else
+				{
+					std::cout << "Incorrect username or password. Please try again!" << std::endl;
+				}
+			}
 			break;
 		case 0:
 			return 0; // Ends the program

@@ -53,7 +53,8 @@ void UI::userSortMenu()
 	std::cout << "Enter your choice: ";
 }
 
-void UI::userSearchMenu(){
+void UI::userSearchMenu()
+{
 	std::cout << "\nSearch Menu\n";
 	std::cout << "1. Search by Institution name\n";
 	std::cout << "2. Search by Locale\n";
@@ -158,8 +159,30 @@ void UI::universityList(University uniArr[], int *currentIndex)
 		}
 		// Ignore any other input and exit the loop
 	} while (userInput == 'n' || userInput == 'p');
+
+	if (userInput != 'n' && userInput != 'p')
+	{
+		std::cout << "Returning to main menu..." << std::endl;
+	}
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// FEEDBACK MENUS
 void UI::invalidOptionMsg()
 {
 	std::cout << "Invalid option! Please try again.\n";
@@ -169,4 +192,14 @@ void UI::clearScreen()
 {
 	std::cout << std::string(100, '\n');
 	system("cls");
+}
+
+void UI::favouriteMenu() {
+    std::cout << "\nFavourite University Menu\n";
+    std::cout << "1. View Favourite Universities\n";
+    std::cout << "2. Add University to Favourites\n";
+    std::cout << "3. Remove University from Favourites\n";
+    std::cout << "4. Return to user menu\n";
+    std::cout << "5. Exit program\n";
+    std::cout << "Enter your choice: ";
 }

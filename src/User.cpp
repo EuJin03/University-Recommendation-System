@@ -4,6 +4,15 @@
 User::User(const std::string &username, const std::string &password, const std::time_t &lastLogin, const bool &isAdmin, const LinkedList<University> &favUnivList)
     : username(username), password(password), lastLogin(lastLogin), isAdmin(isAdmin), favUnivList(favUnivList) {}
 
+User::User(const User &user)
+{
+    this->username = user.getUsername();
+    this->password = user.getPassword();
+    this->lastLogin = user.getLastLogin();
+    this->isAdmin = user.getIsAdmin();
+    this->favUnivList = user.getFavUnivList();
+}
+
 const std::string &User::getUsername() const
 {
     return username;
@@ -34,6 +43,10 @@ void User::setLastLogin(std::time_t newLastLogin)
     lastLogin = newLastLogin;
 }
 
+void User::setFavUnivList(LinkedList<University> newFavUnivList) {
+    this->favUnivList = newFavUnivList;
+}
+
 void User::setAsAdmin()
 {
     isAdmin = !isAdmin;
@@ -42,9 +55,11 @@ void User::setAsAdmin()
 std::ostream &
 operator<<(std::ostream &os, const User &user)
 {
-    os << "Username: " << user.username << std::endl;
-    os << "Password: " << user.password << std::endl;
-    os << "Last Login: " << user.lastLogin << std::endl;
+    LinkedList<University> favUnivList = user.getFavUnivList();
+    os << "Username: " << user.getUsername() << std::endl;
+    os << "Password: " << user.getPassword() << std::endl;
+    os << "Last Login: " << user.getLastLogin() << std::endl;
+    favUnivList.show();
     return os;
 }
 
@@ -53,7 +68,8 @@ bool User::validate(const User &user) const
     return username == user.getUsername() && password == user.getPassword();
 }
 
-bool User::operator==(const User &user) {
+bool User::operator==(const User &user)
+{
     return username == user.getUsername() && password == user.getPassword();
 }
 
