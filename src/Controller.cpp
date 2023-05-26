@@ -281,9 +281,8 @@ void Controller::feedbackController(LinkedList<Feedback> *feedbackList, UI ui, U
 				std::cin.ignore();
 				std::getline(std::cin, reply);
 
-				current.setReplyContent(reply);
-				current.setAdmin(currentUser.getUsername());
-				current.setRepliedAt(std::time(nullptr));
+				Feedback newFeedback(current.getFeedbackID(), current.getUsername(), current.getFeedback(), current.getCreatedAt(), currentUser.getUsername(), reply, std::time(nullptr));
+				feedbackList->updateItem(current, newFeedback);
 
 				ui.clearScreen();
 				current = currentNode->data;

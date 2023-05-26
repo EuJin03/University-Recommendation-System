@@ -4,20 +4,42 @@ using namespace std::chrono;
 
 void Seeder::createFeedbackInstances(LinkedList<Feedback> *feedbackList)
 {
-	int feedbackCount = 3; // Number of feedback instances to create`
+	std::string username1 = "eugene1";
+	std::string feedback10 = "Testing Feedback";
+	std::time_t createdAt1 = getRandomPastTime();
+	std::string admin1 = "Admin 1";
+	std::string reply1 = "Testing Reply";
+	std::time_t repliedAt1 = getRandomPastTime();
 
-	for (int i = 1; i <= feedbackCount; i++)
-	{
-		std::string customerName = "Customer " + std::to_string(i);
-		std::string feedbackText = "Testing Feedback " + std::to_string(i);
-		std::time_t createdAt = getRandomPastTime();
-		std::string adminName = "Admin " + std::to_string(i);
-		std::string replyText = "Testing Reply " + std::to_string(i);
-		std::time_t repliedAt = getRandomPastTime();
+	std::string username2 = "eugene2";
+	std::string feedback20 = "Testing Feedback";
+	std::time_t createdAt2 = getRandomPastTime();
+	std::string admin2 = "Admin 2";
+	std::string reply2 = "Testing Reply";
+	std::time_t repliedAt2 = getRandomPastTime();
 
-		Feedback feedback(i, customerName, feedbackText, createdAt, adminName, replyText, repliedAt);
-		feedbackList->insertAtEnd(feedback);
-	}
+	std::string username3 = "eugene3";
+	std::string feedback30 = "Testing Feedback";
+	std::time_t createdAt3 = getRandomPastTime();
+	std::string admin3 = "Admin 3";
+	std::string reply3 = "Testing Reply";
+	std::time_t repliedAt3 = getRandomPastTime();
+
+	std::string username4 = "eugene4";
+	std::string feedback40 = "Testing Feedback";
+	std::time_t createdAt4 = getRandomPastTime();
+	std::string admin4 = "Admin 4";
+	std::string reply4 = "Testing Reply";
+	std::time_t repliedAt4 = getRandomPastTime();
+
+	Feedback feedback1(0, username1, feedback10, createdAt1, admin1, reply1, repliedAt1);
+	Feedback feedback2(1, username2, feedback20, createdAt2, admin2, reply2, repliedAt2);
+	Feedback feedback3(2, username3, feedback30, createdAt3, admin3, reply3, repliedAt3);
+	Feedback feedback4(3, username4, feedback40, createdAt4, admin4, reply4, repliedAt4);
+	feedbackList->insertAtEnd(feedback1);
+	feedbackList->insertAtEnd(feedback2);
+	feedbackList->insertAtEnd(feedback3);
+	feedbackList->insertAtEnd(feedback4);
 }
 
 std::time_t Seeder::getRandomPastTime()

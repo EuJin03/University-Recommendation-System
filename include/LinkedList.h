@@ -153,6 +153,26 @@ public:
         }
     }
 
+    // Update an item in the LinkedList
+    void updateItem(U data, U newData)
+    {
+        Node<U> *current = head;
+
+        while (current != nullptr)
+        {
+            if (current->data == data)
+            {
+                current->data = newData;
+                break;
+            }
+            else
+            {
+                std::cout << "Record does not exist in the list!" << std::endl;
+            }
+            current = current->next;
+        }
+    }
+
     int getSize() const
     {
         return size;
