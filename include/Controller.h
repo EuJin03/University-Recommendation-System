@@ -14,7 +14,7 @@ class Controller
 public:
     std::string validate(std::string username, std::string password);
     User login(HashTable *customer, std::string username, std::string password);
-    User registerUser();
+    bool registerUser(HashTable *userTable);
     Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
     void insertFavUni(std::string uniName);
     long long checkExecutionTime(Algorithms algorithm, Algorithms::SortType sortType, std::vector<University> &uniArr);

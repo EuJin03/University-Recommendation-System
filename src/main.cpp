@@ -2,6 +2,7 @@
 #include "../include/Seeder.h"
 #include "../include/DynamicArray.h"
 #include "../include/Algorithms.h"
+#include "../include/Controller.h"
 #include <string>
 #include<bits/stdc++.h>
 
@@ -9,6 +10,7 @@ int main()
 {
 	UI ui;
 	Seeder seeder;
+	Controller controller;
 
 	int univIndex = 0;
 	int ARRAY_SIZE = 1422;
@@ -119,7 +121,16 @@ int main()
 			}
 
 			break;
-        case 4:
+        case 4:;
+			if (controller.registerUser(&customer))
+			{
+				std::cout << "User registered successfully!" << std::endl;
+			}
+			else
+			{
+				std::cout << "User registration failed!" << std::endl;
+			}
+			
 			break;
 		case 5:
 			break;
