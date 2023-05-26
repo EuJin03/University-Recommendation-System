@@ -43,6 +43,10 @@ void User::setLastLogin(std::time_t newLastLogin)
     lastLogin = newLastLogin;
 }
 
+void User::setFavUnivList(LinkedList<University> newFavUnivList) {
+    this->favUnivList = newFavUnivList;
+}
+
 void User::setAsAdmin()
 {
     isAdmin = !isAdmin;
@@ -51,9 +55,11 @@ void User::setAsAdmin()
 std::ostream &
 operator<<(std::ostream &os, const User &user)
 {
-    os << "Username: " << user.username << std::endl;
-    os << "Password: " << user.password << std::endl;
-    os << "Last Login: " << user.lastLogin << std::endl;
+    LinkedList<University> favUnivList = user.getFavUnivList();
+    os << "Username: " << user.getUsername() << std::endl;
+    os << "Password: " << user.getPassword() << std::endl;
+    os << "Last Login: " << user.getLastLogin() << std::endl;
+    favUnivList.show();
     return os;
 }
 

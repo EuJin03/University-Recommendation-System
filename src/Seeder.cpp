@@ -14,7 +14,7 @@ void Seeder::createFeedbackInstances(LinkedList<Feedback> *feedbackList)
 		std::string replyText = "Testing Reply " + std::to_string(i);
 
 		Feedback feedback(i, customerName, feedbackText, adminName, replyText);
-		feedbackList->insertAtBeginning(feedback);
+		feedbackList->insertAtEnd(feedback);
 	}
 }
 
@@ -34,30 +34,32 @@ std::time_t Seeder::getRandomPastTime()
 
 void Seeder::createUserInstances(HashTable *customer)
 {
-	std::string username1 = "john123";
-	std::string password1 = "password1";
+	std::string username1 = "admin";
+	std::string password1 = "admin";
 	std::time_t lastLogin1 = getRandomPastTime();
 	bool isAdmin1 = false;
 	User user1(username1, password1, lastLogin1, isAdmin1);
-	user1.setAsAdmin();
 
 	std::string username2 = "eugene";
-	std::string password2 = "password2";
+	std::string password2 = "user";
 	std::time_t lastLogin2 = getRandomPastTime();
 	bool isAdmin2 = false;
-	User user2(username2, password2, lastLogin2, isAdmin2);
+    LinkedList<University> eugeneList;
+	User user2(username2, password2, lastLogin2, isAdmin2, eugeneList);
 
 	std::string username3 = "bryan";
 	std::string password3 = "password3";
 	std::time_t lastLogin3 = getRandomPastTime();
 	bool isAdmin3 = false;
-	User user3(username3, password3, lastLogin3, isAdmin3);
+    LinkedList<University> bryanList;
+	User user3(username3, password3, lastLogin3, isAdmin3, bryanList);
 
 	std::string username4 = "pclai";
 	std::string password4 = "password4";
 	std::time_t lastLogin4 = getRandomPastTime();
 	bool isAdmin4 = false;
-	User user4(username4, password4, lastLogin4, isAdmin4);
+    LinkedList<University> pclaiList;
+	User user4(username4, password4, lastLogin4, isAdmin4, pclaiList);
 
 	// Add users to the customer
 	customer->addUser(user1);
@@ -65,16 +67,14 @@ void Seeder::createUserInstances(HashTable *customer)
 	customer->addUser(user3);
 	customer->addUser(user4);
 
-	// verify
-	bool test = customer->verifyUser("eugene", "password2");
-	if (test)
-	{
-		std::cout << "eugene is verified" << std::endl;
-	}
-	else
-	{
-		std::cout << "eugene is not verified" << std::endl;
-	}
+//	LinkedList<University> newUniList;
+//    University testUniversity = University(1, "Test University", "UK", "United Kingdom", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+//    newUniList.insertAtBeginning(testUniversity);
+//    newUniList.insertAtEnd(testUniversity);
+//    user2.setFavUnivList(newUniList);
+//    customer->removeUser("eugene");
+//    customer->addUser(user2);
+//    std::cout << customer->getUser("eugene") << std::endl;
 
 	User test2 = User();
 }
@@ -95,7 +95,7 @@ void Seeder::createUnivInstances(University uniArr[])
 
 	std::string line;
 	std::regex unwantedRegex("[^0-9]"); // Matches any character that is not a digit
-
+	std::getline(file, line);
 	auto cleanString = [](std::string str)
 	{
 		str.erase(std::remove_if(str.begin(), str.end(), [](unsigned char c)
@@ -135,9 +135,6 @@ void Seeder::createUnivInstances(University uniArr[])
 		trim(rank);
 		std::getline(ss, institution, ',');
 		trim(institution, 60);
-		if (institution == "Institution")
-			continue;
-
 		std::getline(ss, locale, ',');
 		trim(locale, 10);
 		std::getline(ss, location, ',');
