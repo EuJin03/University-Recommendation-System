@@ -199,29 +199,76 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
                 break;
             case 4:
                 ui.clearScreen();
-                return;
-            case 5:
-                exit(1);
-            default:
-                std::cout << "Not an option" << std::endl;
-                break;
-        }
-    }
+			return;
+		case 5:
+			exit(1);
+		default:
+			std::cout << "Not an option" << std::endl;
+			break;
+		}
+	}
 }
 
 void Controller::feedbackController(LinkedList<Feedback> feedbackList, UI ui, User currentUser) {
     int userChoice;
     ui.clearScreen();
+	Node<Feedback> *currentNode = feedbackList.getTail();
+	Feedback current = currentNode->data;
+	do
+	{
 
-    std::cin.ignore();
-    std::cin.clear();
-    std::cin >> userChoice;
-    Feedback current = feedbackList.getTail();
+		std::cout << "------------Feedback Lists------------";
 
-    std::cout << "------------Feedback Lists------------";
-    while (true) {
-        std::cout << "\tFeedback ID: " << current.getFeedbackID() << std::endl;
-        std::cout << "\tUser: " << current.getUsername() << std::endl;
-        std::cout << current.getFeedback() << std::endl;
-    }
+		std::cout << current << std::endl;
+
+		std::cout << "0. Move to previous feedback";
+		std::cout << "\n1. Move to next feedback";
+		std::cout << "\n2. Write a new feedback";
+		std::cout << "\n3. Go back";
+
+		std::cout << "\nPlease select an option: ";
+		std::cin.ignore();
+		std::cin.clear();
+		std::cin >> userChoice;
+
+		if (userChoice == 0)
+		{
+			ui.clearScreen();
+
+			currentNode = feedbackList.navigateNodes(currentNode, 0);
+			current = currentNode->data;
+		}
+
+		if (userChoice == 1)
+		{
+			ui.clearScreen();
+
+			currentNode = feedbackList.navigateNodes(currentNode, 1);
+			current = currentNode->data;
+		}
+
+		if (userChoice == 2)
+		{
+
+			std::string feedback;
+			std::cout << "\n------------Feedback Lists------------";
+			std::cout << "\nPlease enter your feedback: ";
+			std::cin.ignore();
+			std::cin >> feedback;
+
+			int newID = feedbackList.getSize() + 1;
+			std::string newUser = currentUser.getUsername();
+			std::string newComment = feedback;
+			std::time_t createdAt = std::time(nullptr);
+
+			Feedback newFeedback = Feedback(newID, newUser, newComment, createdAt);
+			feedbackList.insertAtEnd(newFeedback);
+			ui.clearScreen();
+			currentNode = feedbackList.getTail();
+			current = currentNode->data;
+		}
+
+		if (userChoice == 3)
+			break;
+	} while (true);
 }

@@ -25,8 +25,8 @@ public:
 
     void insertAtBeginning(U data)
     {
-        Node<U> *newNode;
-        newNode = new Node<U>();
+        // Insert in a way so that the tail will have the latest node.
+        Node<U> *newNode = new Node<U>();
         newNode->data = data;
         newNode->next = head;
         newNode->prev = nullptr;
@@ -46,6 +46,7 @@ public:
 
     bool insertAtEnd(U data)
     {
+        // Insert in a way so that the tail will have the latest node.
         Node<U> *newNode;
         Node<U> *temp = head;
         newNode = new Node<U>();
@@ -55,17 +56,22 @@ public:
 
         if (checkUnique(data))
         {
-            if (head != nullptr) {
+            if (head != nullptr)
+            {
                 tail->next = newNode;
                 newNode->prev = tail;
                 tail = tail->next;
-            } else {
+            }
+            else
+            {
                 head = newNode;
                 tail = newNode;
             }
             size++;
             return true;
-        } else {
+        }
+        else
+        {
             std::cout << "Record already exists in the list!" << std::endl;
             return false;
         }
@@ -138,7 +144,9 @@ public:
                     size--;
                 }
                 break;
-            } else {
+            }
+            else
+            {
                 std::cout << "Record does not exist in the list!" << std::endl;
             }
             current = current->next;
@@ -185,22 +193,22 @@ public:
         }
     }
 
-    U getTail()
+    Node<U> *getTail()
     {
         if (tail != nullptr)
-            return tail->data;
+            return tail;
         else
             throw std::runtime_error("Empty list");
     }
 
-    Node<U> navigateNodes(Node<U> current, int action)
+    Node<U> *navigateNodes(Node<U> *current, int action)
     {
         if (action == 0)
         {
-            if (current->prev != NULL)
+            if (current->prev != nullptr)
                 current = current->prev;
             else
-                std::cout << "This is the leftmost node, go front!.\n";
+                std::cout << "This is the leftmost node, go front!.\n\n";
         }
 
         if (action == 1)
@@ -208,7 +216,7 @@ public:
             if (current->next != NULL)
                 current = current->next;
             else
-                std::cout << "This is the leftmost node, go back!\n";
+                std::cout << "This is the rightmost node, go back!\n\n";
         }
 
         return current;
