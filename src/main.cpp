@@ -89,7 +89,7 @@ int main()
 					else
 					{
 						// Registered User
-						controller.userController(&customer, universityList, &univIndex, ui, &currentUser, &top10);
+						controller.userController(&customer, universityList, &univIndex, ui, &currentUser, &top10, feedbackList, currentUser);
 					}
 					break;
 				}
