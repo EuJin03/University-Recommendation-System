@@ -107,7 +107,6 @@ int main()
         case 4:
 			// Register
 			std::cout << " ---------- REGISTER ---------- " << std::endl;
-			std::string username, password;
     		std::cout << "Enter username: ";
     		std::cin >> username;
     		std::cout << "Enter password: ";

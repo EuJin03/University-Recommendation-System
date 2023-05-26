@@ -26,7 +26,7 @@ public:
     void adminController();
 
     //register User validation
-    bool registerUser(HashTable *customer, UI ui, User *currentUser);
+    bool registerUser(std::string username, std::string password, HashTable *userTable);
 
     // Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
     // void insertFavUni(std::string uniName);
