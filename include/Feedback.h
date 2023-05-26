@@ -44,6 +44,12 @@ public:
 
 	// Overriding ostream operator
 	friend std::ostream &operator<<(std::ostream &os, const Feedback &feedback);
+	bool operator==(const Feedback &other) const
+	{
+		// Define what it means for two University objects to be equal.
+		return this->feedbackID == other.feedbackID
+                && this->username == other.username;
+	}
 };
 
 // Override ostream operator

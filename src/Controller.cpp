@@ -20,7 +20,7 @@ void Controller::adminController()
 {
 }
 
-void Controller::userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *currentUser, DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser)
+void Controller::userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser)
 {
     while (true)
     {
@@ -29,36 +29,36 @@ void Controller::userController(HashTable *customer, University universityList[]
         std::cin.ignore();
         std::cin >> userChoice;
 
-        switch (userChoice)
-        {
-        case 1:
-            // Display all universities' information
-            ui.universityList(universityList, univIndex);
-            break;
-        case 2:
-            // Sort University - pc
-            break;
-        case 3:
-            // Search university - pc
-            break;
-        case 4:
-            // Favourite controller - bryan
-            favouriteController(customer, currentUser, ui, universityList, univIndex, top10);
-            break;
-        case 5:
-            // Feedback controller - eugene
-            feedbackController(feedbackList, ui, currentUser);
-            break;
-        case 6:
-            ui.clearScreen();
-            return;
-        case 0:
-            exit(0);
-        default:
-            return;
-            break;
-        }
-    }
+		switch (userChoice)
+		{
+		case 1:
+			// Display all universities' information
+			ui.universityList(universityList, univIndex);
+			break;
+		case 2:
+			// Sort University - pc
+			break;
+		case 3:
+			// Search university - pc
+			break;
+		case 4:
+			// Favourite controller - bryan
+            favouriteController(customer, favUser, ui, universityList, univIndex, top10);
+			break;
+		case 5:
+			// Feedback controller - eugene
+			feedbackController(feedbackList, ui, currentUser);
+			break;
+		case 6:
+			ui.clearScreen();
+			return;
+		case 0:
+			exit(0);
+		default:
+			return;
+			break;
+		}
+	}
 }
 
 void Controller::favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[], int *univIndex, DynamicArray<University> *top10)
