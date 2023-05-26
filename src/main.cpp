@@ -93,12 +93,12 @@ int main()
 					if (currentUser.getIsAdmin())
 					{
 						// Admin
-						controller.adminController(ui, universityList, &univIndex, &customer);
+						controller.adminController(ui, universityList, &univIndex, &customer, &feedbackList, currentUser); // -- eugene & bryan
 					}
 					else
 					{
 						// Registered User
-						controller.userController(&customer, universityList, &univIndex, ui, &currentUser, &top10, feedbackList, currentUser);
+						controller.userController(&customer, universityList, &univIndex, ui, &currentUser, &top10, &feedbackList, currentUser);
 					}
 					break;
 				}

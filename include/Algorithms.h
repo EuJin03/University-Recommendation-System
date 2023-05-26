@@ -36,7 +36,6 @@ public:
     // Linear Search Algorithm
     void linearSearch(University universityList[], int size, int criteria, std::string key);
 
-
     // Binary Search Algorithm
     int binarySearch(std::vector<University> &uniArr, int start, int end, std::string key);
 };
