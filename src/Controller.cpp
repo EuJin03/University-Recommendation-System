@@ -16,11 +16,115 @@ std::string Controller::validate(std::string username, std::string password)
 	}
 }
 
-void Controller::adminController()
+void Controller::adminController(UI ui, University universityList[], int *univIndex, HashTable *customer)
 {
+	while (true)
+	{
+		ui.adminMenu();
+		int userChoice;
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> userChoice;
+
+		switch (userChoice)
+		{
+		case 1:
+			// Display University
+			ui.universityList(universityList, univIndex);
+			break;
+		case 2:
+			// Display user
+			modifyController(ui, customer);
+			break;
+		case 3:
+			// Display feedback
+			break;
+		case 4:
+			// Logout
+			ui.clearScreen();
+			return;
+		case 5:
+			// Exit
+			exit(0);
+		default:
+			break;
+		}
+	}
 }
 
-void Controller::userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser)
+void Controller::modifyController(UI ui, HashTable *customer)
+{
+	ui.clearScreen();
+	while (true)
+	{
+		std::string oldUsername, newUsername;
+		std::string newPassword;
+		int modifyChoice;
+		User selectedUser;
+
+		customer->printAllUsersDetails();
+		ui.modifyUserMenu();
+		std::cin.clear();
+		std::cin.ignore();
+		std::cin >> modifyChoice;
+		switch (modifyChoice)
+		{
+		case 1:
+			// Change username
+			// Getting user
+			std::cout << "Enter original username: ";
+			std::cin >> oldUsername;
+			selectedUser = customer->getUser(oldUsername);
+
+			// Removing user from HashTable
+			customer->removeUser(oldUsername);
+
+			// Getting new username
+			std::cin.ignore();
+			std::cout << "Enter new username: ";
+			std::cin >> newUsername;
+			selectedUser.setUsername(newUsername);
+
+			// Saving user back to HashTable
+			customer->addUser(selectedUser);
+			ui.clearScreen();
+			break;
+		case 2:
+			// Change password
+			// Getting user
+			std::cout << "Enter username: ";
+			std::cin.ignore();
+			std::cin >> oldUsername;
+			selectedUser = customer->getUser(oldUsername);
+
+			// Removing user record from HashTable
+			customer->removeUser(oldUsername);
+
+			// Getting old password
+			std::cout << "Enter new password: ";
+			std::cin.ignore();
+			std::cin >> newPassword;
+			selectedUser.setPassword(newPassword);
+
+			// Savig user back to HashTable
+			customer->addUser(selectedUser);
+			ui.clearScreen();
+			break;
+		case 3:
+			ui.clearScreen();
+			return;
+		case 4:
+			exit(0);
+		default:
+			ui.clearScreen();
+			std::cout << "Invalid option\n\n";
+			break;
+		}
+	}
+}
+
+void Controller::userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser,
+																DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser)
 {
 	while (true)
 	{
@@ -55,13 +159,14 @@ void Controller::userController(HashTable *customer, University universityList[]
 		case 0:
 			exit(0);
 		default:
-			return;
+			std::cout << "Not an option" << std::endl;
 			break;
 		}
 	}
 }
 
-void Controller::favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[], int *univIndex, DynamicArray<University> *top10)
+void Controller::favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[],
+																		 int *univIndex, DynamicArray<University> *top10)
 {
 	ui.clearScreen();
 	while (true)
@@ -114,6 +219,7 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
 			currentUser->setFavUnivList(favList);
 			break;
 		case 4:
+			ui.clearScreen();
 			return;
 		case 5:
 			exit(1);
@@ -143,7 +249,7 @@ void Controller::feedbackController(LinkedList<Feedback> feedbackList, UI ui, Us
 		std::cout << "\n3. Go back";
 
 		std::cout << "\nPlease select an option: ";
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		//		std::cin.ignore();
 		std::cin.clear();
 		std::cin >> userChoice;
 
@@ -169,7 +275,7 @@ void Controller::feedbackController(LinkedList<Feedback> feedbackList, UI ui, Us
 			std::string feedback;
 			std::cout << "\n------------Feedback Lists------------";
 			std::cout << "\nPlease enter your feedback: ";
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cin.ignore();
 			std::getline(std::cin, feedback);
 
 			int newID = feedbackList.getSize() + 1;

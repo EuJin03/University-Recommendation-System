@@ -32,11 +32,14 @@ public:
 	void setLastLogin(std::time_t newLastLogin);
 	void setAsAdmin();
     void setFavUnivList(LinkedList<University> newFavUnivList);
+    void setUsername(const std::string &newUsername);
+    void setPassword(const std::string &newPassword);
 
 	bool isNull() const { return false; }
 	bool validate(const User &user) const;
 	bool operator==(const User &user);
 	friend std::ostream &operator<<(std::ostream &os, const User &user);
+
 };
 
 #endif // USER_H

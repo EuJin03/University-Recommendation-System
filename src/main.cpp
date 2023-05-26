@@ -84,7 +84,7 @@ int main()
 					if (currentUser.getIsAdmin())
 					{
 						// Admin
-						controller.adminController(); // -- wenxuen
+						controller.adminController(ui, universityList, &univIndex, &customer); // -- wenxuen
 					}
 					else
 					{
