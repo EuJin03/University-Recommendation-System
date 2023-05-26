@@ -227,7 +227,7 @@ void Controller::feedbackController(LinkedList<Feedback> feedbackList, UI ui, Us
 		std::cout << "\n3. Go back";
 
 		std::cout << "\nPlease select an option: ";
-		std::cin.ignore();
+//		std::cin.ignore();
 		std::cin.clear();
 		std::cin >> userChoice;
 
@@ -254,7 +254,7 @@ void Controller::feedbackController(LinkedList<Feedback> feedbackList, UI ui, Us
 			std::cout << "\n------------Feedback Lists------------";
 			std::cout << "\nPlease enter your feedback: ";
 			std::cin.ignore();
-			std::cin >> feedback;
+			std::getline(std::cin, feedback);
 
 			int newID = feedbackList.getSize() + 1;
 			std::string newUser = currentUser.getUsername();
