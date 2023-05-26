@@ -9,7 +9,7 @@
 #include "../include/HashTable.h"
 #include <iostream>
 #include <stdlib.h>
-
+#include <limits>
 class Controller
 {
 public:
