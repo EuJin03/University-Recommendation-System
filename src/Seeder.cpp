@@ -10,10 +10,12 @@ void Seeder::createFeedbackInstances(LinkedList<Feedback> *feedbackList)
 	{
 		std::string customerName = "Customer " + std::to_string(i);
 		std::string feedbackText = "Testing Feedback " + std::to_string(i);
+		std::time_t createdAt = getRandomPastTime();
 		std::string adminName = "Admin " + std::to_string(i);
 		std::string replyText = "Testing Reply " + std::to_string(i);
+		std::time_t repliedAt = getRandomPastTime();
 
-		Feedback feedback(i, customerName, feedbackText, adminName, replyText);
+		Feedback feedback(i, customerName, feedbackText, createdAt);
 		feedbackList->insertAtEnd(feedback);
 	}
 }

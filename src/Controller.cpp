@@ -62,21 +62,53 @@ void Controller::feedbackController(LinkedList<Feedback> feedbackList, UI ui, Us
 {
 	int userChoice;
 	ui.clearScreen();
-
-	std::cin.ignore();
-	std::cin.clear();
-	std::cin >> userChoice;
-	Feedback current = feedbackList.getTail();
-
-	std::cout << "------------Feedback Lists------------";
-	while (true)
+	Node<Feedback> *currentNode = feedbackList.getTail();
+	Feedback current = currentNode->data;
+	do
 	{
-		std::cout << "\tFeedback ID: " << current.getFeedbackID() << std::endl;
-		std::cout << "\tUser: " << current.getUsername() << std::endl;
-		std::cout << current.getFeedback() << std::endl;
-	}
+
+		std::cout << "------------Feedback Lists------------";
+
+		std::cout << current << std::endl;
+
+		std::cout << "\n0. Move to previous feedback";
+		std::cout << "\n1. Move to next feedback";
+		std::cout << "\n2. Write a new feedback";
+		std::cout << "\n3. Go back";
+
+		std::cout << "Please select an option: ";
+		std::cin.ignore();
+		std::cin.clear();
+		std::cin >> userChoice;
+
+		if (userChoice == 0)
+		{
+			ui.clearScreen();
+
+			currentNode = feedbackList.navigateNodes(currentNode, 0);
+			current = currentNode->data;
+		}
+
+		if (userChoice == 1)
+		{
+			ui.clearScreen();
+
+			currentNode = feedbackList.navigateNodes(currentNode, 1);
+			current = currentNode->data;
+		}
+
+		if (userChoice == 2)
+		{
+		}
+
+		if (userChoice == 3)
+			break;
+	} while (true);
 }
 
-void Controller::adminController()
+void
+
+		void
+		Controller::adminController()
 {
 }
