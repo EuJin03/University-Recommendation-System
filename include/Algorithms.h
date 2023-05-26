@@ -16,7 +16,8 @@ public:
         INSTITUTION = 0,
         AR_SCORE = 1,
         FSR_SCORE = 2,
-        ER_SCORE = 3
+        ER_SCORE = 3,
+        RANK_SCORE = 4
     };
 
     // Quick Sort Algorithm

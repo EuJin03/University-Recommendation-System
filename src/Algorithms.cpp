@@ -263,6 +263,8 @@ int Algorithms::getScore(University uni, SortType sortType)
         return uni.getFsrScore();
     case ER_SCORE:
         return uni.getErScore();
+    case RANK_SCORE:
+        return uni.getRank();
     default:
         return -1;
     }

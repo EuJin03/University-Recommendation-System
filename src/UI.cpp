@@ -173,7 +173,8 @@ void UI::modifyUserMenu() {
     std::cout << "\nModify User Menu\n";
     std::cout << "1. Modify username\n";
     std::cout << "2. Modify password\n";
-    std::cout << "3. Return to admin menu\n";
-    std::cout << "4. Exit program\n";
+    std::cout << "3. Delete Inactive Users\n";
+    std::cout << "4. Return to admin menu\n";
+    std::cout << "5. Exit program\n";
     std::cout << "Enter your choice: ";
 }

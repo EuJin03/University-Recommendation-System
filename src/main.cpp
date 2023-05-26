@@ -22,12 +22,8 @@ int main()
 	// Quick sort demo
 	Algorithms algorithm;
 	auto start_load = std::chrono::high_resolution_clock::now();
-	//	algorithm.countSort(universityList, Algorithms::SortType::AR_SCORE);
-	// algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, true, 2);
-	// ui.universityList(universityList, &univIndex);
 	auto end_load = std::chrono::high_resolution_clock::now();
-	long long durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
-	// std::cout << "Time taken for counting sort: " << durationLoad << " microseconds" << std::endl;
+	long long durationLoad;
 
 	LinkedList<Feedback> feedbackList;
 	seeder.createFeedbackInstances(&feedbackList);
@@ -55,8 +51,21 @@ int main()
 			ui.universityList(universityList, &univIndex);
 			break;
 		case 2:
-			ui.userSortMenu();
 			// should move into controller class
+            start_load = std::chrono::high_resolution_clock::now();
+            algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, false, 2);
+            end_load = std::chrono::high_resolution_clock::now();
+            durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
+            std::cout << "Time taken to load data using Quick Sort: " << durationLoad << " microseconds" << std::endl;
+
+            algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::RANK_SCORE);
+
+            start_load = std::chrono::high_resolution_clock::now();
+            algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::AR_SCORE);
+            end_load = std::chrono::high_resolution_clock::now();
+            durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
+            std::cout << "Time taken to load data using Count Sort: " << durationLoad << " microseconds" << std::endl;
+
 			break;
 		case 3:
 			// Search university
@@ -84,7 +93,7 @@ int main()
 					if (currentUser.getIsAdmin())
 					{
 						// Admin
-						controller.adminController(ui, universityList, &univIndex, &customer); // -- wenxuen
+						controller.adminController(ui, universityList, &univIndex, &customer);
 					}
 					else
 					{

@@ -44,21 +44,21 @@ void Seeder::createUserInstances(HashTable *customer)
 
 	std::string username2 = "eugene";
 	std::string password2 = "user";
-	std::time_t lastLogin2 = getRandomPastTime();
+	std::time_t lastLogin2 = std::time(nullptr) - (60 * 60 * 24 * 31);
 	bool isAdmin2 = false;
 	LinkedList<University> eugeneList;
 	User user2(username2, password2, lastLogin2, isAdmin2, eugeneList);
 
 	std::string username3 = "bryan";
-	std::string password3 = "password3";
-	std::time_t lastLogin3 = getRandomPastTime();
+	std::string password3 = "bryan";
+	std::time_t lastLogin3 = std::time(nullptr) - (60 * 60 * 24 * 29);
 	bool isAdmin3 = false;
 	LinkedList<University> bryanList;
 	User user3(username3, password3, lastLogin3, isAdmin3, bryanList);
 
 	std::string username4 = "pclai";
-	std::string password4 = "password4";
-	std::time_t lastLogin4 = getRandomPastTime();
+	std::string password4 = "pclai";
+	std::time_t lastLogin4 = std::time(nullptr) - (60 * 60 * 24 * 30);
 	bool isAdmin4 = false;
 	LinkedList<University> pclaiList;
 	User user4(username4, password4, lastLogin4, isAdmin4, pclaiList);
@@ -68,15 +68,6 @@ void Seeder::createUserInstances(HashTable *customer)
 	customer->addUser(user2);
 	customer->addUser(user3);
 	customer->addUser(user4);
-
-	//	LinkedList<University> newUniList;
-	//    University testUniversity = University(1, "Test University", "UK", "United Kingdom", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
-	//    newUniList.insertAtBeginning(testUniversity);
-	//    newUniList.insertAtEnd(testUniversity);
-	//    user2.setFavUnivList(newUniList);
-	//    customer->removeUser("eugene");
-	//    customer->addUser(user2);
-	//    std::cout << customer->getUser("eugene") << std::endl;
 
 	User test2 = User();
 }

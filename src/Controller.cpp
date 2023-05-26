@@ -24,7 +24,7 @@ void Controller::adminController(UI ui, University universityList[], int *univIn
                 ui.universityList(universityList, univIndex);
                 break;
             case 2:
-                // Display user
+                // Display & modify user
                 modifyController(ui, customer);
                 break;
             case 3:
@@ -49,6 +49,7 @@ void Controller::modifyController(UI ui, HashTable *customer) {
         std::string oldUsername, newUsername;
         std::string newPassword;
         int modifyChoice;
+        char deleteChoice;
         User selectedUser;
 
         customer->printAllUsersDetails();
@@ -94,14 +95,26 @@ void Controller::modifyController(UI ui, HashTable *customer) {
                 std::cin >> newPassword;
                 selectedUser.setPassword(newPassword);
 
-                // Savig user back to HashTable
+                // Saving user back to HashTable
                 customer->addUser(selectedUser);
                 ui.clearScreen();
                 break;
             case 3:
+                // Delete Inactive Users
+                std::cout << "Are you sure you want to delete [y/n]: ";
+                std::cin >> deleteChoice;
+
+                if (deleteChoice == 'y') {
+                    customer->deleteInactiveAccounts();
+                    ui.clearScreen();
+                } else {
+                    ui.clearScreen();
+                }
+                break;
+            case 4:
                 ui.clearScreen();
                 return;
-            case 4:
+            case 5:
                 exit(0);
             default:
                 ui.clearScreen();
@@ -181,8 +194,7 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
                 currentUser->setFavUnivList(favList);
                 customer->removeUser(currentUser->getUsername());
                 customer->addUser(*currentUser);
-                std::cout << " ----- DYNAMIC ARRAY ----- " << std::endl;
-                top10->show();
+                ui.clearScreen();
                 break;
             case 3:
                 ui.universityHeader();
@@ -196,6 +208,7 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
                 favList.removeItem(universityList[uniChoice - 1]);
                 top10->remove(universityList[uniChoice - 1]);
                 currentUser->setFavUnivList(favList);
+                ui.clearScreen();
                 break;
             case 4:
                 ui.clearScreen();
