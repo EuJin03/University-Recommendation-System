@@ -16,7 +16,7 @@ std::string Controller::validate(std::string username, std::string password)
 	}
 }
 
-void Controller::adminController(UI ui, University universityList[], int *univIndex, HashTable *customer)
+void Controller::adminController(UI ui, University universityList[], int *univIndex, HashTable *customer, LinkedList<Feedback> *feedbackList, User currentUser)
 {
 	while (true)
 	{
@@ -38,6 +38,7 @@ void Controller::adminController(UI ui, University universityList[], int *univIn
 			break;
 		case 3:
 			// Display feedback
+			feedbackController(feedbackList, ui, currentUser);
 			break;
 		case 4:
 			// Logout
@@ -124,7 +125,7 @@ void Controller::modifyController(UI ui, HashTable *customer)
 }
 
 void Controller::userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser,
-																DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser)
+																DynamicArray<University> *top10, LinkedList<Feedback> *feedbackList, User currentUser)
 {
 	while (true)
 	{
@@ -136,7 +137,7 @@ void Controller::userController(HashTable *customer, University universityList[]
 		switch (userChoice)
 		{
 		case 1:
-			// Display all universities' information
+			// Display all universities' information - eugene
 			ui.universityList(universityList, univIndex);
 			break;
 		case 2:
@@ -230,11 +231,11 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
 	}
 }
 
-void Controller::feedbackController(LinkedList<Feedback> feedbackList, UI ui, User currentUser)
+void Controller::feedbackController(LinkedList<Feedback> *feedbackList, UI ui, User currentUser)
 {
 	int userChoice;
 	ui.clearScreen();
-	Node<Feedback> *currentNode = feedbackList.getTail();
+	Node<Feedback> *currentNode = feedbackList->getTail();
 	Feedback current = currentNode->data;
 	do
 	{
@@ -257,7 +258,7 @@ void Controller::feedbackController(LinkedList<Feedback> feedbackList, UI ui, Us
 		{
 			ui.clearScreen();
 
-			currentNode = feedbackList.navigateNodes(currentNode, 0);
+			currentNode = feedbackList->navigateNodes(currentNode, 0);
 			current = currentNode->data;
 		}
 
@@ -265,29 +266,47 @@ void Controller::feedbackController(LinkedList<Feedback> feedbackList, UI ui, Us
 		{
 			ui.clearScreen();
 
-			currentNode = feedbackList.navigateNodes(currentNode, 1);
+			currentNode = feedbackList->navigateNodes(currentNode, 1);
 			current = currentNode->data;
 		}
 
 		if (userChoice == 2)
 		{
 
-			std::string feedback;
-			std::cout << "\n------------Feedback Lists------------";
-			std::cout << "\nPlease enter your feedback: ";
-			std::cin.ignore();
-			std::getline(std::cin, feedback);
+			if (currentUser.getIsAdmin())
+			{
+				std::string reply;
+				std::cout << "\n------------Reply Feedback------------";
+				std::cout << "\nPlease enter your reply: ";
+				std::cin.ignore();
+				std::getline(std::cin, reply);
 
-			int newID = feedbackList.getSize() + 1;
-			std::string newUser = currentUser.getUsername();
-			std::string newComment = feedback;
-			std::time_t createdAt = std::time(nullptr);
+				current.setReplyContent(reply);
+				current.setAdmin(currentUser.getUsername());
+				current.setRepliedAt(std::time(nullptr));
 
-			Feedback newFeedback = Feedback(newID, newUser, newComment, createdAt);
-			feedbackList.insertAtEnd(newFeedback);
-			ui.clearScreen();
-			currentNode = feedbackList.getTail();
-			current = currentNode->data;
+				ui.clearScreen();
+				current = currentNode->data;
+			}
+			else
+			{
+				std::string feedback;
+				std::cout << "\n------------Feedback Lists------------";
+				std::cout << "\nPlease enter your feedback: ";
+				std::cin.ignore();
+				std::getline(std::cin, feedback);
+
+				int newID = feedbackList->getSize() + 1;
+				std::string newUser = currentUser.getUsername();
+				std::string newComment = feedback;
+				std::time_t createdAt = std::time(nullptr);
+
+				Feedback newFeedback = Feedback(newID, newUser, newComment, createdAt);
+				feedbackList->insertAtEnd(newFeedback);
+				ui.clearScreen();
+				currentNode = feedbackList->getTail();
+				current = currentNode->data;
+			}
 		}
 
 		if (userChoice == 3)

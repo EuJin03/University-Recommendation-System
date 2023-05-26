@@ -55,7 +55,21 @@ int main()
 			ui.universityList(universityList, &univIndex);
 			break;
 		case 2:
-			ui.userSortMenu();
+			ui.clearScreen();
+
+			start_load = std::chrono::high_resolution_clock::now();
+			algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::AR_SCORE);
+			end_load = std::chrono::high_resolution_clock::now();
+			durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
+			std::cout << "Time taken to load data using Count Sort: " << durationLoad << " microseconds" << std::endl;
+
+			algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::RANK_SCORE);
+
+			start_load = std::chrono::high_resolution_clock::now();
+			algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, false, 2);
+			end_load = std::chrono::high_resolution_clock::now();
+			durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
+			std::cout << "Time taken to load data using Quick Sort: " << durationLoad << " microseconds" << std::endl;
 			// should move into controller class
 			break;
 		case 3:
@@ -84,12 +98,12 @@ int main()
 					if (currentUser.getIsAdmin())
 					{
 						// Admin
-						controller.adminController(ui, universityList, &univIndex, &customer); // -- wenxuen
+						controller.adminController(ui, universityList, &univIndex, &customer, &feedbackList, currentUser); // -- eugene & bryan
 					}
 					else
 					{
 						// Registered User
-						controller.userController(&customer, universityList, &univIndex, ui, &currentUser, &top10, feedbackList, currentUser);
+						controller.userController(&customer, universityList, &univIndex, ui, &currentUser, &top10, &feedbackList, currentUser);
 					}
 					break;
 				}

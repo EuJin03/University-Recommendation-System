@@ -263,6 +263,8 @@ int Algorithms::getScore(University uni, SortType sortType)
         return uni.getFsrScore();
     case ER_SCORE:
         return uni.getErScore();
+    case RANK_SCORE:
+        return uni.getRank();
     default:
         return -1;
     }
@@ -282,29 +284,25 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
     {
     case 1:
         for (int i = 0; i < size; i++)
-    {
-        if (universityList[i].getInstitution() == key)
         {
-            std::cout << universityList[i];
+            if (universityList[i].getInstitution() == key)
+            {
+                std::cout << universityList[i];
+            }
         }
-    }
         std::cout << std::endl;
         break;
     case 2:
         for (int i = 0; i < size; i++)
-    {
-        if (universityList[i].getLocale() == key)
         {
-            std::cout << universityList[i];
+            if (universityList[i].getLocale() == key)
+            {
+                std::cout << universityList[i];
+            }
         }
-
-    }
         std::cout << std::endl;
         break;
     default:
         break;
     }
-
 }
-
-

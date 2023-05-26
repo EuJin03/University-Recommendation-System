@@ -16,7 +16,8 @@ public:
         INSTITUTION = 0,
         AR_SCORE = 1,
         FSR_SCORE = 2,
-        ER_SCORE = 3
+        ER_SCORE = 3,
+        RANK_SCORE = 4
     };
 
     // Quick Sort Algorithm
@@ -34,7 +35,6 @@ public:
 
     // Linear Search Algorithm
     void linearSearch(University universityList[], int size, int criteria, std::string key);
-
 
     // Binary Search Algorithm
     int binarySearch(std::vector<University> &uniArr, int start, int end, std::string key);
