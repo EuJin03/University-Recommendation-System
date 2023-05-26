@@ -37,7 +37,7 @@ void Seeder::createUserInstances(HashTable *customer)
 	std::string username1 = "admin";
 	std::string password1 = "admin";
 	std::time_t lastLogin1 = getRandomPastTime();
-	bool isAdmin1 = false;
+	bool isAdmin1 = true;
 	User user1(username1, password1, lastLogin1, isAdmin1);
 
 	std::string username2 = "eugene";

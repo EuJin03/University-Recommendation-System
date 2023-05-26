@@ -23,7 +23,8 @@ public:
     void favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[], int *univIndex, DynamicArray<University> *top10);
     void feedbackController(LinkedList<Feedback> feedbackList, UI ui, User currentUser);
     // Admin
-    void adminController();
+    void adminController(UI ui, University universityList[], int *univIndex, HashTable *customer);
+    void modifyController(UI ui, HashTable *customer);
 
     // Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
     // void insertFavUni(std::string uniName);

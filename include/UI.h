@@ -25,6 +25,9 @@ public:
 
 	// feedback menu
 
+    // modify user menu
+    void modifyUserMenu();
+
 	// favourite list menu
     void favouriteMenu();
 

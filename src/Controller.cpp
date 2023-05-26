@@ -1,72 +1,159 @@
 #include "../include/Controller.h"
 
-std::string Controller::validate(std::string username, std::string password)
-{
-	if (username.length() < 6)
-	{
-		return "Username must be at least 6 characters long";
-	}
-	else if (password.length() < 6)
-	{
-		return "Password must be at least 6 characters long";
-	}
-	else
-	{
-		return "success";
-	}
+std::string Controller::validate(std::string username, std::string password) {
+    if (username.length() < 6) {
+        return "Username must be at least 6 characters long";
+    } else if (password.length() < 6) {
+        return "Password must be at least 6 characters long";
+    } else {
+        return "success";
+    }
 }
 
-void Controller::adminController()
-{
+void Controller::adminController(UI ui, University universityList[], int *univIndex, HashTable *customer) {
+    while (true) {
+        ui.adminMenu();
+        int userChoice;
+        std::cin.clear();
+        std::cin.ignore();
+        std::cin >> userChoice;
 
+        switch (userChoice) {
+            case 1:
+                // Display University
+                ui.universityList(universityList, univIndex);
+                break;
+            case 2:
+                // Display user
+                modifyController(ui, customer);
+                break;
+            case 3:
+                // Display feedback
+                break;
+            case 4:
+                // Logout
+                ui.clearScreen();
+                return;
+            case 5:
+                // Exit
+                exit(0);
+            default:
+                break;
+        }
+    }
 }
 
-void Controller::userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser)
-{
-	while (true)
-	{
-		ui.customerMenu();
-		int userChoice;
-		std::cin.ignore();
-		std::cin >> userChoice;
-
-		switch (userChoice)
-		{
-		case 1:
-			// Display all universities' information
-			ui.universityList(universityList, univIndex);
-			break;
-		case 2:
-			// Sort University - pc
-			break;
-		case 3:
-			// Search university - pc
-			break;
-		case 4:
-			// Favourite controller - bryan
-            favouriteController(customer, favUser, ui, universityList, univIndex, top10);
-			break;
-		case 5:
-			// Feedback controller - eugene
-			feedbackController(feedbackList, ui, currentUser);
-			break;
-		case 6:
-			ui.clearScreen();
-			return;
-		case 0:
-			exit(0);
-		default:
-			return;
-			break;
-		}
-	}
-}
-
-void Controller::favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[], int *univIndex, DynamicArray<University> *top10)
-{
+void Controller::modifyController(UI ui, HashTable *customer) {
     ui.clearScreen();
-    while (true)
-    {
+    while (true) {
+        std::string oldUsername, newUsername;
+        std::string newPassword;
+        int modifyChoice;
+        User selectedUser;
+
+        customer->printAllUsersDetails();
+        ui.modifyUserMenu();
+        std::cin.clear();
+        std::cin.ignore();
+        std::cin >> modifyChoice;
+        switch (modifyChoice) {
+            case 1:
+                // Change username
+                // Getting user
+                std::cout << "Enter original username: ";
+                std::cin >> oldUsername;
+                selectedUser = customer->getUser(oldUsername);
+
+                // Removing user from HashTable
+                customer->removeUser(oldUsername);
+
+                // Getting new username
+                std::cin.ignore();
+                std::cout << "Enter new username: ";
+                std::cin >> newUsername;
+                selectedUser.setUsername(newUsername);
+
+                // Saving user back to HashTable
+                customer->addUser(selectedUser);
+                ui.clearScreen();
+                break;
+            case 2:
+                // Change password
+                // Getting user
+                std::cout << "Enter username: ";
+                std::cin.ignore();
+                std::cin >> oldUsername;
+                selectedUser = customer->getUser(oldUsername);
+
+                // Removing user record from HashTable
+                customer->removeUser(oldUsername);
+
+                // Getting old password
+                std::cout << "Enter new password: ";
+                std::cin.ignore();
+                std::cin >> newPassword;
+                selectedUser.setPassword(newPassword);
+
+                // Savig user back to HashTable
+                customer->addUser(selectedUser);
+                ui.clearScreen();
+                break;
+            case 3:
+                ui.clearScreen();
+                return;
+            case 4:
+                exit(0);
+            default:
+                ui.clearScreen();
+                std::cout << "Invalid option\n\n";
+                break;
+        }
+    }
+}
+
+void Controller::userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser,
+                                DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser) {
+    while (true) {
+        ui.customerMenu();
+        int userChoice;
+        std::cin.ignore();
+        std::cin >> userChoice;
+
+        switch (userChoice) {
+            case 1:
+                // Display all universities' information
+                ui.universityList(universityList, univIndex);
+                break;
+            case 2:
+                // Sort University - pc
+                break;
+            case 3:
+                // Search university - pc
+                break;
+            case 4:
+                // Favourite controller - bryan
+                favouriteController(customer, favUser, ui, universityList, univIndex, top10);
+                break;
+            case 5:
+                // Feedback controller - eugene
+                feedbackController(feedbackList, ui, currentUser);
+                break;
+            case 6:
+                ui.clearScreen();
+                return;
+            case 0:
+                exit(0);
+            default:
+                std::cout << "Not an option" << std::endl;
+                break;
+        }
+    }
+}
+
+void Controller::favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[],
+                                     int *univIndex, DynamicArray<University> *top10) {
+    ui.clearScreen();
+    while (true) {
         ui.favouriteMenu();
         int userChoice;
         int uniChoice;
@@ -75,8 +162,7 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
         std::cin.ignore();
         std::cin >> userChoice;
 
-        switch (userChoice)
-        {
+        switch (userChoice) {
             case 1:
                 ui.universityHeader();
                 favList.show();
@@ -85,13 +171,11 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
                 ui.universityList(universityList, univIndex);
                 std::cout << "Please provide the rank of the university you want to add: ";
                 std::cin >> uniChoice;
-                if (uniChoice == 0)
-                {
+                if (uniChoice == 0) {
                     std::cout << "Invalid choice" << std::endl;
                     continue;
                 }
-                if (favList.insertAtEnd(universityList[uniChoice - 1]))
-                {
+                if (favList.insertAtEnd(universityList[uniChoice - 1])) {
                     top10->append(universityList[uniChoice - 1]);
                 };
                 currentUser->setFavUnivList(favList);
@@ -105,8 +189,7 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
                 favList.show();
                 std::cout << "Please provide the rank of the university you want to remove: ";
                 std::cin >> uniChoice;
-                if (uniChoice == 0)
-                {
+                if (uniChoice == 0) {
                     std::cout << "Invalid choice" << std::endl;
                     continue;
                 }
@@ -115,6 +198,7 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
                 currentUser->setFavUnivList(favList);
                 break;
             case 4:
+                ui.clearScreen();
                 return;
             case 5:
                 exit(1);
@@ -125,21 +209,19 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
     }
 }
 
-void Controller::feedbackController(LinkedList<Feedback> feedbackList, UI ui, User currentUser)
-{
-	int userChoice;
-	ui.clearScreen();
+void Controller::feedbackController(LinkedList<Feedback> feedbackList, UI ui, User currentUser) {
+    int userChoice;
+    ui.clearScreen();
 
-	std::cin.ignore();
-	std::cin.clear();
-	std::cin >> userChoice;
-	Feedback current = feedbackList.getTail();
+    std::cin.ignore();
+    std::cin.clear();
+    std::cin >> userChoice;
+    Feedback current = feedbackList.getTail();
 
-	std::cout << "------------Feedback Lists------------";
-	while (true)
-	{
-		std::cout << "\tFeedback ID: " << current.getFeedbackID() << std::endl;
-		std::cout << "\tUser: " << current.getUsername() << std::endl;
-		std::cout << current.getFeedback() << std::endl;
-	}
+    std::cout << "------------Feedback Lists------------";
+    while (true) {
+        std::cout << "\tFeedback ID: " << current.getFeedbackID() << std::endl;
+        std::cout << "\tUser: " << current.getUsername() << std::endl;
+        std::cout << current.getFeedback() << std::endl;
+    }
 }
