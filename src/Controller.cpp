@@ -436,7 +436,7 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
 
         switch (userChoice)
         {
-        case 1:
+        case 1: 
             ui.universityHeader();
             favList.show();
             break;
@@ -501,7 +501,7 @@ void Controller::feedbackController(LinkedList<Feedback> *feedbackList, UI ui, U
             std::cout << "\n2. Reply to feedback";
         } else {
             std::cout << "\n2. Write a new feedback";
-
+            
         }
         std::cout << "\n3. Go back";
 
