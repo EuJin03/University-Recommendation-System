@@ -50,7 +50,7 @@ void Controller::adminController(UI ui, University universityList[], int *univIn
                 break;
             case 4:
                 // Display top 10
-                top10Controller(top10, uniqueUni, uniqueUniCount);
+                top10Controller(top10, *uniqueUni, *uniqueUniCount);
                 break;
             case 5:
                 // Logout
@@ -146,10 +146,22 @@ void Controller::modifyController(UI ui, HashTable *customer) {
     }
 }
 
-void Controller::top10Controller(DynamicArray<University> *top10, DynamicArray<University> *uniqueUni,
-                                 DynamicArray<int> *uniqueUniCount) {
+void Controller::top10Controller(DynamicArray<University> *top10, DynamicArray<University> uniqueUni,
+                                 DynamicArray<int> uniqueUniCount) {
     int userChoice;
-    top10->countOccurrences(uniqueUni, uniqueUniCount);
+    for (int i = 0; i < top10->getSize(); i++) {
+        if (uniqueUni.contains(top10->get(i))) {
+            int index = uniqueUni.find(top10->get(i));
+            uniqueUniCount.set(uniqueUniCount.getValue(index) + 1, index);
+        } else {
+            uniqueUni.append(top10->get(i));
+            uniqueUniCount.append(1);
+        }
+    }
+
+    for (int i = 0; i < 10; i++) {
+        std::cout << uniqueUni.get(i).getInstitution() << " : " << uniqueUniCount.get(i) << std::endl;
+    }
     std::cin >> userChoice;
 }
 
