@@ -46,6 +46,8 @@ public:
 
 	// helper & utility methods
 	void clearScreen();
+
+    void sortType();
 };
 
 #endif

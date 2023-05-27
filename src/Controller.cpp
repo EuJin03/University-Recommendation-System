@@ -215,8 +215,8 @@ void Controller::top10Controller(DynamicArray<University> *top10, UI ui) {
     }
 }
 
-void Controller::userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser,
-                                DynamicArray<University> *top10, LinkedList<Feedback> *feedbackList, User currentUser) {
+void Controller::userController(HashTable *customer, University universityList[], int SIZE, int *univIndex, UI ui, User *favUser,
+                                DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser) {
     while (true) {
         ui.customerMenu();
         int userChoice;
@@ -289,59 +289,146 @@ void Controller::sortController(University universityList[], int *univIndex, int
 	ui.clearScreen();
 	while(true)
 	{
-		ui.userSortMenu();
-		int userChoice;
+        ui.sortType();
+        int sortChoice;
         std::cin.clear();
-		std::cin.ignore();
-		std::cin >> userChoice;
+        std::cin.ignore();
+        std::cin >> sortChoice;
 
-		ui.clearScreen();
-		switch (userChoice)
-		{
-			case 1:
-				// Sort by institution name
-				sort(universityList, SIZE, algorithms, Algorithms::SortType::INSTITUTION, Algorithms::SortType::INSTITUTION);
-				break;
+        switch (sortChoice) {
+            case 1:
+                // Sort ascending
+                while (true) {
+                    ui.userSortMenu();
+                    int userChoice;
+                    std::cin.clear();
+                    std::cin.ignore();
+                    std::cin >> userChoice;
 
-			case 2:
-				// Sort by FSR score
-				sort(universityList, SIZE, algorithms, Algorithms::SortType::FSR_SCORE, Algorithms::SortType::FSR_SCORE);
-				// algorithms.countSort(universityList, *univIndex, Algorithms::SortType::FSR_SCORE);
-				break;
+                    ui.clearScreen();
+                    switch (userChoice) {
+                        case 1:
+                            // Sort by institution name
+                            sort(universityList, SIZE, algorithms, Algorithms::SortType::INSTITUTION,
+                                 Algorithms::SortType::INSTITUTION);
+                            break;
 
-			case 3:
-				// Sort by ER score
-				sort(universityList, SIZE, algorithms, Algorithms::SortType::ER_SCORE, Algorithms::SortType::ER_SCORE);
-				break;
+                        case 2:
+                            // Sort by FSR score
+                            sort(universityList, SIZE, algorithms, Algorithms::SortType::FSR_SCORE,
+                                 Algorithms::SortType::FSR_SCORE);
+                            // algorithms.countSort(universityList, *univIndex, Algorithms::SortType::FSR_SCORE);
+                            break;
 
-			case 4:
-				// Sort by AR score
-				sort(universityList, SIZE, algorithms, Algorithms::SortType::AR_SCORE, Algorithms::SortType::AR_SCORE);
-				break;
+                        case 3:
+                            // Sort by ER score
+                            sort(universityList, SIZE, algorithms, Algorithms::SortType::ER_SCORE,
+                                 Algorithms::SortType::ER_SCORE);
+                            break;
 
-			case 5:
-				// Sort by FSR rank
-				algorithms.countSort(universityList, SIZE, Algorithms::SortType::FSR_RANK_SORT);
-				break;
+                        case 4:
+                            // Sort by AR score
+                            sort(universityList, SIZE, algorithms, Algorithms::SortType::AR_SCORE,
+                                 Algorithms::SortType::AR_SCORE);
+                            break;
 
-			case 6:
-				// Sort by ER rank
-				algorithms.countSort(universityList, SIZE, Algorithms::SortType::ER_RANK_SORT);
-				break;
+                        case 5:
+                            // Sort by FSR rank
+                            algorithms.countSort(universityList, SIZE, Algorithms::SortType::FSR_RANK_SORT);
+                            break;
 
-			case 7:
-				// Sort by AR rank
-				algorithms.countSort(universityList, SIZE, Algorithms::SortType::AR_RANK_SORT);
-				break;
+                        case 6:
+                            // Sort by ER rank
+                            algorithms.countSort(universityList, SIZE, Algorithms::SortType::ER_RANK_SORT);
+                            break;
 
-			case 8:
-				return;
+                        case 7:
+                            // Sort by AR rank
+                            algorithms.countSort(universityList, SIZE, Algorithms::SortType::AR_RANK_SORT);
+                            break;
 
-			default:
-				std::cout << "Invalid input" << std::endl;
-				break;
-		}
-	}
+                        case 8:
+                            return;
+
+                        default:
+                            std::cout << "Invalid input" << std::endl;
+                            break;
+                    }
+                }
+                break;
+            case 2:
+                // Sort descending
+                while (true) {
+                    ui.userSortMenu();
+                    int userChoice;
+                    std::cin.clear();
+                    std::cin.ignore();
+                    std::cin >> userChoice;
+
+                    ui.clearScreen();
+                    switch (userChoice) {
+                        case 1:
+                            // Sort by institution name
+//                            sort(universityList, SIZE, algorithms, Algorithms::SortType::INSTITUTION,
+//                                 Algorithms::SortType::INSTITUTION);
+                            algorithms.quickSort(universityList, 0, SIZE - 1, true, 0);
+                            break;
+
+                        case 2:
+                            // Sort by FSR score
+//                            sort(universityList, SIZE, algorithms, Algorithms::SortType::FSR_SCORE,
+//                                 Algorithms::SortType::FSR_SCORE);
+                            algorithms.quickSort(universityList, 0, SIZE - 1, true, 2);
+                            // algorithms.countSort(universityList, *univIndex, Algorithms::SortType::FSR_SCORE);
+                            break;
+
+                        case 3:
+                            // Sort by ER score
+//                            sort(universityList, SIZE, algorithms, Algorithms::SortType::ER_SCORE,
+//                                 Algorithms::SortType::ER_SCORE);
+                            algorithms.quickSort(universityList, 0, SIZE - 1, true, 3);
+                            break;
+
+                        case 4:
+                            // Sort by AR score
+//                            sort(universityList, SIZE, algorithms, Algorithms::SortType::AR_SCORE,
+//                                 Algorithms::SortType::AR_SCORE);
+                            algorithms.quickSort(universityList, 0, SIZE - 1, true, 1);
+                            break;
+
+                        case 5:
+                            // Sort by FSR rank
+                            algorithms.countSort(universityList, SIZE, Algorithms::SortType::FSR_RANK_SORT);
+                            break;
+
+                        case 6:
+                            // Sort by ER rank
+                            algorithms.countSort(universityList, SIZE, Algorithms::SortType::ER_RANK_SORT);
+                            break;
+
+                        case 7:
+                            // Sort by AR rank
+                            algorithms.countSort(universityList, SIZE, Algorithms::SortType::AR_RANK_SORT);
+                            break;
+
+                        case 8:
+                            return;
+
+                        default:
+                            std::cout << "Invalid input" << std::endl;
+                            break;
+                    }
+                }
+                break;
+            case 3:
+                return;
+            case 4:
+                exit(0);
+            default:
+                std::cout << "Invalid input" << std::endl;
+                break;
+        }
+    }
 }
 
 
@@ -572,7 +659,7 @@ void Controller::feedbackController(LinkedList<Feedback> *feedbackList, UI ui, U
                 std::cin.ignore();
                 std::getline(std::cin, feedback);
 
-                int newID = feedbackList->getSize() + 1;
+                int newID = feedbackList->getSize();
                 std::string newUser = currentUser.getUsername();
                 std::string newComment = feedback;
                 std::time_t createdAt = std::time(nullptr);
