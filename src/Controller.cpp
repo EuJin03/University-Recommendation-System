@@ -79,6 +79,7 @@ void Controller::modifyController(UI ui, HashTable *customer)
 		std::string newPassword;
 		int modifyChoice;
 		char deleteChoice;
+		char upgradeChoice;
 		User selectedUser;
 
 		customer->printAllUsersDetails();
@@ -145,8 +146,18 @@ void Controller::modifyController(UI ui, HashTable *customer)
 			}
 			break;
 		case 4:
-			ui.clearScreen();
-			return;
+			std::cout << "\nAre you sure you want to upgrade this user to admin? [y/N]";
+			std::cin >> upgradeChoice;
+
+			if (upgradeChoice)
+			{
+			}
+			else
+			{
+				ui.clearScreen();
+			}
+
+			break;
 		case 5:
 			exit(0);
 		default:
