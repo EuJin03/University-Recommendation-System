@@ -17,6 +17,8 @@ int main()
 	University universityList[ARRAY_SIZE];
 	static int feedbackID = 0;
 	DynamicArray<University> top10;
+    DynamicArray<University> uniqueUni;
+    DynamicArray<int> uniqueUniCount;
 	seeder.createUnivInstances(universityList);
 
 	// Quick sort demo
@@ -61,7 +63,7 @@ int main()
             algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::RANK_SCORE);
 
             start_load = std::chrono::high_resolution_clock::now();
-            algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::AR_SCORE);
+            algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::INSTITUTION);
             end_load = std::chrono::high_resolution_clock::now();
             durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
             std::cout << "Time taken to load data using Count Sort: " << durationLoad << " microseconds" << std::endl;
@@ -108,7 +110,7 @@ int main()
 					if (currentUser.getIsAdmin())
 					{
 						// Admin
-						controller.adminController(ui, universityList, &univIndex, &customer, &feedbackList, currentUser); // -- eugene & bryan
+                    controller.adminController(ui, universityList, &univIndex, &customer, &feedbackList, currentUser, &top10, &uniqueUni, &uniqueUniCount); // -- eugene & bryan
 					}
 					else
 					{

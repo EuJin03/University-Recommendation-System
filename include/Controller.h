@@ -10,8 +10,8 @@
 #include <iostream>
 #include <stdlib.h>
 #include <limits>
-class Controller
-{
+
+class Controller {
 public:
     // general
     std::string validate(std::string username, std::string password);
@@ -20,12 +20,23 @@ public:
     bool registerUser(std::string username, std::string password, HashTable *userTable);
 
     // Registered user
-    void userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> *feedbackList, User currentUser);
-    void favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[], int *univIndex, DynamicArray<University> *top10);
+    void userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser,
+                        DynamicArray<University> *top10, LinkedList<Feedback> *feedbackList, User currentUser);
+
+    void favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[], int *univIndex,
+                             DynamicArray<University> *top10);
+
     void feedbackController(LinkedList<Feedback> *feedbackList, UI ui, User currentUser);
+
     // Admin
-    void adminController(UI ui, University universityList[], int *univIndex, HashTable *customer, LinkedList<Feedback> *feedbackList, User currentUser);
+    void adminController(UI ui, University universityList[], int *univIndex, HashTable *customer,
+                         LinkedList<Feedback> *feedbackList, User currentUser, DynamicArray<University> *top10,
+                         DynamicArray<University> *uniqueUni, DynamicArray<int> *uniqueUniCount);
+
     void modifyController(UI ui, HashTable *customer);
+
+    void top10Controller(DynamicArray<University> *top10, DynamicArray<University> *uniqueUni,
+                         DynamicArray<int> *uniqueUniCount);
 
     // Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
     // void insertFavUni(std::string uniName);

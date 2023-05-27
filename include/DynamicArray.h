@@ -177,7 +177,37 @@ public:
     bool isEmpty()
     {
         return size == 0;
-    };
+    }
+
+    // Count the occurrences of each element in the Dynamic Array
+    void countOccurrences(DynamicArray<T> *arr, DynamicArray<int> *totalCount)
+    {
+        int count = 0;
+        for (int i = 0; i < size; i++)
+        {
+            count = 1;
+            for (int j = i + 1; j < size; j++)
+            {
+                if (array[i] == array[j])
+                {
+                    count++;
+                    for (int k = j; k < size - 1; k++)
+                    {
+                        array[k] = array[k + 1];
+                    }
+                    size--;
+                    j--;
+                }
+            }
+            arr->append(array[i]);
+            totalCount->append(count);
+        }
+
+        for (int i = 0; i < sizeof(totalCount)/sizeof(int); i++)
+        {
+            std::cout << arr->get(i) << " : " <<  totalCount->get(i) << std::endl;
+        }
+    }
 
     void show()
     {
