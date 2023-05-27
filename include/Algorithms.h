@@ -17,9 +17,11 @@ public:
         AR_SCORE = 1,
         FSR_SCORE = 2,
         ER_SCORE = 3,
-        RANK_SCORE = 4
+        RANK_SCORE = 4,
+        AR_RANK_SORT = 5,
+        FSR_RANK_SORT = 6,
+        ER_RANK_SORT = 7
     };
-
     enum SearchType
     {
         RANK = 0,
@@ -45,7 +47,9 @@ public:
     void linearSearch(University universityList[], int size, int criteria, std::string key);
 
     // Binary Search Algorithm
-    void binarySearch(University universityList[], int choice, int rank);
+    void binarySearch(University universityList[], int size, int rank);
+    void binarySearchWithDuplicates(University universityList[], int size, int choice, int rank);
+    int* getRank(University universityList[], int mid, int choice);
 };
 
 #endif // UNIVERSITY_RECOMMENDATION_SYSTEM_ALGORITHMS_H

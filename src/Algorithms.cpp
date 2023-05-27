@@ -41,6 +41,16 @@ int Algorithms::partition(University uniArr[], int start, int pivot, bool regist
         // TODO: Figure out how to decide which column to sort on.
         switch (choice)
         {
+        case 0:
+            for (int j = start; j < pivot; j++)
+            {
+                if (uniArr[j].getInstitution() < uniArr[pivot].getInstitution())
+                {
+                    i++;
+                    swap(&uniArr[i], &uniArr[j]);
+                }
+            }
+            break;
         case 1: // Academic Reputation score (arScore)
             for (int j = start; j < pivot; j++)
             {
@@ -266,6 +276,12 @@ int Algorithms::getScore(University uni, SortType sortType)
         return uni.getErScore();
     case RANK_SCORE:
         return uni.getRank();
+    case AR_RANK_SORT:
+        return uni.getArRank();
+    case FSR_RANK_SORT:
+        return uni.getFsrRank();
+    case ER_RANK_SORT:
+        return uni.getErRank();
     default:
         return -1;
     }
@@ -310,45 +326,51 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
 
 
 
-
-void Algorithms::binarySearch(University universityList[], int choice, int rank)
+void Algorithms::binarySearch(University universityList[], int size, int rank)
 {
     UI ui;
     int start = 0;
-    int end = (sizeof(universityList) / sizeof(University)) - 1;
+    int end = size;
+    const int maxSize = 1442;
     int mid = (start + end) / 2;
     int current;
+    University tempUniList[maxSize];
+
     while(true)
     {
         mid = (start + end) / 2;
-        switch (choice)
-        {
-        case RANK:
-            // Searching by University Rank
-            current = universityList[mid].getRank();
-            break;
+        int uniRank = universityList[mid].getRank();
+        int arRank = universityList[mid].getArRank();
+        int fsrRank = universityList[mid].getFsrRank();
+        int erRank = universityList[mid].getErRank();
         
-        case AR_RANK:
-            // Searching by AR Rank
-            current = universityList[mid].getArRank();
-            break;
-
-        case FSR_RANK:
-            // Searching by FSR Rank
-            current = universityList[mid].getFsrRank();
-            break;
-
-        case ER_RANK:
-            // Searching by ER Rank
-            current = universityList[mid].getErRank();
-            break;
-
-        default:
-            break;
-        }
-
+        // switch (choice)
+        // {
+        // case RANK:
+        //     // Searching by University Rank
+        //     current = universityList[mid].getRank();
+        //     break;
         
-        if (current == rank)
+        // case AR_RANK:
+        //     // Searching by AR Rank
+        //     current = universityList[mid].getArRank();
+        //     break;
+
+        // case FSR_RANK:
+        //     // Searching by FSR Rank
+        //     current = universityList[mid].getFsrRank();
+        //     break;
+
+        // case ER_RANK:
+        //     // Searching by ER Rank
+        //     current = universityList[mid].getErRank();
+        //     break;
+
+        // default:
+        //     break;
+        // }
+
+        if (uniRank == rank || arRank == rank || fsrRank == rank || erRank == rank)
         {
             std::cout << "Found " << rank << " at index " << mid << std::endl;
             std::cout << std::endl;
@@ -368,4 +390,83 @@ void Algorithms::binarySearch(University universityList[], int choice, int rank)
             break;
         }
     }
+}
+
+int* Algorithms::getRank(University universityList[], int mid, int choice)
+{
+    static int currentRank[2];
+    switch (choice)
+    {
+        case RANK:
+            // Searching by University Rank
+            currentRank[0] = universityList[mid].getRank();
+            currentRank[1] = universityList[mid - 1].getRank();
+            break;
+        
+        case AR_RANK:
+            // Searching by AR Rank
+            currentRank[0] = universityList[mid].getArRank();
+            currentRank[1] = universityList[mid - 1].getArRank();
+            break;
+
+        case FSR_RANK:
+            // Searching by FSR Rank
+            currentRank[0] = universityList[mid].getFsrRank();
+            currentRank[1] = universityList[mid - 1].getFsrRank();
+            break;
+
+        case ER_RANK:
+            // Searching by ER Rank
+            currentRank[0] = universityList[mid].getErRank();
+            currentRank[1] = universityList[mid - 1].getErRank();
+            break;
+
+        default:
+            break;
+    }
+
+    return currentRank;
+}
+
+void Algorithms::binarySearchWithDuplicates(University universityList[], int size, int choice, int rank) 
+{
+    int start = 0;
+    int end = size;
+    int mid;
+    int *currentRank;
+    while (start <= end) 
+    {
+        mid = (start + end) / 2;
+        currentRank = getRank(universityList, mid, choice);
+        // Check if the mid element is equal to the target
+        if (currentRank[0] == rank) 
+        {
+            // Handle duplicates by finding the leftmost occurrence
+            while (mid > 0 && currentRank[1] == rank) 
+            {
+                currentRank = getRank(universityList, --mid, choice);
+            }
+            UI ui;
+            ui.universityHeader();
+            // Print all the duplicates
+            while (currentRank[0] == rank) 
+            {
+                std::cout << universityList[mid];
+                currentRank = getRank(universityList, ++mid, choice);
+            }
+            std::cout << std::endl;
+            return;
+        }
+        // If the mid element is greater than the target, search in the left half
+        else if (currentRank[0] > rank) 
+        {
+            end = mid - 1;
+        }
+        // If the mid element is less than the target, search in the right half
+        else 
+        {
+            start = mid + 1;
+        }
+    }
+    std::cout << "Not found." << std::endl;
 }

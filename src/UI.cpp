@@ -41,13 +41,16 @@ void UI::adminMenu()
 
 void UI::userSortMenu()
 {
-	clearScreen();
+	// clearScreen();
 	std::cout << "\nSort Menu\n";
 	std::cout << "1. Sort by Institution name\n";
 	std::cout << "2. Sort by Faculty/Student Ratio score\n";
 	std::cout << "3. Sort by Employer Reputation score\n";
 	std::cout << "4. Sort by Academic Reputation score\n";
-	std::cout << "5. Return to main menu\n";
+	std::cout << "5. Sort by Faculty/Student Ratio rank\n";
+	std::cout << "6. Sort by Employer Reputation rank\n";
+	std::cout << "7. Sort by Academic Reputation rank\n";
+	std::cout << "8. Return to main menu\n";
 	std::cout << "0. Exit program\n";
 	std::cout << "Enter your choice: ";
 }
@@ -58,9 +61,10 @@ void UI::userSearchMenu()
 	std::cout << "1. Search by Institution name\n";
 	std::cout << "2. Search by Locale\n";
 	std::cout << "3. Search by Rank\n";
-	std::cout << "4. Search by Employer Reputation score\n";
-	std::cout << "4. Search by Academic Reputation score\n";
-	std::cout << "5. Return to main menu\n";
+	std::cout << "4. Search by Faculty/Student Ratio Score\n";
+	std::cout << "5. Search by Employer Reputation Rank\n";
+	std::cout << "6. Search by Academic Reputation Rank\n";
+	std::cout << "7. Return to main menu\n";
 	std::cout << "0. Exit program\n";
 	std::cout << "Enter your choice: ";
 }
