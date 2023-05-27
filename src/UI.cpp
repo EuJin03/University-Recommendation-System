@@ -180,3 +180,9 @@ void UI::modifyUserMenu()
 	std::cout << "5. Exit program\n";
 	std::cout << "Enter your choice: ";
 }
+
+void UI::top10() {
+    std::cout << "\n1. Return to admin menu\n";
+    std::cout << "2. Exit program\n";
+    std::cout << "Enter your choice: ";
+}

@@ -34,13 +34,11 @@ public:
 
     // Admin
     void adminController(UI ui, University universityList[], int *univIndex, HashTable *customer,
-                         LinkedList<Feedback> *feedbackList, User currentUser, DynamicArray<University> *top10,
-                         DynamicArray<University> *uniqueUni, DynamicArray<int> *uniqueUniCount);
+                         LinkedList<Feedback> *feedbackList, User currentUser, DynamicArray<University> *top10);
 
     void modifyController(UI ui, HashTable *customer);
 
-    void top10Controller(DynamicArray<University> *top10, DynamicArray<University> uniqueUni,
-                         DynamicArray<int> uniqueUniCount);
+    void top10Controller(DynamicArray<University> *top10, UI ui);
 
     // Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
     // void insertFavUni(std::string uniName);

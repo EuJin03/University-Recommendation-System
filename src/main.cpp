@@ -110,7 +110,7 @@ int main()
 					if (currentUser.getIsAdmin())
 					{
 						// Admin
-						controller.adminController(ui, universityList, &univIndex, &customer, &feedbackList, currentUser, &top10, &uniqueUni, &uniqueUniCount); // -- eugene & bryan
+						controller.adminController(ui, universityList, &univIndex, &customer, &feedbackList, currentUser, &top10); // -- eugene & bryan
 					}
 					else
 					{

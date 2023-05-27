@@ -26,8 +26,7 @@ bool Controller::registerUser(std::string username, std::string password, HashTa
 
 void Controller::adminController(UI ui, University universityList[], int *univIndex, HashTable *customer,
                                  LinkedList<Feedback> *feedbackList, User currentUser,
-                                 DynamicArray<University> *top10,
-                                 DynamicArray<University> *uniqueUni, DynamicArray<int> *uniqueUniCount) {
+                                 DynamicArray<University> *top10) {
     while (true) {
         ui.adminMenu();
         int userChoice;
@@ -50,7 +49,7 @@ void Controller::adminController(UI ui, University universityList[], int *univIn
                 break;
             case 4:
                 // Display top 10
-                top10Controller(top10, *uniqueUni, *uniqueUniCount);
+                top10Controller(top10, ui);
                 break;
             case 5:
                 // Logout
@@ -147,9 +146,10 @@ void Controller::modifyController(UI ui, HashTable *customer) {
     }
 }
 
-void Controller::top10Controller(DynamicArray<University> *top10, DynamicArray<University> uniqueUni,
-                                 DynamicArray<int> uniqueUniCount) {
+void Controller::top10Controller(DynamicArray<University> *top10, UI ui) {
     int userChoice;
+    DynamicArray<University> uniqueUni = DynamicArray<University>();
+    DynamicArray<int> uniqueUniCount;
     for (int i = 0; i < top10->getSize(); i++) {
         if (uniqueUni.contains(top10->get(i))) {
             int index = uniqueUni.find(top10->get(i));
@@ -160,10 +160,40 @@ void Controller::top10Controller(DynamicArray<University> *top10, DynamicArray<U
         }
     }
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < uniqueUni.getSize(); i++) {
+        for (int j = 0; j < uniqueUni.getSize() - 1; j++) {
+            if (uniqueUniCount.get(j) < uniqueUniCount.get(j + 1)) {
+                int temp = uniqueUniCount.get(j);
+                uniqueUniCount.set(uniqueUniCount.get(j + 1), j);
+                uniqueUniCount.set(temp, j + 1);
+
+                University tempUni = uniqueUni.get(j);
+                uniqueUni.set(uniqueUni.get(j + 1), j);
+                uniqueUni.set(tempUni, j + 1);
+            }
+        }
+    }
+
+    ui.clearScreen();
+    std::cout << "Top 10 Universities \n";
+    for (int i = 0; i < uniqueUni.getSize(); i++) {
         std::cout << uniqueUni.get(i).getInstitution() << " : " << uniqueUniCount.get(i) << std::endl;
     }
+    std::cout << std::endl;
+    ui.top10();
+    std::cin.clear();
+    std::cin.ignore();
     std::cin >> userChoice;
+
+    switch (userChoice) {
+        case 1:
+            return;
+        case 2:
+            exit(0);
+        default:
+            std::cout << "Invalid option" << std::endl;
+            break;
+    }
 }
 
 void Controller::userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser,

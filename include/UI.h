@@ -42,6 +42,8 @@ public:
 	void inputErrorMsg();
 	void invalidOptionMsg();
 
+    void top10();
+
 	// helper & utility methods
 	void clearScreen();
 };
