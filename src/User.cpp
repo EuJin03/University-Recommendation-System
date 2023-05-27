@@ -52,6 +52,16 @@ void User::setAsAdmin()
     isAdmin = !isAdmin;
 }
 
+void User::setUsername(const std::string &newUsername)
+{
+    username = newUsername;
+}
+
+void User::setPassword(const std::string &newPassword)
+{
+    password = newPassword;
+}
+
 std::ostream &
 operator<<(std::ostream &os, const User &user)
 {

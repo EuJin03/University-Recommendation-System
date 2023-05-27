@@ -4,18 +4,42 @@ using namespace std::chrono;
 
 void Seeder::createFeedbackInstances(LinkedList<Feedback> *feedbackList)
 {
-	int feedbackCount = 3; // Number of feedback instances to create
+	std::string username1 = "eugene1";
+	std::string feedback10 = "Testing Feedback";
+	std::time_t createdAt1 = getRandomPastTime();
+	std::string admin1 = "Admin 1";
+	std::string reply1 = "Testing Reply";
+	std::time_t repliedAt1 = getRandomPastTime();
 
-	for (int i = 1; i <= feedbackCount; i++)
-	{
-		std::string customerName = "Customer " + std::to_string(i);
-		std::string feedbackText = "Testing Feedback " + std::to_string(i);
-		std::string adminName = "Admin " + std::to_string(i);
-		std::string replyText = "Testing Reply " + std::to_string(i);
+	std::string username2 = "eugene2";
+	std::string feedback20 = "Testing Feedback";
+	std::time_t createdAt2 = getRandomPastTime();
+	std::string admin2 = "Admin 2";
+	std::string reply2 = "Testing Reply";
+	std::time_t repliedAt2 = getRandomPastTime();
 
-		Feedback feedback(i, customerName, feedbackText, adminName, replyText);
-		feedbackList->insertAtEnd(feedback);
-	}
+	std::string username3 = "eugene3";
+	std::string feedback30 = "Testing Feedback";
+	std::time_t createdAt3 = getRandomPastTime();
+	std::string admin3 = "Admin 3";
+	std::string reply3 = "Testing Reply";
+	std::time_t repliedAt3 = getRandomPastTime();
+
+	std::string username4 = "eugene4";
+	std::string feedback40 = "Testing Feedback";
+	std::time_t createdAt4 = getRandomPastTime();
+	std::string admin4 = "Admin 4";
+	std::string reply4 = "Testing Reply";
+	std::time_t repliedAt4 = getRandomPastTime();
+
+	Feedback feedback1(0, username1, feedback10, createdAt1, admin1, reply1, repliedAt1);
+	Feedback feedback2(1, username2, feedback20, createdAt2, admin2, reply2, repliedAt2);
+	Feedback feedback3(2, username3, feedback30, createdAt3, admin3, reply3, repliedAt3);
+	Feedback feedback4(3, username4, feedback40, createdAt4, admin4, reply4, repliedAt4);
+	feedbackList->insertAtEnd(feedback1);
+	feedbackList->insertAtEnd(feedback2);
+	feedbackList->insertAtEnd(feedback3);
+	feedbackList->insertAtEnd(feedback4);
 }
 
 std::time_t Seeder::getRandomPastTime()
@@ -37,28 +61,28 @@ void Seeder::createUserInstances(HashTable *customer)
 	std::string username1 = "admin";
 	std::string password1 = "admin";
 	std::time_t lastLogin1 = getRandomPastTime();
-	bool isAdmin1 = false;
+	bool isAdmin1 = true;
 	User user1(username1, password1, lastLogin1, isAdmin1);
 
 	std::string username2 = "eugene";
 	std::string password2 = "user";
-	std::time_t lastLogin2 = getRandomPastTime();
+	std::time_t lastLogin2 = std::time(nullptr) - (60 * 60 * 24 * 31);
 	bool isAdmin2 = false;
-    LinkedList<University> eugeneList;
+	LinkedList<University> eugeneList;
 	User user2(username2, password2, lastLogin2, isAdmin2, eugeneList);
 
 	std::string username3 = "bryan";
-	std::string password3 = "password3";
-	std::time_t lastLogin3 = getRandomPastTime();
+	std::string password3 = "bryan";
+	std::time_t lastLogin3 = std::time(nullptr) - (60 * 60 * 24 * 29);
 	bool isAdmin3 = false;
-    LinkedList<University> bryanList;
+	LinkedList<University> bryanList;
 	User user3(username3, password3, lastLogin3, isAdmin3, bryanList);
 
 	std::string username4 = "pclai";
-	std::string password4 = "password4";
-	std::time_t lastLogin4 = getRandomPastTime();
+	std::string password4 = "pclai";
+	std::time_t lastLogin4 = std::time(nullptr) - (60 * 60 * 24 * 30);
 	bool isAdmin4 = false;
-    LinkedList<University> pclaiList;
+	LinkedList<University> pclaiList;
 	User user4(username4, password4, lastLogin4, isAdmin4, pclaiList);
 
 	// Add users to the customer
@@ -66,15 +90,6 @@ void Seeder::createUserInstances(HashTable *customer)
 	customer->addUser(user2);
 	customer->addUser(user3);
 	customer->addUser(user4);
-
-//	LinkedList<University> newUniList;
-//    University testUniversity = University(1, "Test University", "UK", "United Kingdom", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
-//    newUniList.insertAtBeginning(testUniversity);
-//    newUniList.insertAtEnd(testUniversity);
-//    user2.setFavUnivList(newUniList);
-//    customer->removeUser("eugene");
-//    customer->addUser(user2);
-//    std::cout << customer->getUser("eugene") << std::endl;
 
 	User test2 = User();
 }

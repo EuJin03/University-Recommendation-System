@@ -16,7 +16,8 @@ public:
         INSTITUTION = 0,
         AR_SCORE = 1,
         FSR_SCORE = 2,
-        ER_SCORE = 3
+        ER_SCORE = 3,
+        RANK_SCORE = 4
     };
 
     enum SearchType
@@ -42,7 +43,6 @@ public:
 
     // Linear Search Algorithm
     void linearSearch(University universityList[], int size, int criteria, std::string key);
-
 
     // Binary Search Algorithm
     void binarySearch(University universityList[], int choice, int rank);

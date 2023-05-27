@@ -9,7 +9,7 @@
 #include "../include/HashTable.h"
 #include <iostream>
 #include <stdlib.h>
-
+#include <limits>
 class Controller
 {
 public:
@@ -17,13 +17,15 @@ public:
     std::string validate(std::string username, std::string password);
 
     // Unregistered user
+    bool registerUser(std::string username, std::string password, HashTable *userTable);
 
     // Registered user
-    void userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser);
+    void userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> *feedbackList, User currentUser);
     void favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[], int *univIndex, DynamicArray<University> *top10);
-    void feedbackController(LinkedList<Feedback> feedbackList, UI ui, User currentUser);
+    void feedbackController(LinkedList<Feedback> *feedbackList, UI ui, User currentUser);
     // Admin
-    void adminController();
+    void adminController(UI ui, University universityList[], int *univIndex, HashTable *customer, LinkedList<Feedback> *feedbackList, User currentUser);
+    void modifyController(UI ui, HashTable *customer);
 
     // Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
     // void insertFavUni(std::string uniName);
