@@ -1,3 +1,6 @@
+/*
+	craeted by eujin
+*/
 #ifndef UI_H
 #define UI_H
 
@@ -25,11 +28,11 @@ public:
 
 	// feedback menu
 
-    // modify user menu
-    void modifyUserMenu();
+	// modify user menu
+	void modifyUserMenu();
 
 	// favourite list menu
-    void favouriteMenu();
+	void favouriteMenu();
 
 	// university ui
 	void universityHeader();

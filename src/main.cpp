@@ -17,8 +17,8 @@ int main()
 	University universityList[ARRAY_SIZE];
 	static int feedbackID = 0;
 	DynamicArray<University> top10;
-    DynamicArray<University> uniqueUni;
-    DynamicArray<int> uniqueUniCount;
+	DynamicArray<University> uniqueUni;
+	DynamicArray<int> uniqueUniCount;
 	seeder.createUnivInstances(universityList);
 
 	// Quick sort demo
@@ -54,19 +54,19 @@ int main()
 			break;
 		case 2:
 			// should move into controller class
-            start_load = std::chrono::high_resolution_clock::now();
-            algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, false, 2);
-            end_load = std::chrono::high_resolution_clock::now();
-            durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
-            std::cout << "Time taken to load data using Quick Sort: " << durationLoad << " microseconds" << std::endl;
+			start_load = std::chrono::high_resolution_clock::now();
+			algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, false, 5);
+			end_load = std::chrono::high_resolution_clock::now();
+			durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
+			std::cout << "Time taken to load data using Quick Sort: " << durationLoad << " microseconds" << std::endl;
 
-            algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::RANK_SCORE);
+			// algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::RANK_SCORE);
 
-            start_load = std::chrono::high_resolution_clock::now();
-            algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::INSTITUTION);
-            end_load = std::chrono::high_resolution_clock::now();
-            durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
-            std::cout << "Time taken to load data using Count Sort: " << durationLoad << " microseconds" << std::endl;
+			start_load = std::chrono::high_resolution_clock::now();
+			algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::INSTITUTION);
+			end_load = std::chrono::high_resolution_clock::now();
+			durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
+			std::cout << "Time taken to load data using Count Sort: " << durationLoad << " microseconds" << std::endl;
 
 			break;
 		case 3:
@@ -78,19 +78,19 @@ int main()
 
 			break;
 		case 4:
-            // Register
-            std::cout << " ---------- REGISTER ---------- " << std::endl;
-                do
-                {
-                    std::cout << "Enter username: ";
-                    std::cin >> username;
-                    std::cout << "Enter password: ";
-                    std::cin >> password;
-                } while (!controller.registerUser(username, password, &customer));
+			// Register
+			std::cout << " ---------- REGISTER ---------- " << std::endl;
+			do
+			{
+				std::cout << "Enter username: ";
+				std::cin >> username;
+				std::cout << "Enter password: ";
+				std::cin >> password;
+			} while (!controller.registerUser(username, password, &customer));
 
-                std::cout << "Registration successful!" << std::endl;
+			std::cout << "Registration successful!" << std::endl;
 
-                break;
+			break;
 			break;
 		case 5:
 			// Login
@@ -104,13 +104,13 @@ int main()
 				if (customer.verifyUser(username, password))
 				{
 					currentUser = customer.getUser(username);
-                    currentUser.setLastLogin(std::time(nullptr));
-                    customer.removeUser(username);
-                    customer.addUser(currentUser);
+					currentUser.setLastLogin(std::time(nullptr));
+					customer.removeUser(username);
+					customer.addUser(currentUser);
 					if (currentUser.getIsAdmin())
 					{
 						// Admin
-                    controller.adminController(ui, universityList, &univIndex, &customer, &feedbackList, currentUser, &top10, &uniqueUni, &uniqueUniCount); // -- eugene & bryan
+						controller.adminController(ui, universityList, &univIndex, &customer, &feedbackList, currentUser, &top10, &uniqueUni, &uniqueUniCount); // -- eugene & bryan
 					}
 					else
 					{

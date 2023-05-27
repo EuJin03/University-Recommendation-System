@@ -1,3 +1,6 @@
+/*
+	craeted by eujin
+*/
 #ifndef SEEDER_H
 #define SEEDER_H
 

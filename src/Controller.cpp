@@ -72,6 +72,7 @@ void Controller::modifyController(UI ui, HashTable *customer) {
         std::string newPassword;
         int modifyChoice;
         char deleteChoice;
+        char upgradeChoice;
         User selectedUser;
 
         customer->printAllUsersDetails();
