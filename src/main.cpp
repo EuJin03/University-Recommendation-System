@@ -18,6 +18,8 @@ int main()
 	University unsortedUniversityList[ARRAY_SIZE];
 	static int feedbackID = 0;
 	DynamicArray<University> top10;
+	DynamicArray<University> uniqueUni;
+	DynamicArray<int> uniqueUniCount;
 	seeder.createUnivInstances(universityList);
 	seeder.createUnivInstances(unsortedUniversityList);
 
@@ -78,19 +80,19 @@ int main()
 			controller.searchController(universityList, &univIndex, ARRAY_SIZE, ui, &currentUser, &top10, feedbackList, currentUser);
 			break;
 		case 4:
-            // Register
-            std::cout << " ---------- REGISTER ---------- " << std::endl;
-                do
-                {
-                    std::cout << "Enter username: ";
-                    std::cin >> username;
-                    std::cout << "Enter password: ";
-                    std::cin >> password;
-                } while (!controller.registerUser(username, password, &customer));
+			// Register
+			std::cout << " ---------- REGISTER ---------- " << std::endl;
+			do
+			{
+				std::cout << "Enter username: ";
+				std::cin >> username;
+				std::cout << "Enter password: ";
+				std::cin >> password;
+			} while (!controller.registerUser(username, password, &customer));
 
-                std::cout << "Registration successful!" << std::endl;
+			std::cout << "Registration successful!" << std::endl;
 
-                break;
+			break;
 			break;
 		case 5:
 			// Login
@@ -104,13 +106,13 @@ int main()
 				if (customer.verifyUser(username, password))
 				{
 					currentUser = customer.getUser(username);
-                    currentUser.setLastLogin(std::time(nullptr));
-                    customer.removeUser(username);
-                    customer.addUser(currentUser);
+					currentUser.setLastLogin(std::time(nullptr));
+					customer.removeUser(username);
+					customer.addUser(currentUser);
 					if (currentUser.getIsAdmin())
 					{
 						// Admin
-						controller.adminController(ui, universityList, &univIndex, &customer, &feedbackList, currentUser); // -- eugene & bryan
+						controller.adminController(ui, universityList, &univIndex, &customer, &feedbackList, currentUser, &top10, &uniqueUni, &uniqueUniCount); // -- eugene & bryan
 					}
 					else
 					{

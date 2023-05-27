@@ -34,8 +34,9 @@ void UI::adminMenu()
 	std::cout << "1. Display all universities' information\n";
 	std::cout << "2. Display all user details\n";
 	std::cout << "3. Display feedback\n";
-	std::cout << "4. Logout\n";
-	std::cout << "5. Exit program\n";
+    std::cout << "4. Show Top 10 Universities\n";
+	std::cout << "5. Logout\n";
+	std::cout << "6. Exit program\n";
 	std::cout << "Enter your choice: ";
 }
 
@@ -173,12 +174,13 @@ void UI::favouriteMenu()
 	std::cout << "Enter your choice: ";
 }
 
-void UI::modifyUserMenu() {
-    std::cout << "\nModify User Menu\n";
-    std::cout << "1. Modify username\n";
-    std::cout << "2. Modify password\n";
-    std::cout << "3. Delete Inactive Users\n";
-    std::cout << "4. Return to admin menu\n";
-    std::cout << "5. Exit program\n";
-    std::cout << "Enter your choice: ";
+void UI::modifyUserMenu()
+{
+	std::cout << "\nModify User Menu\n";
+	std::cout << "1. Modify username\n";
+	std::cout << "2. Modify password\n";
+	std::cout << "3. Delete Inactive Users\n";
+	std::cout << "4. Return to admin menu\n";
+	std::cout << "5. Exit program\n";
+	std::cout << "Enter your choice: ";
 }
