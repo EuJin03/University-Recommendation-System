@@ -34,9 +34,7 @@ bool Controller::registerUser(std::string username, std::string password, HashTa
         std::cout << "Register Failed \nPlease try again with username and password length of at least 6 characters."
                   << std::endl;
         return false;
-    }
-    else
-    {
+    } else {
         std::time_t lastLogin = std::time(nullptr);
         bool isAdmin = false;
         User user(username, password, lastLogin, isAdmin);
@@ -48,52 +46,47 @@ bool Controller::registerUser(std::string username, std::string password, HashTa
 void Controller::adminController(UI ui, University universityList[], int *univIndex, HashTable *customer,
                                  LinkedList<Feedback> *feedbackList, User currentUser,
                                  DynamicArray<University> *top10,
-                                 DynamicArray<University> *uniqueUni, DynamicArray<int> *uniqueUniCount)
-{
-    while (true)
-    {
+                                 DynamicArray<University> *uniqueUni, DynamicArray<int> *uniqueUniCount) {
+    while (true) {
         ui.adminMenu();
         int userChoice;
         std::cin.clear();
         std::cin.ignore();
         std::cin >> userChoice;
 
-        switch (userChoice)
-        {
-        case 1:
-            // Display University
-            ui.universityList(universityList, univIndex);
-            break;
-        case 2:
-            // Display user
-            modifyController(ui, customer);
-            break;
-        case 3:
-            // Display feedback
-            feedbackController(feedbackList, ui, currentUser);
-            break;
-        case 4:
-            // Display top 10
-            top10Controller(top10, uniqueUni, uniqueUniCount);
-            break;
-        case 5:
-            // Logout
-            ui.clearScreen();
-            return;
-        case 6:
-            // Exit
-            exit(0);
-        default:
-            break;
+        switch (userChoice) {
+            case 1:
+                // Display University
+                ui.universityList(universityList, univIndex);
+                break;
+            case 2:
+                // Display user
+                modifyController(ui, customer);
+                break;
+            case 3:
+                // Display feedback
+                feedbackController(feedbackList, ui, currentUser);
+                break;
+            case 4:
+                // Display top 10
+                top10Controller(top10, *uniqueUni, *uniqueUniCount);
+                break;
+            case 5:
+                // Logout
+                ui.clearScreen();
+                return;
+            case 6:
+                // Exit
+                exit(0);
+            default:
+                break;
         }
     }
 }
 
-void Controller::modifyController(UI ui, HashTable *customer)
-{
+void Controller::modifyController(UI ui, HashTable *customer) {
     ui.clearScreen();
-    while (true)
-    {
+    while (true) {
         std::string oldUsername, newUsername;
         std::string newPassword;
         int modifyChoice;
@@ -106,100 +99,95 @@ void Controller::modifyController(UI ui, HashTable *customer)
         std::cin.clear();
         std::cin.ignore();
         std::cin >> modifyChoice;
-        switch (modifyChoice)
-        {
-        case 1:
-            // Change username
-            // Getting user
-            std::cout << "Enter original username: ";
-            std::cin >> oldUsername;
-            selectedUser = customer->getUser(oldUsername);
+        switch (modifyChoice) {
+            case 1:
+                // Change username
+                // Getting user
+                std::cout << "Enter original username: ";
+                std::cin >> oldUsername;
+                selectedUser = customer->getUser(oldUsername);
 
-            // Removing user from HashTable
-            customer->removeUser(oldUsername);
+                // Removing user from HashTable
+                customer->removeUser(oldUsername);
 
-            // Getting new username
-            std::cin.ignore();
-            std::cout << "Enter new username: ";
-            std::cin >> newUsername;
-            selectedUser.setUsername(newUsername);
+                // Getting new username
+                std::cin.ignore();
+                std::cout << "Enter new username: ";
+                std::cin >> newUsername;
+                selectedUser.setUsername(newUsername);
 
-            // Saving user back to HashTable
-            customer->addUser(selectedUser);
-            ui.clearScreen();
-            break;
-        case 2:
-            // Change password
-            // Getting user
-            std::cout << "Enter username: ";
-            std::cin.ignore();
-            std::cin >> oldUsername;
-            selectedUser = customer->getUser(oldUsername);
-
-            // Removing user record from HashTable
-            customer->removeUser(oldUsername);
-
-            // Getting old password
-            std::cout << "Enter new password: ";
-            std::cin.ignore();
-            std::cin >> newPassword;
-            selectedUser.setPassword(newPassword);
-
-            // Saving user back to HashTable
-            customer->addUser(selectedUser);
-            ui.clearScreen();
-            break;
-        case 3:
-            // Delete Inactive Users
-            std::cout << "Are you sure you want to delete [y/n]: ";
-            std::cin >> deleteChoice;
-
-            if (deleteChoice == 'y')
-            {
-                customer->deleteInactiveAccounts();
+                // Saving user back to HashTable
+                customer->addUser(selectedUser);
                 ui.clearScreen();
-            }
-            else
-            {
-                ui.clearScreen();
-            }
-            break;
-        case 4:
-            std::cout << "\nAre you sure you want to upgrade this user to admin? [y/N]";
-            std::cin >> upgradeChoice;
+                break;
+            case 2:
+                // Change password
+                // Getting user
+                std::cout << "Enter username: ";
+                std::cin.ignore();
+                std::cin >> oldUsername;
+                selectedUser = customer->getUser(oldUsername);
 
-            if (upgradeChoice)
-            {
-            }
-            else
-            {
-                ui.clearScreen();
-            }
+                // Removing user record from HashTable
+                customer->removeUser(oldUsername);
 
-            break;
-        case 5:
-            exit(0);
-        default:
-            ui.clearScreen();
-            std::cout << "Invalid option\n\n";
-            break;
+                // Getting old password
+                std::cout << "Enter new password: ";
+                std::cin.ignore();
+                std::cin >> newPassword;
+                selectedUser.setPassword(newPassword);
+
+                // Saving user back to HashTable
+                customer->addUser(selectedUser);
+                ui.clearScreen();
+                break;
+            case 3:
+                // Delete Inactive Users
+                std::cout << "Are you sure you want to delete [y/n]: ";
+                std::cin >> deleteChoice;
+
+                if (deleteChoice == 'y') {
+                    customer->deleteInactiveAccounts();
+                    ui.clearScreen();
+                } else {
+                    ui.clearScreen();
+                }
+                break;
+            case 4:
+                ui.clearScreen();
+                return;
+            case 5:
+                exit(0);
+            default:
+                ui.clearScreen();
+                std::cout << "Invalid option\n\n";
+                break;
         }
     }
 }
 
-void Controller::top10Controller(DynamicArray<University> *top10, DynamicArray<University> *uniqueUni,
-                                 DynamicArray<int> *uniqueUniCount)
-{
+void Controller::top10Controller(DynamicArray<University> *top10, DynamicArray<University> uniqueUni,
+                                 DynamicArray<int> uniqueUniCount) {
     int userChoice;
-    top10->countOccurrences(uniqueUni, uniqueUniCount);
+    for (int i = 0; i < top10->getSize(); i++) {
+        if (uniqueUni.contains(top10->get(i))) {
+            int index = uniqueUni.find(top10->get(i));
+            uniqueUniCount.set(uniqueUniCount.getValue(index) + 1, index);
+        } else {
+            uniqueUni.append(top10->get(i));
+            uniqueUniCount.append(1);
+        }
+    }
+
+    for (int i = 0; i < 10; i++) {
+        std::cout << uniqueUni.get(i).getInstitution() << " : " << uniqueUniCount.get(i) << std::endl;
+    }
     std::cin >> userChoice;
 }
 
 void Controller::userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser,
-                                DynamicArray<University> *top10, LinkedList<Feedback> *feedbackList, User currentUser)
-{
-    while (true)
-    {
+                                DynamicArray<University> *top10, LinkedList<Feedback> *feedbackList, User currentUser) {
+    while (true) {
         ui.customerMenu();
         int userChoice;
         std::cin.ignore();
@@ -433,8 +421,7 @@ void Controller::searchController(University universityList[], int *univIndex, i
 void Controller::favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[], int *univIndex, DynamicArray<University> *top10)
 {
     ui.clearScreen();
-    while (true)
-    {
+    while (true) {
         ui.favouriteMenu();
         int userChoice;
         int uniChoice;
@@ -493,14 +480,12 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
     }
 }
 
-void Controller::feedbackController(LinkedList<Feedback> *feedbackList, UI ui, User currentUser)
-{
+void Controller::feedbackController(LinkedList<Feedback> *feedbackList, UI ui, User currentUser) {
     int userChoice;
     ui.clearScreen();
     Node<Feedback> *currentNode = feedbackList->getTail();
     Feedback current = currentNode->data;
-    do
-    {
+    do {
 
         std::cout << "------------Feedback Lists------------";
 
@@ -508,42 +493,36 @@ void Controller::feedbackController(LinkedList<Feedback> *feedbackList, UI ui, U
 
         std::cout << "0. Move to previous feedback";
         std::cout << "\n1. Move to next feedback";
-        if (currentUser.getIsAdmin())
-        {
+        if (currentUser.getIsAdmin()) {
             std::cout << "\n2. Reply to feedback";
-        }
-        else
-        {
+        } else {
             std::cout << "\n2. Write a new feedback";
+
         }
         std::cout << "\n3. Go back";
 
         std::cout << "\nPlease select an option: ";
-        //		std::cin.ignore();
+//		std::cin.ignore();
         std::cin.clear();
         std::cin >> userChoice;
 
-        if (userChoice == 0)
-        {
+        if (userChoice == 0) {
             ui.clearScreen();
 
             currentNode = feedbackList->navigateNodes(currentNode, 0);
             current = currentNode->data;
         }
 
-        if (userChoice == 1)
-        {
+        if (userChoice == 1) {
             ui.clearScreen();
 
             currentNode = feedbackList->navigateNodes(currentNode, 1);
             current = currentNode->data;
         }
 
-        if (userChoice == 2)
-        {
+        if (userChoice == 2) {
 
-            if (currentUser.getIsAdmin())
-            {
+            if (currentUser.getIsAdmin()) {
                 std::string reply;
                 std::cout << "\n------------Reply Feedback------------";
                 std::cout << "\nPlease enter your reply: ";
@@ -556,16 +535,14 @@ void Controller::feedbackController(LinkedList<Feedback> *feedbackList, UI ui, U
 
                 ui.clearScreen();
                 current = currentNode->data;
-            }
-            else
-            {
+            } else {
                 std::string feedback;
                 std::cout << "\n------------Feedback Lists------------";
                 std::cout << "\nPlease enter your feedback: ";
                 std::cin.ignore();
                 std::getline(std::cin, feedback);
 
-                int newID = feedbackList->getSize();
+                int newID = feedbackList->getSize() + 1;
                 std::string newUser = currentUser.getUsername();
                 std::string newComment = feedback;
                 std::time_t createdAt = std::time(nullptr);

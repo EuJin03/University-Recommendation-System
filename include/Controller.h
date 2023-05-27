@@ -10,6 +10,7 @@
 #include "../include/Feedback.h"
 #include "../include/LinkedList.h"
 #include "../include/HashTable.h"
+#include "../include/DynamicArray.h"
 #include <iostream>
 #include <stdlib.h>
 #include <limits>
@@ -36,8 +37,8 @@ public:
 
     void modifyController(UI ui, HashTable *customer);
 
-    void top10Controller(DynamicArray<University> *top10, DynamicArray<University> *uniqueUni,
-                         DynamicArray<int> *uniqueUniCount);
+    void top10Controller(DynamicArray<University> *top10, DynamicArray<University> uniqueUni,
+                         DynamicArray<int> uniqueUniCount);
 
     // Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
     // void insertFavUni(std::string uniName);
