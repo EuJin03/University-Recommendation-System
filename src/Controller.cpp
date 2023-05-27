@@ -340,7 +340,6 @@ void Controller::searchController(University universityList[], int *univIndex, i
 		ui.userSearchMenu();
 		int userChoice;
         std::cin.clear();
-		std::cin.ignore();
 		std::cin >> userChoice;
 
 		std::string searchCriteria;

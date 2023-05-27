@@ -308,6 +308,7 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
 {
     UI ui;
     int rank;
+    std::string locale;
     switch (criteria)
     {
     case 1:
@@ -330,7 +331,10 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
         ui.universityHeader();
         for (int i = 0; i < size; i++)
         {
-            if (universityList[i].getLocale() == key)
+            key = toLower(key);
+            locale = universityList[i].getLocale();
+            locale = toLower(locale);
+            if (locale.find(key) != std::string::npos)
             {
                 std::cout << universityList[i];
             }
