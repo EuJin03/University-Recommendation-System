@@ -35,12 +35,16 @@ public:
 
     int getCapacity() const { return capacity; };
 
-    T &get(int index)
+    T get(int index)
     {
         if (index < 0 || index >= size)
         {
             throw std::out_of_range("Invalid index");
         }
+        return array[index];
+    }
+
+    int getValue(int index) {
         return array[index];
     }
 
@@ -89,7 +93,7 @@ public:
         size++;
     };
 
-    void set(const University &element, int index)
+    void set(T element, int index)
     {
         if (index < 0 || index >= size)
         {
@@ -147,6 +151,25 @@ public:
         }
     };
 
+    bool contains(T data) {
+        // Return true if the array contains T data
+        for (int i = 0; i < size; i++) {
+            if (array[i] == data) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    int find(T data) {
+        for (int i = 0; i < size; i++) {
+            if (array[i] == data) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     // Increase Dynamic Array capacity by 2
     void growArray()
     {
@@ -177,7 +200,34 @@ public:
     bool isEmpty()
     {
         return size == 0;
-    };
+    }
+
+    // Count the occurrences of each element in the Dynamic Array
+    void countOccurrences(DynamicArray<T> *arr, DynamicArray<int> *totalCount)
+    {
+        int count = 0;
+        for (int i = 0; i < size; i++)
+        {
+            count = 1;
+            for (int j = i + 1; j < size; j++)
+            {
+                if (array[i] == array[j])
+                {
+                    count++;
+                }
+            }
+            arr->append(array[i]);
+            totalCount->append(count);
+        }
+
+        arr->show();
+        totalCount->show();
+
+//        for (int i = 0; i < sizeof(arr)/sizeof(T); i++)
+//        {
+//            std::cout << arr->get(i) << " : " <<  totalCount->get(i) << std::endl;
+//        }
+    }
 
     void show()
     {

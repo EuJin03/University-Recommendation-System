@@ -32,23 +32,26 @@ void UI::adminMenu()
 	clearScreen();
 	std::cout << "\nAdmin Menu\n";
 	std::cout << "1. Display all universities' information\n";
-	std::cout << "2. Sort universities\n";
-	std::cout << "3. Search university details\n";
-	std::cout << "4. Display feedback\n";
+	std::cout << "2. Display all user details\n";
+	std::cout << "3. Display feedback\n";
+    std::cout << "4. Show Top 10 Universities\n";
 	std::cout << "5. Logout\n";
-	std::cout << "0. Exit program\n";
+	std::cout << "6. Exit program\n";
 	std::cout << "Enter your choice: ";
 }
 
 void UI::userSortMenu()
 {
-	clearScreen();
+	// clearScreen();
 	std::cout << "\nSort Menu\n";
 	std::cout << "1. Sort by Institution name\n";
 	std::cout << "2. Sort by Faculty/Student Ratio score\n";
 	std::cout << "3. Sort by Employer Reputation score\n";
 	std::cout << "4. Sort by Academic Reputation score\n";
-	std::cout << "5. Return to main menu\n";
+	std::cout << "5. Sort by Faculty/Student Ratio rank\n";
+	std::cout << "6. Sort by Employer Reputation rank\n";
+	std::cout << "7. Sort by Academic Reputation rank\n";
+	std::cout << "8. Return to main menu\n";
 	std::cout << "0. Exit program\n";
 	std::cout << "Enter your choice: ";
 }
@@ -59,28 +62,10 @@ void UI::userSearchMenu()
 	std::cout << "1. Search by Institution name\n";
 	std::cout << "2. Search by Locale\n";
 	std::cout << "3. Search by Rank\n";
-	std::cout << "4. Search by Employer Reputation score\n";
-	std::cout << "5. Search by Academic Reputation score\n";
-	std::cout << "6. Return to main menu\n";
-	std::cout << "0. Exit program\n";
-	std::cout << "Enter your choice: ";
-}
-
-void UI::guestSearchMenu()
-{
-	std::cout << "\nSearch Menu\n";
-	std::cout << "1. Search by Institution name\n";
-	std::cout << "2. Search by Rank\n";
-	std::cout << "3. Return to main menu\n";
-	std::cout << "0. Exit program\n";
-	std::cout << "Enter your choice: ";
-}
-
-void UI::guestSortMenu()
-{
-	std::cout << "\nSort Menu\n";
-	std::cout << "1. Sort by Institution name\n";
-	std::cout << "2. Return to main menu\n";
+	std::cout << "4. Search by Faculty/Student Ratio Score\n";
+	std::cout << "5. Search by Employer Reputation Rank\n";
+	std::cout << "6. Search by Academic Reputation Rank\n";
+	std::cout << "7. Return to main menu\n";
 	std::cout << "0. Exit program\n";
 	std::cout << "Enter your choice: ";
 }
@@ -166,22 +151,6 @@ void UI::universityList(University uniArr[], int *currentIndex)
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // FEEDBACK MENUS
 void UI::invalidOptionMsg()
 {
@@ -194,12 +163,24 @@ void UI::clearScreen()
 	system("cls");
 }
 
-void UI::favouriteMenu() {
-    std::cout << "\nFavourite University Menu\n";
-    std::cout << "1. View Favourite Universities\n";
-    std::cout << "2. Add University to Favourites\n";
-    std::cout << "3. Remove University from Favourites\n";
-    std::cout << "4. Return to user menu\n";
-    std::cout << "5. Exit program\n";
-    std::cout << "Enter your choice: ";
+void UI::favouriteMenu()
+{
+	std::cout << "\nFavourite University Menu\n";
+	std::cout << "1. View Favourite Universities\n";
+	std::cout << "2. Add University to Favourites\n";
+	std::cout << "3. Remove University from Favourites\n";
+	std::cout << "4. Return to user menu\n";
+	std::cout << "5. Exit program\n";
+	std::cout << "Enter your choice: ";
+}
+
+void UI::modifyUserMenu()
+{
+	std::cout << "\nModify User Menu\n";
+	std::cout << "1. Modify username\n";
+	std::cout << "2. Modify password\n";
+	std::cout << "3. Delete Inactive Users\n";
+	std::cout << "4. Return to admin menu\n";
+	std::cout << "5. Exit program\n";
+	std::cout << "Enter your choice: ";
 }

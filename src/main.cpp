@@ -16,19 +16,19 @@ int main()
 	int univIndex = 0;
 	int ARRAY_SIZE = 1422;
 	University universityList[ARRAY_SIZE];
+	University unsortedUniversityList[ARRAY_SIZE];
 	static int feedbackID = 0;
 	DynamicArray<University> top10;
+	DynamicArray<University> uniqueUni;
+	DynamicArray<int> uniqueUniCount;
 	seeder.createUnivInstances(universityList);
+	seeder.createUnivInstances(unsortedUniversityList);
 
 	// Quick sort demo
 	Algorithms algorithm;
 	auto start_load = std::chrono::high_resolution_clock::now();
-	//	algorithm.countSort(universityList, Algorithms::SortType::AR_SCORE);
-	// algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, true, 2);
-	// ui.universityList(universityList, &univIndex);
 	auto end_load = std::chrono::high_resolution_clock::now();
-	long long durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
-	// std::cout << "Time taken for counting sort: " << durationLoad << " microseconds" << std::endl;
+	long long durationLoad;
 
 	LinkedList<Feedback> feedbackList;
 	seeder.createFeedbackInstances(&feedbackList);
@@ -49,60 +49,36 @@ int main()
 		std::cin >> option;
 		std::string searchCriteria;
 		// Unregistered User
+		int searchRank;
 		switch (option)
 		{
 		case 1:
 			// Display all universities' information
+			// algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, true, 2);
+			// algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::FSR_SCORE);
 			ui.universityList(universityList, &univIndex);
 			break;
 		case 2:
-			ui.userSortMenu();
-			// should move into controller class
+			controller.sortController(universityList, &univIndex, ARRAY_SIZE, ui, &currentUser, &top10, feedbackList, currentUser);
+			// // should move into controller class
+            // start_load = std::chrono::high_resolution_clock::now();
+            // algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, false, 2);
+            // end_load = std::chrono::high_resolution_clock::now();
+            // durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
+            // std::cout << "Time taken to load data using Quick Sort: " << durationLoad << " microseconds" << std::endl;
+
+            // algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::RANK_SCORE);
+
+            // start_load = std::chrono::high_resolution_clock::now();
+            // algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::AR_SCORE);
+            // end_load = std::chrono::high_resolution_clock::now();
+            // durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
+            // std::cout << "Time taken to load data using Count Sort: " << durationLoad << " microseconds" << std::endl;
+
 			break;
 		case 3:
-			//Search university
-			
-			ui.userSearchMenu();
-			std::cin >> option;
-			switch (option)
-			{case 1:
-				// Search by Institution name
-				// universityList.sortByName();
-				std::cout << "Enter the institution name you want to search: ";
-				std::cin.ignore();
-				std::getline(std::cin, searchCriteria);
-				ui.universityHeader();
-				std::cout << std::string(175,'-') << std::endl;
-				start_load = std::chrono::high_resolution_clock::now();
-				algorithm.linearSearch(universityList, ARRAY_SIZE,1, searchCriteria);
-				end_load = std::chrono::high_resolution_clock::now();
-				durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
-				std::cout << "Time taken for linear search to complete: " << durationLoad << " microseconds" << std::endl;
-				break;
-			case 2:
-				// Search by Locale
-				std::cout << "Enter the locale you want to search: ";
-				std::cin.ignore();
-				std::getline(std::cin, searchCriteria);
-				start_load = std::chrono::high_resolution_clock::now();
-				algorithm.linearSearch(universityList, ARRAY_SIZE,2, searchCriteria);
-				end_load = std::chrono::high_resolution_clock::now();
-				durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
-				std::cout << "Time taken for linear search to complete: " << durationLoad << " microseconds" << std::endl;
-				break;
-			case 3:
-				// Search by Rank
-				break;
-			case 4:
-				// Search by Employer Reputation score
-				break;
-			case 5:
-				// Search by Academic Reputation scorecd..
-				break;
-			default:
-				break;
-			}
-
+			// Search university
+			controller.searchController(universityList, &univIndex, ARRAY_SIZE, ui, &currentUser, &top10, feedbackList, currentUser);
 			break;
         case 4:
 			// Register
@@ -130,15 +106,18 @@ int main()
 				if (customer.verifyUser(username, password))
 				{
 					currentUser = customer.getUser(username);
+					currentUser.setLastLogin(std::time(nullptr));
+					customer.removeUser(username);
+					customer.addUser(currentUser);
 					if (currentUser.getIsAdmin())
 					{
 						// Admin
-						controller.adminController(); // -- wenxuen
+						controller.adminController(ui, universityList, &univIndex, &customer, &feedbackList, currentUser, &top10, &uniqueUni, &uniqueUniCount); // -- eugene & bryan
 					}
 					else
 					{
 						// Registered User
-						controller.userController(&customer, universityList, &univIndex, ui, &currentUser, &top10, feedbackList, currentUser);
+						controller.userController(&customer, universityList, &univIndex, ARRAY_SIZE, ui, &currentUser, &top10, feedbackList, currentUser);
 					}
 					break;
 				}

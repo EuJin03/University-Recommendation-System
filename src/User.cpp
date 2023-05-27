@@ -13,6 +13,15 @@ User::User(const User &user)
     this->favUnivList = user.getFavUnivList();
 }
 
+// User::User()
+// {
+//     this->username = "";
+//     this->password = "";
+//     this->lastLogin = 0;
+//     this->isAdmin = false;
+//     this->favUnivList = LinkedList<University>();
+// }
+
 const std::string &User::getUsername() const
 {
     return username;
@@ -50,6 +59,16 @@ void User::setFavUnivList(LinkedList<University> newFavUnivList) {
 void User::setAsAdmin()
 {
     isAdmin = !isAdmin;
+}
+
+void User::setUsername(const std::string &newUsername)
+{
+    username = newUsername;
+}
+
+void User::setPassword(const std::string &newPassword)
+{
+    password = newPassword;
 }
 
 std::ostream &
