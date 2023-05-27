@@ -185,7 +185,7 @@ void Controller::top10Controller(DynamicArray<University> *top10, DynamicArray<U
     std::cin >> userChoice;
 }
 
-void Controller::userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser)
+void Controller::userController(HashTable *customer, University universityList[], int *univIndex,int size, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser)
 {
     while (true)
     {
@@ -202,11 +202,11 @@ void Controller::userController(HashTable *customer, University universityList[]
 			break;
 		case 2:
 			// Sort University - pc
-			sortController(universityList, univIndex, SIZE, ui, favUser, top10, feedbackList, currentUser);
+			sortController(universityList, univIndex, size, ui, favUser, top10, feedbackList, currentUser);
 			break;
 		case 3:
 			// Search university - pc
-			searchController(universityList, univIndex, SIZE, ui, favUser, top10, feedbackList, currentUser);
+			searchController(universityList, univIndex, size, ui, favUser, top10, feedbackList, currentUser);
 			break;
 		case 4:
 			// Favourite controller - bryan
@@ -315,21 +315,19 @@ void Controller::sortController(University universityList[], int *univIndex, int
 	}
 }
 
-
 void searchInt(University universityList[], int size, Algorithms algorithms, std::string searchCriteria, int choice, int searchCriteriaInt)
 {
+    // Binary search for integer
 	auto startLoad = startTimer();
 	algorithms.binarySearchWithDuplicates(universityList, size, choice, searchCriteriaInt);
-	std::cout << "Searched with binary search:" << std::endl;
 	endTimer(startLoad);
-
+    std::cout << "Searched with binary search:" << std::endl;
 	// Linear search for integer
 	// ******************************************************
-	// auto startLoad = startTimer();
-	// algorithms.linearSearch(universityList, *univIndex, searchCriteriaInt, searchCriteria);
-	// std::cout << "Searched with linear search:" << std::endl;
-	// endTimer(startLoad);
-
+	startLoad = startTimer();
+	algorithms.linearSearch(universityList, size, 3, searchCriteria);
+	endTimer(startLoad);
+    std::cout << "Searched with linear search:" << std::endl;
 	
 }
 
@@ -348,6 +346,7 @@ void Controller::searchController(University universityList[], int *univIndex, i
 		std::string searchCriteria;
 		int searchCriteriaInt;
 		ui.clearScreen();
+        auto startLoad = startTimer();
 		switch (userChoice)
 		{
 			case 1:
@@ -355,7 +354,9 @@ void Controller::searchController(University universityList[], int *univIndex, i
 				std::cout << "Enter the institution name you want to search: ";
 				std::cin.ignore();
 				std::getline(std::cin, searchCriteria);
-				algorithms.linearSearch(universityList, SIZE, 0, searchCriteria);
+                startLoad = startTimer();   // is the start timer here correct? 
+				algorithms.linearSearch(universityList, SIZE, 1, searchCriteria);
+                endTimer(startLoad);
 				break;
 
 			case 2:
@@ -363,19 +364,21 @@ void Controller::searchController(University universityList[], int *univIndex, i
 				std::cout << "Enter the locale you want to search: ";
 				std::cin.ignore();
 				std::getline(std::cin, searchCriteria);
-				algorithms.linearSearch(universityList, SIZE, 1, searchCriteria);
+                startLoad = startTimer();
+				algorithms.linearSearch(universityList, SIZE, 2, searchCriteria);
+                endTimer(startLoad);
 				break;
 
 			case 3:
 				// Search by Rank
 				std::cout << "Enter the rank you want to search: ";
 				std::cin >> searchCriteriaInt;
+                searchCriteria = std::to_string(searchCriteriaInt);
 				algorithms.countSort(universityList, SIZE, Algorithms::SortType::RANK_SCORE);
 				std::cout << "Done sort" << std::endl;
-
 				searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::RANK, searchCriteriaInt);
-				// algorithms.countSort(universityList, size, Algorithms::SortType::RANK_SCORE);
-				// searchInt(universityList, size, algorithms, searchCriteria, Algorithms::SearchType::RANK, searchCriteriaInt);
+				algorithms.countSort(universityList, SIZE, Algorithms::SortType::RANK_SCORE);
+				//searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::RANK, searchCriteriaInt);
 				break;
 
 			case 4:

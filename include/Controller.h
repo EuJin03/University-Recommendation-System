@@ -20,6 +20,7 @@ public:
     // general
     std::string validate(std::string username, std::string password);
 
+
     // Unregistered user
     bool registerUser(std::string username, std::string password, HashTable *userTable);
 
@@ -39,9 +40,6 @@ public:
 
     void top10Controller(DynamicArray<University> *top10, DynamicArray<University> uniqueUni,
                          DynamicArray<int> uniqueUniCount);
-
-    //register User validation
-    bool registerUser(std::string username, std::string password, HashTable *userTable);
 
     // Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
     // void insertFavUni(std::string uniName);
