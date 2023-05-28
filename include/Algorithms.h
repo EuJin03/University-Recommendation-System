@@ -24,10 +24,10 @@ public:
     };
     enum SearchType
     {
-        RANK = 0,
-        AR_RANK = 1,
-        FSR_RANK = 2,
-        ER_RANK = 3
+        RANK = 3,
+        FSR_RANK = 4,
+        ER_RANK = 5,
+        AR_RANK = 6
     };
 
     //toLower function
@@ -48,7 +48,7 @@ public:
     static std::string getScoreString(University uni, SortType sortType);
 
     // Linear Search Algorithm
-    void linearSearch(University universityList[], int size, int criteria, std::string key);
+    void linearSearch(University universityList[], int size, int criteria, std::string key, int rank);
 
     // Binary Search Algorithm
     void binarySearch(University universityList[], int size, int rank);

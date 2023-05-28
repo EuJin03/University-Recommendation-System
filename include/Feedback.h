@@ -25,8 +25,9 @@ public:
 	Feedback(int feedbackID, std::string username, std::string feedback, std::time_t createdAt, std::string admin, std::string replyContent, std::time_t repliedAt);
 	// Copy constructor
 	Feedback(int feedbackID, std::string username, std::string feedback, std::time_t createdAt);
-	// Feedback(const Feedback &feedback);
+	Feedback(const Feedback &feedback);
 	Feedback();
+	~Feedback();
 
 	// Getter
 	int getFeedbackID() const { return this->feedbackID; }
@@ -50,8 +51,8 @@ public:
 	friend std::ostream &operator<<(std::ostream &os, const Feedback &feedback);
 	bool operator==(const Feedback &other) const
 	{
-		// Define what it means for two University objects to be equal.
-		return this->feedbackID == other.feedbackID && this->username == other.username;
+		// Define what it means for two Feedback objects to be equal.
+		return this->feedbackID == other.feedbackID && this->username == other.username && this->feedback == other.feedback && this->createdAt == other.createdAt && this->admin == other.admin && this->replyContent == other.replyContent && this->repliedAt == other.repliedAt;
 	}
 };
 

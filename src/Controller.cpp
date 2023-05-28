@@ -21,10 +21,12 @@ auto startTimer = []() {
 	return std::chrono::high_resolution_clock::now();
 };
 
-auto endTimer = [](auto start_load) {
-	auto end_load = std::chrono::high_resolution_clock::now();
-	long long durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
-	std::cout << "Time taken to load: " << durationLoad << " microseconds" << std::endl;
+auto endTimer = [](auto start_load)
+{
+    auto end_load = std::chrono::high_resolution_clock::now();
+    long long durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
+    // std::cout << "Time taken to load: " << durationLoad << " microseconds" << std::endl;
+    return durationLoad;
 };
 
 bool Controller::registerUser(std::string username, std::string password, HashTable *userTable)
@@ -219,7 +221,7 @@ void Controller::top10Controller(DynamicArray<University> *top10, UI ui) {
     }
 };
 
-void Controller::userController(HashTable *customer, University universityList[], int SIZE, int *univIndex, UI ui, User *favUser,
+void Controller::userController(HashTable *customer, University universityList[], int *univIndex, int SIZE, UI ui, User *favUser,
                                 DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser) {
     while (true) {
         ui.customerMenu();
@@ -265,26 +267,19 @@ void Controller::userController(HashTable *customer, University universityList[]
 void sort(University universityList[], int SIZE, Algorithms algorithms, Algorithms::SortType sortType, int choice)
 {
 	
-	auto startLoad = startTimer();
-	// startLoad = std::chrono::high_resolution_clock::now();
+	auto quickStartLoad = startTimer();
 	algorithms.quickSort(universityList, 0, SIZE - 1, true, choice);
-	// endLoad = std::chrono::high_resolution_clock::now();
-	// durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(endLoad - startLoad).count();
 	std::cout << "Sorted with quick sort:" << std::endl;
-	// std::cout << "Time taken to load: " << durationLoad << " microseconds" << std::endl;
-	endTimer(startLoad);
+	long long quickDuration = endTimer(quickStartLoad);
+    std::cout << "Time taken to load (Quick Sort): " << quickDuration << " microseconds" << std::endl;
 
 	algorithms.countSort(universityList, SIZE, Algorithms::SortType::RANK_SCORE);
-
-	algorithms.countSort(universityList, SIZE, Algorithms::SortType::RANK_SCORE);
-	startLoad = startTimer();
-	// auto startLoad = std::chrono::high_resolution_clock::now();
+    
+	auto countStartLoad = startTimer();
 	algorithms.countSort(universityList, SIZE, sortType);
-	// auto endLoad = std::chrono::high_resolution_clock::now();
-	// long long durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(endLoad - startLoad).count();
 	std::cout << "Sorted with count sort:" << std::endl;
-	// std::cout << "Time taken to load: " << durationLoad << " microseconds" << std::endl;
-	endTimer(startLoad);
+	long long countDuration = endTimer(countStartLoad);
+    std::cout << "Time taken to load (Count Sort): " << quickDuration << " microseconds" << std::endl;
 }
 
 void Controller::sortController(University universityList[], int *univIndex, int SIZE, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser) {
@@ -431,20 +426,22 @@ void Controller::sortController(University universityList[], int *univIndex, int
     }
 }
 
-
-void Controller::searchInt(University universityList[], int size, Algorithms algorithms, std::string searchCriteria, int choice,
-          int searchCriteriaInt) {
-    auto startLoad = startTimer();
-    algorithms.binarySearchWithDuplicates(universityList, size, choice, searchCriteriaInt);
-    std::cout << "Searched with binary search:" << std::endl;
-    endTimer(startLoad);
-
+void searchInt(University universityList[], int SIZE, Algorithms algorithms, std::string searchCriteria, int choice, int searchCriteriaInt)
+{
     // Linear search for integer
     // ******************************************************
-//    startLoad = startTimer();
-//    algorithms.linearSearch(universityList, size, 3, searchCriteria);
-//    std::cout << "Searched with linear search:" << std::endl;
-//    endTimer(startLoad);
+    auto linearStartLoad = startTimer();
+    algorithms.linearSearch(universityList, SIZE, choice, searchCriteria, searchCriteriaInt);
+    std::cout << "Searched with linear search:" << std::endl;
+    long long linearDuration = endTimer(linearStartLoad);
+    
+    auto binaryStartLoad = startTimer();
+    algorithms.binarySearchWithDuplicates(universityList, SIZE, choice, searchCriteriaInt);
+    std::cout << "Searched with binary search:" << std::endl;
+    long long binaryDuration = endTimer(binaryStartLoad);
+    
+    std::cout << "Time taken to load (Linear Search): " << linearDuration << " microseconds" << std::endl;
+    std::cout << "Time taken to load (Binary Search): " << binaryDuration << " microseconds" << std::endl;
 }
 
 void Controller::searchController(University universityList[], int *univIndex, int SIZE, UI ui, User *favUser,
@@ -461,35 +458,35 @@ void Controller::searchController(University universityList[], int *univIndex, i
         std::string searchCriteria;
         int searchCriteriaInt;
         ui.clearScreen();
-        switch (userChoice) {
-            case 1:
-                // Search by institution name
-                std::cout << "Enter the institution name you want to search: ";
-                std::cin.ignore();
-                std::getline(std::cin, searchCriteria);
-                algorithms.linearSearch(universityList, SIZE, 1, searchCriteria);
-                break;
+        switch (userChoice)
+        {
+        case 1:
+            // Search by institution name
+            std::cout << "Enter the institution name you want to search: ";
+            std::cin.ignore();
+            std::getline(std::cin, searchCriteria);
+            algorithms.linearSearch(universityList, SIZE, 1, searchCriteria, searchCriteriaInt);
+            break;
 
-            case 2:
-                // Search by Locale
-                std::cout << "Enter the locale you want to search: ";
-                std::cin.ignore();
-                std::getline(std::cin, searchCriteria);
-                algorithms.linearSearch(universityList, SIZE, 2, searchCriteria);
-                break;
+        case 2:
+            // Search by Locale
+            std::cout << "Enter the locale you want to search: ";
+            std::cin.ignore();
+            std::getline(std::cin, searchCriteria);
+            algorithms.linearSearch(universityList, SIZE, 2, searchCriteria, searchCriteriaInt);
+            break;
 
-            case 3:
-                // Search by Rank
-                std::cout << "Enter the rank you want to search: ";
-                std::cin >> searchCriteriaInt;
-                algorithms.countSort(universityList, SIZE, Algorithms::SortType::RANK_SCORE);
-                std::cout << "Done sort" << std::endl;
-
-                searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::RANK,
-                          searchCriteriaInt);
-                // algorithms.countSort(universityList, size, Algorithms::SortType::RANK_SCORE);
-                // searchInt(universityList, size, algorithms, searchCriteria, Algorithms::SearchType::RANK, searchCriteriaInt);
-                break;
+        case 3:
+            // Search by Rank
+            std::cout << "Enter the rank you want to search: ";
+            std::cin >> searchCriteriaInt;
+            searchCriteria = std::to_string(searchCriteriaInt);
+            algorithms.countSort(universityList, SIZE, Algorithms::SortType::RANK_SCORE);
+            std::cout << "Done sort" << std::endl;
+            // searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::RANK, searchCriteriaInt);
+            // algorithms.countSort(universityList, SIZE, Algorithms::SortType::RANK_SCORE);
+            searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::RANK, searchCriteriaInt);
+            break;
 
             case 4:
                 // Search by Faculty Student Ratio Rank

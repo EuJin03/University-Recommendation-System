@@ -112,7 +112,7 @@ int main()
 					else
 					{
 						// Registered User
-						controller.userController(&customer, universityList, ARRAY_SIZE, &univIndex, ui, &currentUser, &top10, feedbackList, currentUser);
+						controller.userController(&customer, universityList, &univIndex, ARRAY_SIZE, ui, &currentUser, &top10, feedbackList, currentUser);
 					}
 					break;
 				}
