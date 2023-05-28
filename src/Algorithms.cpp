@@ -304,12 +304,12 @@ std::string Algorithms::toLower(std::string &str)
     return str;
 }
 
-void Algorithms::linearSearch(University universityList[], int size, int criteria, std::string key)
+void Algorithms::linearSearch(University universityList[], int size, int userChoice, std::string key)
 {
     UI ui;
     int rank;
     std::string locale;
-    switch (criteria)
+    switch (userChoice)
     {
     case 1:
         ui.universityHeader();
@@ -342,10 +342,45 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
     case 3:
         ui.universityHeader();
         rank = std::stoi(key);
-        std::cout << rank << std::endl;
         for (int i = 0; i < size; i++)
         {
             if (universityList[i].getRank() == rank)
+            {
+                std::cout << universityList[i];
+            }
+        }
+        std::cout << std::endl;
+        break;
+    case 4:
+        ui.universityHeader();
+        rank = std::stoi(key);
+        for (int i = 0; i < size; i++)
+        {
+            if (universityList[i].getArRank() == rank)
+            {
+                std::cout << universityList[i];
+            }
+        }
+        std::cout << std::endl;
+        break;
+    case 5:
+        ui.universityHeader();
+        rank = std::stoi(key);
+        for (int i = 0; i < size; i++)
+        {
+            if (universityList[i].getFsrRank() == rank)
+            {
+                std::cout << universityList[i];
+            }
+        }
+        std::cout << std::endl;
+        break;
+    case 6:
+        ui.universityHeader();
+        rank = std::stoi(key);
+        for (int i = 0; i < size; i++)
+        {
+            if (universityList[i].getErRank() == rank)
             {
                 std::cout << universityList[i];
             }

@@ -39,7 +39,7 @@ public:
 
     void top10Controller(DynamicArray<University> *top10, UI ui);
 
-    void searchInt(University universityList[], int size, Algorithms algorithms, std::string searchCriteria, int choice,
+    void searchInt(University universityList[], int size, Algorithms algorithms, int userChoice, int choice,
                    int searchCriteriaInt);
 
     // Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
