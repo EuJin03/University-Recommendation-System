@@ -313,7 +313,7 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
     {
     case 1:
         ui.universityHeader();
-        
+
         for (int i = 0; i < size; i++)
         {
             // finally found a way to make it case insensitive yay :D  (╯°□°）╯︵ ┻━┻
@@ -409,7 +409,7 @@ void Algorithms::binarySearch(University universityList[], int size, int rank)
             std::cout << std::endl;
             ui.universityHeader();
             std::cout << universityList[mid] << std::endl
-                      << std::endl;
+                    << std::endl;
             break;
         }
         else if (current < rank)
