@@ -11,6 +11,7 @@
 #include "../include/LinkedList.h"
 #include "../include/HashTable.h"
 #include "../include/DynamicArray.h"
+#include "../include/UI.h"
 #include <iostream>
 #include <stdlib.h>
 #include <limits>
@@ -37,6 +38,9 @@ public:
     void modifyController(UI ui, HashTable *customer);
 
     void top10Controller(DynamicArray<University> *top10, UI ui);
+
+    void searchInt(University universityList[], int size, Algorithms algorithms, std::string searchCriteria, int choice,
+                   int searchCriteriaInt);
 
     // Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
     // void insertFavUni(std::string uniName);

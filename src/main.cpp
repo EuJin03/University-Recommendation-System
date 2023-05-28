@@ -16,7 +16,6 @@ int main()
 	int ARRAY_SIZE = 1422;
 	University universityList[ARRAY_SIZE];
 	University unsortedUniversityList[ARRAY_SIZE];
-	static int feedbackID = 0;
 	DynamicArray<University> top10;
 	DynamicArray<University> uniqueUni;
 	DynamicArray<int> uniqueUniCount;
