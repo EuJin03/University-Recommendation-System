@@ -203,9 +203,9 @@ public:
             totalCount->append(count);
         }
 
-        for (int i = 0; i < sizeof(totalCount)/sizeof(int); i++)
+        for (int i = 0; i < sizeof(totalCount) / sizeof(int); i++)
         {
-            std::cout << arr->get(i) << " : " <<  totalCount->get(i) << std::endl;
+            std::cout << arr->get(i) << " : " << totalCount->get(i) << std::endl;
         }
     }
 
