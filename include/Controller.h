@@ -10,6 +10,7 @@
 #include "../include/Feedback.h"
 #include "../include/LinkedList.h"
 #include "../include/HashTable.h"
+#include "../include/DynamicArray.h"
 #include <iostream>
 #include <stdlib.h>
 #include <limits>
@@ -23,12 +24,10 @@ public:
     bool registerUser(std::string username, std::string password, HashTable *userTable);
 
     // Registered user
-    void userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser,
-                        DynamicArray<University> *top10, LinkedList<Feedback> *feedbackList, User currentUser);
-
-    void favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[], int *univIndex,
-                             DynamicArray<University> *top10);
-
+    void userController(HashTable *customer, University universityList[], int *univIndex, int size, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser);
+    void sortController(University universityList[], int *univIndex, int SIZE, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser);
+    void searchController(University universityList[], int *univIndex, int SIZE, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser);
+    void favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[], int *univIndex, DynamicArray<University> *top10);
     void feedbackController(LinkedList<Feedback> *feedbackList, UI ui, User currentUser);
 
     // Admin
@@ -38,12 +37,12 @@ public:
 
     void modifyController(UI ui, HashTable *customer);
 
-    void top10Controller(DynamicArray<University> *top10, DynamicArray<University> *uniqueUni,
-                         DynamicArray<int> *uniqueUniCount);
+    void top10Controller(DynamicArray<University> *top10, DynamicArray<University> uniqueUni,
+                         DynamicArray<int> uniqueUniCount);
 
     // Feedback insertFeedback(LinkedList<Feedback> feedbackList, std::string userFeedback);
     // void insertFavUni(std::string uniName);
     // checkExecutionTime(Algorithms algorithm, Algorithms::SortType sortType, std::vector<University> &uniArr);
 };
 
-#endif // CONTROLLER_H
+#endif // CONTROLLER_Hs
