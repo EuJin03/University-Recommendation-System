@@ -16,7 +16,6 @@ int main()
 	int ARRAY_SIZE = 1422;
 	University universityList[ARRAY_SIZE];
 	University unsortedUniversityList[ARRAY_SIZE];
-	static int feedbackID = 0;
 	DynamicArray<University> top10;
 	DynamicArray<University> uniqueUni;
 	DynamicArray<int> uniqueUniCount;
@@ -52,27 +51,23 @@ int main()
 		switch (option)
 		{
 		case 1:
-			// Display all universities' information
-			// algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, true, 2);
-			// algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::FSR_SCORE);
 			ui.universityList(universityList, &univIndex);
 			break;
 		case 2:
-			controller.sortController(universityList, &univIndex, ARRAY_SIZE, ui, &currentUser, &top10, feedbackList, currentUser);
 			// // should move into controller class
-            // start_load = std::chrono::high_resolution_clock::now();
-            // algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, false, 2);
-            // end_load = std::chrono::high_resolution_clock::now();
-            // durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
-            // std::cout << "Time taken to load data using Quick Sort: " << durationLoad << " microseconds" << std::endl;
+             start_load = std::chrono::high_resolution_clock::now();
+             algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, false, 2);
+             end_load = std::chrono::high_resolution_clock::now();
+             durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
+             std::cout << "Time taken to load data using Quick Sort: " << durationLoad << " microseconds" << std::endl;
 
-            // algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::RANK_SCORE);
+             algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::RANK_SCORE);
 
-            // start_load = std::chrono::high_resolution_clock::now();
-            // algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::AR_SCORE);
-            // end_load = std::chrono::high_resolution_clock::now();
-            // durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
-            // std::cout << "Time taken to load data using Count Sort: " << durationLoad << " microseconds" << std::endl;
+             start_load = std::chrono::high_resolution_clock::now();
+             algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::INSTITUTION);
+             end_load = std::chrono::high_resolution_clock::now();
+             durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
+             std::cout << "Time taken to load data using Count Sort: " << durationLoad << " microseconds" << std::endl;
 
 			break;
 		case 3:
@@ -112,12 +107,12 @@ int main()
 					if (currentUser.getIsAdmin())
 					{
 						// Admin
-						controller.adminController(ui, universityList, &univIndex, &customer, &feedbackList, currentUser, &top10, &uniqueUni, &uniqueUniCount); // -- eugene & bryan
+						controller.adminController(ui, universityList, &univIndex, &customer, &feedbackList, currentUser, &top10); // -- eugene & bryan
 					}
 					else
 					{
 						// Registered User
-						controller.userController(&customer, universityList, &univIndex, ARRAY_SIZE, ui, &currentUser, &top10, feedbackList, currentUser);
+						controller.userController(&customer, universityList, ARRAY_SIZE, &univIndex, ui, &currentUser, &top10, feedbackList, currentUser);
 					}
 					break;
 				}

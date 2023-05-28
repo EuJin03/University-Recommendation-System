@@ -30,6 +30,10 @@ public:
         ER_RANK = 3
     };
 
+    //toLower function
+    std::string toLower(std::string &str);
+
+
     // Quick Sort Algorithm
     void swap(University *uniA, University *uniB);
     int partition(University uniArr[], int start, int pivot, bool registered, int choice);

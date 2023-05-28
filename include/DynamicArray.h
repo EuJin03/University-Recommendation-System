@@ -202,33 +202,6 @@ public:
         return size == 0;
     }
 
-    // Count the occurrences of each element in the Dynamic Array
-    void countOccurrences(DynamicArray<T> *arr, DynamicArray<int> *totalCount)
-    {
-        int count = 0;
-        for (int i = 0; i < size; i++)
-        {
-            count = 1;
-            for (int j = i + 1; j < size; j++)
-            {
-                if (array[i] == array[j])
-                {
-                    count++;
-                }
-            }
-            arr->append(array[i]);
-            totalCount->append(count);
-        }
-
-        arr->show();
-        totalCount->show();
-
-//        for (int i = 0; i < sizeof(arr)/sizeof(T); i++)
-//        {
-//            std::cout << arr->get(i) << " : " <<  totalCount->get(i) << std::endl;
-//        }
-    }
-
     void show()
     {
         for (int i = 0; i < size; i++)

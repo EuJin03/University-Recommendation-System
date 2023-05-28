@@ -15,7 +15,7 @@ std::string Controller::validate(std::string username, std::string password)
 	{
 		return "success";
 	}
-}
+};
 
 auto startTimer = []() {
 	return std::chrono::high_resolution_clock::now();
@@ -41,12 +41,12 @@ bool Controller::registerUser(std::string username, std::string password, HashTa
         userTable->addUser(user);
     }
     return true;
-}
+};
 
 void Controller::adminController(UI ui, University universityList[], int *univIndex, HashTable *customer,
                                  LinkedList<Feedback> *feedbackList, User currentUser,
-                                 DynamicArray<University> *top10,
-                                 DynamicArray<University> *uniqueUni, DynamicArray<int> *uniqueUniCount) {
+                                 DynamicArray<University> *top10)
+{
     while (true) {
         ui.adminMenu();
         int userChoice;
@@ -69,7 +69,7 @@ void Controller::adminController(UI ui, University universityList[], int *univIn
                 break;
             case 4:
                 // Display top 10
-                top10Controller(top10, *uniqueUni, *uniqueUniCount);
+                top10Controller(top10, ui);
                 break;
             case 5:
                 // Logout
@@ -82,11 +82,13 @@ void Controller::adminController(UI ui, University universityList[], int *univIn
                 break;
         }
     }
-}
+};
 
-void Controller::modifyController(UI ui, HashTable *customer) {
+void Controller::modifyController(UI ui, HashTable *customer)
+{
     ui.clearScreen();
-    while (true) {
+    while (true)
+    {
         std::string oldUsername, newUsername;
         std::string newPassword;
         int modifyChoice;
@@ -99,16 +101,17 @@ void Controller::modifyController(UI ui, HashTable *customer) {
         std::cin.clear();
         std::cin.ignore();
         std::cin >> modifyChoice;
-        switch (modifyChoice) {
-            case 1:
-                // Change username
-                // Getting user
-                std::cout << "Enter original username: ";
-                std::cin >> oldUsername;
-                selectedUser = customer->getUser(oldUsername);
+        switch (modifyChoice)
+        {
+        case 1:
+            // Change username
+            // Getting user
+            std::cout << "Enter original username: ";
+            std::cin >> oldUsername;
+            selectedUser = customer->getUser(oldUsername);
 
-                // Removing user from HashTable
-                customer->removeUser(oldUsername);
+            // Removing user from HashTable
+            customer->removeUser(oldUsername);
 
                 // Getting new username
                 std::cin.ignore();
@@ -164,11 +167,12 @@ void Controller::modifyController(UI ui, HashTable *customer) {
                 break;
         }
     }
-}
+};
 
-void Controller::top10Controller(DynamicArray<University> *top10, DynamicArray<University> uniqueUni,
-                                 DynamicArray<int> uniqueUniCount) {
+void Controller::top10Controller(DynamicArray<University> *top10, UI ui) {
     int userChoice;
+    DynamicArray<University> uniqueUni = DynamicArray<University>();
+    DynamicArray<int> uniqueUniCount;
     for (int i = 0; i < top10->getSize(); i++) {
         if (uniqueUni.contains(top10->get(i))) {
             int index = uniqueUni.find(top10->get(i));
@@ -179,14 +183,44 @@ void Controller::top10Controller(DynamicArray<University> *top10, DynamicArray<U
         }
     }
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < uniqueUni.getSize(); i++) {
+        for (int j = 0; j < uniqueUni.getSize() - 1; j++) {
+            if (uniqueUniCount.get(j) < uniqueUniCount.get(j + 1)) {
+                int temp = uniqueUniCount.get(j);
+                uniqueUniCount.set(uniqueUniCount.get(j + 1), j);
+                uniqueUniCount.set(temp, j + 1);
+
+                University tempUni = uniqueUni.get(j);
+                uniqueUni.set(uniqueUni.get(j + 1), j);
+                uniqueUni.set(tempUni, j + 1);
+            }
+        }
+    }
+
+    ui.clearScreen();
+    std::cout << "Top 10 Universities \n";
+    for (int i = 0; i < uniqueUni.getSize(); i++) {
         std::cout << uniqueUni.get(i).getInstitution() << " : " << uniqueUniCount.get(i) << std::endl;
     }
+    std::cout << std::endl;
+    ui.top10();
+    std::cin.clear();
+    std::cin.ignore();
     std::cin >> userChoice;
-}
 
-void Controller::userController(HashTable *customer, University universityList[], int *univIndex, UI ui, User *favUser,
-                                DynamicArray<University> *top10, LinkedList<Feedback> *feedbackList, User currentUser) {
+    switch (userChoice) {
+        case 1:
+            return;
+        case 2:
+            exit(0);
+        default:
+            std::cout << "Invalid option" << std::endl;
+            break;
+    }
+};
+
+void Controller::userController(HashTable *customer, University universityList[], int SIZE, int *univIndex, UI ui, User *favUser,
+                                DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser) {
     while (true) {
         ui.customerMenu();
         int userChoice;
@@ -225,7 +259,7 @@ void Controller::userController(HashTable *customer, University universityList[]
 			break;
 		}
 	}
-}
+};
 
 // to reduece sorting code
 void sort(University universityList[], int SIZE, Algorithms algorithms, Algorithms::SortType sortType, int choice)
@@ -253,185 +287,270 @@ void sort(University universityList[], int SIZE, Algorithms algorithms, Algorith
 	endTimer(startLoad);
 }
 
-void Controller::sortController(University universityList[], int *univIndex, int SIZE, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser)
-{
-	Algorithms algorithms;
-	ui.clearScreen();
-	while(true)
-	{
-		ui.userSortMenu();
-		int userChoice;
+void Controller::sortController(University universityList[], int *univIndex, int SIZE, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser) {
+    Algorithms algorithms;
+    ui.clearScreen();
+    while (true) {
+        ui.sortType();
+        int sortChoice;
         std::cin.clear();
-		std::cin.ignore();
-		std::cin >> userChoice;
+        std::cin.ignore();
+        std::cin >> sortChoice;
 
-		ui.clearScreen();
-		switch (userChoice)
-		{
-			case 1:
-				// Sort by institution name
-				sort(universityList, SIZE, algorithms, Algorithms::SortType::INSTITUTION, Algorithms::SortType::INSTITUTION);
-				break;
+        switch (sortChoice) {
+            case 1:
+                // Sort ascending
+                while (true) {
+                    ui.userSortMenu();
+                    int userChoice;
+                    std::cin.clear();
+                    std::cin.ignore();
+                    std::cin >> userChoice;
 
-			case 2:
-				// Sort by FSR score
-				sort(universityList, SIZE, algorithms, Algorithms::SortType::FSR_SCORE, Algorithms::SortType::FSR_SCORE);
-				// algorithms.countSort(universityList, *univIndex, Algorithms::SortType::FSR_SCORE);
-				break;
+                    ui.clearScreen();
+                    switch (userChoice) {
+                        case 1:
+                            // Sort by institution name
+                            sort(universityList, SIZE, algorithms, Algorithms::SortType::INSTITUTION,
+                                 Algorithms::SortType::INSTITUTION);
+                            break;
 
-			case 3:
-				// Sort by ER score
-				sort(universityList, SIZE, algorithms, Algorithms::SortType::ER_SCORE, Algorithms::SortType::ER_SCORE);
-				break;
+                        case 2:
+                            // Sort by FSR score
+                            sort(universityList, SIZE, algorithms, Algorithms::SortType::FSR_SCORE,
+                                 Algorithms::SortType::FSR_SCORE);
+                            // algorithms.countSort(universityList, *univIndex, Algorithms::SortType::FSR_SCORE);
+                            break;
 
-			case 4:
-				// Sort by AR score
-				sort(universityList, SIZE, algorithms, Algorithms::SortType::AR_SCORE, Algorithms::SortType::AR_SCORE);
-				break;
+                        case 3:
+                            // Sort by ER score
+                            sort(universityList, SIZE, algorithms, Algorithms::SortType::ER_SCORE,
+                                 Algorithms::SortType::ER_SCORE);
+                            break;
 
-			case 5:
-				// Sort by FSR rank
-				algorithms.countSort(universityList, SIZE, Algorithms::SortType::FSR_RANK_SORT);
-				break;
+                        case 4:
+                            // Sort by AR score
+                            sort(universityList, SIZE, algorithms, Algorithms::SortType::AR_SCORE,
+                                 Algorithms::SortType::AR_SCORE);
+                            break;
 
-			case 6:
-				// Sort by ER rank
-				algorithms.countSort(universityList, SIZE, Algorithms::SortType::ER_RANK_SORT);
-				break;
+                        case 5:
+                            // Sort by FSR rank
+                            algorithms.countSort(universityList, SIZE, Algorithms::SortType::FSR_RANK_SORT);
+                            break;
 
-			case 7:
-				// Sort by AR rank
-				algorithms.countSort(universityList, SIZE, Algorithms::SortType::AR_RANK_SORT);
-				break;
+                        case 6:
+                            // Sort by ER rank
+                            algorithms.countSort(universityList, SIZE, Algorithms::SortType::ER_RANK_SORT);
+                            break;
 
-			case 8:
-				return;
+                        case 7:
+                            // Sort by AR rank
+                            algorithms.countSort(universityList, SIZE, Algorithms::SortType::AR_RANK_SORT);
+                            break;
 
-			default:
-				std::cout << "Invalid input" << std::endl;
-				break;
-		}
-	}
+                        case 8:
+                            return;
+
+                        default:
+                            std::cout << "Invalid input" << std::endl;
+                            break;
+                    }
+                }
+                break;
+            case 2:
+                // Sort descending
+                while (true) {
+                    ui.userSortMenu();
+                    int userChoice;
+                    std::cin.clear();
+                    std::cin.ignore();
+                    std::cin >> userChoice;
+
+                    ui.clearScreen();
+                    switch (userChoice) {
+                        case 1:
+                            // Sort by institution name
+//                            sort(universityList, SIZE, algorithms, Algorithms::SortType::INSTITUTION,
+//                                 Algorithms::SortType::INSTITUTION);
+                            algorithms.quickSort(universityList, 0, SIZE - 1, true, 0);
+                            break;
+
+                        case 2:
+                            // Sort by FSR score
+                            sort(universityList, SIZE, algorithms, Algorithms::SortType::FSR_SCORE,
+                                 Algorithms::SortType::FSR_SCORE);
+                            // algorithms.countSort(universityList, *univIndex, Algorithms::SortType::FSR_SCORE);
+                            break;
+
+                        case 3:
+                            // Sort by ER score
+                            sort(universityList, SIZE, algorithms, Algorithms::SortType::ER_SCORE,
+                                 Algorithms::SortType::ER_SCORE);
+                            break;
+
+                        case 4:
+                            // Sort by AR score
+                            sort(universityList, SIZE, algorithms, Algorithms::SortType::AR_SCORE,
+                                 Algorithms::SortType::AR_SCORE);
+                            break;
+
+                        case 5:
+                            // Sort by FSR rank
+                            algorithms.countSort(universityList, SIZE, Algorithms::SortType::FSR_RANK_SORT);
+                            break;
+
+                        case 6:
+                            // Sort by ER rank
+                            algorithms.countSort(universityList, SIZE, Algorithms::SortType::ER_RANK_SORT);
+                            break;
+
+                        case 7:
+                            // Sort by AR rank
+                            algorithms.countSort(universityList, SIZE, Algorithms::SortType::AR_RANK_SORT);
+                            break;
+
+                        case 8:
+                            return;
+
+                        default:
+                            std::cout << "Invalid input" << std::endl;
+                            break;
+                    }
+                }
+                break;
+            case 3:
+                return;
+            case 4:
+                exit(0);
+            default:
+                std::cout << "Invalid input" << std::endl;
+                break;
+
+        }
+    }
 }
 
 
-void searchInt(University universityList[], int size, Algorithms algorithms, std::string searchCriteria, int choice, int searchCriteriaInt)
-{
-	auto startLoad = startTimer();
-	algorithms.binarySearchWithDuplicates(universityList, size, choice, searchCriteriaInt);
-	std::cout << "Searched with binary search:" << std::endl;
-	endTimer(startLoad);
+void Controller::searchInt(University universityList[], int size, Algorithms algorithms, std::string searchCriteria, int choice,
+          int searchCriteriaInt) {
+    auto startLoad = startTimer();
+    algorithms.binarySearchWithDuplicates(universityList, size, choice, searchCriteriaInt);
+    std::cout << "Searched with binary search:" << std::endl;
+    endTimer(startLoad);
 
-	// Linear search for integer
-	// ******************************************************
-	// auto startLoad = startTimer();
-	// algorithms.linearSearch(universityList, *univIndex, searchCriteriaInt, searchCriteria);
-	// std::cout << "Searched with linear search:" << std::endl;
-	// endTimer(startLoad);
-
-	
+    // Linear search for integer
+    // ******************************************************
+//    startLoad = startTimer();
+//    algorithms.linearSearch(universityList, size, 3, searchCriteria);
+//    std::cout << "Searched with linear search:" << std::endl;
+//    endTimer(startLoad);
 }
 
-void Controller::searchController(University universityList[], int *univIndex, int SIZE, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> feedbackList, User currentUser)
-{
-	Algorithms algorithms;
-	ui.clearScreen();
-	while(true)
-	{
-		ui.userSearchMenu();
-		int userChoice;
+void Controller::searchController(University universityList[], int *univIndex, int SIZE, UI ui, User *favUser,
+                                  DynamicArray<University> *top10, LinkedList<Feedback> feedbackList,
+                                  User currentUser) {
+    Algorithms algorithms;
+    ui.clearScreen();
+    while (true) {
+        ui.userSearchMenu();
+        int userChoice;
         std::cin.clear();
-		std::cin.ignore();
-		std::cin >> userChoice;
+        std::cin >> userChoice;
 
-		std::string searchCriteria;
-		int searchCriteriaInt;
-		ui.clearScreen();
-		switch (userChoice)
-		{
-			case 1:
-				// Search by institution name
-				std::cout << "Enter the institution name you want to search: ";
-				std::cin.ignore();
-				std::getline(std::cin, searchCriteria);
-				algorithms.linearSearch(universityList, SIZE, 0, searchCriteria);
-				break;
+        std::string searchCriteria;
+        int searchCriteriaInt;
+        ui.clearScreen();
+        switch (userChoice) {
+            case 1:
+                // Search by institution name
+                std::cout << "Enter the institution name you want to search: ";
+                std::cin.ignore();
+                std::getline(std::cin, searchCriteria);
+                algorithms.linearSearch(universityList, SIZE, 1, searchCriteria);
+                break;
 
-			case 2:
-				// Search by Locale
-				std::cout << "Enter the locale you want to search: ";
-				std::cin.ignore();
-				std::getline(std::cin, searchCriteria);
-				algorithms.linearSearch(universityList, SIZE, 1, searchCriteria);
-				break;
+            case 2:
+                // Search by Locale
+                std::cout << "Enter the locale you want to search: ";
+                std::cin.ignore();
+                std::getline(std::cin, searchCriteria);
+                algorithms.linearSearch(universityList, SIZE, 2, searchCriteria);
+                break;
 
-			case 3:
-				// Search by Rank
-				std::cout << "Enter the rank you want to search: ";
-				std::cin >> searchCriteriaInt;
-				algorithms.countSort(universityList, SIZE, Algorithms::SortType::RANK_SCORE);
-				std::cout << "Done sort" << std::endl;
+            case 3:
+                // Search by Rank
+                std::cout << "Enter the rank you want to search: ";
+                std::cin >> searchCriteriaInt;
+                algorithms.countSort(universityList, SIZE, Algorithms::SortType::RANK_SCORE);
+                std::cout << "Done sort" << std::endl;
 
-				searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::RANK, searchCriteriaInt);
-				// algorithms.countSort(universityList, size, Algorithms::SortType::RANK_SCORE);
-				// searchInt(universityList, size, algorithms, searchCriteria, Algorithms::SearchType::RANK, searchCriteriaInt);
-				break;
+                searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::RANK,
+                          searchCriteriaInt);
+                // algorithms.countSort(universityList, size, Algorithms::SortType::RANK_SCORE);
+                // searchInt(universityList, size, algorithms, searchCriteria, Algorithms::SearchType::RANK, searchCriteriaInt);
+                break;
 
-			case 4:
-				// Search by Faculty Student Ratio Rank
-				std::cout << "Enter the FSR rank you want to search: ";
-				std::cin >> searchCriteriaInt;
-				algorithms.countSort(universityList, SIZE, Algorithms::SortType::FSR_RANK_SORT);
-				std::cout << "Done sort" << std::endl;
+            case 4:
+                // Search by Faculty Student Ratio Rank
+                std::cout << "Enter the FSR rank you want to search: ";
+                std::cin >> searchCriteriaInt;
+                algorithms.countSort(universityList, SIZE, Algorithms::SortType::FSR_RANK_SORT);
+                std::cout << "Done sort" << std::endl;
 
-				searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::FSR_RANK, searchCriteriaInt);
-				break;
-			case 5:
-				// Search by Employer Reputation Rank
-				std::cout << "Enter the ER rank you want to search: ";
-				std::cin >> searchCriteriaInt;
-				algorithms.countSort(universityList, SIZE, Algorithms::SortType::ER_RANK_SORT);
-				std::cout << "Done sort" << std::endl;
-				searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::ER_RANK, searchCriteriaInt);
-				break;
+                searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::FSR_RANK,
+                          searchCriteriaInt);
+                break;
+            case 5:
+                // Search by Employer Reputation Rank
+                std::cout << "Enter the ER rank you want to search: ";
+                std::cin >> searchCriteriaInt;
+                algorithms.countSort(universityList, SIZE, Algorithms::SortType::ER_RANK_SORT);
+                std::cout << "Done sort" << std::endl;
+                searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::ER_RANK,
+                          searchCriteriaInt);
+                break;
 
-			case 6:
-				// Search by Academic Reputation Rank
-				std::cout << "Enter the AR rank you want to search: ";
-				std::cin >> searchCriteriaInt;
-				algorithms.countSort(universityList, SIZE, Algorithms::SortType::AR_RANK_SORT);
-				std::cout << "Done sort" << std::endl;
+            case 6:
+                // Search by Academic Reputation Rank
+                std::cout << "Enter the AR rank you want to search: ";
+                std::cin >> searchCriteriaInt;
+                algorithms.countSort(universityList, SIZE, Algorithms::SortType::AR_RANK_SORT);
+                std::cout << "Done sort" << std::endl;
 
-				searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::AR_RANK, searchCriteriaInt);
-				break;
+                searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::AR_RANK,
+                          searchCriteriaInt);
+                break;
 
-			case 7:
-				return;
+            case 7:
+                return;
 
-			case 0:
-				exit(0);
+            case 0:
+                exit(0);
 
-			default:
-				std::cout << "Invalid input" << std::endl;
-				break;
-		}
-	}
+            default:
+                std::cout << "Invalid input" << std::endl;
+                break;
+        }
+    }
 }
 
-void Controller::favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[], int *univIndex, DynamicArray<University> *top10)
-{
+void Controller::favouriteController(HashTable *customer, User *currentUser, UI ui, University universityList[],
+                                     int *univIndex, DynamicArray<University> *top10) {
+    Algorithms algorithms;
+
     ui.clearScreen();
     while (true) {
         ui.favouriteMenu();
         int userChoice;
         int uniChoice;
+        algorithms.countSort(universityList, 1422, Algorithms::SortType::RANK_SCORE);
         LinkedList<University> favList = currentUser->getFavUnivList();
         std::cin.clear();
         std::cin.ignore();
         std::cin >> userChoice;
 
-        switch (userChoice)
-        {
+        switch (userChoice) {
             case 1:
                 ui.universityHeader();
                 favList.show();
@@ -440,13 +559,11 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
                 ui.universityList(universityList, univIndex);
                 std::cout << "Please provide the rank of the university you want to add: ";
                 std::cin >> uniChoice;
-                if (uniChoice == 0)
-                {
+                if (uniChoice == 0) {
                     std::cout << "Invalid choice" << std::endl;
                     continue;
                 }
-                if (favList.insertAtEnd(universityList[uniChoice - 1]))
-                {
+                if (favList.insertAtEnd(universityList[uniChoice - 1])) {
                     top10->append(universityList[uniChoice - 1]);
                 };
                 currentUser->setFavUnivList(favList);
@@ -460,8 +577,7 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
                 favList.show();
                 std::cout << "Please provide the rank of the university you want to remove: ";
                 std::cin >> uniChoice;
-                if (uniChoice == 0)
-                {
+                if (uniChoice == 0) {
                     std::cout << "Invalid choice" << std::endl;
                     continue;
                 }
@@ -497,7 +613,6 @@ void Controller::feedbackController(LinkedList<Feedback> *feedbackList, UI ui, U
             std::cout << "\n2. Reply to feedback";
         } else {
             std::cout << "\n2. Write a new feedback";
-
         }
         std::cout << "\n3. Go back";
 
@@ -530,7 +645,8 @@ void Controller::feedbackController(LinkedList<Feedback> *feedbackList, UI ui, U
                 std::getline(std::cin, reply);
 
                 Feedback newFeedback(current.getFeedbackID(), current.getUsername(), current.getFeedback(),
-                                     current.getCreatedAt(), currentUser.getUsername(), reply, std::time(nullptr));
+                                     current.getCreatedAt(), currentUser.getUsername(), reply,
+                                     std::time(nullptr));
                 feedbackList->updateItem(current, newFeedback);
 
                 ui.clearScreen();
@@ -542,7 +658,7 @@ void Controller::feedbackController(LinkedList<Feedback> *feedbackList, UI ui, U
                 std::cin.ignore();
                 std::getline(std::cin, feedback);
 
-                int newID = feedbackList->getSize() + 1;
+                int newID = feedbackList->getSize();
                 std::string newUser = currentUser.getUsername();
                 std::string newComment = feedback;
                 std::time_t createdAt = std::time(nullptr);
@@ -559,3 +675,4 @@ void Controller::feedbackController(LinkedList<Feedback> *feedbackList, UI ui, U
             break;
     } while (true);
 }
+

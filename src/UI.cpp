@@ -184,3 +184,18 @@ void UI::modifyUserMenu()
 	std::cout << "5. Exit program\n";
 	std::cout << "Enter your choice: ";
 }
+
+void UI::top10() {
+    std::cout << "\n1. Return to admin menu\n";
+    std::cout << "2. Exit program\n";
+    std::cout << "Enter your choice: ";
+}
+
+void UI::sortType() {
+    std::cout << "\nSort Type\n";
+    std::cout << "1. Sort ascendingly\n";
+    std::cout << "2. Sort descendingly\n";
+    std::cout << "3. Return to admin menu\n";
+    std::cout << "4. Exit program\n";
+    std::cout << "Enter your choice: ";
+}
