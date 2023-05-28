@@ -77,6 +77,29 @@ public:
         }
     }
 
+    void pushAndPointEnd(U data)
+    {
+        Node<U> *newNode;
+        newNode = new Node<U>();
+        newNode->data = data;
+        newNode->next = nullptr;
+        newNode->prev = nullptr;
+
+        if (head == nullptr)
+
+        {
+            head = newNode;
+            tail = newNode;
+        }
+        else
+        {
+            tail->next = newNode;
+            newNode->prev = tail;
+            tail = tail->next;
+        }
+        size++;
+    }
+
     void removeAtBeginning()
     {
         if (head != nullptr)
