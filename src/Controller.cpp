@@ -299,7 +299,7 @@ void sort(University universityList[], int SIZE, Algorithms algorithms, Algorith
     algorithms.countSort(universityList, SIZE, sortType);
     std::cout << "Sorted with count sort:" << std::endl;
     long long countDuration = endTimer(countStartLoad);
-    std::cout << "Time taken to load (Count Sort): " << quickDuration << " microseconds" << std::endl;
+    std::cout << "Time taken to load (Count Sort): " << countDuration << " microseconds" << std::endl;
 }
 
 void Controller::sortController(University universityList[], int *univIndex, int SIZE, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> *feedbackList, User currentUser)

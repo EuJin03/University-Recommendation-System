@@ -43,6 +43,7 @@ int main()
 	int option, sortOption;
 	while (true)
 	{
+		ui.clearScreen();
 		ui.mainMenu();
 		std::cin >> option;
 		std::string searchCriteria;
@@ -51,10 +52,14 @@ int main()
 		switch (option)
 		{
 		case 1:
+			ui.clearScreen();
 			ui.universityList(universityList, &univIndex);
 			break;
 		case 2:
-			// // should move into controller class
+			ui.clearScreen();
+			char command;
+			// should move into controller class
+			std::cout << " ---------- SORT ---------- " << std::endl;
 			start_load = std::chrono::high_resolution_clock::now();
 			algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, false, 2);
 			end_load = std::chrono::high_resolution_clock::now();
@@ -69,13 +74,26 @@ int main()
 			durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
 			std::cout << "Time taken to load data using Count Sort: " << durationLoad << " microseconds" << std::endl;
 
+			std::cout << "\n\nEnter '0' to go back to main menu:";
+			std::cin >> command;
+			if (command == 0)
+			{
+				break;
+			}
+			else
+			{
+				continue;
+			}
+
 			break;
 		case 3:
 			// Search university
+			ui.clearScreen();
 			controller.searchController(universityList, &univIndex, ARRAY_SIZE, ui, &currentUser, &top10, &feedbackList, currentUser);
 			break;
 		case 4:
 			// Register
+			ui.clearScreen();
 			std::cout << " ---------- REGISTER ---------- " << std::endl;
 			do
 			{
@@ -91,6 +109,7 @@ int main()
 			break;
 		case 5:
 			// Login
+			ui.clearScreen();
 			std::cout << " ---------- LOGIN ---------- " << std::endl;
 			while (true)
 			{
