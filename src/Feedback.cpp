@@ -44,6 +44,8 @@ Feedback::Feedback()
 	this->repliedAt = -1;
 }
 
+// Feedback::~Feedback() = default;
+
 // Override ostream operator
 std::ostream &operator<<(std::ostream &os, const Feedback &feedback)
 {
