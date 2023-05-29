@@ -28,11 +28,10 @@ auto endTimer = [](auto start_load) {
 };
 
 bool Controller::registerUser(std::string username, std::string password, HashTable *userTable)
-{
+{K
     if (validate(username, password) != "success")
     {
-        std::cout << "Register Failed \nPlease try again with username and password length of at least 6 characters."
-                  << std::endl;
+        std::cout << "Register Failed \nPlease try again with username and password length of at least 6 characters." << std::endl;
         return false;
     } else {
         std::time_t lastLogin = std::time(nullptr);
@@ -256,7 +255,6 @@ void Controller::userController(HashTable *customer, University universityList[]
 			exit(0);
 		default:
 			return;
-			break;
 		}
 	}
 };
