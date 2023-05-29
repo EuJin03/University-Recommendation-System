@@ -43,6 +43,7 @@ int main()
 	int option, sortOption;
 	while (true)
 	{
+		ui.clearScreen();
 		ui.mainMenu();
 		std::cin >> option;
 		std::string searchCriteria;
@@ -51,31 +52,40 @@ int main()
 		switch (option)
 		{
 		case 1:
+			ui.clearScreen();
 			ui.universityList(universityList, &univIndex);
 			break;
 		case 2:
-			// // should move into controller class
+			ui.clearScreen();
+			char command;
+			// should move into controller class
+			std::cout << " ---------- SORT ---------- " << std::endl;
 			start_load = std::chrono::high_resolution_clock::now();
 			algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, false, 2);
 			end_load = std::chrono::high_resolution_clock::now();
 			durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
 			std::cout << "Time taken to load data using Quick Sort: " << durationLoad << " microseconds" << std::endl;
 
-			algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::RANK_SCORE);
+			algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::RANK_SCORE, true);
 
 			start_load = std::chrono::high_resolution_clock::now();
-			algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::INSTITUTION);
+			algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::INSTITUTION, true);
 			end_load = std::chrono::high_resolution_clock::now();
 			durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
 			std::cout << "Time taken to load data using Count Sort: " << durationLoad << " microseconds" << std::endl;
 
+			std::cout << "\nInput anything to go back to main menu:";
+			std::cin >> command;
+
 			break;
 		case 3:
 			// Search university
+			ui.clearScreen();
 			controller.searchController(universityList, &univIndex, ARRAY_SIZE, ui, &currentUser, &top10, &feedbackList, currentUser);
 			break;
 		case 4:
 			// Register
+			ui.clearScreen();
 			std::cout << " ---------- REGISTER ---------- " << std::endl;
 			do
 			{
@@ -91,6 +101,7 @@ int main()
 			break;
 		case 5:
 			// Login
+			ui.clearScreen();
 			std::cout << " ---------- LOGIN ---------- " << std::endl;
 			while (true)
 			{
