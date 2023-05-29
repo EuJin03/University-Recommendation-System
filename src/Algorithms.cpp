@@ -307,8 +307,6 @@ std::string Algorithms::toLower(std::string &str)
 void Algorithms::linearSearch(University universityList[], int size, int criteria, std::string key, int rank)
 {
     UI ui;
-    // int rank;
-    std::string locale;
     switch (criteria)
     {
     case 1:
@@ -330,7 +328,7 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
         for (int i = 0; i < size; i++)
         {
             key = toLower(key);
-            locale = universityList[i].getLocale();
+            std::string locale = universityList[i].getLocale();
             locale = toLower(locale);
             if (locale.find(key) != std::string::npos)
             {
