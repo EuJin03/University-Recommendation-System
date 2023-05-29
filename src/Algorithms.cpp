@@ -38,7 +38,6 @@ int Algorithms::partition(University uniArr[], int start, int pivot, bool regist
     int i = start - 1;
     if (registered)
     { // Registered users, need to think how to decide on which column to sort on.
-        // TODO: Figure out how to decide which column to sort on.
         switch (choice)
         {
         case 0:

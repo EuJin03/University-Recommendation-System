@@ -15,6 +15,11 @@ struct Node
 template <class U>
 class LinkedList
 {
+private:
+    Node<U> *head;
+    Node<U> *tail;
+    int size;
+
 public:
     LinkedList()
     {
@@ -264,11 +269,6 @@ public:
 
         return current;
     }
-
-private:
-    Node<U> *head;
-    Node<U> *tail;
-    int size;
 };
 
 #endif // LINKEDLIST_H

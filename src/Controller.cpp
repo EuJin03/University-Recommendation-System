@@ -31,7 +31,7 @@ auto endTimer = [](auto start_load)
 };
 
 bool Controller::registerUser(std::string username, std::string password, HashTable *userTable)
-{K
+{
     if (validate(username, password) != "success")
     {
         std::cout << "Register Failed \nPlease try again with username and password length of at least 6 characters." << std::endl;
@@ -188,7 +188,7 @@ void Controller::top10Controller(DynamicArray<University> *top10, UI ui)
         if (uniqueUni.contains(top10->get(i)))
         {
             int index = uniqueUni.find(top10->get(i));
-            uniqueUniCount.set(uniqueUniCount.getValue(index) + 1, index);
+            uniqueUniCount.set(uniqueUniCount.get(index) + 1, index);
         }
         else
         {
@@ -298,7 +298,7 @@ void sort(University universityList[], int SIZE, Algorithms algorithms, Algorith
     algorithms.countSort(universityList, SIZE, sortType);
     std::cout << "Sorted with count sort:" << std::endl;
     long long countDuration = endTimer(countStartLoad);
-    std::cout << "Time taken to load (Count Sort): " << quickDuration << " microseconds" << std::endl;
+    std::cout << "Time taken to load (Count Sort): " << countDuration << " microseconds" << std::endl;
 }
 
 void Controller::sortController(University universityList[], int *univIndex, int SIZE, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> *feedbackList, User currentUser)
@@ -459,13 +459,11 @@ void searchInt(University universityList[], int SIZE, Algorithms algorithms, std
     algorithms.linearSearch(universityList, SIZE, choice, searchCriteria, searchCriteriaInt);
     long long linearDuration = endTimer(linearStartLoad);
     std::cout << "Searched with linear search:" << std::endl;
-    long long linearDuration = endTimer(linearStartLoad);
 
     auto binaryStartLoad = startTimer();
     algorithms.binarySearchWithDuplicates(universityList, SIZE, choice, searchCriteriaInt);
     long long binaryDuration = endTimer(binaryStartLoad);
     std::cout << "Searched with binary search:" << std::endl;
-    long long binaryDuration = endTimer(binaryStartLoad);
 
     std::cout << "Time taken to load (Linear Search): " << linearDuration << " microseconds" << std::endl;
     std::cout << "Time taken to load (Binary Search): " << binaryDuration << " microseconds" << std::endl;
@@ -600,8 +598,6 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
             currentUser->setFavUnivList(favList);
             customer->removeUser(currentUser->getUsername());
             customer->addUser(*currentUser);
-            std::cout << " ----- DYNAMIC ARRAY ----- " << std::endl;
-            top10->show();
             break;
         case 3:
             ui.universityHeader();
@@ -618,6 +614,7 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
             currentUser->setFavUnivList(favList);
             break;
         case 4:
+            ui.clearScreen();
             return;
         case 5:
             exit(1);

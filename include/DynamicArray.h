@@ -8,8 +8,7 @@
 #include "UI.h"
 
 template <class T>
-class DynamicArray
-{
+class DynamicArray {
 private:
     T *array;
     int size;
@@ -24,17 +23,13 @@ public:
         capacity = 1;
         array = new T[capacity];
     };
-
     // Destructor
     ~DynamicArray()
     {
         delete[] array;
     };
-
     int getSize() const { return size; };
-
     int getCapacity() const { return capacity; };
-
     T get(int index)
     {
         if (index < 0 || index >= size)
@@ -43,11 +38,6 @@ public:
         }
         return array[index];
     }
-
-    int getValue(int index) {
-        return array[index];
-    }
-
     // Append T object at the end of the Dynamic Array
     void append(const T &element)
     {
@@ -58,41 +48,34 @@ public:
         array[size] = element;
         size++;
     };
-
-    // Remove the last element of the Dynamic Array
-    void pop()
+    // Remove T element from the Dynamic Array regardless of index
+    void remove(const T &element)
     {
-        if (size > 0)
+        int index = -1;
+        for (int i = 0; i < size; i++)
         {
-            //            array[size - 1] = NULL;
-            size--;
-            if (size < capacity / 2)
+            if (array[i] == element)
             {
-                shrinkArray();
+                index = i;
+                break;
             }
         }
-    };
-
-    // Insert T element at the specified index
-    void insertAt(const T &element, int index)
-    {
-        if (index < 0 || index > size)
+        if (index == -1)
         {
-            std::cout << "Invalid index" << std::endl;
+            std::cout << "Element not found" << std::endl;
             return;
         }
-        if (size == capacity)
+        for (int i = index; i < size - 1; i++)
         {
-            growArray();
+            array[i] = array[i + 1];
         }
-        for (int i = size; i > index; i--)
+        //        array[size - 1] = NULL;
+        size--;
+        if (size < capacity / 2)
         {
-            array[i] = array[i - 1];
+            shrinkArray();
         }
-        array[index] = element;
-        size++;
     };
-
     void set(T element, int index)
     {
         if (index < 0 || index >= size)
@@ -122,35 +105,6 @@ public:
         array[index] = element;
     }
 
-    // Remove T element from the Dynamic Array regardless of index
-    void remove(const T &element)
-    {
-        int index = -1;
-        for (int i = 0; i < size; i++)
-        {
-            if (array[i] == element)
-            {
-                index = i;
-                break;
-            }
-        }
-        if (index == -1)
-        {
-            std::cout << "Element not found" << std::endl;
-            return;
-        }
-        for (int i = index; i < size - 1; i++)
-        {
-            array[i] = array[i + 1];
-        }
-        //        array[size - 1] = NULL;
-        size--;
-        if (size < capacity / 2)
-        {
-            shrinkArray();
-        }
-    };
-
     bool contains(T data) {
         // Return true if the array contains T data
         for (int i = 0; i < size; i++) {
@@ -160,7 +114,6 @@ public:
         }
         return false;
     }
-
     int find(T data) {
         for (int i = 0; i < size; i++) {
             if (array[i] == data) {
@@ -169,7 +122,6 @@ public:
         }
         return -1;
     }
-
     // Increase Dynamic Array capacity by 2
     void growArray()
     {
@@ -182,7 +134,6 @@ public:
         delete[] array;
         array = newArray;
     };
-
     // Decrease Dynamic Array capacity by 2
     void shrinkArray()
     {
@@ -195,13 +146,6 @@ public:
         delete[] array;
         array = newArray;
     };
-
-    // Check if Dynamic Array is empty
-    bool isEmpty()
-    {
-        return size == 0;
-    }
-
     void show()
     {
         for (int i = 0; i < size; i++)
