@@ -66,10 +66,10 @@ int main()
 			durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
 			std::cout << "Time taken to load data using Quick Sort: " << durationLoad << " microseconds" << std::endl;
 
-			algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::RANK_SCORE);
+			algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::RANK_SCORE, true);
 
 			start_load = std::chrono::high_resolution_clock::now();
-			algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::INSTITUTION);
+			algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::INSTITUTION, true);
 			end_load = std::chrono::high_resolution_clock::now();
 			durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
 			std::cout << "Time taken to load data using Count Sort: " << durationLoad << " microseconds" << std::endl;

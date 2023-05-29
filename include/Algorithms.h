@@ -30,9 +30,8 @@ public:
         AR_RANK = 6
     };
 
-    //toLower function
+    // toLower function
     std::string toLower(std::string &str);
-
 
     // Quick Sort Algorithm
     void swap(University *uniA, University *uniB);
@@ -40,9 +39,9 @@ public:
     void quickSort(University uniArr[], int start, int end, bool registered, int choice);
 
     // Counting Sort Algorithm
-    static void countSort(University universityList[], int size, SortType sortType);
-    static void countSortInteger(University universityList[], int size, SortType sortType);
-    static void countSortString(University universityList[], int size, SortType sortType);
+    static void countSort(University universityList[], int size, SortType sortType, bool reverse);
+    static void countSortInteger(University universityList[], int size, SortType sortType, bool reverse);
+    static void countSortString(University universityList[], int size, SortType sortType, bool reverse);
     static int getMaxScore(University universityList[], int size, SortType sortType);
     static int getScore(University uni, SortType sortType);
     static std::string getScoreString(University uni, SortType sortType);
@@ -53,7 +52,7 @@ public:
     // Binary Search Algorithm
     void binarySearch(University universityList[], int size, int rank);
     void binarySearchWithDuplicates(University universityList[], int size, int choice, int rank);
-    int* getRank(University universityList[], int mid, int choice);
+    int *getRank(University universityList[], int mid, int choice);
 };
 
 #endif // UNIVERSITY_RECOMMENDATION_SYSTEM_ALGORITHMS_H
