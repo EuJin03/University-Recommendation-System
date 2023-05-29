@@ -25,9 +25,9 @@ public:
 	Feedback(int feedbackID, std::string username, std::string feedback, std::time_t createdAt, std::string admin, std::string replyContent, std::time_t repliedAt);
 	// Copy constructor
 	Feedback(int feedbackID, std::string username, std::string feedback, std::time_t createdAt);
-	Feedback(const Feedback &feedback);
+	// Feedback(const Feedback &feedback);
 	Feedback();
-	~Feedback();
+	// ~Feedback();
 
 	// Getter
 	int getFeedbackID() const { return this->feedbackID; }
