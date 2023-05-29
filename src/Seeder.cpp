@@ -36,10 +36,10 @@ void Seeder::createFeedbackInstances(LinkedList<Feedback> *feedbackList)
 	Feedback feedback2(1, username2, feedback20, createdAt2, admin2, reply2, repliedAt2);
 	Feedback feedback3(2, username3, feedback30, createdAt3, admin3, reply3, repliedAt3);
 	Feedback feedback4(3, username4, feedback40, createdAt4, admin4, reply4, repliedAt4);
-	feedbackList->insertAtEnd(feedback1);
-	feedbackList->insertAtEnd(feedback2);
-	feedbackList->insertAtEnd(feedback3);
-	feedbackList->insertAtEnd(feedback4);
+	feedbackList->pushAndPointEnd(feedback1);
+	feedbackList->pushAndPointEnd(feedback2);
+	feedbackList->pushAndPointEnd(feedback3);
+	feedbackList->pushAndPointEnd(feedback4);
 }
 
 std::time_t Seeder::getRandomPastTime()
