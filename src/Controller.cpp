@@ -460,13 +460,11 @@ void searchInt(University universityList[], int SIZE, Algorithms algorithms, std
     algorithms.linearSearch(universityList, SIZE, choice, searchCriteria, searchCriteriaInt);
     long long linearDuration = endTimer(linearStartLoad);
     std::cout << "Searched with linear search:" << std::endl;
-    long long linearDuration = endTimer(linearStartLoad);
 
     auto binaryStartLoad = startTimer();
     algorithms.binarySearchWithDuplicates(universityList, SIZE, choice, searchCriteriaInt);
     long long binaryDuration = endTimer(binaryStartLoad);
     std::cout << "Searched with binary search:" << std::endl;
-    long long binaryDuration = endTimer(binaryStartLoad);
 
     std::cout << "Time taken to load (Linear Search): " << linearDuration << " microseconds" << std::endl;
     std::cout << "Time taken to load (Binary Search): " << binaryDuration << " microseconds" << std::endl;

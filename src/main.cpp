@@ -74,16 +74,8 @@ int main()
 			durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
 			std::cout << "Time taken to load data using Count Sort: " << durationLoad << " microseconds" << std::endl;
 
-			std::cout << "\n\nEnter '0' to go back to main menu:";
+			std::cout << "\nInput anything to go back to main menu:";
 			std::cin >> command;
-			if (command == 0)
-			{
-				break;
-			}
-			else
-			{
-				continue;
-			}
 
 			break;
 		case 3:
