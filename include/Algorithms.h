@@ -50,7 +50,6 @@ public:
     long long linearSearch(University universityList[], int size, int criteria, std::string key, int rank);
 
     // Binary Search Algorithm
-    void binarySearch(University universityList[], int size, int rank);
     long long binarySearchWithDuplicates(University universityList[], int size, int choice, int rank);
     int* getRank(University universityList[], int mid, int choice);
 

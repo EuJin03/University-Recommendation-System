@@ -468,75 +468,6 @@ long long Algorithms::linearSearch(University universityList[], int size, int cr
     return duration;
 }
 
-void Algorithms::binarySearch(University universityList[], int size, int rank)
-{
-    UI ui;
-    int start = 0;
-    int end = size;
-    const int maxSize = 1442;
-    int mid = (start + end) / 2;
-    int current;
-    University tempUniList[maxSize];
-
-    while (true)
-    {
-        mid = (start + end) / 2;
-        int uniRank = universityList[mid].getRank();
-        int arRank = universityList[mid].getArRank();
-        int fsrRank = universityList[mid].getFsrRank();
-        int erRank = universityList[mid].getErRank();
-
-        // switch (choice)
-        // {
-        // case RANK:
-        //     // Searching by University Rank
-        //     current = universityList[mid].getRank();
-        //     break;
-
-        // case AR_RANK:
-        //     // Searching by AR Rank
-        //     current = universityList[mid].getArRank();
-        //     break;
-
-        // case FSR_RANK:
-        //     // Searching by FSR Rank
-        //     current = universityList[mid].getFsrRank();
-        //     break;
-
-        // case ER_RANK:
-        //     // Searching by ER Rank
-        //     current = universityList[mid].getErRank();
-        //     break;
-
-        // default:
-        //     break;
-        // }
-
-        if (uniRank == rank || arRank == rank || fsrRank == rank || erRank == rank)
-        {
-            std::cout << "Found " << rank << " at index " << mid << std::endl;
-            std::cout << std::endl;
-            ui.universityHeader();
-            std::cout << universityList[mid] << std::endl
-                      << std::endl;
-            break;
-        }
-        else if (current < rank)
-        {
-            start = mid + 1;
-        }
-        else
-        {
-            end = mid - 1;
-        }
-        if (start > end)
-        {
-            std::cout << "Not found." << std::endl;
-            break;
-        }
-    }
-}
-
 int *Algorithms::getRank(University universityList[], int mid, int choice)
 {
     static int currentRank[2];
@@ -583,12 +514,12 @@ long long Algorithms::binarySearchWithDuplicates(University universityList[], in
     auto binaryStartLoad = std::chrono::high_resolution_clock::now();
     while (start <= end)
     {
-        // std::cout << "looping" << std::endl;
         mid = (start + end) / 2;
         currentRank = getRank(universityList, mid, choice);
         // Check if the mid element is equal to the target
         if (currentRank[0] == rank)
         {
+            // Save the time taken to hit the first match
             duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - binaryStartLoad).count();
             // Handle duplicates by finding the leftmost occurrence
             while (mid > 0 && currentRank[1] == rank)
@@ -596,7 +527,7 @@ long long Algorithms::binarySearchWithDuplicates(University universityList[], in
                 currentRank = getRank(universityList, --mid, choice);
             }
             UI ui;
-            // ui.universityHeader();
+            ui.universityHeader();
             // Print all the duplicates
             while (currentRank[0] == rank)
             {
