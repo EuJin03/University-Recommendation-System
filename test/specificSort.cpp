@@ -14,6 +14,26 @@ struct insertionSortName
     string universityRow[10];
 };
 
+void sortingChoice(int choice)
+{
+    switch (choice)
+    {
+    case 1: /* constant-expression */
+        /* code */
+        performSorting(choice);
+        break;
+    case 2:
+        performSorting(choice);
+        break;
+    case 3:
+        performSorting(choice);
+        break;
+    default:
+        cout << "invalid input" << endl;
+        break;
+    }
+}
+
 bool compareScore(int choice, const insertionSortName &row1, const insertionSortName &row2)
 {
     if (choice == 1)

@@ -24,7 +24,7 @@ public:
 
     // Unregistered user
     bool registerUser(std::string username, std::string password, HashTable *userTable);
-
+    void sort(University universityList[], int SIZE, Algorithms algorithms, Algorithms::SortType sortType, int choice, bool reverse);
     // Registered user
     void userController(HashTable *customer, University universityList[], int *univIndex, int SIZE, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> *feedbackList, User currentUser);
     void sortController(University universityList[], int *univIndex, int SIZE, UI ui, User *favUser, DynamicArray<University> *top10, LinkedList<Feedback> *feedbackList, User currentUser);

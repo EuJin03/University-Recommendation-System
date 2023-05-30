@@ -62,7 +62,7 @@ void UI::userSearchMenu()
 	std::cout << "1. Search by Institution name\n";
 	std::cout << "2. Search by Locale\n";
 	std::cout << "3. Search by Rank\n";
-	std::cout << "4. Search by Faculty/Student Ratio Score\n";
+	std::cout << "4. Search by Faculty/Student Ratio Rank\n";
 	std::cout << "5. Search by Employer Reputation Rank\n";
 	std::cout << "6. Search by Academic Reputation Rank\n";
 	std::cout << "7. Return to main menu\n";

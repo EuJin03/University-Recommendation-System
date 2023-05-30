@@ -295,7 +295,7 @@ void Controller::userController(HashTable *customer, University universityList[]
 };
 
 // to reduce sorting code
-void sort(University universityList[], int SIZE, Algorithms algorithms, Algorithms::SortType sortType, int choice, bool reverse)
+void Controller::sort(University universityList[], int SIZE, Algorithms algorithms, Algorithms::SortType sortType, int choice, bool reverse)
 {
 
     auto quickStartLoad = startTimer();
@@ -473,16 +473,16 @@ void Controller::sortController(University universityList[], int *univIndex, int
 void searchInt(University universityList[], int SIZE, Algorithms algorithms, std::string searchCriteria, int choice, int searchCriteriaInt)
 {
     // Linear search for integer
-    // *********************************************************************************************************************
-    auto linearStartLoad = startTimer();
-    algorithms.linearSearch(universityList, SIZE, choice, searchCriteria, searchCriteriaInt);
-    long long linearDuration = endTimer(linearStartLoad);
-    std::cout << "Searched with linear search:" << std::endl;
+    // ******************************************************
+    // auto linearStartLoad = startTimer();
+    long long linearDuration = algorithms.linearSearch(universityList, SIZE, choice, searchCriteria, searchCriteriaInt);
+    // std::cout << "Searched with linear search:" << std::endl;
+    // long long linearDuration = endTimer(linearStartLoad);
 
-    auto binaryStartLoad = startTimer();
-    algorithms.binarySearchWithDuplicates(universityList, SIZE, choice, searchCriteriaInt);
-    long long binaryDuration = endTimer(binaryStartLoad);
-    std::cout << "Searched with binary search:" << std::endl;
+    // auto binaryStartLoad = startTimer();
+    long long binaryDuration = algorithms.binarySearchWithDuplicates(universityList, SIZE, choice, searchCriteriaInt);
+    // std::cout << "Searched with binary search:" << std::endl;
+    // long long binaryDuration = endTimer(binaryStartLoad);
 
     std::cout << "Time taken to load (Linear Search): " << linearDuration << " microseconds" << std::endl;
     std::cout << "Time taken to load (Binary Search): " << binaryDuration << " microseconds" << std::endl;
@@ -529,8 +529,6 @@ void Controller::searchController(University universityList[], int *univIndex, i
             searchCriteria = std::to_string(searchCriteriaInt);
             algorithms.countSort(universityList, SIZE, Algorithms::SortType::RANK_SCORE, true);
             std::cout << "Done sort" << std::endl;
-            // searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::RANK, searchCriteriaInt);
-            // algorithms.countSort(universityList, SIZE, Algorithms::SortType::RANK_SCORE);
             searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::RANK, searchCriteriaInt);
             break;
 
@@ -538,7 +536,7 @@ void Controller::searchController(University universityList[], int *univIndex, i
             // Search by Faculty Student Ratio Rank
             std::cout << "Enter the FSR rank you want to search: ";
             std::cin >> searchCriteriaInt;
-            algorithms.countSort(universityList, SIZE, Algorithms::SortType::FSR_RANK_SORT, true);
+            algorithms.countSort(universityList, SIZE, Algorithms::SortType::FSR_RANK_SORT, false);
             std::cout << "Done sort" << std::endl;
 
             searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::FSR_RANK,
@@ -548,7 +546,7 @@ void Controller::searchController(University universityList[], int *univIndex, i
             // Search by Employer Reputation Rank
             std::cout << "Enter the ER rank you want to search: ";
             std::cin >> searchCriteriaInt;
-            algorithms.countSort(universityList, SIZE, Algorithms::SortType::ER_RANK_SORT, true);
+            algorithms.countSort(universityList, SIZE, Algorithms::SortType::ER_RANK_SORT, false);
             std::cout << "Done sort" << std::endl;
             searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::ER_RANK,
                       searchCriteriaInt);
@@ -558,7 +556,7 @@ void Controller::searchController(University universityList[], int *univIndex, i
             // Search by Academic Reputation Rank
             std::cout << "Enter the AR rank you want to search: ";
             std::cin >> searchCriteriaInt;
-            algorithms.countSort(universityList, SIZE, Algorithms::SortType::AR_RANK_SORT, true);
+            algorithms.countSort(universityList, SIZE, Algorithms::SortType::AR_RANK_SORT, false);
             std::cout << "Done sort" << std::endl;
 
             searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::AR_RANK,
@@ -605,6 +603,7 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
         case 2:
             // Add university to favourite list
             ui.universityList(universityList, univIndex);
+
             std::cout << "Please provide the rank of the university you want to add: ";
             std::cin >> uniChoice;
             // Checks whether input is valid or not

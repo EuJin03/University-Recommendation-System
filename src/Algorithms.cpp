@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 #include "../include/Algorithms.h"
 #include "../include/University.h"
 #include "../include/UI.h"
@@ -143,9 +144,9 @@ void Algorithms::countSort(University universityList[], int size, SortType sortT
 
 /**
  * @brief Count Sort Algorithm.
- * @param uniArr std::vector of University objects to be sorted.
+ * @param uniArr array of University objects to be sorted.
  * @param sortType The type of sorting to be applied.
- * @return The sorted std::vector of University objects.
+ * @return The sorted array of University objects.
  *
  * This function implements the Count Sort algorithm to sort the uniArr std::vector. The sortType parameter is used
  * to determine the sorting criteria.
@@ -155,8 +156,8 @@ void Algorithms::countSortInteger(University universityList[], int size, SortTyp
     int n = size;
     int maxScore = getMaxScore(universityList, size, sortType);
 
-    std::vector<University> output(n);
-    std::vector<int> count(maxScore + 1, 0);
+    University *output = new University[n];
+    int *count = new int[maxScore + 1]();
 
     for (int i = 0; i < n; i++)
     {
@@ -164,9 +165,19 @@ void Algorithms::countSortInteger(University universityList[], int size, SortTyp
         count[score]++;
     }
 
-    for (int i = 1; i <= maxScore; i++)
+    if (reverse)
     {
-        count[i] += count[i - 1];
+        for (int i = 1; i <= maxScore; i++)
+        {
+            count[i] += count[i - 1];
+        }
+    }
+    else
+    {
+        for (int i = maxScore - 1; i >= 0; i--)
+        {
+            count[i] += count[i + 1];
+        }
     }
 
     for (int i = n - 1; i >= 0; i--)
@@ -180,6 +191,9 @@ void Algorithms::countSortInteger(University universityList[], int size, SortTyp
     {
         universityList[i] = output[i];
     }
+
+    delete[] output;
+    delete[] count;
 }
 
 void Algorithms::countSortString(University universityList[], int size, SortType sortType, bool reverse)
@@ -194,8 +208,8 @@ void Algorithms::countSortString(University universityList[], int size, SortType
 
     int k = 128;
 
-    std::vector<University> output(n);
-    std::vector<int> count(k, 0);
+    University *output = new University[n];
+    int *count = new int[k]();
 
     for (int len = maxLen; len > 0; len--)
     {
@@ -211,8 +225,16 @@ void Algorithms::countSortString(University universityList[], int size, SortType
                 count[int(institution[len - 1])]++;
         }
 
-        for (int i = 1; i < k; i++)
-            count[i] += count[i - 1];
+        if (reverse)
+        {
+            for (int i = 1; i < k; i++)
+                count[i] += count[i - 1];
+        }
+        else
+        {
+            for (int i = k - 2; i >= 0; i--)
+                count[i] += count[i + 1];
+        }
 
         for (int i = n - 1; i >= 0; i--)
         {
@@ -234,6 +256,9 @@ void Algorithms::countSortString(University universityList[], int size, SortType
             universityList[i] = output[i];
         }
     }
+
+    delete[] output;
+    delete[] count;
 }
 
 /**
@@ -310,13 +335,19 @@ std::string Algorithms::toLower(std::string &str)
     return str;
 }
 
-void Algorithms::linearSearch(University universityList[], int size, int criteria, std::string key, int rank)
+long long Algorithms::linearSearch(University universityList[], int size, int criteria, std::string key, int rank)
 {
     UI ui;
+    // int rank;
+    std::string locale;
+    bool found = false;
+    long long duration;
+    auto linearStartLoad = std::chrono::high_resolution_clock::now();
     switch (criteria)
     {
     case 1:
         ui.universityHeader();
+        linearStartLoad = std::chrono::high_resolution_clock::now();
         for (int i = 0; i < size; i++)
         {
             key = toLower(key);
@@ -324,6 +355,12 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
             uniName = toLower(uniName);
             if (uniName.find(key) != std::string::npos)
             {
+                
+                if(!found)
+                {
+                    found = true;
+                    duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - linearStartLoad).count();
+                }
                 std::cout << universityList[i];
             }
         }
@@ -331,6 +368,7 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
         break;
     case 2:
         ui.universityHeader();
+        linearStartLoad = std::chrono::high_resolution_clock::now();
         for (int i = 0; i < size; i++)
         {
             key = toLower(key);
@@ -338,6 +376,12 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
             locale = toLower(locale);
             if (locale.find(key) != std::string::npos)
             {
+                
+                if(!found)
+                {
+                    found = true;
+                    duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - linearStartLoad).count();
+                }
                 std::cout << universityList[i];
             }
         }
@@ -345,12 +389,18 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
         break;
     case 3:
         ui.universityHeader();
+        linearStartLoad = std::chrono::high_resolution_clock::now();
         // rank = std::stoi(key);
         // std::cout << rank << std::endl;
         for (int i = 0; i < size; i++)
         {
             if (universityList[i].getRank() == rank)
             {
+                if(!found)
+                {
+                    found = true;
+                    duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - linearStartLoad).count();
+                }
                 std::cout << universityList[i];
             }
         }
@@ -359,11 +409,18 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
 
     case 4:
         ui.universityHeader();
+        linearStartLoad = std::chrono::high_resolution_clock::now();
         // rank = std::stoi(key);
         for (int i = 0; i < size; i++)
         {
             if (universityList[i].getFsrRank() == rank)
             {
+                
+                if(!found)
+                {
+                    found = true;
+                    duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - linearStartLoad).count();
+                }
                 std::cout << universityList[i];
             }
         }
@@ -372,11 +429,18 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
 
     case 5:
         ui.universityHeader();
+        linearStartLoad = std::chrono::high_resolution_clock::now();
         // rank = std::stoi(key);
         for (int i = 0; i < size; i++)
         {
             if (universityList[i].getErRank() == rank)
             {
+                
+                if(!found)
+                {
+                    found = true;
+                    duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - linearStartLoad).count();
+                }
                 std::cout << universityList[i];
             }
         }
@@ -385,11 +449,17 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
 
     case 6:
         ui.universityHeader();
+        linearStartLoad = std::chrono::high_resolution_clock::now();
         // rank = std::stoi(key);
         for (int i = 0; i < size; i++)
         {
             if (universityList[i].getArRank() == rank)
             {
+                if(!found)
+                {
+                    found = true;
+                    duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - linearStartLoad).count();
+                }
                 std::cout << universityList[i];
             }
         }
@@ -398,75 +468,7 @@ void Algorithms::linearSearch(University universityList[], int size, int criteri
     default:
         break;
     }
-}
-
-void Algorithms::binarySearch(University universityList[], int size, int rank)
-{
-    UI ui;
-    int start = 0;
-    int end = size;
-    const int maxSize = 1442;
-    int mid = (start + end) / 2;
-    int current;
-    University tempUniList[maxSize];
-
-    while (true)
-    {
-        mid = (start + end) / 2;
-        int uniRank = universityList[mid].getRank();
-        int arRank = universityList[mid].getArRank();
-        int fsrRank = universityList[mid].getFsrRank();
-        int erRank = universityList[mid].getErRank();
-
-        // switch (choice)
-        // {
-        // case RANK:
-        //     // Searching by University Rank
-        //     current = universityList[mid].getRank();
-        //     break;
-
-        // case AR_RANK:
-        //     // Searching by AR Rank
-        //     current = universityList[mid].getArRank();
-        //     break;
-
-        // case FSR_RANK:
-        //     // Searching by FSR Rank
-        //     current = universityList[mid].getFsrRank();
-        //     break;
-
-        // case ER_RANK:
-        //     // Searching by ER Rank
-        //     current = universityList[mid].getErRank();
-        //     break;
-
-        // default:
-        //     break;
-        // }
-
-        if (uniRank == rank || arRank == rank || fsrRank == rank || erRank == rank)
-        {
-            std::cout << "Found " << rank << " at index " << mid << std::endl;
-            std::cout << std::endl;
-            ui.universityHeader();
-            std::cout << universityList[mid] << std::endl
-                      << std::endl;
-            break;
-        }
-        else if (current < rank)
-        {
-            start = mid + 1;
-        }
-        else
-        {
-            end = mid - 1;
-        }
-        if (start > end)
-        {
-            std::cout << "Not found." << std::endl;
-            break;
-        }
-    }
+    return duration;
 }
 
 int *Algorithms::getRank(University universityList[], int mid, int choice)
@@ -505,12 +507,14 @@ int *Algorithms::getRank(University universityList[], int mid, int choice)
     return currentRank;
 }
 
-void Algorithms::binarySearchWithDuplicates(University universityList[], int size, int choice, int rank)
+long long Algorithms::binarySearchWithDuplicates(University universityList[], int size, int choice, int rank)
 {
     int start = 0;
     int end = size;
     int mid;
     int *currentRank;
+    long long duration;
+    auto binaryStartLoad = std::chrono::high_resolution_clock::now();
     while (start <= end)
     {
         mid = (start + end) / 2;
@@ -518,6 +522,8 @@ void Algorithms::binarySearchWithDuplicates(University universityList[], int siz
         // Check if the mid element is equal to the target
         if (currentRank[0] == rank)
         {
+            // Save the time taken to hit the first match
+            duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - binaryStartLoad).count();
             // Handle duplicates by finding the leftmost occurrence
             while (mid > 0 && currentRank[1] == rank)
             {
@@ -532,7 +538,7 @@ void Algorithms::binarySearchWithDuplicates(University universityList[], int siz
                 currentRank = getRank(universityList, ++mid, choice);
             }
             std::cout << std::endl;
-            return;
+            return duration;
         }
         // If the mid element is greater than the target, search in the left half
         else if (currentRank[0] > rank)
@@ -546,4 +552,5 @@ void Algorithms::binarySearchWithDuplicates(University universityList[], int siz
         }
     }
     std::cout << "Not found." << std::endl;
+    return 0;
 }
