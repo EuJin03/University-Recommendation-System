@@ -22,11 +22,12 @@ private:
 public:
 	HashTable(int tableSize);
 
+	// Accessors
 	void addUser(const User &user);
 	void removeUser(const std::string &username);
 	User getUser(const std::string &username);
 
-	// TODO: implement these
+	// CRUD
 	bool verifyUser(const std::string &username, const std::string &password) const;
 	bool updateLastLogin(const std::string &username);
 	void printUserDetails(const std::string &username);

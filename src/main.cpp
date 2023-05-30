@@ -10,8 +10,8 @@ int main()
 {
 	UI ui;
 	Seeder seeder;
-	Controller controller;
-
+	Controller controller; 
+	
 	int univIndex = 0;
 	int ARRAY_SIZE = 1422;
 	University universityList[ARRAY_SIZE];
@@ -60,19 +60,8 @@ int main()
 			char command;
 			// should move into controller class
 			std::cout << " ---------- SORT ---------- " << std::endl;
-			start_load = std::chrono::high_resolution_clock::now();
-			algorithm.quickSort(universityList, 0, ARRAY_SIZE - 1, false, 2);
-			end_load = std::chrono::high_resolution_clock::now();
-			durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
-			std::cout << "Time taken to load data using Quick Sort: " << durationLoad << " microseconds" << std::endl;
-
-			algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::RANK_SCORE, true);
-
-			start_load = std::chrono::high_resolution_clock::now();
-			algorithm.countSort(universityList, ARRAY_SIZE, Algorithms::SortType::INSTITUTION, true);
-			end_load = std::chrono::high_resolution_clock::now();
-			durationLoad = std::chrono::duration_cast<std::chrono::microseconds>(end_load - start_load).count();
-			std::cout << "Time taken to load data using Count Sort: " << durationLoad << " microseconds" << std::endl;
+			controller.sort(universityList, ARRAY_SIZE, algorithm, Algorithms::SortType::INSTITUTION,
+											Algorithms::SortType::INSTITUTION, true);
 
 			std::cout << "\nInput anything to go back to main menu:";
 			std::cin >> command;

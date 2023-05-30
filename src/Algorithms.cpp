@@ -137,9 +137,9 @@ void Algorithms::countSort(University universityList[], int size, SortType sortT
 
 /**
  * @brief Count Sort Algorithm.
- * @param uniArr std::vector of University objects to be sorted.
+ * @param uniArr array of University objects to be sorted.
  * @param sortType The type of sorting to be applied.
- * @return The sorted std::vector of University objects.
+ * @return The sorted array of University objects.
  *
  * This function implements the Count Sort algorithm to sort the uniArr std::vector. The sortType parameter is used
  * to determine the sorting criteria.
@@ -149,8 +149,8 @@ void Algorithms::countSortInteger(University universityList[], int size, SortTyp
     int n = size;
     int maxScore = getMaxScore(universityList, size, sortType);
 
-    std::vector<University> output(n);
-    std::vector<int> count(maxScore + 1, 0);
+    University *output = new University[n];
+    int *count = new int[maxScore + 1]();
 
     for (int i = 0; i < n; i++)
     {
@@ -160,16 +160,16 @@ void Algorithms::countSortInteger(University universityList[], int size, SortTyp
 
     if (reverse)
     {
-        for (int i = maxScore - 1; i >= 0; i--)
+        for (int i = 1; i <= maxScore; i++)
         {
-            count[i] += count[i + 1];
+            count[i] += count[i - 1];
         }
     }
     else
     {
-        for (int i = 1; i <= maxScore; i++)
+        for (int i = maxScore - 1; i >= 0; i--)
         {
-            count[i] += count[i - 1];
+            count[i] += count[i + 1];
         }
     }
 
@@ -184,6 +184,9 @@ void Algorithms::countSortInteger(University universityList[], int size, SortTyp
     {
         universityList[i] = output[i];
     }
+
+    delete[] output;
+    delete[] count;
 }
 
 void Algorithms::countSortString(University universityList[], int size, SortType sortType, bool reverse)
@@ -198,8 +201,8 @@ void Algorithms::countSortString(University universityList[], int size, SortType
 
     int k = 128;
 
-    std::vector<University> output(n);
-    std::vector<int> count(k, 0);
+    University *output = new University[n];
+    int *count = new int[k]();
 
     for (int len = maxLen; len > 0; len--)
     {
@@ -217,13 +220,13 @@ void Algorithms::countSortString(University universityList[], int size, SortType
 
         if (reverse)
         {
-            for (int i = k - 2; i >= 0; i--)
-                count[i] += count[i + 1];
+            for (int i = 1; i < k; i++)
+                count[i] += count[i - 1];
         }
         else
         {
-            for (int i = 1; i < k; i++)
-                count[i] += count[i - 1];
+            for (int i = k - 2; i >= 0; i--)
+                count[i] += count[i + 1];
         }
 
         for (int i = n - 1; i >= 0; i--)
@@ -246,6 +249,9 @@ void Algorithms::countSortString(University universityList[], int size, SortType
             universityList[i] = output[i];
         }
     }
+
+    delete[] output;
+    delete[] count;
 }
 
 /**

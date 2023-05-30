@@ -284,7 +284,7 @@ void Controller::userController(HashTable *customer, University universityList[]
 };
 
 // to reduece sorting code
-void sort(University universityList[], int SIZE, Algorithms algorithms, Algorithms::SortType sortType, int choice, bool reverse)
+void Controller::sort(University universityList[], int SIZE, Algorithms algorithms, Algorithms::SortType sortType, int choice, bool reverse)
 {
 
     auto quickStartLoad = startTimer();
@@ -517,6 +517,7 @@ void Controller::searchController(University universityList[], int *univIndex, i
             std::cin >> searchCriteriaInt;
             searchCriteria = std::to_string(searchCriteriaInt);
             algorithms.countSort(universityList, SIZE, Algorithms::SortType::RANK_SCORE, true);
+
             std::cout << "Done sort" << std::endl;
             // searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::RANK, searchCriteriaInt);
             // algorithms.countSort(universityList, SIZE, Algorithms::SortType::RANK_SCORE);
