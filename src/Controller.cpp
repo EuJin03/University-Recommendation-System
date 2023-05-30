@@ -216,9 +216,16 @@ void Controller::top10Controller(DynamicArray<University> *top10, UI ui)
 
     ui.clearScreen();
     std::cout << "Top 10 Universities \n";
-    for (int i = 0; i < uniqueUni.getSize(); i++)
-    {
-        std::cout << uniqueUni.get(i).getInstitution() << " : " << uniqueUniCount.get(i) << std::endl;
+    if (uniqueUni.getSize() <= 10) {
+        for (int i = 0; i < uniqueUni.getSize(); i++)
+        {
+            std::cout << uniqueUni.get(i).getInstitution() << " : " << uniqueUniCount.get(i) << std::endl;
+        }
+    } else {
+        for (int i = 0; i < 10; i++)
+        {
+            std::cout << uniqueUni.get(i).getInstitution() << " : " << uniqueUniCount.get(i) << std::endl;
+        }
     }
     std::cout << std::endl;
     ui.top10();
