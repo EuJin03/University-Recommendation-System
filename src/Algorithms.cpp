@@ -38,6 +38,7 @@ int Algorithms::partition(University uniArr[], int start, int pivot, bool regist
     int i = start - 1;
     if (registered)
     { // Registered users, need to think how to decide on which column to sort on.
+        // TODO: Figure out how to decide which column to sort on.
         switch (choice)
         {
         case 0:
@@ -157,19 +158,9 @@ void Algorithms::countSortInteger(University universityList[], int size, SortTyp
         count[score]++;
     }
 
-    if (reverse)
+    for (int i = 1; i <= maxScore; i++)
     {
-        for (int i = maxScore - 1; i >= 0; i--)
-        {
-            count[i] += count[i + 1];
-        }
-    }
-    else
-    {
-        for (int i = 1; i <= maxScore; i++)
-        {
-            count[i] += count[i - 1];
-        }
+        count[i] += count[i - 1];
     }
 
     for (int i = n - 1; i >= 0; i--)
@@ -214,16 +205,8 @@ void Algorithms::countSortString(University universityList[], int size, SortType
                 count[int(institution[len - 1])]++;
         }
 
-        if (reverse)
-        {
-            for (int i = k - 2; i >= 0; i--)
-                count[i] += count[i + 1];
-        }
-        else
-        {
-            for (int i = 1; i < k; i++)
-                count[i] += count[i - 1];
-        }
+        for (int i = 1; i < k; i++)
+            count[i] += count[i - 1];
 
         for (int i = n - 1; i >= 0; i--)
         {

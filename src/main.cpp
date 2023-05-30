@@ -81,7 +81,13 @@ int main()
 		case 3:
 			// Search university
 			ui.clearScreen();
-			controller.searchController(universityList, &univIndex, ARRAY_SIZE, ui, &currentUser, &top10, &feedbackList, currentUser);
+			// controller.searchController(universityList, &univIndex, ARRAY_SIZE, ui, &currentUser, &top10, &feedbackList, currentUser);
+			std::cout << "Enter the institution name you want to search: ";
+            std::cin.ignore();
+            std::getline(std::cin, searchCriteria);
+            algorithm.linearSearch(universityList, ARRAY_SIZE, 1, searchCriteria, 0);
+			std::cout << "\nInput anything to go back to main menu:";
+			std::cin >> command;
 			break;
 		case 4:
 			// Register
@@ -96,7 +102,8 @@ int main()
 			} while (!controller.registerUser(username, password, &customer));
 
 			std::cout << "Registration successful!" << std::endl;
-
+			std::cout << "\nInput anything to go back to main menu:";
+			std::cin >> command;
 			break;
 			break;
 		case 5:
