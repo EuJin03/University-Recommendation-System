@@ -38,7 +38,10 @@ private:
 
 public:
 	// Constructor
-	University(int rank, std::string institution, std::string locale, std::string location, int arScore, int arRank, int erScore, int erRank, int fsrScore, int fsrRank, int cpfScore, int cpfRank, int lfrScore, int lfrRank, int lsrScore, int lsrRank, int lrnScore, int lrnRank, int gerScore, int gerRank, int scoreScaled);
+	University(int rank, std::string institution, std::string locale,
+						 std::string location, int arScore, int arRank, int erScore, int erRank, int fsrScore,
+						 int fsrRank, int cpfScore, int cpfRank, int lfrScore, int lfrRank, int lsrScore, int lsrRank,
+						 int lrnScore, int lrnRank, int gerScore, int gerRank, int scoreScaled);
 	University();
 	// Copy Constructor
 	University(const University &university);

@@ -140,9 +140,11 @@ void Algorithms::countSort(University universityList[], int size, SortType sortT
  * @brief Count Sort Algorithm.
  * @param uniArr array of University objects to be sorted.
  * @param sortType The type of sorting to be applied.
+ * @param reverse Whether to sort in ascending or descending order.
  * @return The sorted array of University objects.
+ * @ref https://www.geeksforgeeks.org/counting-sort/
  *
- * This function implements the Count Sort algorithm to sort the uniArr std::vector. The sortType parameter is used
+ * This function implements the Count Sort algorithm to sort the uniArr array. The sortType parameter is used
  * to determine the sorting criteria.
  */
 void Algorithms::countSortInteger(University universityList[], int size, SortType sortType, bool reverse)
@@ -155,38 +157,37 @@ void Algorithms::countSortInteger(University universityList[], int size, SortTyp
 
     for (int i = 0; i < n; i++)
     {
-        int score = getScore(universityList[i], sortType);
-        count[score]++;
+        int score = getScore(universityList[i], sortType); // getScore returns the score based on the sortType parameter.
+        count[score]++;                                    //  count[score] is the number of universities with score equal to score.
     }
 
     if (reverse)
     {
         for (int i = 1; i <= maxScore; i++)
         {
-            count[i] += count[i - 1];
+            count[i] += count[i - 1]; // count[i] is the number of universities with score less than or equal to i.
         }
     }
     else
     {
         for (int i = maxScore - 1; i >= 0; i--)
         {
-            count[i] += count[i + 1];
+            count[i] += count[i + 1]; // count[i] is the number of universities with score greater than or equal to i.
         }
     }
 
     for (int i = n - 1; i >= 0; i--)
     {
         int score = getScore(universityList[i], sortType);
-        output[count[score] - 1] = universityList[i];
+        output[count[score] - 1] = universityList[i]; // output[count[score] - 1] is the position of the university in the sorted array.
         count[score]--;
     }
 
     for (int i = 0; i < n; i++)
     {
-        universityList[i] = output[i];
+        universityList[i] = output[i]; // Copy the sorted array to the original array.
     }
-
-    delete[] output;
+    delete[] output; // Delete the temporary array.
     delete[] count;
 }
 
@@ -196,8 +197,8 @@ void Algorithms::countSortString(University universityList[], int size, SortType
     int maxLen = 0;
     for (int i = 0; i < n; i++)
     {
-        int len = getScoreString(universityList[i], sortType).length();
-        maxLen = std::max(maxLen, len);
+        int len = getScoreString(universityList[i], sortType).length(); // getScoreString returns the string based on the sortType parameter.
+        maxLen = std::max(maxLen, len);                                 // maxLen is the length of the longest string.
     }
 
     int k = 128;
@@ -208,8 +209,9 @@ void Algorithms::countSortString(University universityList[], int size, SortType
     for (int len = maxLen; len > 0; len--)
     {
         for (int i = 0; i < k; i++)
-            count[i] = 0;
+            count[i] = 0; // count[i] is the number of universities with the last character of the string equal to i.
 
+        // Count the number of universities with the last character of the string equal to i.
         for (int i = 0; i < n; i++)
         {
             std::string institution = getScoreString(universityList[i], sortType);
@@ -222,26 +224,27 @@ void Algorithms::countSortString(University universityList[], int size, SortType
         if (reverse)
         {
             for (int i = 1; i < k; i++)
-                count[i] += count[i - 1];
+                count[i] += count[i - 1]; // count[i] is the number of universities with the last character of the string less than or equal to i.
         }
         else
         {
             for (int i = k - 2; i >= 0; i--)
-                count[i] += count[i + 1];
+                count[i] += count[i + 1]; // count[i] is the number of universities with the last character of the string greater than or equal to i.
         }
 
+        // output[count[i] - 1] is the position of the university in the sorted array.
         for (int i = n - 1; i >= 0; i--)
         {
             std::string institution = getScoreString(universityList[i], sortType);
             if (institution.length() < len)
             {
-                output[count[0] - 1] = universityList[i];
+                output[count[0] - 1] = universityList[i]; // output[count[0] - 1] is the position of the university in the sorted array.
                 count[0]--;
             }
             else
             {
-                output[count[int(institution[len - 1])] - 1] = universityList[i];
-                count[int(institution[len - 1])]--;
+                output[count[int(institution[len - 1])] - 1] = universityList[i]; // output[count[int(institution[len - 1])] - 1] is the position of the university in the sorted array.
+                count[int(institution[len - 1])]--;                               // count[int(institution[len - 1])] is the number of universities with the last character of the string equal to institution[len - 1].
             }
         }
 
@@ -349,8 +352,8 @@ long long Algorithms::linearSearch(University universityList[], int size, int cr
             uniName = toLower(uniName);
             if (uniName.find(key) != std::string::npos)
             {
-                
-                if(!found)
+
+                if (!found)
                 {
                     found = true;
                     duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - linearStartLoad).count();
@@ -370,8 +373,8 @@ long long Algorithms::linearSearch(University universityList[], int size, int cr
             locale = toLower(locale);
             if (locale.find(key) != std::string::npos)
             {
-                
-                if(!found)
+
+                if (!found)
                 {
                     found = true;
                     duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - linearStartLoad).count();
@@ -390,7 +393,7 @@ long long Algorithms::linearSearch(University universityList[], int size, int cr
         {
             if (universityList[i].getRank() == rank)
             {
-                if(!found)
+                if (!found)
                 {
                     found = true;
                     duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - linearStartLoad).count();
@@ -409,8 +412,8 @@ long long Algorithms::linearSearch(University universityList[], int size, int cr
         {
             if (universityList[i].getFsrRank() == rank)
             {
-                
-                if(!found)
+
+                if (!found)
                 {
                     found = true;
                     duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - linearStartLoad).count();
@@ -429,8 +432,8 @@ long long Algorithms::linearSearch(University universityList[], int size, int cr
         {
             if (universityList[i].getErRank() == rank)
             {
-                
-                if(!found)
+
+                if (!found)
                 {
                     found = true;
                     duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - linearStartLoad).count();
@@ -449,7 +452,7 @@ long long Algorithms::linearSearch(University universityList[], int size, int cr
         {
             if (universityList[i].getArRank() == rank)
             {
-                if(!found)
+                if (!found)
                 {
                     found = true;
                     duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - linearStartLoad).count();
