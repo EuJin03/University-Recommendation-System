@@ -474,6 +474,16 @@ long long Algorithms::linearSearch(University universityList[], int size, int cr
     return duration;
 }
 
+
+/**
+ * @brief Binary Search Algorithm -- getRank function
+ * @usage This function is used to retrieve the corresponding rank from the university in list based on the user input.
+ * 
+ * @param universityList[] university list
+ * @param mid index of element to get rank from
+ * @param choice user choise
+ * @return int*
+ */
 int *Algorithms::getRank(University universityList[], int mid, int choice)
 {
     static int currentRank[2];
@@ -510,6 +520,19 @@ int *Algorithms::getRank(University universityList[], int mid, int choice)
     return currentRank;
 }
 
+/**
+ * @brief Binary Search Algorithm -- main function
+ * @usage To search for university based on user choice and input by repeatedly dividing the search interval in half.
+ * 
+ * @param universityList[] university list
+ * @param size size of the list
+ * @param choice user choice
+ * @param rank user input
+ * @return long long --
+ * 
+ * Referenced from Geeks for Geeks (2023)
+ * Full APA citation: GeeksforGeeks. (2023, May 24). Binary Search – Data Structure and Algorithm Tutorials. Retrieved from www.geeksforgeeks.org: https://www.geeksforgeeks.org/binary-search/
+ */
 long long Algorithms::binarySearchWithDuplicates(University universityList[], int size, int choice, int rank)
 {
     int start = 0;
