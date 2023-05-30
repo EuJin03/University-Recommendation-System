@@ -47,12 +47,13 @@ public:
     static std::string getScoreString(University uni, SortType sortType);
 
     // Linear Search Algorithm
-    void linearSearch(University universityList[], int size, int criteria, std::string key, int rank);
+    long long linearSearch(University universityList[], int size, int criteria, std::string key, int rank);
 
     // Binary Search Algorithm
     void binarySearch(University universityList[], int size, int rank);
-    void binarySearchWithDuplicates(University universityList[], int size, int choice, int rank);
-    int *getRank(University universityList[], int mid, int choice);
+    long long binarySearchWithDuplicates(University universityList[], int size, int choice, int rank);
+    int* getRank(University universityList[], int mid, int choice);
+
 };
 
 #endif // UNIVERSITY_RECOMMENDATION_SYSTEM_ALGORITHMS_H
