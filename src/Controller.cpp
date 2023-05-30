@@ -462,16 +462,16 @@ void Controller::sortController(University universityList[], int *univIndex, int
 void searchInt(University universityList[], int SIZE, Algorithms algorithms, std::string searchCriteria, int choice, int searchCriteriaInt)
 {
     // Linear search for integer
-    // *********************************************************************************************************************
-    auto linearStartLoad = startTimer();
-    algorithms.linearSearch(universityList, SIZE, choice, searchCriteria, searchCriteriaInt);
-    long long linearDuration = endTimer(linearStartLoad);
-    std::cout << "Searched with linear search:" << std::endl;
+    // ******************************************************
+    // auto linearStartLoad = startTimer();
+    long long linearDuration = algorithms.linearSearch(universityList, SIZE, choice, searchCriteria, searchCriteriaInt);
+    // std::cout << "Searched with linear search:" << std::endl;
+    // long long linearDuration = endTimer(linearStartLoad);
 
-    auto binaryStartLoad = startTimer();
-    algorithms.binarySearchWithDuplicates(universityList, SIZE, choice, searchCriteriaInt);
-    long long binaryDuration = endTimer(binaryStartLoad);
-    std::cout << "Searched with binary search:" << std::endl;
+    // auto binaryStartLoad = startTimer();
+    long long binaryDuration = algorithms.binarySearchWithDuplicates(universityList, SIZE, choice, searchCriteriaInt);
+    // std::cout << "Searched with binary search:" << std::endl;
+    // long long binaryDuration = endTimer(binaryStartLoad);
 
     std::cout << "Time taken to load (Linear Search): " << linearDuration << " microseconds" << std::endl;
     std::cout << "Time taken to load (Binary Search): " << binaryDuration << " microseconds" << std::endl;
@@ -592,6 +592,7 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
             break;
         case 2:
             ui.universityList(universityList, univIndex);
+            
             std::cout << "Please provide the rank of the university you want to add: ";
             std::cin >> uniChoice;
             if (uniChoice == 0)
