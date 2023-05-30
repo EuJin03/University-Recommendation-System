@@ -8,7 +8,7 @@
 
 /**
  * @brief Quick Sort Algorithm -- swap function
- * @usage Swap 2 University objects in an array.    
+ * @usage Swap 2 University objects in an array.
  *
  * @param uniA
  * @param uniB
@@ -24,7 +24,7 @@ void Algorithms::swap(University *uniA, University *uniB)
  * @brief Quick Sort Algorithm -- partition function
  * @usage Partition the array into 2 parts, one with elements smaller than the pivot, and the other with elements
  * larger than the pivot.
- * 
+ *
  * Referenced from Geeks for Geeks (2023)
  * Full APA citation: Geeks for Geeks. (2023, May 19). QuickSort. Retrieved from Geeks for Geeks: https://www.geeksforgeeks.org/quick-sort/
  *
@@ -111,7 +111,7 @@ int Algorithms::partition(University uniArr[], int start, int pivot, bool regist
  * @brief Quick Sort Algorithm -- quickSort function
  * @usage Sort the array using the partition function, teh registered parameter is passed to partition to ensure
  * that the correct column is sorted on.
- * 
+ *
  * Referenced from Geeks for Geeks (2023)
  * Full APA citation: Geeks for Geeks. (2023, May 19). QuickSort. Retrieved from Geeks for Geeks: https://www.geeksforgeeks.org/quick-sort/
  *
@@ -148,7 +148,7 @@ void Algorithms::countSort(University universityList[], int size, SortType sortT
  * @param sortType The type of sorting to be applied.
  * @param reverse Whether to sort in ascending or descending order.
  * @return The sorted array of University objects.
- * @ref https://www.geeksforgeeks.org/counting-sort/
+ * @ref Count Sort: GeeksforGeeks. (2023, May 24). Counting Sort. Retrieved from Geeks for Geeks: https://www.geeksforgeeks.org/counting-sort/
  *
  * This function implements the Count Sort algorithm to sort the uniArr array. The sortType parameter is used
  * to determine the sorting criteria.

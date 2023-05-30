@@ -4,6 +4,11 @@
 #include <iostream>
 #include "Feedback.h"
 
+/**
+ * @brief A class that represents doubly linked list
+ * @tparam T The data type
+ * @ref GeeksforGeeks. (2021, May 24). Linked List in C++ (Singly linked list). Retrieved from Geeks for Geeks: https://www.geeksforgeeks.org/linked-list-set-1-introduction/
+ */
 template <class T>
 struct Node
 {
@@ -21,7 +26,6 @@ private:
     int size;
 
 public:
-
     // Constructor
     LinkedList()
     {
@@ -33,8 +37,8 @@ public:
     /**
      * @brief Inserts a new node at the beginning of the linked list
      * @param data The data to be inserted
-     * @return void 
-    */
+     * @return void
+     */
     void insertAtBeginning(U data)
     {
         // Insert in a way so that the tail will have the latest node.
@@ -60,7 +64,7 @@ public:
      * @brief Inserts a new node at the end of the linked list
      * @param data The data to be inserted
      * @return void
-    */
+     */
     bool insertAtEnd(U data)
     {
         // Insert in a way so that the tail will have the latest node.
@@ -121,7 +125,7 @@ public:
      * @brief removes node from the beginning of the Linked List
      * @param void
      * @return void
-    */
+     */
     void removeAtBeginning()
     {
         if (head != nullptr)
@@ -147,7 +151,7 @@ public:
      * @brief removes node from the end of the Linked List
      * @param void
      * @return void
-    */
+     */
     void removeAtEnd()
     {
         if (tail != nullptr)
@@ -276,7 +280,7 @@ public:
      * @param current The current node
      * @param action The action to be taken
      * @return Node<U>* The new node
-    */
+     */
     Node<U> *navigateNodes(Node<U> *current, int action)
     {
         if (action == 0)

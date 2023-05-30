@@ -13,6 +13,10 @@
 
 #include "User.h"
 
+/**
+ * @brief A class that represents a hash table
+ * @ref GeeksforGeeks. (2021, May 24). Hashing in STL. Retrieved from Geeks for Geeks: https://www.geeksforgeeks.org/hashing-in-stl/
+ */
 class HashTable
 {
 private:

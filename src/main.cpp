@@ -10,8 +10,8 @@ int main()
 {
 	UI ui;
 	Seeder seeder;
-	Controller controller; 
-	
+	Controller controller;
+
 	// Initialize variables
 	int univIndex = 0;
 	int ARRAY_SIZE = 1422;
