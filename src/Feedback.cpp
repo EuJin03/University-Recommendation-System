@@ -22,17 +22,6 @@ Feedback::Feedback(int feedbackID, std::string username, std::string feedback, s
 	this->repliedAt = -1;
 }
 
-// Feedback::Feedback(const Feedback &feedback)
-// {
-// 	this->feedbackID = feedback.feedbackID;
-// 	this->username = feedback.username;
-// 	this->feedback = feedback.feedback;
-// 	this->createdAt = feedback.createdAt;
-// 	this->admin = feedback.admin;
-// 	this->replyContent = feedback.replyContent;
-// 	this->repliedAt = feedback.repliedAt;
-// }
-
 Feedback::Feedback()
 {
 	this->feedbackID = 0;

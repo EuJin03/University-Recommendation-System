@@ -7,7 +7,7 @@
 
 /**
  * @brief Quick Sort Algorithm -- swap function
- * @usage Swap 2 University objects in an array.
+ * @usage Swap 2 University objects in an array.    
  *
  * @param uniA
  * @param uniB
@@ -23,6 +23,9 @@ void Algorithms::swap(University *uniA, University *uniB)
  * @brief Quick Sort Algorithm -- partition function
  * @usage Partition the array into 2 parts, one with elements smaller than the pivot, and the other with elements
  * larger than the pivot.
+ * 
+ * Referenced from Geeks for Geeks (2023)
+ * Full APA citation: Geeks for Geeks. (2023, May 19). QuickSort. Retrieved from Geeks for Geeks: https://www.geeksforgeeks.org/quick-sort/
  *
  * @param uniArr
  * @param start
@@ -107,6 +110,9 @@ int Algorithms::partition(University uniArr[], int start, int pivot, bool regist
  * @brief Quick Sort Algorithm -- quickSort function
  * @usage Sort the array using the partition function, teh registered parameter is passed to partition to ensure
  * that the correct column is sorted on.
+ * 
+ * Referenced from Geeks for Geeks (2023)
+ * Full APA citation: Geeks for Geeks. (2023, May 19). QuickSort. Retrieved from Geeks for Geeks: https://www.geeksforgeeks.org/quick-sort/
  *
  * @param uniArr
  * @param start

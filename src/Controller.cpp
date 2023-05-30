@@ -66,7 +66,7 @@ void Controller::adminController(UI ui, University universityList[], int *univIn
             ui.universityList(universityList, univIndex);
             break;
         case 2:
-            // Display user
+            // Display and modify user details
             modifyController(ui, customer);
             break;
         case 3:
@@ -74,7 +74,7 @@ void Controller::adminController(UI ui, University universityList[], int *univIn
             feedbackController(feedbackList, ui, currentUser);
             break;
         case 4:
-            // Display top 10
+            // Display top 10 universities saved by users
             top10Controller(top10, ui);
             break;
         case 5:
@@ -183,20 +183,22 @@ void Controller::top10Controller(DynamicArray<University> *top10, UI ui)
     int userChoice;
     DynamicArray<University> uniqueUni = DynamicArray<University>();
     DynamicArray<int> uniqueUniCount;
+    // Adding universities to uniqueUni and uniqueUniCount
     for (int i = 0; i < top10->getSize(); i++)
     {
-        if (uniqueUni.contains(top10->get(i)))
+        if (uniqueUni.contains(top10->get(i)))          // If uniqueUni already contains the university 
         {
-            int index = uniqueUni.find(top10->get(i));
+            int index = uniqueUni.find(top10->get(i));  // If yes, update the corresponding count
             uniqueUniCount.set(uniqueUniCount.get(index) + 1, index);
         }
         else
         {
-            uniqueUni.append(top10->get(i));
-            uniqueUniCount.append(1);
+            uniqueUni.append(top10->get(i));            // If no, then add the university name to uniqueUni Dynamic Array
+            uniqueUniCount.append(1);                   // And initialize its count to 1
         }
     }
 
+    // Sorts the uniqueUni and uniqueUniCount in descending order
     for (int i = 0; i < uniqueUni.getSize(); i++)
     {
         for (int j = 0; j < uniqueUni.getSize() - 1; j++)
@@ -214,9 +216,10 @@ void Controller::top10Controller(DynamicArray<University> *top10, UI ui)
         }
     }
 
+    // Prints out the top 10 universities
     ui.clearScreen();
     std::cout << "Top 10 Universities \n";
-    if (uniqueUni.getSize() <= 10) {
+    if (uniqueUni.getSize() <= 10) {    // If the total universities saved is less than 10, use getSize() function to avoid runtime errors
         for (int i = 0; i < uniqueUni.getSize(); i++)
         {
             std::cout << uniqueUni.get(i).getInstitution() << " : " << uniqueUniCount.get(i) << std::endl;
@@ -228,6 +231,8 @@ void Controller::top10Controller(DynamicArray<University> *top10, UI ui)
         }
     }
     std::cout << std::endl;
+
+    // Asking whether user wants to continue or not
     ui.top10();
     std::cin.clear();
     std::cin.ignore();
@@ -262,19 +267,19 @@ void Controller::userController(HashTable *customer, University universityList[]
             ui.universityList(universityList, univIndex);
             break;
         case 2:
-            // Sort University - pc
+            // Sort University
             sortController(universityList, univIndex, SIZE, ui, favUser, top10, feedbackList, currentUser);
             break;
         case 3:
-            // Search university - pc
+            // Search university
             searchController(universityList, univIndex, SIZE, ui, favUser, top10, feedbackList, currentUser);
             break;
         case 4:
-            // Favourite controller - bryan
+            // Favourite controller
             favouriteController(customer, favUser, ui, universityList, univIndex, top10);
             break;
         case 5:
-            // Feedback controller - eugene
+            // Feedback controller
             feedbackController(feedbackList, ui, currentUser);
             break;
         case 6:
@@ -289,7 +294,7 @@ void Controller::userController(HashTable *customer, University universityList[]
     }
 };
 
-// to reduece sorting code
+// to reduce sorting code
 void sort(University universityList[], int SIZE, Algorithms algorithms, Algorithms::SortType sortType, int choice, bool reverse)
 {
 
@@ -593,18 +598,22 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
         switch (userChoice)
         {
         case 1:
+            // Show user's favourite list
             ui.universityHeader();
             favList.show();
             break;
         case 2:
+            // Add university to favourite list
             ui.universityList(universityList, univIndex);
             std::cout << "Please provide the rank of the university you want to add: ";
             std::cin >> uniChoice;
+            // Checks whether input is valid or not
             if (uniChoice == 0)
             {
                 std::cout << "Invalid choice" << std::endl;
                 continue;
             }
+            // If university can be added, add it to the top 10 list as well
             if (favList.insertAtEnd(universityList[uniChoice - 1]))
             {
                 top10->append(universityList[uniChoice - 1]);
@@ -614,6 +623,7 @@ void Controller::favouriteController(HashTable *customer, User *currentUser, UI 
             customer->addUser(*currentUser);
             break;
         case 3:
+            // Remove university from favourite list, opposite process of adding
             ui.universityHeader();
             favList.show();
             std::cout << "Please provide the rank of the university you want to remove: ";

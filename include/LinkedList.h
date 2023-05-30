@@ -21,6 +21,8 @@ private:
     int size;
 
 public:
+
+    // Constructor
     LinkedList()
     {
         head = nullptr;
@@ -28,6 +30,11 @@ public:
         size = 0;
     }
 
+    /**
+     * @brief Inserts a new node at the beginning of the linked list
+     * @param data The data to be inserted
+     * @return void 
+    */
     void insertAtBeginning(U data)
     {
         // Insert in a way so that the tail will have the latest node.
@@ -49,6 +56,11 @@ public:
         size++;
     }
 
+    /**
+     * @brief Inserts a new node at the end of the linked list
+     * @param data The data to be inserted
+     * @return void
+    */
     bool insertAtEnd(U data)
     {
         // Insert in a way so that the tail will have the latest node.
@@ -105,6 +117,11 @@ public:
         size++;
     }
 
+    /**
+     * @brief removes node from the beginning of the Linked List
+     * @param void
+     * @return void
+    */
     void removeAtBeginning()
     {
         if (head != nullptr)
@@ -126,6 +143,11 @@ public:
         }
     }
 
+    /**
+     * @brief removes node from the end of the Linked List
+     * @param void
+     * @return void
+    */
     void removeAtEnd()
     {
         if (tail != nullptr)
@@ -249,6 +271,12 @@ public:
             throw std::runtime_error("Empty list");
     }
 
+    /**
+     * @brief Navigates through the nodes of the linked list one by one
+     * @param current The current node
+     * @param action The action to be taken
+     * @return Node<U>* The new node
+    */
     Node<U> *navigateNodes(Node<U> *current, int action)
     {
         if (action == 0)

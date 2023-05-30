@@ -12,6 +12,7 @@ int main()
 	Seeder seeder;
 	Controller controller;
 
+	// Initialize variables
 	int univIndex = 0;
 	int ARRAY_SIZE = 1422;
 	University universityList[ARRAY_SIZE];
@@ -52,10 +53,12 @@ int main()
 		switch (option)
 		{
 		case 1:
+			// Display university list
 			ui.clearScreen();
 			ui.universityList(universityList, &univIndex);
 			break;
 		case 2:
+			// Sort university list by institution name in ascending order
 			ui.clearScreen();
 			char command;
 			// should move into controller class
@@ -81,13 +84,7 @@ int main()
 		case 3:
 			// Search university
 			ui.clearScreen();
-			// controller.searchController(universityList, &univIndex, ARRAY_SIZE, ui, &currentUser, &top10, &feedbackList, currentUser);
-			std::cout << "Enter the institution name you want to search: ";
-            std::cin.ignore();
-            std::getline(std::cin, searchCriteria);
-            algorithm.linearSearch(universityList, ARRAY_SIZE, 1, searchCriteria, 0);
-			std::cout << "\nInput anything to go back to main menu:";
-			std::cin >> command;
+			controller.searchController(universityList, &univIndex, ARRAY_SIZE, ui, &currentUser, &top10, &feedbackList, currentUser);
 			break;
 		case 4:
 			// Register
@@ -149,20 +146,3 @@ int main()
 
 	return 0;
 }
-
-/**
-	system("cls");
-	time_t now = time(0);
-	tm* current_time = localtime(&now);
-
-	auto start_load = high_resolution_clock::now();
-	auto end_load = high_resolution_clock::now();
-	long long durationLoad = duration_cast<std::chrono::microseconds>(end_load - start_load).count();
-	std::cout << "Time taken to load data: " << durationLoad << " microseconds" << std::endl;
-
-	Seeder seeder;
-	seeder.createFeedbackInstances();
-	seeder.createUnivInstances();
-	seeder.createUserInstances();
-	seeder.createDynamicArrayInstance();
- */

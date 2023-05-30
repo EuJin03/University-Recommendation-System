@@ -40,6 +40,9 @@ public:
 
 	bool isNull() const { return false; }
 	bool validate(const User &user) const;
+
+	// Below codes are referenced from Jason (2023)
+	// APA Citation: Jason. (2023, March 8). Override output operator << inside class c++ to print std::vector. Retrieved from stackoverflow: https://stackoverflow.com/questions/75670540/override-output-operator-inside-class-c-to-print-stdvector
 	bool operator==(const User &user);
 	friend std::ostream &operator<<(std::ostream &os, const User &user);
 };

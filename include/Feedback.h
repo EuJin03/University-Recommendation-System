@@ -48,6 +48,8 @@ public:
 	void setRepliedAt(std::time_t repliedAt) { this->repliedAt = repliedAt; }
 
 	// Overriding ostream operator
+	// Below codes are referenced from Jason (2023)
+	// APA Citation: Jason. (2023, March 8). Override output operator << inside class c++ to print std::vector. Retrieved from stackoverflow: https://stackoverflow.com/questions/75670540/override-output-operator-inside-class-c-to-print-stdvector
 	friend std::ostream &operator<<(std::ostream &os, const Feedback &feedback);
 	bool operator==(const Feedback &other) const
 	{
