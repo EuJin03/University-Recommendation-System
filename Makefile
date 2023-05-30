@@ -1,14 +1,17 @@
 CC=g++
 CFLAGS=-I include
-OBJ=bin/University.o bin/main.o bin/Feedback.o bin/HashTable.o bin/User.o bin/Seeder.o bin/UI.o bin/Algorithms.o bin/Controller.o
+OBJ=$(addprefix bin/,$(notdir $(patsubst %.cpp,%.o,$(wildcard src/*.cpp))))
 
 all: university_recommendation_system
 
 university_recommendation_system: $(OBJ)
 	$(CC) -o $@ $^
 
-bin/%.o: src/%.cpp
+bin/%.o: src/%.cpp | bin
 	$(CC) -c -o $@ $< $(CFLAGS)
+
+bin:
+	mkdir -p bin
 
 clean:
 	rm -f $(OBJ) university_recommendation_system
