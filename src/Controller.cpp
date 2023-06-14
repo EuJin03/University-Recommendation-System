@@ -539,7 +539,7 @@ void Controller::searchController(University universityList[], int *univIndex, i
             // Search by Faculty Student Ratio Rank
             std::cout << "Enter the FSR rank you want to search: ";
             std::cin >> searchCriteriaInt;
-            algorithms.countSort(universityList, SIZE, Algorithms::SortType::FSR_RANK_SORT, false);
+            algorithms.countSort(universityList, SIZE, Algorithms::SortType::FSR_RANK_SORT, true);
             std::cout << "Done sort" << std::endl;
 
             searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::FSR_RANK,
@@ -549,7 +549,7 @@ void Controller::searchController(University universityList[], int *univIndex, i
             // Search by Employer Reputation Rank
             std::cout << "Enter the ER rank you want to search: ";
             std::cin >> searchCriteriaInt;
-            algorithms.countSort(universityList, SIZE, Algorithms::SortType::ER_RANK_SORT, false);
+            algorithms.countSort(universityList, SIZE, Algorithms::SortType::ER_RANK_SORT, true);
             std::cout << "Done sort" << std::endl;
             searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::ER_RANK,
                       searchCriteriaInt);
@@ -559,7 +559,7 @@ void Controller::searchController(University universityList[], int *univIndex, i
             // Search by Academic Reputation Rank
             std::cout << "Enter the AR rank you want to search: ";
             std::cin >> searchCriteriaInt;
-            algorithms.countSort(universityList, SIZE, Algorithms::SortType::AR_RANK_SORT, false);
+            algorithms.countSort(universityList, SIZE, Algorithms::SortType::AR_RANK_SORT, true);
             std::cout << "Done sort" << std::endl;
 
             searchInt(universityList, SIZE, algorithms, searchCriteria, Algorithms::SearchType::AR_RANK,
