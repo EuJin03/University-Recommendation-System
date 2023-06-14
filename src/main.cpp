@@ -4,7 +4,6 @@
 #include "../include/Algorithms.h"
 #include "../include/LinkedList.h"
 #include "../include/Controller.h"
-#include <string>
 
 int main()
 {
@@ -116,7 +115,7 @@ int main()
 					else
 					{
 						// Registered User
-						controller.userController(&customer, universityList, &univIndex, ARRAY_SIZE, ui, &currentUser, &top10, &feedbackList, currentUser);
+						controller.userController(&customer, universityList, &univIndex, ARRAY_SIZE, ui, &currentUser, &top10, &feedbackList, currentUser); // -- eugene & bryan
 					}
 					break;
 				}
