@@ -186,15 +186,15 @@ void Controller::top10Controller(DynamicArray<University> *top10, UI ui)
     // Adding universities to uniqueUni and uniqueUniCount
     for (int i = 0; i < top10->getSize(); i++)
     {
-        if (uniqueUni.contains(top10->get(i)))          // If uniqueUni already contains the university 
+        if (uniqueUni.contains(top10->get(i))) // If uniqueUni already contains the university
         {
-            int index = uniqueUni.find(top10->get(i));  // If yes, update the corresponding count
+            int index = uniqueUni.find(top10->get(i)); // If yes, update the corresponding count
             uniqueUniCount.set(uniqueUniCount.get(index) + 1, index);
         }
         else
         {
-            uniqueUni.append(top10->get(i));            // If no, then add the university name to uniqueUni Dynamic Array
-            uniqueUniCount.append(1);                   // And initialize its count to 1
+            uniqueUni.append(top10->get(i)); // If no, then add the university name to uniqueUni Dynamic Array
+            uniqueUniCount.append(1);        // And initialize its count to 1
         }
     }
 
@@ -219,12 +219,15 @@ void Controller::top10Controller(DynamicArray<University> *top10, UI ui)
     // Prints out the top 10 universities
     ui.clearScreen();
     std::cout << "Top 10 Universities \n";
-    if (uniqueUni.getSize() <= 10) {    // If the total universities saved is less than 10, use getSize() function to avoid runtime errors
+    if (uniqueUni.getSize() <= 10)
+    { // If the total universities saved is less than 10, use getSize() function to avoid runtime errors
         for (int i = 0; i < uniqueUni.getSize(); i++)
         {
             std::cout << uniqueUni.get(i).getInstitution() << " : " << uniqueUniCount.get(i) << std::endl;
         }
-    } else {
+    }
+    else
+    {
         for (int i = 0; i < 10; i++)
         {
             std::cout << uniqueUni.get(i).getInstitution() << " : " << uniqueUniCount.get(i) << std::endl;
@@ -657,7 +660,6 @@ void Controller::feedbackController(LinkedList<Feedback> *feedbackList, UI ui, U
 
     do
     {
-        currentNode = feedbackList->getTail();
         current = currentNode->data;
         std::cout << "------------Feedback Lists------------";
 
